@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { createAppKit } from '@reown/appkit/react'
-
 import { WagmiProvider } from 'wagmi'
 import { mainnet, optimism } from '@reown/appkit/networks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -46,16 +45,21 @@ createAppKit({
   }
 })
 
-export function AppKitProvider({ children }) {
-  return (
+const AppKitProvider= (
+  { children, initialState }: { children: ReactNode; initialState?: State }
+) => (
     <WagmiProvider config={wagmiAdapter.wagmiConfig}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
-  )
-}
+  
+)
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <AppKitProvider initialState={undefined}>
     <App />
+    </AppKitProvider>
   </StrictMode>,
 )
+
+export default AppKitProvider
