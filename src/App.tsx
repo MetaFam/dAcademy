@@ -139,7 +139,7 @@ function App() {
         <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
             <figure>
-              <img src="./assets/gameb.webp" alt="drw" />
+              <img src="./assets/gameb.webp" alt="WTF is GameB?" />
             </figure>
             <div className="card-body">
               <h2 className="card-title text-white z-10 font-extrabold">WTF is GameB?</h2>
@@ -147,7 +147,7 @@ function App() {
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
             <figure>
-              <img src="./assets/metacrisis.webp" alt="drw" />
+              <img src="./assets/metacrisis.webp" alt="WTF is the MetaCrisis?" />
             </figure>
             <div className="card-body">
               <h2 className="card-title text-white z-10 font-extrabold">WTF is the MetaCrisis?</h2>
@@ -163,7 +163,7 @@ function App() {
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
             <figure>
-              <img src="./assets/metamodernist.webp" alt="drw" />
+              <img src="./assets/metamodernist.webp" alt="Political MetaModernism" />
             </figure>
             <div className="card-body">
               <h2 className="card-title text-white z-10 font-extrabold">Political MetaModernism:Bridging Divides</h2>
@@ -171,7 +171,7 @@ function App() {
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
             <figure>
-              <img src="./assets/goodquests.webp" alt="drw" />
+              <img src="./assets/goodquests.webp" alt="Choose Good Quests" />
             </figure>
             <div className="card-body">
               <h2 className="card-title text-white z-10 font-extrabold">Choose Good Quests</h2>
@@ -179,7 +179,7 @@ function App() {
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
             <figure>
-              <img src="./assets/memedriven.webp" alt="drw" />
+              <img src="./assets/memedriven.webp" alt="Meme Driven Organizations" />
             </figure>
             <div className="card-body">
               <h2 className="card-title text-white z-10 font-extrabold">Meme Driven Organizations</h2>
