@@ -199,34 +199,50 @@ function App() {
         <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
             <figure>
-              <img src="./assets/buildonop.png" alt="drw" />
+              <img src="./assets/ethereum.webp" alt="wtf is ethereum" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10">Playbook 5</h2>
+              <h2 className="card-title text-white z-10">WTF is Ethereum?</h2>
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
             <figure>
-              <img src="./assets/buildonop.png" alt="drw" />
+              <img src="./assets/daos.webp" alt="wtf are daos" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10">Playbook 6</h2>
+              <h2 className="card-title text-white z-10">WTF are DAOs?</h2>
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
             <figure>
-              <img src="./assets/buildonop.png" alt="drw" />
+              <img src="./assets/defi.webp" alt="wtf is defi" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10">Playbook 7</h2>
+              <h2 className="card-title text-white z-10">WTF is DeFi?</h2>
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
             <figure>
-              <img src="./assets/buildonop.png" alt="drw" />
+              <img src="./assets/nfts.webp" alt="wtf are nfts" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10">Playbook 8</h2>
+              <h2 className="card-title text-white z-10">WTF are NFTs?</h2>
+            </div>
+          </div>
+          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
+            <figure>
+              <img src="./assets/dapps.webp" alt="wtf are dapps" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-white z-10">WTF are dApps?</h2>
+            </div>
+          </div>
+          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
+            <figure>
+              <img src="./assets/web3builder.webp" alt="web 3 developer" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-white z-10">Become a Web3 Developer</h2>
             </div>
           </div>
         </Carousel>
