@@ -44,21 +44,39 @@ function App() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Media Outlet</a>
+                <a>Support</a>
               </li>
               <li>
                 <a>Categories</a>
                 <ul className="p-2">
+                <li>
+                    <a>Meta/Game-b</a>
+                  </li>
                   <li>
-                    <a>Web3 Basics</a>
+                    <a>Web3 General</a>
+                  </li>
+                  <li>
+                    <a>DAO Playbooks</a>
+                  </li> 
+                  <li>
+                    <a>Self Actualization</a>
+                  </li>
+                  <li>
+                    <a>Building Chain by Chain</a>
                   </li>
                   <li>
                     <a>ReFi</a>
                   </li>
+                  <li>
+                    <a>Current AI</a>
+                  </li>
+                  <li>
+                    <a>Random Complentary Skills</a>
+                  </li>
                 </ul>
               </li>
               <li>
-                <a>Item 3</a>
+                <a>Submit</a>
               </li>
             </ul>
           </div>
@@ -67,23 +85,41 @@ function App() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Item 1</a>
+              <a>Support</a>
             </li>
             <li>
               <details>
                 <summary>Categories</summary>
                 <ul className="p-2 z-10">
                   <li>
-                    <a>Web3 Basics</a>
+                    <a>Meta/Game-b</a>
+                  </li>
+                  <li>
+                    <a>Web3 General</a>
+                  </li>
+                  <li>
+                    <a>DAO Playbooks</a>
+                  </li> 
+                  <li>
+                    <a>Self Actualization</a>
+                  </li>
+                  <li>
+                    <a>Building Chain by Chain</a>
                   </li>
                   <li>
                     <a>ReFi</a>
+                  </li>
+                  <li>
+                    <a>Current AI</a>
+                  </li>
+                  <li>
+                    <a>Random Complentary Skills</a>
                   </li>
                 </ul>
               </details>
             </li>
             <li>
-              <a>Item 3</a>
+              <a>Submit</a>
             </li>
           </ul>
         </div>
@@ -91,44 +127,75 @@ function App() {
           <w3m-button className="btn btn-sm pr-16 rounded" />
         </div>
       </div>
-      <div className="container mx-auto p-4">
+      <h2 className="text-accent font-light text-3xl mb-16 pt-6">A de-store of knowledge.  Onboard forward.</h2>
+      <div className="justify-start">
+        <h1 className="text-2xl font-medium text-primary justify-left text-left ml-12"> Meta/GameB</h1>
+        <h2 className="text-xl font-medium text-accent justify-left text-left ml-12">
+          Bigger picture, the grander game.
+        </h2>
+      </div>
+      <div className="container mx-auto p-4 mt-30">
       <div className="mb-16">
         <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
+          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 gap-4">
             <figure>
-              <img src="./assets/buildonop.png" alt="drw" />
+              <img src="./assets/gameb.webp" alt="drw" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10">Playbook 1</h2>
+              <h2 className="card-title text-white z-10">WTF is GameB?</h2>
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
             <figure>
-              <img src="./assets/buildonop.png" alt="drw" />
+              <img src="./assets/metacrisis.webp" alt="drw" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10">Playbook 2</h2>
+              <h2 className="card-title text-white z-10">WTF is the MetaCrisis?</h2>
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
             <figure>
-              <img src="./assets/buildonop.png" alt="drw" />
+              <img src="./assets/moloch.webp" alt="drw" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10">Playbook 3</h2>
+              <h2 className="card-title text-white z-10">Meditations on Moloch</h2>
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
             <figure>
-              <img src="./assets/buildonop.png" alt="drw" />
+              <img src="./assets/metamodernist.webp" alt="drw" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10">Playbook 4</h2>
+              <h2 className="card-title text-white z-10 font-bold">Political MetaModernism:Bridging Divides</h2>
+            </div>
+          </div>
+          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
+            <figure>
+              <img src="./assets/goodquests.webp" alt="drw" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-white z-10">Choose Good Quests</h2>
+            </div>
+          </div>
+          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
+            <figure>
+              <img src="./assets/memedriven.webp" alt="drw" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-white z-10">Meme Driven Organizations</h2>
             </div>
           </div>
         </Carousel>
         </div>
         <div className="mb-16">
+          <div className="justify-start">
+              <h1 className="text-2xl font-medium text-primary justify-left text-left ml-12">
+                 Web3 General
+              </h1>
+              <h2 className="text-xl font-medium text-accent justify-left text-left ml-12">
+                Web3 basics: how & why
+              </h2>
+            </div>
         <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
             <figure>
@@ -164,6 +231,12 @@ function App() {
           </div>
         </Carousel>
         </div>
+        <div className="justify-start">
+        <h1 className="text-2xl font-medium text-primary justify-left text-left ml-12"> DAO Playbooks</h1>
+        <h2 className="text-xl font-medium text-accent justify-left text-left ml-12">
+          DAO Tooling/Coordination Methods
+        </h2>
+      </div>
         <div className="mb-16">
         <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
@@ -200,6 +273,12 @@ function App() {
           </div>
         </Carousel>
         </div>
+        <div className="justify-start">
+        <h1 className="text-2xl font-medium text-primary justify-left text-left ml-12"> Self-Actualization/Well-being</h1>
+        <h2 className="text-xl font-medium text-accent justify-left text-left ml-12">
+          Level-up, self-improve
+        </h2>
+      </div>
         <div className="mb-16">
         <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
         <div className="mb-8">
