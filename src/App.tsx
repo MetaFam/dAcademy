@@ -257,34 +257,62 @@ function App() {
         <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
             <figure>
-              <img src="./assets/buildonop.png" alt="drw" />
+              <img src="./assets/best-dao-contributor.webp" alt="Become the Best Contributor in any DAO" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10">Playbook 9</h2>
+              <h2 className="card-title text-white z-10">Become the Best Contributor in any DAO</h2>
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
             <figure>
-              <img src="./assets/buildonop.png" alt="drw" />
+              <img src="./assets/daosummoner.webp" alt="Starting DAOs 101" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10">Playbook 10</h2>
+              <h2 className="card-title text-white z-10">Starting DAOs 101</h2>
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
             <figure>
-              <img src="./assets/buildonop.png" alt="drw" />
+              <img src="./assets/impact-networks.webp" alt="Impact Networks" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10">Playbook 11</h2>
+              <h2 className="card-title text-white z-10">Impact Networks</h2>
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
             <figure>
-              <img src="./assets/buildonop.png" alt="drw" />
+              <img src="./assets/coordinape.webp" alt="Use Coordinape to Reward Contributors" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10">Playbook 12</h2>
+              <h2 className="card-title text-white z-10">Use Coordinape to Reward Contributors</h2>
+            </div>
+            <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
+            <figure>
+              <img src="./assets/holacracy.webp" alt="Effective Meetings with Holacracy" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-white z-10">Effective Meetings with Holacracy</h2>
+            </div>
+            <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
+            <figure>
+              <img src="./assets/daowriter.webp" alt="Entering DAOs as a Writer" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-white z-10">Use Coordinape to Reward Contributors</h2>
+            </div>
+            <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
+            <figure>
+              <img src="./assets/successful-teams.webp" alt="Building Successful Teams" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-white z-10">Building Successful Teams</h2>
+            </div>
+            <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4">
+            <figure>
+              <img src="./assets/coordinape.webp" alt="Use Coordinape to Reward Contributors" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-white z-10">Use Coordinape to Reward Contributors</h2>
             </div>
           </div>
         </Carousel>
