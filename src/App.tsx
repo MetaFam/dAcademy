@@ -10,7 +10,7 @@ const responsive = {
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 3
+    items: 4
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -138,7 +138,7 @@ function App() {
       <div className="mb-16">
         <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/gameb.webp" alt="WTF is GameB?" />
             </figure>
             <div className="card-body">
@@ -146,7 +146,7 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/metacrisis.webp" alt="WTF is the MetaCrisis?" />
             </figure>
             <div className="card-body">
@@ -154,7 +154,7 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/moloch.webp" alt="drw" />
             </figure>
             <div className="card-body">
@@ -162,15 +162,16 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/metamodernist.webp" alt="Political MetaModernism" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Political MetaModernism:Bridging Divides</h2>
+              <h2 className="card-title text-white z-10 font-extrabold">Political MetaModernism:
+                Bridging Divides</h2>
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/goodquests.webp" alt="Choose Good Quests" />
             </figure>
             <div className="card-body">
@@ -178,7 +179,7 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/memedriven.webp" alt="Meme Driven Organizations" />
             </figure>
             <div className="card-body">
@@ -187,7 +188,6 @@ function App() {
           </div>
         </Carousel>
         </div>
-        <div className="mb-16">
           <div className="justify-start">
               <h1 className="text-2xl font-medium text-primary justify-left text-left ml-12">
                 Web3 General
@@ -196,9 +196,10 @@ function App() {
                 Web3 basics: how & why
               </h2>
             </div>
+            <div className="mb-16">
         <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/ethereum.webp" alt="wtf is ethereum" />
             </figure>
             <div className="card-body">
@@ -206,7 +207,7 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/daos.webp" alt="wtf are daos" />
             </figure>
             <div className="card-body">
@@ -214,7 +215,7 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/defi.webp" alt="wtf is defi" />
             </figure>
             <div className="card-body">
@@ -222,7 +223,7 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/nfts.webp" alt="wtf are nfts" />
             </figure>
             <div className="card-body">
@@ -230,7 +231,7 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/dapps.webp" alt="wtf are dapps" />
             </figure>
             <div className="card-body">
@@ -238,7 +239,7 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/web3builder.webp" alt="web 3 developer" />
             </figure>
             <div className="card-body">
@@ -256,7 +257,7 @@ function App() {
         <div className="mb-16">
         <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/best-dao-contributor.webp" alt="Become the Best Contributor in any DAO" />
             </figure>
             <div className="card-body">
@@ -264,7 +265,7 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lgS">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/daosummoner.webp" alt="Starting DAOs 101" />
             </figure>
             <div className="card-body">
@@ -272,7 +273,7 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/impact-networks.webp" alt="Impact Networks" />
             </figure>
             <div className="card-body">
@@ -280,11 +281,35 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/coordinape.webp" alt="Use Coordinape to Reward Contributors" />
             </figure>
             <div className="card-body">
               <h2 className="card-title text-white z-10 font-extrabold">Use Coordinape to Reward Contributors</h2>
+            </div>
+          </div>
+          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
+            <figure className="border-white border">
+              <img src="./assets/holacracy.webp" alt="Effective Meetings with Holacracy" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-white z-10 font-extrabold">Effective Meetings with Holacracy</h2>
+            </div>
+          </div>
+          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
+            <figure className="border-white border">
+              <img src="./assets/daowriter.webp" alt="Entering a DAO as a Writer" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-white z-10 font-extrabold">Entering a DAO as a Writer</h2>
+            </div>
+          </div>
+          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
+            <figure className="border-white border">
+              <img src="./assets/successful-teams.webp" alt="Building Successful Teams" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-white z-10 font-extrabold">Building Successful Teams</h2>
             </div>
           </div>
         </Carousel>
@@ -299,7 +324,7 @@ function App() {
         <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
         <div className="mb-8">
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/creatorgame.webp" alt="How to Play the Creator Game" />
             </figure>
             <div className="card-body">
@@ -308,7 +333,7 @@ function App() {
           </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/time.webp" alt="Embrace the Ticking Clock" />
             </figure>
             <div className="card-body">
@@ -316,7 +341,7 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/biases.webp" alt="Know your Biases" />
             </figure>
             <div className="card-body">
@@ -324,7 +349,7 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure>
+            <figure className="border-white border">
               <img src="./assets/imposter.webp" alt="Understanding Imposter Syndrome" />
             </figure>
             <div className="card-body">
@@ -332,13 +357,13 @@ function App() {
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-  <figure>
-    <img src="./assets/journaling.webp" alt="Journaling like Dickie Bush" />
-  </figure>
-  <div className="card-body">
-    <h2 className="card-title text-white z-10 font-extrabold">Journaling like Dickie Bush</h2>
-  </div>
-</div>
+            <figure className="border-white border">
+              <img src="./assets/journaling.webp" alt="Journaling like Dickie Bush" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-white z-10 font-extrabold">Journaling like Dickie Bush</h2>
+            </div>
+          </div>
         </Carousel>
         </div>
       </div>
