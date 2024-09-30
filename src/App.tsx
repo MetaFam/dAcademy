@@ -124,16 +124,16 @@ function App() {
       <div>
       <h2 className="text-accent font-light text-3xl mb-16 pt-6">A de-store of knowledge.  Onboard forward.</h2>
       </div>
-      <div className="justify-start">
-        <h1 className="text-2xl font-medium text-primary justify-left text-left ml-12"> Meta/GameB</h1>
-        <h2 className="text-xl font-medium text-accent justify-left text-left ml-12">
+      <div className="justify-start mb-4">
+        <h1 className="text-2xl font-medium text-primary justify-left text-left ml-4"> Meta/GameB</h1>
+        <h2 className="text-xl font-medium text-accent justify-left text-left ml-4">
           Bigger picture, the grander game.
         </h2>
       </div>
       <div className="container p-4 mt-30 gap-4">
       <div className="mb-16">
         <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl shadow-md mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
+          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
             <figure className="border-white border">
               <img src="./assets/gameb.webp" alt="WTF is GameB?" />
             </figure>
@@ -273,7 +273,7 @@ function App() {
               <img src="./assets/impact-networks.webp" alt="Impact Networks" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Impact Networks</h2>
+              <h2 className="card-title text-white z-10 font-extrabold"></h2>
             </div>
           </div>
           <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
