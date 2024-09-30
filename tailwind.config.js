@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        'right-accent': '8px 0px 16px {{ daisyui("colors.accent") }}',
+      },
+    },
   },
   plugins: [require("daisyui")],
 

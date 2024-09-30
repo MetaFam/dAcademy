@@ -50,7 +50,7 @@ function App() {
                 <a>Categories</a>
                 <ul className="p-2">
                 <li>
-                    <a>Meta/Game-b</a>
+                    <a>Meta - Game-b</a>
                   </li>
                   <li>
                     <a>Web3 General</a>
@@ -89,7 +89,7 @@ function App() {
                 <summary>Categories</summary>
                 <ul className="p-2 z-10">
                   <li>
-                    <a>Meta/Game-b</a>
+                    <a>Meta - Game-b</a>
                   </li>
                   <li>
                     <a>Web3 General</a>
@@ -133,7 +133,7 @@ function App() {
       <div className="container p-4 mt-30 gap-4">
       <div className="mb-16">
         <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
+          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl shadow-md mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
             <figure className="border-white border">
               <img src="./assets/gameb.webp" alt="WTF is GameB?" />
             </figure>
