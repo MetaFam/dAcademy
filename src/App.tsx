@@ -68,10 +68,7 @@ function App() {
                     <a>ReFi</a>
                   </li>
                   <li>
-                    <a>Current AI</a>
-                  </li>
-                  <li>
-                    <a>Random Complentary Skills</a>
+                    <a>Random Skills</a>
                   </li>
                 </ul>
               </li>
@@ -110,10 +107,7 @@ function App() {
                     <a>ReFi</a>
                   </li>
                   <li>
-                    <a>Current AI</a>
-                  </li>
-                  <li>
-                    <a>Random Complentary Skills</a>
+                    <a>Random Skills</a>
                   </li>
                 </ul>
               </details>
