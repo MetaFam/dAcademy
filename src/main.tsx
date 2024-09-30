@@ -12,7 +12,7 @@ import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 const queryClient = new QueryClient()
 
 
-const projectId = 'process.env.VITE_PUBLIC_PROJECT_ID'
+const projectId = import.meta.env.VITE_APPKIT_PROJECT_ID
 
 
 const metadata = {
@@ -26,22 +26,22 @@ export const networks = [mainnet, optimism]
 
 
 const wagmiAdapter = new WagmiAdapter({
-  ssr: true,
   networks,
   projectId
 })
 
+console.log({ projectId })
 
 createAppKit({
   adapters: [wagmiAdapter],
   networks: [mainnet, optimism],
   metadata,
   projectId,
+  showWallets: true,
   features: {
     analytics: true,
     email: false,
     socials: [ 'x', 'farcaster', 'discord' ],
-    emailShowWallets: false,
   }
 })
 
