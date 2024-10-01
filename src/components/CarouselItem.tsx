@@ -13,7 +13,7 @@ const CarouselItem = ({ item }: CarouselItemProps) => (
     <figure className="border-white border">
       <img src={item.image} alt={item.alt} />
     </figure>
-    <div className="card-body">
+    <div className="card-body bg-black bg-opacity-20 p-0 mx-auto px-1">
       <h2 className="card-title text-white z-10 font-extrabold">{item.title}</h2>
     </div>
   </div>
