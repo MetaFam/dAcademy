@@ -1,5 +1,6 @@
 {
   "metaGameB": {
+    "title": "Meta/GameB",
     "description": "Bigger picture, the grander game.",
     "items": [
       {
@@ -29,6 +30,7 @@
     ]
   },
   "web3General": {
+    "title": "Web3 General",
     "description": "Web3 basics: how & why",
     "items": [
       {
@@ -58,6 +60,7 @@
     ]
   },
   "daoPlaybooks": {
+    "title": "DAO Playbooks",
     "description": "DAO Tooling/Coordination Methods",
     "items": [
       {
@@ -91,6 +94,7 @@
     ]
   },
   "selfActualization": {
+    "title": "Self-Actualization/Well-being",
     "description": "Level-up, self-improve",
     "items": [
       {
