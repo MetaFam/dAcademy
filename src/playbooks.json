@@ -1,0 +1,106 @@
+{
+  "metaGameB": [
+    {
+      "title": "WTF is GameB?",
+      "image": "./assets/gameb.webp"
+    },
+    {
+      "title": "WTF is the MetaCrisis?",
+      "image": "./assets/metacrisis.webp"
+    },
+    {
+      "title": "Meditations on Moloch",
+      "image": "./assets/moloch.webp"
+    },
+    {
+      "title": "Political MetaModernism: Bridging Divides",
+      "image": "./assets/metamodernist.webp"
+    },
+    {
+      "title": "Choose Good Quests",
+      "image": "./assets/goodquests.webp"
+    },
+    {
+      "title": "Meme Driven Organizations",
+      "image": "./assets/memedriven.webp"
+    }
+  ],
+  "web3General": [
+    {
+      "title": "WTF is Ethereum?",
+      "image": "./assets/ethereum.webp"
+    },
+    {
+      "title": "WTF are DAOs?",
+      "image": "./assets/daos.webp"
+    },
+    {
+      "title": "WTF is DeFi?",
+      "image": "./assets/defi.webp"
+    },
+    {
+      "title": "WTF are NFTs?",
+      "image": "./assets/nfts.webp"
+    },
+    {
+      "title": "WTF are dApps?",
+      "image": "./assets/dapps.webp"
+    },
+    {
+      "title": "Become a Web3 Developer",
+      "image": "./assets/web3builder.webp"
+    }
+  ],
+  "daoPlaybooks": [
+    {
+      "title": "Become the Best Contributor in any DAO",
+      "image": "./assets/best-dao-contributor.webp"
+    },
+    {
+      "title": "Starting DAOs 101",
+      "image": "./assets/daosummoner.webp"
+    },
+    {
+      "title": "Impact Networks",
+      "image": "./assets/impact-networks.webp"
+    },
+    {
+      "title": "Use Coordinape to Reward Contributors",
+      "image": "./assets/coordinape.webp"
+    },
+    {
+      "title": "Effective Meetings with Holacracy",
+      "image": "./assets/holacracy.webp"
+    },
+    {
+      "title": "Entering a DAO as a Writer",
+      "image": "./assets/daowriter.webp"
+    },
+    {
+      "title": "Building Successful Teams",
+      "image": "./assets/successful-teams.webp"
+    }
+  ],
+  "selfActualization": [
+    {
+      "title": "How to Play the Creator Game",
+      "image": "./assets/creatorgame.webp"
+    },
+    {
+      "title": "Embrace the Ticking Clock",
+      "image": "./assets/time.webp"
+    },
+    {
+      "title": "Know your Biases",
+      "image": "./assets/biases.webp"
+    },
+    {
+      "title": "Understanding Imposter Syndrome",
+      "image": "./assets/imposter.webp"
+    },
+    {
+      "title": "Journaling like Dickie Bush",
+      "image": "./assets/journaling.webp"
+    }
+  ]
+}

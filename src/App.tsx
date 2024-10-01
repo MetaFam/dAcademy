@@ -3,6 +3,7 @@ import './App.css';
 import Carousel from'react-multi-carousel';
 import'react-multi-carousel/lib/styles.css';
 import Navbar from './components/Navbar';
+import playbooks from './playbooks.json';
 
 const responsive = {
   superLargeDesktop: {
@@ -18,8 +19,8 @@ const responsive = {
     items: 2
   },
   mobile: {
-    breakpoint: { max: 464, min: 464 },
-    items: 2
+    breakpoint: { max: 464, min: 0 },
+    items: 1
   }
 };
 
@@ -28,7 +29,7 @@ function App() {
     <>
       <Navbar />
       <div>
-      <h2 className="text-accent font-light text-3xl mb-16 pt-6">A de-store of knowledge.  Onboard forward.</h2>
+        <h2 className="text-accent font-light text-3xl mb-16 pt-6">A de-store of knowledge.  Onboard forward.</h2>
       </div>
       <div className="justify-start mb-4">
         <h1 className="text-2xl font-medium text-primary justify-left text-left ml-4"> Meta/GameB</h1>
@@ -37,236 +38,85 @@ function App() {
         </h2>
       </div>
       <div className="container p-4 mt-30 gap-4">
-      <div className="mb-16">
-        <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/gameb.webp" alt="WTF is GameB?" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">WTF is GameB?</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/metacrisis.webp" alt="WTF is the MetaCrisis?" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">WTF is the MetaCrisis?</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/moloch.webp" alt="drw" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Meditations on Moloch</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/metamodernist.webp" alt="Political MetaModernism" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Political MetaModernism:
-                Bridging Divides</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/goodquests.webp" alt="Choose Good Quests" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Choose Good Quests</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/memedriven.webp" alt="Meme Driven Organizations" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Meme Driven Organizations</h2>
-            </div>
-          </div>
-        </Carousel>
-        </div>
-          <div className="justify-start mb-4">
-              <h1 className="text-2xl font-medium text-primary justify-left text-left">
-                Web3 General
-              </h1>
-              <h2 className="text-xl font-medium text-accent justify-left text-left">
-                Web3 basics: how & why
-              </h2>
-            </div>
-            <div className="mb-16">
-        <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/ethereum.webp" alt="wtf is ethereum" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">WTF is Ethereum?</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/daos.webp" alt="wtf are daos" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">WTF are DAOs?</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/defi.webp" alt="wtf is defi" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">WTF is DeFi?</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/nfts.webp" alt="wtf are nfts" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">WTF are NFTs?</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/dapps.webp" alt="wtf are dapps" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">WTF are dApps?</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/web3builder.webp" alt="web 3 developer" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Become a Web3 Developer</h2>
-            </div>
-          </div>
-        </Carousel>
+        <div className="mb-16">
+          <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
+            {playbooks.metaGameB.map((item, index) => (
+              <div key={index} className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
+                <figure className="border-white border">
+                  <img src={item.image} alt={item.alt} />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title text-white z-10 font-extrabold">{item.title}</h2>
+                </div>
+              </div>
+            ))}
+          </Carousel>
         </div>
         <div className="justify-start mb-4">
-        <h1 className="text-2xl font-medium text-primary justify-left text-left"> DAO Playbooks</h1>
-        <h2 className="text-xl font-medium text-accent justify-left text-left">
-          DAO Tooling/Coordination Methods
-        </h2>
-      </div>
+          <h1 className="text-2xl font-medium text-primary justify-left text-left">
+            Web3 General
+          </h1>
+          <h2 className="text-xl font-medium text-accent justify-left text-left">
+            Web3 basics: how & why
+          </h2>
+        </div>
         <div className="mb-16">
-        <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/best-dao-contributor.webp" alt="Become the Best Contributor in any DAO" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Become the Best Contributor in any DAO</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lgS">
-            <figure className="border-white border">
-              <img src="./assets/daosummoner.webp" alt="Starting DAOs 101" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Starting DAOs 101</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/impact-networks.webp" alt="Impact Networks" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold"></h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/coordinape.webp" alt="Use Coordinape to Reward Contributors" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Use Coordinape to Reward Contributors</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/holacracy.webp" alt="Effective Meetings with Holacracy" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Effective Meetings with Holacracy</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/daowriter.webp" alt="Entering a DAO as a Writer" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Entering a DAO as a Writer</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/successful-teams.webp" alt="Building Successful Teams" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Building Successful Teams</h2>
-            </div>
-          </div>
-        </Carousel>
+          <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
+            {playbooks.web3General.map((item, index) => (
+              <div key={index} className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
+                <figure className="border-white border">
+                  <img src={item.image} alt={item.alt} />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title text-white z-10 font-extrabold">{item.title}</h2>
+                </div>
+              </div>
+            ))}
+          </Carousel>
         </div>
         <div className="justify-start mb-4">
-        <h1 className="text-2xl font-medium text-primary justify-left text-left"> Self-Actualization/Well-being</h1>
-        <h2 className="text-xl font-medium text-accent justify-left text-left">
-          Level-up, self-improve
-        </h2>
-      </div>
+          <h1 className="text-2xl font-medium text-primary justify-left text-left">
+            DAO Playbooks
+          </h1>
+          <h2 className="text-xl font-medium text-accent justify-left text-left">
+            DAO Tooling/Coordination Methods
+          </h2>
+        </div>
         <div className="mb-16">
-        <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
-        <div className="mb-8">
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/creatorgame.webp" alt="How to Play the Creator Game" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">How to Play the Creator Game</h2>
-            </div>
-          </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/time.webp" alt="Embrace the Ticking Clock" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Embrace the Ticking Clock</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/biases.webp" alt="Know your Biases" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Know your BiasesS</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/imposter.webp" alt="Understanding Imposter Syndrome" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Understanding Imposter Syndrome</h2>
-            </div>
-          </div>
-          <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
-            <figure className="border-white border">
-              <img src="./assets/journaling.webp" alt="Journaling like Dickie Bush" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-white z-10 font-extrabold">Journaling like Dickie Bush</h2>
-            </div>
-          </div>
-        </Carousel>
+          <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
+            {playbooks.daoPlaybooks.map((item, index) => (
+              <div key={index} className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
+                <figure className="border-white border">
+                  <img src={item.image} alt={item.alt} />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title text-white z-10 font-extrabold">{item.title}</h2>
+                </div>
+              </div>
+            ))}
+          </Carousel>
+        </div>
+        <div className="justify-start mb-4">
+          <h1 className="text-2xl font-medium text-primary justify-left text-left">
+            Self-Actualization/Well-being
+          </h1>
+          <h2 className="text-xl font-medium text-accent justify-left text-left">
+            Level-up, self-improve
+          </h2>
+        </div>
+        <div className="mb-16">
+          <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
+            {playbooks.selfActualization.map((item, index) => (
+              <div key={index} className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 shadow-xl mr-4 rounded-l-none rounded-rt-lg rounded-br-lg">
+                <figure className="border-white border">
+                  <img src={item.image} alt={item.alt} />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title text-white z-10 font-extrabold">{item.title}</h2>
+                </div>
+              </div>
+            ))}
+          </Carousel>
         </div>
       </div>
     </>
