@@ -27,7 +27,7 @@ const responsive = {
 };
 
 const CarouselSection = ({ title, description, items }) => (
-  <div className="mb-16">
+  <div className="mb-6 pb-4">
     <SectionHeader title={title} description={description} />
     <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8">
       {items.map((item, index) => (
