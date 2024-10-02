@@ -93,9 +93,7 @@ function Navbar() {
         </ul>
       </div>
       <div className="navbar-end px-4">
-        <div className="btn btn-sm pr-16 rounded">
           <w3m-button />
-        </div>
       </div>
     </div>
   );
