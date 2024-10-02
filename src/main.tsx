@@ -1,5 +1,5 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from'react'
+import { createRoot } from'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { createAppKit } from '@reown/appkit/react'
@@ -8,22 +8,20 @@ import { mainnet, optimism } from '@reown/appkit/networks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 
+import { ReactNode } from'react'
 
 const queryClient = new QueryClient()
 
-
 const projectId = import.meta.env.VITE_APPKIT_PROJECT_ID
 
-
 const metadata = {
-  name: 'retest1',
+  name:'retest1',
   description: 'AppKit Example',
   url: 'https://web3modal.com', 
   icons: ['https://avatars.githubusercontent.com/u/179229932']
 }
 
 export const networks = [mainnet, optimism]
-
 
 const wagmiAdapter = new WagmiAdapter({
   networks,
@@ -45,19 +43,16 @@ createAppKit({
   }
 })
 
-const AppKitProvider= (
-  { children, initialState }: { children: ReactNode; initialState?: State }
-) => (
-    <WagmiProvider config={wagmiAdapter.wagmiConfig}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </WagmiProvider>
-  
+const AppKitProvider = ({ children }: { children: ReactNode }) => (
+  <WagmiProvider config={wagmiAdapter.wagmiConfig}>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  </WagmiProvider>
 )
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AppKitProvider initialState={undefined}>
-    <App />
+    <AppKitProvider>
+      <App />
     </AppKitProvider>
   </StrictMode>,
 )

@@ -1,4 +1,3 @@
-import React from'react';
 import './App.css';
 import Carousel from'react-multi-carousel';
 import'react-multi-carousel/lib/styles.css';
@@ -6,6 +5,12 @@ import Navbar from './components/Navbar';
 import playbooks from './playbooks.json';
 import SectionHeader from './components/SectionHeader';
 import CarouselItem from './components/CarouselItem';
+
+interface CarouselSectionProps {
+  title: string;
+  description: string;
+  items: { title: string; image: string }[];
+}
 
 const responsive = {
   superLargeDesktop: {
@@ -26,8 +31,8 @@ const responsive = {
   }
 };
 
-const CarouselSection = ({ title, description, items }) => (
-  <div className="mb-6 pb-4">
+const CarouselSection = ({ title, description, items }: CarouselSectionProps) => (
+  <div className="container p-4 mt-30 gap-4">
     <SectionHeader title={title} description={description} />
     <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8 w-full">
       {items.map((item, index) => (
@@ -38,7 +43,7 @@ const CarouselSection = ({ title, description, items }) => (
 );
 
 const App = () => {
-  const sections = Object.keys(playbooks);
+  const sections = Object.keys(playbooks) as (keyof typeof playbooks)[];
 
   return (
     <>
@@ -50,9 +55,9 @@ const App = () => {
         {sections.map((section, index) => (
           <CarouselSection
             key={index}
-            title={playbooks[section].title}
-            description={playbooks[section].description}
-            items={playbooks[section].items}
+            title={playbooks[section]?.title}
+            description={playbooks[section]?.description}
+            items={playbooks[section]?.items}
           />
         ))}
       </div>

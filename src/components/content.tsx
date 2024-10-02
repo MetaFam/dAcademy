@@ -1,5 +1,9 @@
-export default function Content({ active, content }) {
+interface ContentProps {
+  active: string;
+  content: string;
+}
 
+export default function Content({ active, content }: ContentProps) {
   return (
     <div id="content" className="flex-grow">
       <div className="card bg-transparent max-w-md mt-4 mx-auto">

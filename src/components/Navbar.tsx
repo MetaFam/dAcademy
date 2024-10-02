@@ -1,5 +1,3 @@
-import React from'react';
-
 function Navbar() {
   return (
     <div className="sticky lg:static top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2 mb-4">
@@ -95,7 +93,9 @@ function Navbar() {
         </ul>
       </div>
       <div className="navbar-end px-4">
-        <w3m-button className="btn btn-sm pr-16 rounded" />
+        <div className="btn btn-sm pr-16 rounded">
+          <w3m-button />
+        </div>
       </div>
     </div>
   );
