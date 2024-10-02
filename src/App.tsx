@@ -65,6 +65,18 @@ const App = () => {
           />
         ))}
       </div>
+      <div className="fixed bottom-0 right-0 p-4">
+        <a className="btn btn-ghost text-xl" onClick={() => window.scrollTo({ top: 0, behavior:'smooth' })}>
+          <div className="flex flex-col justify-center items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7 7 7" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7 7 7" />
+            </svg>
+          </div>
+        </a>
+      </div>
     </>
   );
 };
