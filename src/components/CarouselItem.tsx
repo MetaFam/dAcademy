@@ -8,7 +8,7 @@ interface CarouselItemProps {
 
 const CarouselItem = ({ item }: CarouselItemProps) => (
   <div
-    className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 mr-4 rounded-l-none rounded-rt-lg rounded-br-lg pb-4 hover:scale-90 transition duration-200"
+    className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center p-0 image-full z-0 card bg-base-100 mr-4 rounded-l-none rounded-rt-lg rounded-br-lg pb-4 hover:scale-90 transition duration-600"
   >
     <figure className="border-white border">
       <img src={item.image} alt={item.alt} />

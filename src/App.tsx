@@ -7,6 +7,7 @@ import SectionHeader from './components/SectionHeader';
 import CarouselItem from './components/CarouselItem';
 
 interface CarouselSectionProps {
+  id: string;
   title: string;
   description: string;
   items: { title: string; image: string }[];
@@ -31,8 +32,8 @@ const responsive = {
   }
 };
 
-const CarouselSection = ({ title, description, items }: CarouselSectionProps) => (
-  <div className="container p-4 mt-30 gap-4">
+const CarouselSection = ({ id, title, description, items }: CarouselSectionProps) => (
+  <div id={id} className="container p-4 mt-30 gap-4">
     <SectionHeader title={title} description={description} />
     <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8 w-full">
       {items.map((item, index) => (
@@ -47,7 +48,7 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar sections={sections} />
       <div>
         <h2 className="text-accent font-light text-3xl mb-16 pt-6">A de-store of knowledge.  Onboard forward.</h2>
       </div>
@@ -55,6 +56,7 @@ const App = () => {
         {sections.map((section, index) => (
           <CarouselSection
             key={index}
+            id={playbooks[section]?.title.toLowerCase().replace(/\s+/g, '-')}
             title={playbooks[section]?.title}
             description={playbooks[section]?.description}
             items={playbooks[section]?.items}

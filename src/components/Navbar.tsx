@@ -1,6 +1,18 @@
-import React from 'react';
+import React from'react';
+import playbooks from '../playbooks.json';
 
-function Navbar() {
+interface NavbarProps {
+  sections: string[];
+}
+
+function Navbar({ sections }: NavbarProps) {
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior:'smooth' });
+    }
+  };
+
   return (
     <div className="sticky lg:static top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2 mb-4">
       <div className="navbar-start">
@@ -26,27 +38,13 @@ function Navbar() {
             <li>
               <a>Categories</a>
               <ul className="p-2">
-                <li>
-                  <a>Meta - Game-b</a>
-                </li>
-                <li>
-                  <a>Web3 General</a>
-                </li>
-                <li>
-                  <a>DAO Playbooks</a>
-                </li>
-                <li>
-                  <a>Self Actualization</a>
-                </li>
-                <li>
-                  <a>Building Chain by Chain</a>
-                </li>
-                <li>
-                  <a>ReFi</a>
-                </li>
-                <li>
-                  <a>Random Skills</a>
-                </li>
+                {sections.map((section, index) => (
+                  <li key={index}>
+                    <a onClick={() => scrollToSection(playbooks[section].title.toLowerCase().replace(/\s+/g, '-'))}>
+                      {playbooks[section].title}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </li>
             <li>
@@ -65,27 +63,13 @@ function Navbar() {
             <details>
               <summary>Categories</summary>
               <ul className="p-2 z-10">
-                <li>
-                  <a>Meta - Game-b</a>
-                </li>
-                <li>
-                  <a>Web3 General</a>
-                </li>
-                <li>
-                  <a>DAO Playbooks</a>
-                </li>
-                <li>
-                  <a>Self Actualization</a>
-                </li>
-                <li>
-                  <a>Building Chain by Chain</a>
-                </li>
-                <li>
-                  <a>ReFi</a>
-                </li>
-                <li>
-                  <a>Random Skills</a>
-                </li>
+                {sections.map((section, index) => (
+                  <li key={index}>
+                    <a onClick={() => scrollToSection(playbooks[section].title.toLowerCase().replace(/\s+/g, '-'))}>
+                      {playbooks[section].title}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </details>
           </li>
