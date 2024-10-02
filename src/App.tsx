@@ -37,7 +37,9 @@ const CarouselSection = ({ id, title, description, items }: CarouselSectionProps
     <SectionHeader title={title} description={description} />
     <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8 w-full">
       {items.map((item, index) => (
-        <CarouselItem key={index} item={item} />
+        <div id={`${id}-${item.title.toLowerCase().replace(/\s+/g, '-')}`} key={index}>
+          <CarouselItem item={item} />
+        </div>
       ))}
     </Carousel>
   </div>
