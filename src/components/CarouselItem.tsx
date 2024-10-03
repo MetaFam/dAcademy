@@ -12,7 +12,7 @@ const CarouselItem = ({ item }: CarouselItemProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/book');
+    navigate('/');
   };
 
   return (
