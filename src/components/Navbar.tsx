@@ -14,7 +14,7 @@ function Navbar({ sections }: NavbarProps) {
   };
 
   return (
-    <div className="sticky top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2 mb-4">
+    <div className="sticky top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-[1001] shadow-md shadow-secondary px-0 sm:px-2 mb-4">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
