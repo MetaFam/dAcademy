@@ -52,7 +52,7 @@ const App = () => {
     <>
       <Navbar sections={sections} />
       <div>
-        <h2 className="text-accent font-light text-3xl mb-16 pt-6">A de-store of knowledge.  Onboard forward.</h2>
+        <h2 className="text-accent font-light text-3xl mb-2 pt-6">A de-store of knowledge.  Onboard forward.</h2>
       </div>
       <div className="container p-4 mt-30 gap-4">
         {sections.map((section, index) => (

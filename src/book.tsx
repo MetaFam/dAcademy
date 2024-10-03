@@ -1,5 +1,5 @@
 import React from'react';
-import '../App.css';
+import './App.css';
 import { useState } from'react';
 import Navbar from './components/Navbar';
 import Chapters from './components/chapters';
@@ -7,6 +7,8 @@ import Content from './components/content';
 import Reward from './components/reward';
 
 function Book() {
+  console.log('Book component is being rendered');
+
   const [content, setContent] = useState('');
   const [activeQuest, setActiveQuest] = useState(1);
   const chapterSelected = (index) => {
