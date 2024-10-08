@@ -76,22 +76,16 @@ function Book() {
       })
     )
 
-    const [_content, setContent] = useState('')
-    const [activeQuest, setActiveQuest] = useState(1)
+    const [content, setContent] = useState(null)
     const chapterSelected = (index: number) => {
-      setActiveQuest(index + 1)
       switch (index) {
-        case 0:
-          setContent('Content for Quest 1')
+        case 0: {
+          setContent(chain.description)
           break
-        case 1:
-          setContent('Content for Quest 2')
-          break
-        case 2:
-          setContent('Content for Quest 3')
-          break
-        default:
-          setContent('')
+        }
+        default: {
+          setContent(chain.quests[index - 1].description)
+        }
       }
     }
 
@@ -108,6 +102,8 @@ function Book() {
       )
     }
 
+    if(!content) chapterSelected(0)
+
     return (
       <>
         <div className="container mx-auto p-20">
@@ -115,9 +111,9 @@ function Book() {
           <h1 className="text-4xl md:text-6xl font-bold text-left mt-2">{book.title}</h1>
           <p className="text-sm text-white text-left pl-1 mt-6 mb-4">Last updated: insert date</p>
           <main className="md:flex justify-start">
-            <Chapters onChange={chapterSelected} active={activeQuest}/>
-            <Content content={chain.description} active={activeQuest}/>
-            <Reward image={chain.token.imageUrl} />
+            <Chapters onChange={chapterSelected} chapters={chain.quests.map(({ name }) => name)}/>
+            <Content {...{ content }}/>
+            <Reward image={chain.token.imageUrl}/>
           </main>
         </div>
       </>

@@ -1,22 +1,27 @@
+import { useState } from "react"
+
 export default function Chapters(
-  { onChange, active }:
-  { onChange: (index: number) => void, active: number }
+  { onChange, chapters }:
+  { onChange: (index: number) => void, chapters: Array<string> }
 ) {
-  const chapters = ['Chapter', 'Chapter', 'Chapter']
+  const [active, setActive] = useState(0)
+
+  if(!chapters) {
+    throw new Error('Argument `chapters` is not defined.')
+  }
+
+  const onClick = (index) => {
+    setActive(index)
+    onChange(index)
+  }
 
   return (
-    <ol id="chapters" className="flex flex-col max-w-md mt-4 mr-10">
-      {chapters.map((chapter, index) => (
-        <li key={index} className="card bg-base-100 shadow-md p-3" onClick={() => onChange(index)}>
-          <h2 className="text-lg font-bold text-left">
-            {active === index + 1 ? (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-              </svg>
-            ) : (
-              `${index + 1} `
-            )}
-            {chapter}
+    <ol id="chapters" className="flex flex-col max-w-72 text-balance mt-4 mr-4">
+      {['Introduction', ...chapters].map((chapter, index) => (
+        <li key={index} className="card bg-base-100 shadow-md p-3" onClick={() => onClick(index)}>
+          <h2 className="text-lg font-medium text-left -indent-6 ml-7">
+            {active === index ? '✔' : `${index + 1}`}
+            {' '}{chapter}
           </h2>
         </li>
       ))}
