@@ -3,13 +3,19 @@ import Carousel from'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import playbooks from './playbooks.json';
 import SectionHeader from './components/SectionHeader';
-import CarouselItem from './components/CarouselItem';
+import CarouselItem, { toSlug } from './components/CarouselItem';
 
+export type Book = {title: string; image: string}
+export type Category = {
+  title: string
+  description: string
+  books: Book[]
+}
 interface CarouselSectionProps {
   id: string;
   title: string;
   description: string;
-  items: { title: string; image: string }[];
+  items: Book[];
 }
 
 const responsive = {
@@ -56,7 +62,7 @@ const App = () => {
         {playbooks.map((category, index) => (
           <CarouselSection
             key={index}
-            id={category.title.toLowerCase().replace(/\s+/g, '-')}
+            id={toSlug(category.title)}
             title={category.title}
             description={category.description}
             items={category.books}

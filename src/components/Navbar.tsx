@@ -1,12 +1,10 @@
 import playbooks from '../playbooks.json';
 import { Link } from '@tanstack/react-router'
+import { toSlug } from './CarouselItem';
+import { Category } from '../App';
 
-type Section = keyof typeof playbooks
-interface NavbarProps {
-  sections: Section[];
-}
 
-function Navbar({ sections }: NavbarProps) {
+function Navbar() {
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -39,10 +37,10 @@ function Navbar({ sections }: NavbarProps) {
             <li>
               <a>Categories</a>
               <ul className="p-2">
-                {sections.map((section: Section, index: number) => (
+                {playbooks.map((category: Category, index: number) => (
                   <li key={index}>
-                    <a onClick={() => scrollToSection(playbooks[section].title.toLowerCase().replace(/\s+/g, '-'))}>
-                      {playbooks[section].title}
+                    <a onClick={() => scrollToSection(toSlug(category.title))}>
+                      {category.title}
                     </a>
                   </li>
                 ))}
@@ -64,10 +62,10 @@ function Navbar({ sections }: NavbarProps) {
             <details>
               <summary>Categories</summary>
               <ul className="p-2 z-10">
-                {sections.map((section: Section, index: number) => (
+                {playbooks.map((category: Category, index: number) => (
                   <li key={index}>
-                    <a onClick={() => scrollToSection(playbooks[section].title.toLowerCase().replace(/\s+/g, '-'))}>
-                      {playbooks[section].title}
+                    <a onClick={() => scrollToSection(toSlug(category.title))}>
+                      {category.title}
                     </a>
                   </li>
                 ))}
