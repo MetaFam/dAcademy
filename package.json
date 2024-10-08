@@ -22,6 +22,7 @@
     "graphql-request": "^7.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-markdown": "^9.0.1",
     "react-multi-carousel": "^2.8.5",
     "viem": "^2.21.16",
     "vinxi": "^0.4.3",

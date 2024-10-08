@@ -8,6 +8,7 @@ import Reward from '../../components/reward'
 import playbooks from '../../playbooks.json'
 import { toSlug } from '../../components/CarouselItem'
 
+
 const questChainQueryDocument = gql`
   query ChainDetails($name: String!) {
     questChains(where: {
@@ -16,6 +17,9 @@ const questChainQueryDocument = gql`
     }) {
       description
       imageUrl
+      token {
+        imageUrl
+      }
       quests(orderBy: questId) {
         questId
         name
@@ -33,6 +37,7 @@ export type Quest = {
 export type Chain = {
   description: string
   imageUrl: string
+  token: { imageUrl: string }
   quests: Array<Quest>
 }
 export type GraphChainResponse = {
@@ -112,7 +117,7 @@ function Book() {
           <main className="md:flex justify-start">
             <Chapters onChange={chapterSelected} active={activeQuest}/>
             <Content content={chain.description} active={activeQuest}/>
-            <Reward />
+            <Reward image={chain.token.imageUrl} />
           </main>
         </div>
       </>
