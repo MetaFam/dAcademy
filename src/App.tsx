@@ -1,7 +1,6 @@
 import './App.css';
 import Carousel from'react-multi-carousel';
-import'react-multi-carousel/lib/styles.css';
-import Navbar from './components/Navbar';
+import 'react-multi-carousel/lib/styles.css';
 import playbooks from './playbooks.json';
 import SectionHeader from './components/SectionHeader';
 import CarouselItem from './components/CarouselItem';
@@ -50,7 +49,6 @@ const App = () => {
 
   return (
     <>
-      <Navbar sections={sections} />
       <div>
         <h2 className="text-accent font-light text-3xl mb-2 pt-6">A de-store of knowledge.  Onboard forward.</h2>
       </div>

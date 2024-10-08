@@ -7,22 +7,30 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "vdev": "vinxi dev",
+    "vbuild": "vinxi build",
+    "vstart": "vinxi start"
   },
   "dependencies": {
     "@reown/appkit": "^1.0.4",
     "@reown/appkit-adapter-wagmi": "^1.0.4",
     "@tanstack/react-query": "^5.56.2",
+    "@tanstack/react-router": "^1.63.2",
+    "@tanstack/start": "^1.63.2",
     "@web3modal/wagmi": "^5.1.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-multi-carousel": "^2.8.5",
-    "react-router-dom": "^6.26.2",
     "viem": "^2.21.16",
+    "vinxi": "^0.4.3",
     "wagmi": "^2.12.16"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@tanstack/router-cli": "^1.58.12",
+    "@tanstack/router-devtools": "^1.63.0",
+    "@tanstack/router-plugin": "^1.62.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
