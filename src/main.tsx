@@ -4,14 +4,21 @@ import './index.css'
 import { createAppKit } from '@reown/appkit/react'
 import { WagmiProvider } from 'wagmi'
 import { mainnet, optimism } from '@reown/appkit/networks'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import {
+  QueryClient, QueryClientProvider,
+} from '@tanstack/react-query'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
+import {
+  RouterProvider, createRouter, createHashHistory,
+} from '@tanstack/react-router'
 
 import { ReactNode } from'react'
 import { routeTree } from './routeTree.gen'
 
-const router = createRouter({ routeTree })
+const hashHistory = createHashHistory()
+const router = createRouter({
+  routeTree, history: hashHistory,
+})
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
