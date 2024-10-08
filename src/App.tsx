@@ -45,7 +45,7 @@ const CarouselSection = ({ id, title, description, items }: CarouselSectionProps
 );
 
 const App = () => {
-  const sections = Object.keys(playbooks) as (keyof typeof playbooks)[];
+
 
   return (
     <>
@@ -53,13 +53,13 @@ const App = () => {
         <h2 className="text-accent font-light text-3xl mb-2 pt-6">A de-store of knowledge.  Onboard forward.</h2>
       </div>
       <div className="container p-4 mt-30 gap-4">
-        {sections.map((section, index) => (
+        {playbooks.map((category, index) => (
           <CarouselSection
             key={index}
-            id={playbooks[section]?.title.toLowerCase().replace(/\s+/g, '-')}
-            title={playbooks[section]?.title}
-            description={playbooks[section]?.description}
-            items={playbooks[section]?.items}
+            id={category.title.toLowerCase().replace(/\s+/g, '-')}
+            title={category.title}
+            description={category.description}
+            items={category.books}
           />
         ))}
       </div>

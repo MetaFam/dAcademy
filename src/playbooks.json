@@ -1,8 +1,8 @@
-{
-  "metaGameB": {
+[
+  {
     "title": "Meta/GameB",
     "description": "Bigger picture, the grander game.",
-    "items": [
+    "books": [
       {
         "title": "WTF is GameB?",
         "image": "/assets/gameb.webp"
@@ -29,10 +29,10 @@
       }
     ]
   },
-  "web3General": {
+  {
     "title": "Web3 General",
     "description": "Web3 basics: how & why",
-    "items": [
+    "books": [
       {
         "title": "WTF is Ethereum?",
         "image": "/assets/ethereum.webp"
@@ -59,10 +59,10 @@
       }
     ]
   },
-  "daoPlaybooks": {
+  {
     "title": "DAO Playbooks",
     "description": "DAO Tooling/Coordination Methods",
-    "items": [
+    "books": [
       {
         "title": "Become the Best Contributor in any DAO",
         "image": "/assets/best-dao-contributor.webp"
@@ -93,10 +93,10 @@
       }
     ]
   },
-  "selfActualization": {
+  {
     "title": "Self-Actualization",
     "description": "Level-up, self-improve",
-    "items": [
+    "books": [
       {
         "title": "How to Play the Creator Game",
         "image": "/assets/creatorgame.webp"
@@ -119,4 +119,4 @@
       }
     ]
   }
-}
+]
