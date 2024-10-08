@@ -8,10 +8,13 @@ interface CarouselItemProps {
   };
 }
 
+export const toSlug = (title: string) => (
+  title.toLowerCase().replace(/\s+/g, '-').replace(/[\?,:]/g, '')
+)
 const CarouselItem = ({ item }: CarouselItemProps) => {
 
   return (
-    <Link to={`/book/${encodeURIComponent(item.title)}`}>
+    <Link to={`/book/${toSlug(item.title)}`}>
     <div className="basis-1/4 md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-1 flex place-items-center image-full z-0 card p-0 bg-base-100 mr-4 rounded-l-none rounded-rt-lg rounded-br-lg pb-4 hover:scale-95 transition duration-600">
       <figure className="border-white border">
         <img src={item.image} alt={item.alt} />
