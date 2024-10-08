@@ -71,22 +71,22 @@ function Book() {
       })
     )
 
-    const [_content, setContent] = useState('');
-    const [activeQuest, setActiveQuest] = useState(1);
+    const [_content, setContent] = useState('')
+    const [activeQuest, setActiveQuest] = useState(1)
     const chapterSelected = (index: number) => {
-      setActiveQuest(index + 1);
+      setActiveQuest(index + 1)
       switch (index) {
         case 0:
-          setContent('Content for Quest 1');
-          break;
+          setContent('Content for Quest 1')
+          break
         case 1:
-          setContent('Content for Quest 2');
-          break;
+          setContent('Content for Quest 2')
+          break
         case 2:
-          setContent('Content for Quest 3');
-          break;
+          setContent('Content for Quest 3')
+          break
         default:
-          setContent('');
+          setContent('')
       }
     }
 
@@ -94,13 +94,14 @@ function Book() {
     if(!book) {
       throw new Error(`No book found for: "${slug}".`)
     }
+
+    if(isLoading) return <h1>Loading…</h1>
+
     if(!chain) {
       throw new Error(
         `No chain found for: "${slug}" = "${book.title}".`
       )
     }
-
-    if(isLoading) return <h1>Loading…</h1>
 
     return (
       <>

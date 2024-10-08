@@ -35,7 +35,7 @@ const metadata = {
   name:'retest1',
   description: 'AppKit Example',
   url: 'https://web3modal.com',
-  icons: ['https://avatars.githubusercontent.com/u/179229932']
+  icons: ['https://dacade.my/octopus%20icon.svg']
 }
 
 export const networks = [mainnet, optimism]

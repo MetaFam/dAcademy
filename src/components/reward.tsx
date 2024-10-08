@@ -1,7 +1,6 @@
-import { CarbonShare } from "./share";
+import { CarbonShare } from './share'
 
-export default function Reward(){
-
+export const Reward = () => {
   return (
     <div id="reward" className="flex flex-col flex-shrink-0 mx-auto">
       <div className="text-blue-900 hover:text-white flex flex-grow justify-center mb-10 mt-8">
@@ -21,3 +20,5 @@ export default function Reward(){
     </div>
   )
 }
+
+export default Reward

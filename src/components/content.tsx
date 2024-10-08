@@ -1,6 +1,6 @@
 interface ContentProps {
-  active: number;
-  content: string;
+  active: number
+  content: string
 }
 
 export default function Content({ active, content }: ContentProps) {

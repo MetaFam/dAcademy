@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  scroll-behavior: smooth;
 }
 
 @media (max-width: 768px) {
@@ -10,5 +11,5 @@
      swiping: true;
    }
  }
-   
+
 

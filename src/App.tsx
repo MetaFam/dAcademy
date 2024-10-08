@@ -1,21 +1,27 @@
-import './App.css';
-import Carousel from'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
-import playbooks from './playbooks.json';
-import SectionHeader from './components/SectionHeader';
-import CarouselItem, { toSlug } from './components/CarouselItem';
+import Carousel from'react-multi-carousel'
+import { Link } from '@tanstack/react-router'
+import playbooks from './playbooks.json'
+import SectionHeader from './components/SectionHeader'
+import
+  CarouselItem, { toSlug }
+from './components/CarouselItem'
+import 'react-multi-carousel/lib/styles.css'
+import './App.css'
 
-export type Book = {title: string; image: string}
+export type Book = {
+  title: string
+  image: string
+}
 export type Category = {
   title: string
   description: string
-  books: Book[]
+  books: Array<Book>
 }
 interface CarouselSectionProps {
-  id: string;
-  title: string;
-  description: string;
-  items: Book[];
+  id: string
+  title: string
+  description: string
+  items: Array<Book>
 }
 
 const responsive = {
@@ -35,54 +41,50 @@ const responsive = {
     breakpoint: { max: 464, min: 0 },
     items: 1
   }
-};
+}
 
 const CarouselSection = ({ id, title, description, items }: CarouselSectionProps) => (
-  <div id={id} className="container p-4 mt-30 gap-4">
-    <SectionHeader title={title} description={description} />
-    <Carousel responsive={responsive} className="gap-4 md:gap-6 lg:gap-8 w-full">
+  <div {...{ id }} className="container p-4 mt-30 gap-4 scroll-mt-20">
+    <SectionHeader {...{ title, description }} />
+    <Carousel {...{ responsive }} className="gap-4 md:gap-6 lg:gap-8 w-full">
       {items.map((item, index) => (
         <div id={`${id}-${item.title.toLowerCase().replace(/\s+/g, '-')}`} key={index}>
-          <CarouselItem item={item} />
+          <CarouselItem {...{ item }} />
         </div>
       ))}
     </Carousel>
   </div>
-);
+)
 
-const App = () => {
-
-
-  return (
-    <>
-      <div>
-        <h2 className="text-accent font-light text-3xl mb-2 pt-6">A de-store of knowledge.  Onboard forward.</h2>
-      </div>
-      <div className="container p-4 mt-30 gap-4">
-        {playbooks.map((category, index) => (
-          <CarouselSection
-            key={index}
-            id={toSlug(category.title)}
-            title={category.title}
-            description={category.description}
-            items={category.books}
-          />
-        ))}
-      </div>
-      <div className="fixed bottom-0 right-0 p-4">
-        <a className="btn btn-ghost text-xl" onClick={() => window.scrollTo({ top: 0, behavior:'smooth' })}>
-          <div className="flex flex-col justify-center items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7 7 7" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7 7 7" />
-            </svg>
-          </div>
-        </a>
-      </div>
-    </>
-  );
-};
-
-export default App;
+export const App = () => (
+  <>
+    <div id="top" className="scroll-mt-32">
+      <h2 className="text-accent font-light text-3xl mb-2 pt-6">A de-store of knowledge. Onboard forward.</h2>
+    </div>
+    <div className="container p-4 mt-30 gap-4">
+      {playbooks.map((category, index) => (
+        <CarouselSection
+          key={index}
+          id={toSlug(category.title)}
+          title={category.title}
+          description={category.description}
+          items={category.books}
+        />
+      ))}
+    </div>
+    <div className="fixed bottom-0 right-0 p-4">
+      <Link to={'/#top' as '/'} className="btn btn-ghost text-xl">
+        <div className="flex flex-col justify-center items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7 7 7" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7 7 7" />
+          </svg>
+        </div>
+      </Link>
+    </div>
+  </>
+)
+4
+export default App
