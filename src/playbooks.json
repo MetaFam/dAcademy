@@ -4,11 +4,11 @@
     "description": "Bigger picture, the grander game.",
     "books": [
       {
-        "title": "WTF is GameB?",
+        "title": "WTF is Game B?",
         "image": "/assets/gameb.webp"
       },
       {
-        "title": "WTF is the MetaCrisis?",
+        "title": "WTF is Metacrisis?",
         "image": "/assets/metacrisis.webp"
       },
       {
@@ -16,7 +16,7 @@
         "image": "/assets/moloch.webp"
       },
       {
-        "title": "Political MetaModernism: Bridging Divides",
+        "title": "Political Metamodernism: Bridging Divides",
         "image": "/assets/metamodernist.webp"
       },
       {
@@ -31,7 +31,7 @@
   },
   {
     "title": "Web3 General",
-    "description": "Web3 basics: how & why",
+    "description": "Web3 basics: how & why.",
     "books": [
       {
         "title": "WTF is Ethereum?",
@@ -64,7 +64,7 @@
     "description": "DAO Tooling/Coordination Methods",
     "books": [
       {
-        "title": "Become the Best Contributor in any DAO",
+        "title": "Become the Best Contributor in Any DAO",
         "image": "/assets/best-dao-contributor.webp"
       },
       {
@@ -76,7 +76,7 @@
         "image": "/assets/impact-networks.webp"
       },
       {
-        "title": "Use Coordinape to Reward Contributors",
+        "title": "Using Coordinape to Reward Contributors",
         "image": "/assets/coordinape.webp"
       },
       {
@@ -95,7 +95,7 @@
   },
   {
     "title": "Self-Actualization",
-    "description": "Level-up, self-improve",
+    "description": "Level-up, self-improve.",
     "books": [
       {
         "title": "How to Play the Creator Game",
@@ -106,7 +106,7 @@
         "image": "/assets/time.webp"
       },
       {
-        "title": "Know your Biases",
+        "title": "Know Your Biases",
         "image": "/assets/biases.webp"
       },
       {
@@ -114,7 +114,7 @@
         "image": "/assets/imposter.webp"
       },
       {
-        "title": "Journaling like Dickie Bush",
+        "title": "Journaling Like Dickie Bush",
         "image": "/assets/journaling.webp"
       }
     ]
