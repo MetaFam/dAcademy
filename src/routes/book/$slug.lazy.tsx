@@ -119,7 +119,7 @@ function Book() {
       if(!client) {
         console.warn('Viem `client` not set.')
       } else {
-        client.getEnsName({ address: id }).then(console.log)
+        client.getEnsName({ address: id as `0x${string}` }).then(console.log)
       }
     }
     return (
