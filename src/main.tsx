@@ -45,8 +45,6 @@ const wagmiAdapter = new WagmiAdapter({
   projectId
 })
 
-console.log({ projectId })
-
 createAppKit({
   adapters: [wagmiAdapter],
   networks: [mainnet, optimism],

@@ -17,6 +17,7 @@
     "@tanstack/react-router": "^1.63.2",
     "@tanstack/start": "^1.63.2",
     "@web3modal/wagmi": "^5.1.10",
+    "clsx": "^2.1.1",
     "gh-pages": "^6.1.1",
     "graphql": "^16.9.0",
     "graphql-request": "^7.1.0",

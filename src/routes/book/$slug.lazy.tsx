@@ -7,6 +7,9 @@ import Content from '../../components/content'
 import Reward from '../../components/reward'
 import playbooks from '../../playbooks.json'
 import { toSlug } from '../../components/CarouselItem'
+import { usePublicClient } from 'wagmi'
+
+
 
 
 const questChainQueryDocument = gql`
@@ -17,9 +20,8 @@ const questChainQueryDocument = gql`
     }) {
       description
       imageUrl
-      token {
-        imageUrl
-      }
+      token { imageUrl }
+      createdBy { id }
       quests(orderBy: questId) {
         questId
         name
@@ -39,6 +41,7 @@ export type Chain = {
   imageUrl: string
   token: { imageUrl: string }
   quests: Array<Quest>
+  createdBy: { id: string }
 }
 export type GraphChainResponse = {
   questChains: Array<Chain>
@@ -75,10 +78,13 @@ function Book() {
         )
       })
     )
-
-    const [content, setContent] = useState(null)
+    const client = usePublicClient()
+    const [active, setActive] = useState(0)
+    const [content, setContent] = useState<string | null>(null)
+    const [creator, setCreator] = useState('Unknown')
     const chapterSelected = (index: number) => {
-      switch (index) {
+      setActive(index)
+      switch(index) {
         case 0: {
           setContent(chain.description)
           break
@@ -88,7 +94,10 @@ function Book() {
         }
       }
     }
-
+    const passIntro = () => {
+      chapterSelected(1)
+      document.getElementById('top')?.scrollIntoView()
+    }
     if(error) throw error
     if(!book) {
       throw new Error(`No book found for: "${slug}".`)
@@ -103,16 +112,30 @@ function Book() {
     }
 
     if(!content) chapterSelected(0)
-
+    if(creator === 'Unknown') {
+      const { id } = chain.createdBy
+      setCreator(`${id.substring(0, 5)}⋯${id.substring(id.length - 3)}`)
+      console.log({client})
+      if(!client) {
+        console.warn('Viem `client` not set.')
+      } else {
+        client.getEnsName({ address: id }).then(console.log)
+      }
+    }
     return (
       <>
-        <div className="container mx-auto p-20">
-          <p className="text-sm text-secondary mt-5 text-left pl-1">Author Wallet: 0x1234567890abcdef</p>
+        <div id="top" className="container mx-auto p-20">
+          <p className="text-sm text-secondary mt-5 text-left pl-1">Creator: {creator}</p>
           <h1 className="text-4xl md:text-6xl font-bold text-left mt-2">{book.title}</h1>
           <p className="text-sm text-white text-left pl-1 mt-6 mb-4">Last updated: insert date</p>
           <main className="md:flex justify-start">
-            <Chapters onChange={chapterSelected} chapters={chain.quests.map(({ name }) => name)}/>
-            <Content {...{ content }}/>
+            <Chapters {...{ active }} onChange={chapterSelected} chapters={chain.quests.map(({ name }) => name)}/>
+            <div>
+              <Content {...{ content }}/>
+              {active === 0 && (
+                <button className='shadow-md rounded-md bg-base-300 p-4 hover:bg-yellow-300/60 text-white text-center' onClick={passIntro}>Continue</button>
+              )}
+            </div>
             <Reward image={chain.token.imageUrl}/>
           </main>
         </div>
