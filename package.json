@@ -8,9 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "vdev": "vinxi dev",
-    "vbuild": "vinxi build",
-    "vstart": "vinxi start"
+    "gh:publish": "gh-pages --nojekyll --dist dist"
+
   },
   "dependencies": {
     "@reown/appkit": "^1.0.4",
