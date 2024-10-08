@@ -1,4 +1,4 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
+import { createRootRoute, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import Navbar from '../components/Navbar'
 import playbooks from '../playbooks.json'
@@ -12,7 +12,7 @@ export const Route = createRootRoute({
     <>
       <Navbar sections={sections} />
       <Outlet />
-      {/* <TanStackRouterDevtools /> */}
+      <TanStackRouterDevtools />
     </>
     )
   },

@@ -1,4 +1,7 @@
-export default function Chapters({ onChange, active }) {
+export default function Chapters(
+  { onChange, active }:
+  { onChange: (index: number) => void, active: number }
+) {
   const chapters = ['Chapter', 'Chapter', 'Chapter']
 
   return (

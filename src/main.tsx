@@ -1,7 +1,5 @@
 import { StrictMode } from'react'
 import { createRoot } from'react-dom/client'
-import App from './App'
-import Book from './book'
 import './index.css'
 import { createAppKit } from '@reown/appkit/react'
 import { WagmiProvider } from 'wagmi'

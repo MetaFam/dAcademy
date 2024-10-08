@@ -1,5 +1,5 @@
 interface ContentProps {
-  active: string;
+  active: number;
   content: string;
 }
 

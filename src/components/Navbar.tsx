@@ -1,8 +1,8 @@
-import React from'react';
 import playbooks from '../playbooks.json';
 
+type Section = keyof typeof playbooks
 interface NavbarProps {
-  sections: string[];
+  sections: Section[];
 }
 
 function Navbar({ sections }: NavbarProps) {
@@ -38,7 +38,7 @@ function Navbar({ sections }: NavbarProps) {
             <li>
               <a>Categories</a>
               <ul className="p-2">
-                {sections.map((section, index) => (
+                {sections.map((section: Section, index: number) => (
                   <li key={index}>
                     <a onClick={() => scrollToSection(playbooks[section].title.toLowerCase().replace(/\s+/g, '-'))}>
                       {playbooks[section].title}
@@ -63,7 +63,7 @@ function Navbar({ sections }: NavbarProps) {
             <details>
               <summary>Categories</summary>
               <ul className="p-2 z-10">
-                {sections.map((section, index) => (
+                {sections.map((section: Section, index: number) => (
                   <li key={index}>
                     <a onClick={() => scrollToSection(playbooks[section].title.toLowerCase().replace(/\s+/g, '-'))}>
                       {playbooks[section].title}

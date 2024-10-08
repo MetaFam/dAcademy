@@ -6,6 +6,6 @@ export const Route = createLazyFileRoute('/book/$title')({
 })
 
 function Book() {
-  const { title } = Route.useParams()
+  // const { title } = Route.useParams()
   return <BookContent />
 }

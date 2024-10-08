@@ -1,4 +1,3 @@
-import React from'react';
 import './App.css';
 import { useState } from'react';
 import Chapters from './components/chapters';
@@ -10,7 +9,7 @@ function Book() {
 
   const [content, setContent] = useState('');
   const [activeQuest, setActiveQuest] = useState(1);
-  const chapterSelected = (index) => {
+  const chapterSelected = (index: number) => {
     setActiveQuest(index + 1);
     switch (index) {
       case 0:
