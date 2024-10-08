@@ -1,4 +1,5 @@
 import playbooks from '../playbooks.json';
+import { Link } from '@tanstack/react-router'
 
 type Section = keyof typeof playbooks
 interface NavbarProps {
@@ -52,7 +53,7 @@ function Navbar({ sections }: NavbarProps) {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">dAcademy</a>
+        <Link to="/" className="btn btn-ghost text-xl">dAcademy</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
