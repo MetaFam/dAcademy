@@ -1,4 +1,4 @@
-import { StrictMode } from'react'
+import { StrictMode, ReactNode } from'react'
 import { createRoot } from'react-dom/client'
 import './index.css'
 import { createAppKit } from '@reown/appkit/react'
@@ -11,8 +11,8 @@ import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import {
   RouterProvider, createRouter, createHashHistory,
 } from '@tanstack/react-router'
+import { Toaster } from 'react-hot-toast'
 
-import { ReactNode } from'react'
 import { routeTree } from './routeTree.gen'
 
 const hashHistory = createHashHistory()
@@ -68,8 +68,9 @@ const root=document.getElementById('root')!
 if (!root.innerHTML){
   createRoot(root).render(
     <StrictMode>
+      <Toaster/>
       <AppKitProvider>
-        <RouterProvider {...{ router }} />
+        <RouterProvider {...{ router }}/>
       </AppKitProvider>
     </StrictMode>,
   )
