@@ -3,11 +3,14 @@ import { clsx } from 'clsx'
 import { useQuery } from '@tanstack/react-query'
 
 const userChainProgressQueryDocument = gql`
-  query QuestStatusDetails($chain: String!, $user: String!) {
+  query ChainDetails($chain: String!, $user: String!) {
     questStatuses(where: {questChain: $chain, user: $user}, orderBy: quest__questId) {
       status
       quest {
+        name
         questId
+        optional
+        paused
       }
       submissions {
         name
@@ -72,41 +75,57 @@ export default function Chapters(
         const status = statuses?.find(
           ({ quest: { questId } }) => (Number(questId) === index - 1)
         )
-        const approved = status == null ? null : (
-          (() => {
-            switch(status.status) {
-              case 'pass': return true
-              case 'fail': return false
-              default: {
-                console.warn(
-                  `Unknown Status for Quest ${index - 1}: ${status.status}`
-                )
-                return null
-              }
-            }
-          })()
-        )
+        let { status: state } = status ?? {}
         const [first, ...rest] = chapter.split(/\s+/g)
+        let tooltip = (
+          (state == null ? (
+            'You have not yet submitted a proof for this chapter.'
+          ) : (
+            `Your submission ${(() => {
+              switch(state) {
+                case 'pass': return 'has been approved.'
+                case 'fail': return 'has been rejected.'
+                case 'review': return 'is under review.'
+                default: return `has a \`state\` of "${state}".`
+              }
+            })()}`
+          ))
+        )
+        if(index === 0) {
+          state = 'init'
+          tooltip = 'No submission required for this chapter.'
+        }
+
         return (
           <li
             key={index}
-            className={clsx(
-              'card bg-base-100 shadow-md p-3 hover:bg-yellow-300/60',
-              active === index && 'bg-white/20',
-            )}
+            data-tip={tooltip}
             onClick={() => onChange(index)}
+            className={clsx(
+              'card tooltip tooltip-right bg-base-100 shadow-md p-3 hover:bg-yellow-300/60',
+              active === index && 'bg-white/20',
+              state === 'pass' && 'tooltip-success',
+              state === 'fail' && 'tooltip-error',
+              state === 'review' && 'tooltip-info',
+              state === 'init' && 'tooltip-secondary',
+              state == null && 'tooltip-primary',
+
+            )}
           >
             <h2 className="text-lg font-medium text-left">
               <span className="whitespace-pre">
                 <span className={clsx(
                   'inline-block w-8 text-white text-center rounded-full',
-                  approved === true && 'bg-green-500',
-                  approved === false && 'bg-red-500',
-                  approved == null && 'bg-blue-400',
+                  state === 'init' && 'bg-yellow-500',
+                  state === 'pass' && 'bg-green-500',
+                  state === 'fail' && 'bg-red-500',
+                  state === 'review' && 'bg-orange-400',
+                  state == null && 'bg-blue-400',
                 )}>
                   {index + 1}
                 </span>{' '}{first}
               </span>
+              {rest.length > 0 && ' '}
               <span>{rest.join(' ')}</span>
             </h2>
           </li>
