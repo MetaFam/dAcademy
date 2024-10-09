@@ -11,6 +11,8 @@ import './App.css'
 export type Book = {
   title: string
   image: string
+  alt?: string
+  displayTitle?: boolean
 }
 export type Category = {
   title: string
@@ -48,8 +50,8 @@ const CarouselSection = ({ id, title, description, items }: CarouselSectionProps
     <SectionHeader {...{ title, description }} />
     <Carousel {...{ responsive }} className="gap-4 md:gap-6 lg:gap-8 w-full">
       {items.map((item, index) => (
-        <div id={`${id}-${item.title.toLowerCase().replace(/\s+/g, '-')}`} key={index}>
-          <CarouselItem {...{ item }} />
+        <div id={`${id}-${toSlug(item.title)}`} key={index}>
+          <CarouselItem {...item} />
         </div>
       ))}
     </Carousel>

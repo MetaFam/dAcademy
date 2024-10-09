@@ -72,8 +72,9 @@
         "image": "/assets/daosummoner.webp"
       },
       {
-        "title": "",
-        "image": "/assets/impact-networks.webp"
+        "title": "How to Build a Network for Impact",
+        "image": "/assets/impact-networks.webp",
+        "displayTitle": false
       },
       {
         "title": "Using Coordinape to Reward Contributors",
