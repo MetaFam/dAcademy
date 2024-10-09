@@ -7,10 +7,9 @@ import Content from '../../components/content'
 import Reward from '../../components/reward'
 import playbooks from '../../playbooks.json'
 import { toSlug } from '../../components/CarouselItem'
-import { usePublicClient } from 'wagmi'
-
-
-
+import { useConfig, usePublicClient } from 'wagmi'
+import { createPublicClient, http } from 'viem'
+import { mainnet } from 'viem/chains'
 
 const questChainQueryDocument = gql`
   query ChainDetails($name: String!) {
@@ -78,7 +77,7 @@ function Book() {
         )
       })
     )
-    const client = usePublicClient()
+
     const [active, setActive] = useState(0)
     const [content, setContent] = useState<string | null>(null)
     const [creator, setCreator] = useState('Unknown')
@@ -111,21 +110,25 @@ function Book() {
       )
     }
 
+    const { id: creatorId } = chain.createdBy
     if(!content) chapterSelected(0)
     if(creator === 'Unknown') {
-      const { id } = chain.createdBy
-      setCreator(`${id.substring(0, 5)}⋯${id.substring(id.length - 3)}`)
-      console.log({client})
-      if(!client) {
-        console.warn('Viem `client` not set.')
-      } else {
-        client.getEnsName({ address: id as `0x${string}` }).then(console.log)
-      }
+      setCreator(
+        `${creatorId.substring(0, 5)}⋯${creatorId.substring(-3)}`
+      )
+      const client = createPublicClient({
+        chain: mainnet,
+        transport: http()
+      })
+      client.getEnsName({ address: id as `0x${string}` })
+      .then((name) => { if(name) setCreator(name) })
     }
     return (
       <>
         <div id="top" className="container mx-auto p-20">
-          <p className="text-sm text-secondary mt-5 text-left pl-1">Creator: {creator}</p>
+          <h2 className="text-sm text-secondary mt-5 text-left pl-1" title={creatorId} onClick={() => navigator.clipboard.writeText(creatorId)}>
+            Creator: {creator}
+          </h2>
           <h1 className="text-4xl md:text-6xl font-bold text-left mt-2">{book.title}</h1>
           <p className="text-sm text-white text-left pl-1 mt-6 mb-4">Last updated: insert date</p>
           <main className="md:flex justify-start">
