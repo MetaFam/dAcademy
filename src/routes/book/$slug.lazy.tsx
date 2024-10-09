@@ -124,7 +124,6 @@ function Book() {
       client.getEnsName({ address: creatorId as `0x${string}` })
       .then((name) => { if(name) setCreator(name) })
     }
-    console.debug({str: chain.updatedAt, num: Number(chain.updatedAt)})
     return (
       <>
         <div id="top" className="container mx-auto p-20">
@@ -133,7 +132,7 @@ function Book() {
           </h2>
           <h1 className="text-4xl md:text-6xl font-bold text-left mt-2">{book.title}</h1>
           <p className="text-sm text-white text-left pl-1 mt-6 mb-4">
-            Last Updated: {new Date(Number(chain.updatedAt)).toLocaleString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}
+            Last Updated: {new Date(Number(chain.updatedAt) * 1000).toLocaleString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}
           </p>
           <main className="md:flex justify-start">
             <Chapters {...{ active }} onChange={chapterSelected} chapters={chain.quests.map(({ name }) => name)}/>
