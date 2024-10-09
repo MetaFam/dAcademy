@@ -22,6 +22,7 @@ const questChainQueryDocument = gql`
       imageUrl
       token { imageUrl }
       createdBy { id }
+      updatedAt
       quests(orderBy: questId) {
         questId
         name
@@ -42,6 +43,7 @@ export type Chain = {
   token: { imageUrl: string }
   quests: Array<Quest>
   createdBy: { id: string }
+  updatedAt: string
 }
 export type GraphChainResponse = {
   questChains: Array<Chain>
@@ -122,12 +124,15 @@ function Book() {
         client.getEnsName({ address: id as `0x${string}` }).then(console.log)
       }
     }
+    console.debug({str: chain.updatedAt, num: Number(chain.updatedAt)})
     return (
       <>
         <div id="top" className="container mx-auto p-20">
           <p className="text-sm text-secondary mt-5 text-left pl-1">Creator: {creator}</p>
           <h1 className="text-4xl md:text-6xl font-bold text-left mt-2">{book.title}</h1>
-          <p className="text-sm text-white text-left pl-1 mt-6 mb-4">Last updated: insert date</p>
+          <p className="text-sm text-white text-left pl-1 mt-6 mb-4">
+            Last Updated: {new Date(Number(chain.updatedAt)).toLocaleString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}
+          </p>
           <main className="md:flex justify-start">
             <Chapters {...{ active }} onChange={chapterSelected} chapters={chain.quests.map(({ name }) => name)}/>
             <div>
