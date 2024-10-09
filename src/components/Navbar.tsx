@@ -5,7 +5,7 @@ import { toSlug } from './CarouselItem'
 
 export const Navbar = () => (
   <nav className="sticky top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-[1001] shadow-md shadow-secondary px-0 sm:px-2 mb-4">
-    <div className="navbar-start">
+    <div className="justify-start">
       <div className="dropdown">
         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
           <svg
@@ -40,31 +40,35 @@ export const Navbar = () => (
           </li>
         </ul>
       </div>
-      <Link to="/" className="btn btn-ghost text-xl">dAcademy</Link>
     </div>
-    <div className="navbar-center hidden lg:flex">
-      <ul className="menu menu-horizontal px-1">
-        <li><a>Support</a></li>
-        <li>
-          <details>
-            <summary>Categories</summary>
-            <ul className="p-2 z-10">
-              {playbooks.map((category, index) => (
-                <li key={index}>
-                  <Link to={`/#${toSlug(category.title)}`}>
-                    {category.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </details>
-        </li>
-        <li><a>Submit</a></li>
-      </ul>
-    </div>
-    <div className="navbar-end px-4">
-      <w3m-button />
-    </div>
+    <ul className="grow flex flex-col md:flex-row justify-center">
+      <li>
+        <Link to="/" className="btn btn-ghost text-xl">dAcademy</Link>
+      </li>
+      <li className="hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">
+            <li><a>Support</a></li>
+            <li>
+              <details>
+                <summary>Categories</summary>
+                <ul className="p-2 z-10">
+                  {playbooks.map((category, index) => (
+                    <li key={index}>
+                      <Link to={`/#${toSlug(category.title)}`}>
+                        {category.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </li>
+            <li><a>Submit</a></li>
+        </ul>
+      </li>
+      <li>
+        <div className="navbar-end px-4"><w3m-button/></div>
+      </li>
+    </ul>
   </nav>
 )
 
