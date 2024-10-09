@@ -7,7 +7,6 @@ import Content from '../../components/content'
 import Reward from '../../components/reward'
 import playbooks from '../../playbooks.json'
 import { toSlug } from '../../components/CarouselItem'
-import { useConfig, usePublicClient } from 'wagmi'
 import { createPublicClient, http } from 'viem'
 import { mainnet } from 'viem/chains'
 
@@ -120,7 +119,7 @@ function Book() {
         chain: mainnet,
         transport: http()
       })
-      client.getEnsName({ address: id as `0x${string}` })
+      client.getEnsName({ address: creatorId as `0x${string}` })
       .then((name) => { if(name) setCreator(name) })
     }
     return (
