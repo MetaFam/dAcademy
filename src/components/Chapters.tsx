@@ -61,8 +61,6 @@ export default function Chapters(
     })
   )
 
-  console.debug({ viewer, book, statuses })
-
   if(error) throw error
 
   if(!chapters) {
@@ -70,13 +68,15 @@ export default function Chapters(
   }
 
   return (
-    <ol id="chapters" className="flex flex-col max-w-72 text-balance mt-4 mr-4">
+    <ol
+      id="chapters"
+      className="flex flex-col max-w-72 text-balance mt-4 mr-4"
+    >
       {['Introduction', ...chapters].map((chapter, index) => {
         const status = statuses?.find(
           ({ quest: { questId } }) => (Number(questId) === index - 1)
         )
         let { status: state } = status ?? {}
-        const [first, ...rest] = chapter.split(/\s+/g)
         let tooltip = (
           (state == null ? (
             'You have not yet submitted a proof for this chapter.'
@@ -95,6 +95,19 @@ export default function Chapters(
           state = 'init'
           tooltip = 'No submission required for this chapter.'
         }
+        const labelBg = (() => {
+          switch(state) {
+            case 'init': return 'fill-yellow-500'
+            case 'pass': return 'fill-green-500'
+            case 'fail': return 'fill-red-500'
+            case 'review': return 'fill-orange-400'
+            case null: case undefined: return 'fill-blue-400'
+            default: {
+              console.warn(`Unknown \`state\`: "${state}".`)
+              return 'fill-blue-600'
+            }
+          }
+        })()
 
         return (
           <li
@@ -102,32 +115,28 @@ export default function Chapters(
             data-tip={tooltip}
             onClick={() => onChange(index)}
             className={clsx(
-              'card tooltip tooltip-right bg-base-100 shadow-md p-3 hover:bg-yellow-300/60',
+              'card tooltip tooltip-right shadow-md p-3 hover:bg-yellow-300/75 hover:text-black',
               active === index && 'bg-white/20',
               state === 'pass' && 'tooltip-success',
               state === 'fail' && 'tooltip-error',
               state === 'review' && 'tooltip-info',
               state === 'init' && 'tooltip-secondary',
               state == null && 'tooltip-primary',
-
             )}
           >
-            <h2 className="text-lg font-medium text-left">
-              <span className="whitespace-pre">
-                <span className={clsx(
-                  'inline-block w-8 text-white text-center rounded-full',
-                  state === 'init' && 'bg-yellow-500',
-                  state === 'pass' && 'bg-green-500',
-                  state === 'fail' && 'bg-red-500',
-                  state === 'review' && 'bg-orange-400',
-                  state == null && 'bg-blue-400',
-                )}>
-                  {index + 1}
-                </span>{' '}{first}
-              </span>
-              {rest.length > 0 && ' '}
-              <span>{rest.join(' ')}</span>
-            </h2>
+            <div className="flex">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 50 50"
+                className="w-8 h-8 flex-shrink-0 mr-2 self-center"
+              >
+                <circle cx="50%" cy="50%" r="40%" className={labelBg} stroke="#000B" strokeWidth={8} paintOrder="stroke fill"/>
+                <text x="50%" y="57%" fontSize="2.5rem" textAnchor="middle" dominantBaseline="middle" className="fill-black font-bold">{index + 1}</text>
+              </svg>
+              <h2 className="text-lg font-medium text-left">
+                {chapter}
+              </h2>
+            </div>
           </li>
         )
       })}

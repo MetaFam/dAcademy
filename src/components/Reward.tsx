@@ -1,4 +1,3 @@
-import { CarbonShare } from './share'
 import { toHTTP } from '../utils'
 
 export const Reward = ({ image }: { image: string }) => {

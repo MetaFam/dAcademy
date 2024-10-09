@@ -18,6 +18,13 @@
 
   ul {
     list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  ul, ol {
     margin-left: 1.5rem;
     margin-bottom: .5rem;
   }
@@ -37,5 +44,15 @@
 
   a {
     color: var(--wui-color-accent-base-100);
+  }
+
+  a:hover {
+    opacity: 0.75;
+  }
+
+  blockquote {
+    border-left: 4px solid var(--wui-color-accent-base-100);
+    padding: 0 1rem;
+    margin: 0;
   }
 }
