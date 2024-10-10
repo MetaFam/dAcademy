@@ -1,68 +1,15 @@
-import { gql, request } from 'graphql-request'
 import { clsx } from 'clsx'
-import { useQuery } from '@tanstack/react-query'
-
-const userChainProgressQueryDocument = gql`
-  query ChainDetails($chain: String!, $user: String!) {
-    questStatuses(where: {questChain: $chain, user: $user}, orderBy: quest__questId) {
-      status
-      quest {
-        name
-        questId
-        optional
-        paused
-      }
-      submissions {
-        name
-        description
-        details
-        externalUrl
-      }
-    }
-  }
-`
-
-export type Submission = {
-  name: string
-  description: string
-  details: string
-  externalUrl: string
-}
-export type Status = {
-  status: string
-  quest: { questId: string }
-  submissions: Array<Submission>
-}
-export type Statuses = {
-  questStatuses: Array<Status>
-}
+import { Status } from '../routes/book/$slug/index.lazy'
 
 export default function Chapters(
-  { onChange, chapters, active, viewer, book }:
+  { onChange, chapters, active, statuses }:
   {
     onChange: (index: number) => void
     chapters: Array<string>
     active: number
-    viewer?: string // Current user's Ethereum address
-    book?: string // Quest Chain's contract address
+    statuses?: Array<Status>
   }
 ) {
-  const { data: { questStatuses: statuses } = {}, error } = (
-    useQuery<Statuses>({
-      enabled: !!viewer && !!book,
-      queryKey: [`statuses-${book}-${viewer}`],
-      queryFn: async () => (
-        request(
-          import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
-          userChainProgressQueryDocument,
-          { chain: book, user: viewer },
-        )
-      )
-    })
-  )
-
-  if(error) throw error
-
   if(!chapters) {
     throw new Error('Argument `chapters` is not defined.')
   }
@@ -115,7 +62,7 @@ export default function Chapters(
             data-tip={tooltip}
             onClick={() => onChange(index)}
             className={clsx(
-              'card tooltip tooltip-right shadow-md p-3 hover:bg-yellow-300/75 hover:text-black',
+              'card tooltip tooltip-top md:tooltip-right shadow-md p-3 hover:bg-yellow-300/75 hover:text-black',
               active === index && 'bg-white/20',
               state === 'pass' && 'tooltip-success',
               state === 'fail' && 'tooltip-error',

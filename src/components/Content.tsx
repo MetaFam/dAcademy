@@ -2,7 +2,7 @@ import Markdown from 'react-markdown'
 import '../content.css'
 
 interface ContentProps {
-  content: string | null
+  content?: string | null
 }
 
 export default function Content({ content }: ContentProps) {

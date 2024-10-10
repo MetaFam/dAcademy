@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import { createLazyFileRoute } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { gql, request } from 'graphql-request'
@@ -11,6 +11,8 @@ import { createPublicClient, http } from 'viem'
 import { mainnet } from 'viem/chains'
 import { useAccount } from 'wagmi'
 import toast from 'react-hot-toast'
+import '@mdxeditor/editor/style.css'
+import '../../../markdown-editor.css'
 
 const questChainQueryDocument = gql`
   query ChainDetails($name: String!) {
@@ -36,6 +38,26 @@ const questChainQueryDocument = gql`
   }
 `
 
+const userChainProgressQueryDocument = gql`
+  query ChainDetails($chain: String!, $user: String!) {
+    questStatuses(where: {questChain: $chain, user: $user}, orderBy: quest__questId) {
+      status
+      quest {
+        name
+        questId
+        optional
+        paused
+      }
+      submissions {
+        name
+        description
+        details
+        externalUrl
+      }
+    }
+  }
+`
+
 export type Quest = {
   questId: number
   name: string
@@ -54,6 +76,21 @@ export type GraphChainResponse = {
   questChains: Array<Chain>
 }
 
+export type Submission = {
+  name: string
+  description: string
+  details: string
+  externalUrl: string
+}
+export type Status = {
+  status: string
+  quest: { questId: string }
+  submissions: Array<Submission>
+}
+export type Statuses = {
+  questStatuses: Array<Status>
+}
+
 export const Route = createLazyFileRoute('/book/$slug/')({
   component: Book,
 })
@@ -68,8 +105,8 @@ function Book() {
 
     const {
       data: { questChains: [chain] = [] } = {},
-      error,
-      isLoading,
+      error: questError,
+      isLoading: questLoading,
     } = useQuery<GraphChainResponse>({
       queryKey: [`chain-${slug}`],
       queryFn: async () =>
@@ -81,6 +118,25 @@ function Book() {
     })
 
     const account = useAccount()
+    const viewer = account?.address?.toLowerCase()
+    const {
+      data: { questStatuses: statuses } = {},
+      error: statusesError,
+      isLoading: statusesLoading,
+    } = (
+      useQuery<Statuses>({
+        enabled: !!viewer && !!book,
+        queryKey: [`statuses-${book}-${viewer}`],
+        queryFn: async () => (
+          request(
+            import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
+            userChainProgressQueryDocument,
+            { chain: book, user: viewer },
+          )
+        )
+      })
+    )
+
     const [active, setActive] = useState(0)
     const [content, setContent] = useState<string | null>(null)
     const [creator, setCreator] = useState('Unknown')
@@ -96,26 +152,36 @@ function Book() {
         }
       }
     }
-    const passIntro = () => {
-      chapterSelected(1)
-      document.getElementById('top')?.scrollIntoView()
+    const passSection = (index: number) => {
+      chapterSelected(index + 1)
+      document.getElementById('root')?.scrollIntoView()
     }
 
-    if (error) throw error
+    if (questError) throw questError
+    if (statusesError) throw statusesError
+
     if (!book) {
       throw new Error(`No book found for: "${slug}".`)
     }
 
-    if (isLoading) return <h1>Loading…</h1>
+    if (questLoading) return <h1>Loading a Quest…</h1>
+    if (statusesLoading) return <h1>Loading Statuses…</h1>
 
     if (!chain) {
       throw new Error(`No chain found for: "${slug}" = "${book.title}".`)
     }
 
+    const Editor = React.lazy(
+      () => import('../../../components/MarkdownEditor')
+    )
+    const status = statuses?.find(
+      ({ quest: { questId } }) => (Number(questId) === active - 1)
+    )
+
     const { id: creatorId } = chain.createdBy
     if (!content) chapterSelected(0)
     if (creator === 'Unknown') {
-      setCreator(`${creatorId.substr(0, 5)}⋯${creatorId.substr(-3)}`)
+      setCreator(`${creatorId.substring(0, 5)}⋯${creatorId.slice(-3)}`)
       const client = createPublicClient({
         chain: mainnet,
         transport: http(),
@@ -126,6 +192,7 @@ function Book() {
           if (name) setCreator(name)
         })
     }
+
     return (
       <>
         <div id="top" className="container mx-auto py-20 px-5">
@@ -158,21 +225,25 @@ function Book() {
           </p>
           <main className="md:flex justify-start">
             <Chapters
-              {...{ active }}
+              {...{ active, statuses }}
               onChange={chapterSelected}
               chapters={chain.quests.map(({ name }) => name)}
-              viewer={account?.address?.toLowerCase()}
-              book={chain.id}
             />
             <div>
               <Content {...{ content }} />
-              {active === 0 && (
+              {active === 0 ? (
                 <button
+                  onClick={() => passSection(active)}
                   className="shadow-md rounded-md bg-base-300 p-4 hover:bg-yellow-300/60 text-white text-center"
-                  onClick={passIntro}
                 >
                   Continue
-                </button>
+                  </button>
+              ) : (
+                status?.status && ['pass'].includes(status.status) && (
+                  <Suspense fallback={<h3>Loading Editor…</h3>}>
+                    <Editor className="dark-theme dark-editor content mt-10"/>
+                  </Suspense>
+                )
               )}
             </div>
             <Reward image={chain.token.imageUrl} />

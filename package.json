@@ -11,6 +11,7 @@
     "gh:publish": "gh-pages --nojekyll --dist dist"
   },
   "dependencies": {
+    "@mdxeditor/editor": "^3.14.0",
     "@reown/appkit": "^1.0.4",
     "@reown/appkit-adapter-wagmi": "^1.0.4",
     "@tanstack/react-query": "^5.56.2",

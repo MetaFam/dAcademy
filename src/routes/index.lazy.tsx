@@ -51,7 +51,7 @@ const responsive = {
 }
 
 const CarouselSection = ({ id, title, description, items }: CarouselSectionProps) => (
-  <div {...{ id }} className="container p-4 mt-30 gap-4 scroll-mt-20">
+  <div {...{ id }} className="container py-4 mt-30 gap-4 scroll-mt-20">
     <SectionHeader {...{ title, description }} />
     <Carousel {...{ responsive }} className="gap-4 md:gap-6 lg:gap-8 w-full">
       {items.map((item, index) => (
