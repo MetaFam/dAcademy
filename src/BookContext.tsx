@@ -39,9 +39,7 @@ const userChainProgressQueryDocument = gql`
     questStatuses(where: {questChain: $chain, user: $user}, orderBy: quest__questId) {
       status
       quest {
-        name
         questId
-        optional
         paused
       }
       submissions {
@@ -53,10 +51,15 @@ const userChainProgressQueryDocument = gql`
     }
   }
 `
+class ChaptersArray extends Array {
+  current: Chapter = this[0]
+}
 type Book = {
   title: string
   introduction: string
-  chapters: Array<Chapter>
+  chapters: typeof ChaptersArray
+  updatedAt: Date
+  contract: string
   nft: {
     id: string
     address: string
@@ -72,7 +75,7 @@ type Chapter = {
   optional: boolean
   title: string
   content: string
-  status: string
+  status?: string
 }
 
 export type Quest = {
@@ -118,11 +121,16 @@ export type Statuses = {
   questStatuses: Array<Status>
 }
 
-const BookContext = createContext<Book | undefined>(undefined)
+type ContextReturn = {
+  book?: Book
+  error?: Error
+  loading: boolean
+}
+const BookContext = createContext<ContextReturn>({ loading: true })
 
 export const useBook = (slug: string) => {
   const context = useContext(BookContext)
-  context?.setSlug(slug)
+  context.book?.setSlug(slug)
   return context
 }
 
@@ -140,7 +148,7 @@ export const BookContextProvider: React.FC<PropsWithChildren> = ({
   const {
     data: { questChains: [chain] = [] } = {},
     error: questError,
-    isLoading: questLoading,
+    isLoading: loading,
   } = useQuery<GraphChainResponse>({
     enabled: !!book,
     queryKey: [`chain-${slug}`],
@@ -157,7 +165,6 @@ export const BookContextProvider: React.FC<PropsWithChildren> = ({
   const {
     data: { questStatuses: statuses } = {},
     error: statusesError,
-    isLoading: statusesLoading,
   } = (
     useQuery<Statuses>({
       enabled: !!reader && !!chain?.id,
@@ -172,22 +179,30 @@ export const BookContextProvider: React.FC<PropsWithChildren> = ({
     })
   )
 
-  const chapters = chain.quests.map((quest) => ({
-    optional: quest.optional,
-    title: quest.name,
-    content: quest.description,
-    status: quest.status.status,
-
-
-  }))
+  const chapters = chain.quests.map((quest, index) => {
+    const status = statuses?.find(({ quest: { questId } }) => (
+      Number(questId) === index
+    ))
+    return {
+      optional: quest.optional,
+      title: quest.name,
+      content: quest.description,
+      status: status?.status,
+    }
+  })
+  chapters.current = chapters[on]
   return (
-    <BookContext.Provider value={
-      !book ? undefined : {
+    <BookContext.Provider value={{
+      error: questError ?? statusesError ?? undefined,
+      loading,
+      book: loading || !book ? undefined : {
         title: book.title,
         introduction: chain.description,
         reader,
         creator: chain.createdBy.id,
         owners: [],
+        updatedAt: new Date(Number(chain.updatedAt) * 1000),
+        contract: chain.id,
         nft: {
           id: chain.token.tokenId,
           address: chain.token.tokenAddress,
@@ -197,6 +212,6 @@ export const BookContextProvider: React.FC<PropsWithChildren> = ({
         setOn,
         setSlug,
       }
-    }/>
+    }}/>
   )}
 

@@ -10,7 +10,7 @@ import Submission from '../../../components/Submission'
 // import { debug } from '../../../main'
 import '@mdxeditor/editor/style.css'
 import '../../../markdown-editor.css'
-import { useBook } from '../../../BookContext
+import { useBook } from '../../../BookContext'
 
 export const Route = createLazyFileRoute('/book/$slug/')({
   component: Book,
@@ -19,22 +19,22 @@ export const Route = createLazyFileRoute('/book/$slug/')({
 export function Book() {
   try {
     const { slug } = Route.useParams()
-    const book = useBook(slug)
+    const { book, loading, error } = useBook(slug)
     const [content, setContent] = useState<string>()
     const [creator, setCreator] = useState('Unknown')
 
-    if(!book) {
+    if(loading || !book) {
       return `Loading: ${slug}`
     }
     const chapterSelected = (index: number) => {
-      setActive(index)
+      book.setOn(index)
       switch (index) {
         case 0: {
           setContent(book.introduction)
           break
         }
         default: {
-          const { content } = book.chapters?.[book.on ?? 1 - 1]
+          const { content } = book.chapters[book.on - 1]
           setContent(content)
         }
       }
@@ -44,34 +44,23 @@ export function Book() {
       chapterSelected(index + 1)
     }
 
-    if (questError) throw questError
-    if (statusesError) throw statusesError
+    if (error) throw error
 
     if (!book) {
       throw new Error(`No book found for: "${slug}".`)
     }
 
-    if (questLoading) return <h1>Loading a Quest…</h1>
-    if (statusesLoading) return <h1>Loading Statuses…</h1>
+    if (loading) return <h1>Loading "{book.title}"…</h1>
 
-    if (!chain) {
-      throw new Error(`No chain found for: "${slug}" = "${book.title}".`)
-    }
-
-    const status = statuses?.find(
-      ({ quest: { questId } }) => (Number(questId) === active - 1)
-    )
-
-    const { id: creatorId } = chain.createdBy
     if (!content) chapterSelected(0)
     if (creator === 'Unknown') {
-      setCreator(`${creatorId.substring(0, 5)}⋯${creatorId.slice(-3)}`)
+      setCreator(`${book.creator.substring(0, 5)}⋯${book.creator.slice(-3)}`)
       const client = createPublicClient({
         chain: mainnet,
         transport: http(),
       })
       client
-        .getEnsName({ address: creatorId as `0x${string}` })
+        .getEnsName({ address: book.creator as `0x${string}` })
         .then((name) => {
           if (name) setCreator(name)
         })
@@ -84,7 +73,7 @@ export function Book() {
             title="Click to copy the creator's contract address."
             onClick={() => {
               toast.success('Creator’s address copied to clipboard.')
-              navigator.clipboard.writeText(creatorId)
+              navigator.clipboard.writeText(book.creator)
             }}
             className="text-sm text-secondary mt-5 text-left pl-1"
           >
@@ -93,7 +82,7 @@ export function Book() {
           <h1
             title="Click to copy the Quest Chain contract address."
             onClick={() => {
-              navigator.clipboard.writeText(chain.id)
+              navigator.clipboard.writeText(book.contract)
               toast.success('Quest Chain contract address copied to clipboard.')
             }}
             className="text-4xl md:text-6xl font-bold text-left mt-2"
@@ -102,28 +91,24 @@ export function Book() {
           </h1>
           <p className="text-sm text-white text-left pl-1 mt-6 mb-4">
             Last Updated:{' '}
-            {new Date(Number(chain.updatedAt) * 1000).toLocaleString(
+            {book.updatedAt.toLocaleString(
               undefined,
               { day: 'numeric', month: 'long', year: 'numeric' },
             )}
           </p>
           <main className="md:flex justify-start">
-            <Chapters
-              {...{ active, statuses }}
-              onChange={chapterSelected}
-              chapters={chain.quests.map(({ name }) => name)}
-            />
+            <Chapters/>
             <div>
-              <Content {...{ content }} />
-              {active === 0 ? (
+              <Content/>
+              {book.on === 0 ? (
                 <button
-                  onClick={() => passSection(active)}
+                  onClick={() => passSection(book.on)}
                   className="shadow-md rounded-md bg-base-300 p-4 hover:bg-yellow-300/60 text-white text-center"
                 >
                   Continue
                   </button>
               ) : (
-                (!!status && ['pass'].includes(status?.status)) ? (
+                (!!status && ['pass'].includes(book.chapters.current.status)) ? (
                   <div role="alert" className="alert alert-success flex items-center mt-10">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
