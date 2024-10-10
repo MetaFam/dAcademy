@@ -88,7 +88,10 @@ export type Submission = {
 }
 export type Status = {
   status: string
-  quest: { questId: string }
+  quest: {
+   questId: string
+   optional: boolean
+  }
   submissions: Array<Submission>
 }
 export type Statuses = {

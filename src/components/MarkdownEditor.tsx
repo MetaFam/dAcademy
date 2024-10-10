@@ -75,7 +75,7 @@ export const MarkdownEditor = (
       markdownShortcutPlugin(),
       toolbarPlugin({
         toolbarContents: () => (
-          <>
+          <section className="flex flex-wrap items-center">
             <BoldItalicUnderlineToggles/>
             <Separator/>
             <BlockTypeSelect/>
@@ -97,7 +97,7 @@ export const MarkdownEditor = (
                 ]}
               />
             </DiffSourceToggleWrapper>
-          </>
+          </section>
         )
       }),
     ]}

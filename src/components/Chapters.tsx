@@ -77,7 +77,14 @@ export default function Chapters(
                 viewBox="0 0 50 50"
                 className="w-8 h-8 flex-shrink-0 mr-2 self-center"
               >
-                <circle cx="50%" cy="50%" r="40%" className={labelBg} stroke="#000B" strokeWidth={8} paintOrder="stroke fill"/>
+                <circle
+                  cx="50%" cy="50%" r="40%"
+                  className={labelBg}
+                  stroke={clsx(status?.quest.optional ? '#A44F' : '#000B')} strokeWidth={8}
+                  strokeDasharray={clsx(status?.quest.optional && '5 15')}
+                  strokeLinecap="round"
+                  paintOrder="stroke fill"
+                />
                 <text x="50%" y="57%" fontSize="2.5rem" textAnchor="middle" dominantBaseline="middle" className="fill-black font-bold">{index + 1}</text>
               </svg>
               <h2 className="text-lg font-medium text-left">
