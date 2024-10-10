@@ -5,6 +5,7 @@ import { useAccount, useChainId, useConfig, useWaitForTransactionReceipt, useWri
 import { watchChainId } from '@wagmi/core'
 import abi from '../abis/QuestChain.json'
 import { MDXEditorMethods } from '@mdxeditor/editor'
+import clsx from 'clsx'
 
 const CHAIN = 10
 
@@ -183,8 +184,9 @@ export const Submission = (
           }
         }}
         disabled={label !== defaultLabel}
-        className="btn btn-wide text-primary my-6"
+        className={'btn btn-wide text-primary my-6'}
       >
+        <span className={clsx(label.endsWith('…') && 'loading loading-dots loading-md')}></span>
         {label}
       </button>
     </Suspense>
