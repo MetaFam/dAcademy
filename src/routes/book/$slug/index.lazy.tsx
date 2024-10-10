@@ -22,6 +22,7 @@ const questChainQueryDocument = gql`
       where: { name_starts_with_nocase: $name, name_ends_with_nocase: $name }
     ) {
       id
+      address
       description
       imageUrl
       token {
@@ -67,6 +68,7 @@ export type Quest = {
 }
 export type Chain = {
   id: string
+  address: string
   description: string
   imageUrl: string
   token: { imageUrl: string }
@@ -244,7 +246,7 @@ export function Book() {
                 (!!status && ['pass'].includes(status?.status)) ? (
                   <h2>You have already successfully completed this submission.</h2>
                 ) : (
-                  <Submission/>
+                  <Submission contract={chain.address} index={active - 1}/>
                 )
               )}
             </div>

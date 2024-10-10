@@ -24,20 +24,19 @@ import {
   ConditionalContents,
   ShowSandpackInfo,
   codeMirrorPlugin,
-  sandpackPlugin,
   codeBlockPlugin,
   linkDialogPlugin,
+  MDXEditorMethods,
+  MDXEditorProps,
 } from '@mdxeditor/editor'
+import { ForwardedRef } from 'react'
 
 export const MarkdownEditor = (
-  { markdown = '', onChange, className, ...props }:
-  {
-    markdown?: string
-    className?: string
-    onChange?: (mark: string) => void
-  } = {}
+  { editorRef = null, ...props }:
+  { editorRef?: ForwardedRef<MDXEditorMethods> | null } & MDXEditorProps
 ) => (
   <MDXEditor
+    ref={editorRef}
     plugins={[
       headingsPlugin(),
       listsPlugin(),
@@ -73,7 +72,6 @@ export const MarkdownEditor = (
           txt: 'Text'
         },
       }),
-      sandpackPlugin(),
       markdownShortcutPlugin(),
       toolbarPlugin({
         toolbarContents: () => (
@@ -103,7 +101,6 @@ export const MarkdownEditor = (
         )
       }),
     ]}
-    {...{ markdown, className, onChange }}
     {...props}
   />
 )
