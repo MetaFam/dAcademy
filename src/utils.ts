@@ -15,7 +15,7 @@ export const upload = async (files: Array<File>) => {
   })
 
   const response = await fetch(
-    'http://localhost:3000/ucan',
+    import.meta.env.VITE_UCAN_DELEGATOR,
     {
       method: 'POST',
       body: JSON.stringify({ did: client.did() })
