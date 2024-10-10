@@ -125,13 +125,13 @@ function Book() {
       isLoading: statusesLoading,
     } = (
       useQuery<Statuses>({
-        enabled: !!viewer && !!book,
-        queryKey: [`statuses-${book}-${viewer}`],
+        enabled: !!viewer && !!chain.id,
+        queryKey: [`statuses-${chain.id}-${viewer}`],
         queryFn: async () => (
           request(
             import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
             userChainProgressQueryDocument,
-            { chain: book, user: viewer },
+            { chain: chain.id, user: viewer },
           )
         )
       })
