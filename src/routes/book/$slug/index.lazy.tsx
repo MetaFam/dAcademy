@@ -1,102 +1,16 @@
 import { useState } from 'react'
 import { createLazyFileRoute } from '@tanstack/react-router'
-import { useQuery } from '@tanstack/react-query'
-import { gql, request } from 'graphql-request'
 import { createPublicClient, http } from 'viem'
 import { mainnet } from 'viem/chains'
-import { useAccount } from 'wagmi'
 import toast from 'react-hot-toast'
 import Chapters from '../../../components/Chapters'
 import Content from '../../../components/Content'
 import Reward from '../../../components/Reward'
-import playbooks from '../../../playbooks.json'
-import { toSlug } from '../../../components/CarouselItem'
 import Submission from '../../../components/Submission'
 // import { debug } from '../../../main'
 import '@mdxeditor/editor/style.css'
 import '../../../markdown-editor.css'
-
-const questChainQueryDocument = gql`
-  query ChainDetails($name: String!) {
-    questChains(
-      where: { name_starts_with_nocase: $name, name_ends_with_nocase: $name }
-    ) {
-      id
-      address
-      description
-      imageUrl
-      token {
-        imageUrl
-      }
-      createdBy {
-        id
-      }
-      updatedAt
-      quests(orderBy: questId) {
-        questId
-        name
-        description
-      }
-    }
-  }
-`
-
-const userChainProgressQueryDocument = gql`
-  query ChainDetails($chain: String!, $user: String!) {
-    questStatuses(where: {questChain: $chain, user: $user}, orderBy: quest__questId) {
-      status
-      quest {
-        name
-        questId
-        optional
-        paused
-      }
-      submissions {
-        name
-        description
-        details
-        externalUrl
-      }
-    }
-  }
-`
-
-export type Quest = {
-  questId: number
-  name: string
-  description: string
-}
-export type Chain = {
-  id: string
-  address: string
-  description: string
-  imageUrl: string
-  token: { imageUrl: string }
-  quests: Array<Quest>
-  createdBy: { id: string }
-  updatedAt: string
-}
-export type GraphChainResponse = {
-  questChains: Array<Chain>
-}
-
-export type Submission = {
-  name: string
-  description: string
-  details: string
-  externalUrl: string
-}
-export type Status = {
-  status: string
-  quest: {
-   questId: string
-   optional: boolean
-  }
-  submissions: Array<Submission>
-}
-export type Statuses = {
-  questStatuses: Array<Status>
-}
+import { useBook } from '../../../BookContext
 
 export const Route = createLazyFileRoute('/book/$slug/')({
   component: Book,
@@ -105,58 +19,23 @@ export const Route = createLazyFileRoute('/book/$slug/')({
 export function Book() {
   try {
     const { slug } = Route.useParams()
-    const book = playbooks
-      .map(({ books }) => books)
-      .flat()
-      .find(({ title }) => toSlug(title) === slug)
-
-    const {
-      data: { questChains: [chain] = [] } = {},
-      error: questError,
-      isLoading: questLoading,
-    } = useQuery<GraphChainResponse>({
-      queryKey: [`chain-${slug}`],
-      queryFn: async () =>
-        request(
-          import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
-          questChainQueryDocument,
-          { name: book?.title },
-        ),
-    })
-
-    const account = useAccount()
-    const viewer = account?.address?.toLowerCase()
-    const {
-      data: { questStatuses: statuses } = {},
-      error: statusesError,
-      isLoading: statusesLoading,
-    } = (
-      useQuery<Statuses>({
-        enabled: !!viewer && !!chain?.id,
-        queryKey: [`statuses-${chain?.id}-${viewer}`],
-        queryFn: async () => (
-          request(
-            import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
-            userChainProgressQueryDocument,
-            { chain: chain.id, user: viewer },
-          )
-        )
-      })
-    )
-
-    const [active, setActive] = useState(0)
-    const [content, setContent] = useState<string | null>(null)
+    const book = useBook(slug)
+    const [content, setContent] = useState<string>()
     const [creator, setCreator] = useState('Unknown')
 
+    if(!book) {
+      return `Loading: ${slug}`
+    }
     const chapterSelected = (index: number) => {
       setActive(index)
       switch (index) {
         case 0: {
-          setContent(chain.description)
+          setContent(book.introduction)
           break
         }
         default: {
-          setContent(chain.quests[index - 1].description)
+          const { content } = book.chapters?.[book.on ?? 1 - 1]
+          setContent(content)
         }
       }
     }

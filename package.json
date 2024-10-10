@@ -29,7 +29,6 @@
     "react-markdown": "^9.0.1",
     "react-multi-carousel": "^2.8.5",
     "viem": "^2.21.16",
-    "vinxi": "^0.4.3",
     "wagmi": "^2.12.16"
   },
   "devDependencies": {
