@@ -1,11 +1,17 @@
 import React, { useState, Suspense, ReactNode, useEffect } from 'react'
 import toast from 'react-hot-toast'
-import { upload } from '../utils'
-import { useAccount, useChainId, useConfig, useWaitForTransactionReceipt, useWriteContract } from 'wagmi'
+import {
+  useChainId,
+  useConfig,
+  useWaitForTransactionReceipt,
+  useWriteContract,
+} from 'wagmi'
 import { watchChainId } from '@wagmi/core'
-import abi from '../abis/QuestChain.json'
 import { MDXEditorMethods } from '@mdxeditor/editor'
 import clsx from 'clsx'
+import { useBook } from '../BookContext'
+import { upload } from '../utils'
+import abi from '../abis/QuestChain.json'
 
 const CHAIN = 10
 
@@ -26,11 +32,8 @@ export const Alert = ({ children }: { children: ReactNode }) => (
   </div>
 )
 
-export const Submission = (
-  { name = 'Submission', contract, index }:
-  { name?: string, contract: string, index: number }
-) => {
-  const { address } = useAccount()
+export const Submission = ({ slug }: { slug: string }) => {
+  const { book } = useBook(slug)
   const chain = useChainId()
   const editorRef = React.useRef<MDXEditorMethods>(null)
   const [saving, setSaving] = useState(false)
@@ -44,25 +47,39 @@ export const Submission = (
     isPending: pending,
   } = useWriteContract()
   const config = useConfig()
+  const errorSource = {
+    chain: ({
+      type: 'chain',
+      error: (
+        <h3 className="flex text-center items-center justify-center">
+          Please switch to the Optimism network to continue.
+        </h3>
+      )
+    }),
+    account: ({
+      type: 'account',
+      error: (
+        <h3 className="flex text-center items-center justify-center">
+          Please
+          <div className="mx-2"><w3m-button size="sm"/></div>
+          to submit a proof.
+        </h3>
+      )
+    })
+  }
   useEffect(() => {
     if(config) {
       return watchChainId(config, {
         onChange(chainId: number) {
           if(chainId !== CHAIN && !error.chain) {
-            setError({
-              type: 'chain',
-              error: (
-                <h3 className="flex text-center items-center justify-center">
-                  Please switch to the Optimism network to continue.
-                </h3>
-              ),
-            })
+            setError(errorSource.chain)
           }
         },
       })
     }
   }, [config])
 
+  const { contract } = book ?? {}
   useEffect(() => {
     if(hash) {
       toast.success(
@@ -73,7 +90,7 @@ export const Submission = (
           </a>
           to the Quest Chain contract at
           <a href={`https://optimistic.etherscan.io/address/${contract}`} className="ml-1 whitespace-nowrap text-primary hover:text-secondary" target="_blank">
-            {contract.substring(0, 6)}…{contract.slice(-4)}
+            {contract?.substring(0, 6)}…{contract?.slice(-4)}
           </a>.
         </p>,
         { duration: 12_000, position: 'bottom-center', style: { width: '45ch' } },
@@ -84,30 +101,16 @@ export const Submission = (
     useWaitForTransactionReceipt({ hash })
   )
 
-  if(!address && !error.account) {
-    setError({
-      type: 'account',
-      error: (
-        <h3 className="flex text-center items-center justify-center">
-          Please
-          <div className="mx-2"><w3m-button size="sm"/></div>
-          to submit a proof.
-        </h3>
-      )
-    })
-  } else if(address && error.account) {
+  if(!book) throw new Error(`No book found for: "${slug}".`)
+
+  if(book.reader == null && !error.account) {
+    setError(errorSource.account)
+  } else if(book.reader != null && error.account) {
     setError({ type: 'account', error: null })
   }
 
   if(chain !== CHAIN && !error.chain) {
-    setError({
-      type: 'chain',
-      error: (
-        <h3 className="flex text-center items-center justify-center">
-          Please switch to the Optimism network to continue.
-        </h3>
-      )
-    })
+    setError(errorSource.chain)
   } else if(chain === CHAIN && error.chain) {
     setError({ type: 'chain', error: null })
   }
@@ -174,7 +177,7 @@ export const Submission = (
               address: contract as `0x${string}`,
               abi,
               functionName: 'submitProofs',
-              args: [[index], [cid]],
+              args: [[book.on - 1], [cid]],
             })
           } catch(error) {
             console.error({ error })

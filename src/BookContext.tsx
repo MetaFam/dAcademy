@@ -51,18 +51,26 @@ const userChainProgressQueryDocument = gql`
     }
   }
 `
-class ChaptersArray extends Array {
+
+class ChaptersArray<T> extends Array {
   current: Chapter = this[0]
+
+  constructor(...items: Array<T>) {
+    super()
+    this.push(...items)
+  }
 }
+
 type Book = {
   title: string
   introduction: string
-  chapters: typeof ChaptersArray
+  chapters: ChaptersArray<Chapter>
   updatedAt: Date
   contract: string
   nft: {
     id: string
     address: string
+    image: string
   }
   creator: string
   owners: Array<string>
@@ -130,6 +138,7 @@ const BookContext = createContext<ContextReturn>({ loading: true })
 
 export const useBook = (slug: string) => {
   const context = useContext(BookContext)
+  console.debug({ context })
   context.book?.setSlug(slug)
   return context
 }
@@ -179,24 +188,12 @@ export const BookContextProvider: React.FC<PropsWithChildren> = ({
     })
   )
 
-  const chapters = chain.quests.map((quest, index) => {
-    const status = statuses?.find(({ quest: { questId } }) => (
-      Number(questId) === index
-    ))
-    return {
-      optional: quest.optional,
-      title: quest.name,
-      content: quest.description,
-      status: status?.status,
-    }
-  })
-  chapters.current = chapters[on]
   return (
     <BookContext.Provider value={{
       error: questError ?? statusesError ?? undefined,
       loading,
       book: loading || !book ? undefined : {
-        title: book.title,
+        title: book.title ?? 'Unknown',
         introduction: chain.description,
         reader,
         creator: chain.createdBy.id,
@@ -206,12 +203,37 @@ export const BookContextProvider: React.FC<PropsWithChildren> = ({
         nft: {
           id: chain.token.tokenId,
           address: chain.token.tokenAddress,
+          image: chain.token.imageUrl,
         },
-        chapters,
+        chapters: (() => {
+          const chapters = new ChaptersArray(...[
+            {
+              optional: true,
+              title: 'Introduction',
+              content: chain.description,
+              status: 'init',
+            },
+            ...chain.quests.map((quest, index) => {
+              const status = statuses?.find(({ quest: { questId } }) => (
+                Number(questId) === index
+              ))
+              return {
+                optional: quest.optional,
+                title: quest.name,
+                content: quest.description,
+                status: status?.status,
+              }
+            }),
+          ])
+          chapters.current = chapters[on]
+          return chapters
+        })(),
         on,
         setOn,
         setSlug,
       }
-    }}/>
+    }}>
+      {children}
+    </BookContext.Provider>
   )}
 
