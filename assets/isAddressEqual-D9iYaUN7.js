@@ -1,0 +1,1 @@
+import{ad as e,ae as d}from"./index-CBwDx5gl.js";function a(s,r){if(!e(s,{strict:!1}))throw new d({address:s});if(!e(r,{strict:!1}))throw new d({address:r});return s.toLowerCase()===r.toLowerCase()}export{a as i};
