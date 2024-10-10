@@ -12,8 +12,10 @@ import {
   RouterProvider, createRouter, createHashHistory,
 } from '@tanstack/react-router'
 import { Toaster } from 'react-hot-toast'
-
 import { routeTree } from './routeTree.gen'
+
+const params = new URLSearchParams(window.location.search)
+export const debug = !!params.get('debug')
 
 const hashHistory = createHashHistory()
 const router = createRouter({

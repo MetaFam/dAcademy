@@ -30,8 +30,12 @@ import {
 } from '@mdxeditor/editor'
 
 export const MarkdownEditor = (
-  { markdown = '', className, ...props }:
-  { markdown?: string, className?: string } = {}
+  { markdown = '', onChange, className, ...props }:
+  {
+    markdown?: string
+    className?: string
+    onChange?: (mark: string) => void
+  } = {}
 ) => (
   <MDXEditor
     plugins={[
@@ -99,7 +103,7 @@ export const MarkdownEditor = (
         )
       }),
     ]}
-    {...{ markdown, className }}
+    {...{ markdown, className, onChange }}
     {...props}
   />
 )

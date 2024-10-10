@@ -1,16 +1,18 @@
-import React, { Suspense, useState } from 'react'
+import { useState } from 'react'
 import { createLazyFileRoute } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { gql, request } from 'graphql-request'
+import { createPublicClient, http } from 'viem'
+import { mainnet } from 'viem/chains'
+import { useAccount } from 'wagmi'
+import toast from 'react-hot-toast'
 import Chapters from '../../../components/Chapters'
 import Content from '../../../components/Content'
 import Reward from '../../../components/Reward'
 import playbooks from '../../../playbooks.json'
 import { toSlug } from '../../../components/CarouselItem'
-import { createPublicClient, http } from 'viem'
-import { mainnet } from 'viem/chains'
-import { useAccount } from 'wagmi'
-import toast from 'react-hot-toast'
+import Submission from '../../../components/Submission'
+// import { debug } from '../../../main'
 import '@mdxeditor/editor/style.css'
 import '../../../markdown-editor.css'
 
@@ -95,7 +97,7 @@ export const Route = createLazyFileRoute('/book/$slug/')({
   component: Book,
 })
 
-function Book() {
+export function Book() {
   try {
     const { slug } = Route.useParams()
     const book = playbooks
@@ -125,8 +127,8 @@ function Book() {
       isLoading: statusesLoading,
     } = (
       useQuery<Statuses>({
-        enabled: !!viewer && !!chain.id,
-        queryKey: [`statuses-${chain.id}-${viewer}`],
+        enabled: !!viewer && !!chain?.id,
+        queryKey: [`statuses-${chain?.id}-${viewer}`],
         queryFn: async () => (
           request(
             import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
@@ -140,6 +142,7 @@ function Book() {
     const [active, setActive] = useState(0)
     const [content, setContent] = useState<string | null>(null)
     const [creator, setCreator] = useState('Unknown')
+
     const chapterSelected = (index: number) => {
       setActive(index)
       switch (index) {
@@ -171,9 +174,6 @@ function Book() {
       throw new Error(`No chain found for: "${slug}" = "${book.title}".`)
     }
 
-    const Editor = React.lazy(
-      () => import('../../../components/MarkdownEditor')
-    )
     const status = statuses?.find(
       ({ quest: { questId } }) => (Number(questId) === active - 1)
     )
@@ -192,6 +192,8 @@ function Book() {
           if (name) setCreator(name)
         })
     }
+
+    console.debug({ statuses, active, status })
 
     return (
       <>
@@ -239,10 +241,10 @@ function Book() {
                   Continue
                   </button>
               ) : (
-                status?.status && ['pass'].includes(status.status) && (
-                  <Suspense fallback={<h3>Loading Editor…</h3>}>
-                    <Editor className="dark-theme dark-editor content mt-10"/>
-                  </Suspense>
+                (!!status && ['pass'].includes(status?.status)) ? (
+                  <h2>You have already successfully completed this submission.</h2>
+                ) : (
+                  <Submission/>
                 )
               )}
             </div>
