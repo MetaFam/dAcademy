@@ -10,3 +10,4 @@ Using [DaisyUI Components](https://daisyui.com/)
 
 Built using [Quest Chains contracts](https://github.com/quest-chains)
 
+On [Optimism](https://docs.optimism.io/)
