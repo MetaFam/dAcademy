@@ -7,3 +7,6 @@ Includes:
 Built with [Vite-React-ts](https://vite.dev/guide/)
 
 Using [DaisyUI Components](https://daisyui.com/)
+
+Built using [Quest Chains contracts](https://github.com/quest-chains)
+
