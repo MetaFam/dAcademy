@@ -1,10 +1,10 @@
 import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi'
 import { toHTTP } from '../utils'
 import abi from '../abis/Token.json'
-import { Chapter, useBook } from '../hooks/useBook'
+import { Chapter, useLoadedBook } from '../BookContext'
 
 export const Reward = () => {
-  const book = useBook()
+  const book = useLoadedBook()
   const { data: hash, writeContract } = useWriteContract()
   const { isLoading: confirming, isSuccess: confirmed } = (
     useWaitForTransactionReceipt({ hash })

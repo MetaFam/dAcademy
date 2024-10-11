@@ -1,25 +1,16 @@
 import { clsx } from 'clsx'
-import { useBook } from '../hooks/useBook'
+import { useLoadedBook } from '../BookContext'
 
 export default function Chapters() {
-  const book = useBook()
-  if(!book) {
-    throw new Error('Argument `book` is not defined.')
-  }
-
-  const { chapters } = book
-  if(!chapters) {
-    throw new Error('Argument `chapters` is not defined.')
-  }
-
-  const { status } = chapters.current
+  const book = useLoadedBook()
 
   return (
     <ol
       id="chapters"
       className="flex flex-col max-w-72 text-balance mt-4 mr-4"
     >
-      {chapters.map((chapter, index) => {
+      {book.chapters.map((chapter, index) => {
+        const { status } = chapter
         let tooltip = (
           (status == null ? (
             'You have not yet submitted a proof for this chapter.'

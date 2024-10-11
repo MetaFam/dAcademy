@@ -9,7 +9,7 @@ import {
 import { watchChainId } from '@wagmi/core'
 import { MDXEditorMethods } from '@mdxeditor/editor'
 import clsx from 'clsx'
-import { useBook } from '../hooks/useBook'
+import { Book, useLoadedBook } from '../BookContext'
 import { upload } from '../utils'
 import abi from '../abis/QuestChain.json'
 
@@ -33,7 +33,7 @@ export const Alert = ({ children }: { children: ReactNode }) => (
 )
 
 export const Submission = () => {
-  const book = useBook()
+  const book = useLoadedBook()
   const chain = useChainId()
   const editorRef = React.useRef<MDXEditorMethods>(null)
   const [saving, setSaving] = useState(false)
@@ -79,7 +79,7 @@ export const Submission = () => {
     }
   }, [config])
 
-  const { contract } = book ?? {}
+  const { contract = null } = (!!book && 'contract' in book) ? book : {}
   useEffect(() => {
     if(hash) {
       toast.success(
@@ -101,11 +101,9 @@ export const Submission = () => {
     useWaitForTransactionReceipt({ hash })
   )
 
-  if(!book) throw new Error(`No book found for: "${slug}".`)
-
   if(book.reader == null && !error.account) {
     setError(errorSource.account)
-  } else if(book.reader != null && error.account) {
+  } else if((book as Book).reader != null && error.account) {
     setError({ type: 'account', error: null })
   }
 
