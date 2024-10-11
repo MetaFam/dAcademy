@@ -9,7 +9,7 @@ import {
 import { watchChainId } from '@wagmi/core'
 import { MDXEditorMethods } from '@mdxeditor/editor'
 import clsx from 'clsx'
-import { useBook } from '../BookContext'
+import { useBook } from '../hooks/useBook'
 import { upload } from '../utils'
 import abi from '../abis/QuestChain.json'
 
@@ -32,8 +32,8 @@ export const Alert = ({ children }: { children: ReactNode }) => (
   </div>
 )
 
-export const Submission = ({ slug }: { slug: string }) => {
-  const { book } = useBook(slug)
+export const Submission = () => {
+  const book = useBook()
   const chain = useChainId()
   const editorRef = React.useRef<MDXEditorMethods>(null)
   const [saving, setSaving] = useState(false)
@@ -172,6 +172,8 @@ export const Submission = ({ slug }: { slug: string }) => {
               </p>,
               { duration: 15_000, position: 'bottom-center', style: { width: '45ch' } },
             )
+
+            if(book.on == null) throw new Error('No current chapter.')
 
             writeContract({
               address: contract as `0x${string}`,

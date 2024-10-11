@@ -1,10 +1,10 @@
 import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi'
 import { toHTTP } from '../utils'
 import abi from '../abis/Token.json'
-import { useBook } from '../BookContext'
+import { Chapter, useBook } from '../hooks/useBook'
 
-export const Reward = ({ slug }: { slug: string }) => {
-  const { book } = useBook(slug)
+export const Reward = () => {
+  const book = useBook()
   const { data: hash, writeContract } = useWriteContract()
   const { isLoading: confirming, isSuccess: confirmed } = (
     useWaitForTransactionReceipt({ hash })
@@ -12,8 +12,8 @@ export const Reward = ({ slug }: { slug: string }) => {
 
   if(!book) throw new Error('No book found.')
 
-
   const mint = () => {
+    if(!book) throw new Error('No book found.')
     writeContract({
       address: book.nft.address as `0x${string}`,
       abi,
@@ -21,8 +21,8 @@ export const Reward = ({ slug }: { slug: string }) => {
       args: [[book.reader], [book.nft.id]],
     })
   }
-  const mintable = book.chapters.every(
-    (chapter) => chapter.status === 'pass'
+  const mintable = book.chapters?.every(
+    (chapter: Chapter) => chapter.status === 'pass'
   )
 
   const label = (() => {

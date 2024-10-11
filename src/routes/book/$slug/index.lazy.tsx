@@ -10,7 +10,7 @@ import Submission from '../../../components/Submission'
 // import { debug } from '../../../main'
 import '@mdxeditor/editor/style.css'
 import '../../../markdown-editor.css'
-import { useBook } from '../../../BookContext'
+import { useBook } from '../../../hooks/useBook'
 
 export const Route = createLazyFileRoute('/book/$slug/')({
   component: Book,
@@ -19,51 +19,36 @@ export const Route = createLazyFileRoute('/book/$slug/')({
 export function Book() {
   try {
     const { slug } = Route.useParams()
-    const { book, loading, error } = useBook(slug)
-    const [content, setContent] = useState<string>()
+    const book = useBook(slug)
     const [creator, setCreator] = useState('Unknown')
 
-    if(loading || !book) {
-      return `Loading: ${slug}`
+    if(book.status === 'init') {
+      return `Loading: "${book.title}"…`
     }
+    if(book.status === 'error') throw book.error
+
     const chapterSelected = (index: number) => {
-      book.setOn(index)
-      switch (index) {
-        case 0: {
-          setContent(book.introduction)
-          break
-        }
-        default: {
-          const { content } = book.chapters[book.on - 1]
-          setContent(content)
-        }
+      if(!book.setOn) {
+        throw new Error('Book without `setOn`.')
       }
+      book.setOn(index)
     }
     const passSection = async (index: number) => {
       document.documentElement.scrollIntoView()
       chapterSelected(index + 1)
     }
 
-    if (error) throw error
-
-    if (!book) {
-      throw new Error(`No book found for: "${slug}".`)
-    }
-
-    if (loading) return <h1>Loading "{book.title}"…</h1>
-
-    if (!content) chapterSelected(0)
     if (creator === 'Unknown') {
       setCreator(`${book.creator.substring(0, 5)}⋯${book.creator.slice(-3)}`)
       const client = createPublicClient({
         chain: mainnet,
         transport: http(),
       })
-      client
+      ;(
+        client
         .getEnsName({ address: book.creator as `0x${string}` })
-        .then((name) => {
-          if (name) setCreator(name)
-        })
+        .then((name) => { if (name) setCreator(name) })
+      )
     }
 
     return (
@@ -97,9 +82,9 @@ export function Book() {
             )}
           </p>
           <main className="md:flex justify-start">
-            <Chapters {...{ slug }}/>
+            <Chapters/>
             <div>
-              <Content {...{ slug }}/>
+              <Content/>
               {book.on === 0 ? (
                 <button
                   onClick={() => passSection(book.on)}
@@ -129,11 +114,11 @@ export function Book() {
                     )}
                   </div>
                 ) : (
-                  <Submission {...{ slug }}/>
+                  <Submission/>
                 )
               )}
             </div>
-            <Reward {...{ slug }}/>
+            <Reward/>
           </main>
         </div>
       </>

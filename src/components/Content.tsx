@@ -1,9 +1,9 @@
 import Markdown from 'react-markdown'
 import '../content.css'
-import { useBook } from '../BookContext'
+import { useBook } from '../hooks/useBook'
 
-export default function Content({ slug }: { slug: string }) {
-  const { book: { chapters: { current } = {} } = {} } = useBook(slug)
+export default function Content() {
+  const { chapters: { current } = {} } = useBook()
 
   return (
     <div id="content" className="flex-grow">

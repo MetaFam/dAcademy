@@ -1,8 +1,8 @@
 import { clsx } from 'clsx'
-import { useBook } from '../BookContext'
+import { useBook } from '../hooks/useBook'
 
-export default function Chapters({ slug }: { slug: string}) {
-  const { book } = useBook(slug)
+export default function Chapters() {
+  const book = useBook()
   if(!book) {
     throw new Error('Argument `book` is not defined.')
   }
@@ -57,7 +57,7 @@ export default function Chapters({ slug }: { slug: string}) {
           <li
             key={index}
             data-tip={tooltip}
-            onClick={() => book.setOn(index)}
+            onClick={() => book.setOn?.(index)}
             className={clsx(
               'card tooltip tooltip-top md:tooltip-right shadow-md p-3 hover:bg-yellow-300/75 hover:text-black',
               book.on === index && 'bg-white/20',
