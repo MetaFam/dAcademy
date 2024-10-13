@@ -76,7 +76,7 @@ export default function Chapters() {
                 <text x="50%" y="57%" fontSize="2.5rem" textAnchor="middle" dominantBaseline="middle" className="fill-black font-bold">{index + 1}</text>
               </svg>
               <h2 className="text-lg font-medium text-left">
-                {book.on === 0 ? 'Introduction' : chapter.title}
+                {chapter.title}
               </h2>
             </div>
           </li>
