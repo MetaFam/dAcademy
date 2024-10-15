@@ -7,7 +7,7 @@ export default function Chapters() {
   return (
     <ol
       id="chapters"
-      className="flex flex-col max-w-72 text-balance mt-4 mr-4 sticky top-0"
+      className="flex flex-col max-w-72 text-balance mt-4 mr-4 sticky top-0 z-50"
     >
       {book.chapters.map((chapter, index) => {
         const { status } = chapter
