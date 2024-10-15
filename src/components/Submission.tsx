@@ -178,6 +178,16 @@ export const Submission = () => {
               abi,
               functionName: 'submitProofs',
               args: [[book.on - 1], [cid]],
+            }, {
+              onError: (error) => {
+                console.error({ error })
+                toast.error(
+                  (error as { shortMessage: string }).shortMessage
+                  ?? error.message, {
+                    duration: 12_000,
+                  }
+                )
+              },
             })
           } catch(error) {
             console.error({ error })
