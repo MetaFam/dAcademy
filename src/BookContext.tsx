@@ -6,7 +6,7 @@ import playbooks from './playbooks.json'
 import { toSlug } from './components/CarouselItem'
 
 const questChainQueryDocument = gql`
-  query ChainDetails($name: String!) {
+  query ChainDetails($name: String!, $reader: String) {
     questChains(
       where: {
         name_starts_with_nocase: $name,
@@ -21,6 +21,11 @@ const questChainQueryDocument = gql`
         tokenId
         imageUrl
         tokenAddress
+        owners(
+          where: { ownerOf_: { address: $reader } }
+        ) {
+          ownerOf { address }
+        }
       }
       createdBy {
         id
@@ -83,6 +88,7 @@ export type Book = {
     id: string
     address: string
     image: string
+    minted: boolean
   }
   creator: string
   owners: Array<string>
@@ -198,6 +204,8 @@ export const BookProvider = (
   ) ?? {}
   if(!title) throw new Error(`Book "${slug}" not found.`)
 
+  const account = useAccount()
+  const reader = account?.address?.toLowerCase() ?? null
   const {
     data: { questChains: [chain] = [] } = {},
     error: questError,
@@ -207,12 +215,11 @@ export const BookProvider = (
     queryFn: async () => request(
       import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
       questChainQueryDocument,
-      { name: title },
+      { name: title, reader },
     ),
   })
 
-  const account = useAccount()
-  const reader = account?.address?.toLowerCase() ?? null
+
   const {
     data,
     error: statusesError,
@@ -275,9 +282,10 @@ export const BookProvider = (
       updatedAt: new Date(Number(chain.updatedAt) * 1000),
       contract: chain.id,
       nft: {
-        id: chain.token.tokenId,
+        id: Number(chain.token.tokenId),
         address: chain.token.tokenAddress,
         image: chain.token.imageUrl,
+        minted: chain.token.owners.length > 0,
       },
       on,
       setOn,
