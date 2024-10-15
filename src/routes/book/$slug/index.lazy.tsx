@@ -19,13 +19,16 @@ export function Book() {
 
     return (
       <BookProvider {...{ slug }}>
-        <article id="top" className="container mx-auto py-20 px-5">
-          <BookHeader/>
-          <main className="md:flex justify-start">
+        <article
+          id="top"
+          className="container mx-auto py-20 px-5 overflow-auto relative"
+        >
+          <BookHeader />
+          <main className="md:flex justify-start overflow-hidden relative">
             <Suspense fallback={<h1>Loading…</h1>}>
-              <Chapters/>
-              <Content/>
-              <Reward/>
+              <Chapters />
+              <Content />
+              <Reward />
             </Suspense>
           </main>
         </article>

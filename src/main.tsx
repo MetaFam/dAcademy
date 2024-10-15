@@ -34,9 +34,9 @@ const queryClient = new QueryClient()
 const projectId = import.meta.env.VITE_APPKIT_PROJECT_ID
 
 const metadata = {
-  name:'retest1',
-  description: 'AppKit Example',
-  url: 'https://web3modal.com',
+  name:'dAcademy',
+  description: 'dAcademy',
+  url: 'https://dacade.my',
   icons: ['https://dacade.my/octopus%20icon.svg']
 }
 

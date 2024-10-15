@@ -85,7 +85,9 @@ export const Navbar = () => {
           </ul>
         </li>
         <li>
-          <div className="navbar-end px-4"><w3m-button/></div>
+          <div className="navbar-end px-4">
+            <w3m-button balance="hide"/>
+          </div>
         </li>
       </ul>
     </nav>
