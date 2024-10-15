@@ -4,7 +4,6 @@ import Navbar from '../components/Navbar'
 import '../App.css'
 
 export const Route = createRootRoute({
-
   component: () => {
     return (
     <>

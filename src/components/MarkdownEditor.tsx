@@ -30,6 +30,7 @@ import {
   MDXEditorProps,
 } from '@mdxeditor/editor'
 import { ForwardedRef } from 'react'
+import { upload } from '../utils'
 
 export const MarkdownEditor = (
   { editorRef = null, ...props }:
@@ -45,7 +46,14 @@ export const MarkdownEditor = (
       linkDialogPlugin(),
       thematicBreakPlugin(),
       tablePlugin(),
-      imagePlugin(),
+      imagePlugin({
+        imageUploadHandler: async (image: File) => {
+          const cid = await upload([image])
+          console.log({cid})
+          return `https://w3s.link/ipfs/${cid}/${image.name}`
+        },
+      }),
+
       diffSourcePlugin(),
       codeMirrorPlugin({
         codeBlockLanguages: {
