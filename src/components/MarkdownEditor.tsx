@@ -49,7 +49,6 @@ export const MarkdownEditor = (
       imagePlugin({
         imageUploadHandler: async (image: File) => {
           const cid = await upload([image])
-          console.log({cid})
           return `https://w3s.link/ipfs/${cid}/${image.name}`
         },
       }),
