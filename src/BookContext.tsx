@@ -85,7 +85,7 @@ export type Book = {
   updatedAt: Date
   contract: string
   nft: {
-    id: string
+    id: number
     address: string
     image: string
     minted: boolean
@@ -144,6 +144,7 @@ export type Chain = {
     imageUrl: string
     tokenId: string
     tokenAddress: string
+    owners: Array<{ ownerOf: { address: string } }>
   }
   quests: Array<Quest>
   createdBy: { id: string }

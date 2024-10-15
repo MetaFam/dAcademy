@@ -15,8 +15,7 @@ export const Reward = () => {
 
   const mint = () => {
     if(!book) throw new Error('No book found.')
-      console.debug({addr: book.nft.address, user: book.reader, id: book.nft.id})
-      const ret = writeContract({
+    writeContract({
       address: book.contract as `0x${string}`,
       abi,
       functionName: 'mintToken',
@@ -24,12 +23,25 @@ export const Reward = () => {
     }, {
       onError: (error) => {
         console.error({ error })
-        toast(error.shortMessage ?? error.message, {
-          duration: 12_000,
-        })
+        toast.error(
+          (error as { shortMessage: string }).shortMessage
+          ?? error.message, {
+            duration: 12_000,
+          }
+        )
       },
+      onSuccess: (hash) => (
+        toast.success(
+          <p>
+            Minted in transaction
+            <a href={`https://optimistic.etherscan.io/tx/${hash}`} className="mx-1 whitespace-nowrap text-primary hover:text-secondary" target="_blank">
+              {hash.substring(0, 8)}…{hash.slice(-6)}
+            </a>.
+          </p>,
+          { duration: 12_000 },
+        )
+      )
     })
-    console.debug({ret})
   }
   let mintable = book.chapters?.every(
     (chapter: Chapter) => (
@@ -37,6 +49,7 @@ export const Reward = () => {
     )
   ) && !book.nft.minted
 
+  const defaultLabel = 'Mint NFT'
   const label = (() => {
     if(confirming) return (
       <>
@@ -45,7 +58,7 @@ export const Reward = () => {
       </>
     )
     if(confirmed) return '¡Done: Minted!'
-    return 'Mint NFT'
+    return defaultLabel
   })()
 
   return (
@@ -54,7 +67,7 @@ export const Reward = () => {
         <h1 className="text-3xl font-bold text-center my-4 mx-2">Completion NFT</h1>
         <img src={toHTTP(book.nft.image)} alt="Soulbound NFT" className="w-full h-full object-contain pb-4 px-4" />
         {mintable && (
-          <button onClick={mint} className="btn btn-primary">
+          <button disabled={label !== defaultLabel} onClick={mint} className="btn btn-primary">
             {label}
           </button>
         )}
