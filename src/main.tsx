@@ -70,7 +70,7 @@ const root=document.getElementById('root')!
 if (!root.innerHTML){
   createRoot(root).render(
     <StrictMode>
-      <Toaster/>
+      <Toaster position="bottom-center"/>
       <AppKitProvider>
         <RouterProvider {...{ router }}/>
       </AppKitProvider>

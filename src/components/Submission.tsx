@@ -93,7 +93,7 @@ export const Submission = () => {
             {contract?.substring(0, 6)}…{contract?.slice(-4)}
           </a>.
         </p>,
-        { duration: 12_000, position: 'bottom-center', style: { width: '45ch' } },
+        { duration: 12_000, style: { width: '45ch' } },
       )
     }
   }, [hash])
