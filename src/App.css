@@ -8,8 +8,10 @@
 
 @media (max-width: 768px) {
   .react-multi-carousel {
-     swiping: true;
-   }
- }
+    swiping: true;
+  }
+}
 
-
+w3m-modal {
+  z-index: 1002;
+}
