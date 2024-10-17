@@ -25,7 +25,7 @@ export const Route = createLazyFileRoute('/')({
   component: () => (
     <div>
       <h1 className="text-2xl font-bold text-secondary mt-8">Welcome to dAcademy!</h1>
-      <h2 className="text-lg font-semibold text-primary mb-8">Here is a subdescription</h2>
+      <h2 className="text-lg font-semibold text-primary mb-8">Here is a descriptioni of dAcademy</h2>
       <div className="flex flex-col md:flex-row md:justify-around items-center">
         {orgs.map((org) => (
           <div key={org.slug} className="w-full md:w-1/3 mb-4 md:mb-0">
@@ -35,13 +35,15 @@ export const Route = createLazyFileRoute('/')({
                   <img
                     src={org.logo}
                     alt="Org Logo"
-                    className="rounded-xl" />
+                    className="w-48" />
                 </figure>
                 <div className="card-body items-center text-center">
                   <h2 className="card-title">{org.name}</h2>
                   <p>{org.slogan}</p>
                   <div className="card-actions">
                     {/* <button className="btn btn-primary">Visit {org.name}'s Shelf</button> */}
+                    {/* add in topic badges
+                    add in attestation reactions or hearts */}
                   </div>
                 </div>
               </a>
