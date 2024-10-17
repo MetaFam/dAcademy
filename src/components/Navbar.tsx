@@ -41,7 +41,7 @@ export const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
-            <li><a>Support</a></li>
+            <li><a>Profile</a></li>
             <li>
               <a>Categories</a>
               <ul className="p-2">
@@ -66,7 +66,7 @@ export const Navbar = () => {
         </li>
         <li className="hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-              <li><a>Support</a></li>
+              <li><a>Profile</a></li>
               <li>
                 <details>
                   <summary>Categories</summary>

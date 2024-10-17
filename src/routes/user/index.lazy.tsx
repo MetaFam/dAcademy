@@ -4,7 +4,7 @@ import Statuses from '../../components/UserProfile/Statuses'
 import Carousel from'react-multi-carousel'
 import'react-multi-carousel/lib/styles.css'
 import Attended from '../../components/UserProfile/Attended'
-// import Carousel from 'react-multi-carousel'
+
 // import { getAccount } from '@wagmi/core'
 // import { getEnsAvatar } from '@wagmi/core'
 // import { getEnsName } from '@wagmi/core'
