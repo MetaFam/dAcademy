@@ -1,7 +1,5 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import Earned from '../../components/UserProfile/Earned'
 import Statuses from '../../components/UserProfile/Statuses'
-import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import Attended from '../../components/UserProfile/Attended'
 
@@ -24,33 +22,25 @@ const responsive = {
   },
 }
 
-export const Route = createLazyFileRoute('/orgdash/')({
+export const Route = createLazyFileRoute('/upload/')({
   component: () => (
     <div>
       <h1 className="text-2xl font-semibold text-secondary mt-12 mb-8">
-        Dashboard for orgX
+        Upload Hub
       </h1>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center justify-start">
-          <div className="w-11/12 bg-secondary/25">
-            <h1 className="text-lg font-semibold mt-4 mb-4">Current Books</h1>
-            <Carousel
-              {...{ responsive }}
-              className="top-0 gap-4 md:gap-6 lg:gap-8 w-full mr-0"
-            >
-              <Earned />
-              <Earned />
-              <Earned />
-              <Earned />
-              <Earned />
-            </Carousel>
+          <div className="mt-4 mb-4 w-11/12 bg-secondary/25">
+            <h1>Upload Cover to IPFS</h1>
           </div>
-          <div className="mt-4 mb-4 w-11/12">
-            <Statuses />
+          <div className="mt-4 mb-4 w-11/12 bg-secondary/25">
+            <h1>Book Description</h1>
+            <h1>Book Introduction</h1>
           </div>
-          <div className="mt-4 mb-4 w-11/12">
-            <Attended />
+          <div className="mt-4 mb-4 w-11/12 bg-secondary/25">
+            <h1>Chapter 1</h1>
+            <h1>Add a chapter</h1>
           </div>
           <label
             htmlFor="my-drawer-2"
@@ -70,19 +60,19 @@ export const Route = createLazyFileRoute('/orgdash/')({
               ENS/Account Info
             </h1>
             <li>
-              <a>Current Books</a>
+              <a>Upload Cover</a>
             </li>
             <li>
-              <a>Submission Statuses</a>
+              <a>Book Description</a>
             </li>
             <li>
-              <a>Workshops Given</a>
+              <a>Book Introduction</a>
             </li>
             <li>
-              <a>Upload Books</a>
+              <a>Chapters</a>
             </li>
             <li>
-              <a>Completion NFTs</a>
+              <a>Owner Permissions</a>
             </li>
           </ul>
         </div>
