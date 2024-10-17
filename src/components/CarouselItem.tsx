@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { Book } from '../routes/index.lazy'
+import { type Book } from '../routes/org/$id/index.lazy'
 
 export const toSlug = (title: string) => (
   title.toLowerCase().replace(/\s+/g, '-').replace(/[\?,:]/g, '')
