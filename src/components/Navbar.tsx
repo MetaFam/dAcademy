@@ -57,7 +57,13 @@ export const Navbar = () => {
               </ul>
             </li>
             <li>
-              <a>Submit</a>
+              <button
+              data-tally-open="mOJvyK"
+              data-tally-layout="modal"
+              data-tally-emoji-text="👋"
+              data-tally-emoji-animation="wave">
+                Join as an Org
+              </button>
             </li>
           </ul>
         </div>
@@ -85,7 +91,15 @@ export const Navbar = () => {
                   </ul>
                 </details>
               </li>
-              <li><a>Submit</a></li>
+              <li>
+                <button
+                data-tally-open="mOJvyK"
+                data-tally-layout="modal"
+                data-tally-emoji-text="👋"
+                data-tally-emoji-animation="wave">
+                  Join as an Org
+                </button>
+              </li>
           </ul>
         </li>
         <li>

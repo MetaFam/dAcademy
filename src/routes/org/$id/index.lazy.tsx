@@ -86,7 +86,7 @@ export function App() {
         ))}
       </div>
       <div className="fixed bottom-0 right-0 p-4">
-        <Link to={'/#top' as '/org/id/'} className="btn btn-ghost text-xl">
+        <Link to={'#top' as '/#/org'} className="btn btn-ghost text-xl">
           <div className="flex flex-col justify-center items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"

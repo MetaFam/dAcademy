@@ -45,9 +45,9 @@ export const Route = createLazyFileRoute('/')({
     <div>
       <h1 className="text-2xl font-bold text-secondary mt-8">Welcome to dAcademy!</h1>
       <h2 className="text-lg font-semibold mb-8">Learn, Verify, Achieve: Protocol for a Decentralized Education</h2>
-      <div className="dropdown">
-        <div tabIndex={0} role="button" className="btn m-1">Current Organizations & Bookshelves</div>
-        <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+      <div className="dropdown dropdown-hover">
+        <div tabIndex={0} role="button" className="btn m-1 rounded-sm">Current Organizations & Bookshelves</div>
+        <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-sm z-[1] w-52 p-2 shadow">
           {orgs.map((org) => (
             <li key={org.slug}>
               <Link to={`/org/${org.slug}`}>{org.name}</Link>
@@ -58,7 +58,7 @@ export const Route = createLazyFileRoute('/')({
       <div className="flex flex-col mx-8 md:flex-row md:flex-wrap md:justify-center items-center">
         {orgs.map((org) => (
           <div key={org.slug} className="w-full md:w-1/3 mb-8 md:mb-12">
-            <div className="card bg-base-100 w-80 shadow-xl hover:shadow-secondary">
+            <div className="card bg-base-100 w-80 shadow-xl hover:shadow-secondary rounded-sm">
               <Link to={`/org/${org.slug}`}>
                 <figure className="px-10 pt-10">
                   <img
