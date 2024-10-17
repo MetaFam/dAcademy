@@ -1,6 +1,5 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import 'react-multi-carousel/lib/styles.css'
-
+import ChapterUpload from '../../components/upload/UploadChapter'
 
 // import { getAccount } from '@wagmi/core'
 // import { getEnsAvatar } from '@wagmi/core'
@@ -37,8 +36,9 @@ export const Route = createLazyFileRoute('/upload/')({
             <h1>Book Description</h1>
             <h1>Book Introduction</h1>
           </div>
-          <div className="mt-4 mb-4 w-11/12 bg-secondary/25">
+          <div className="mt-4 mb-4 w-11/12 bg-secondary/25 flex flex-col h-screen">
             <h1>Chapter 1</h1>
+            <ChapterUpload/>
             <h1>Add a chapter</h1>
           </div>
           <label
