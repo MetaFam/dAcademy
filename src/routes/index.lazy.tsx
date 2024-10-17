@@ -1,4 +1,5 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 
 const orgs = [
   {
@@ -25,12 +26,12 @@ export const Route = createLazyFileRoute('/')({
   component: () => (
     <div>
       <h1 className="text-2xl font-bold text-secondary mt-8">Welcome to dAcademy!</h1>
-      <h2 className="text-lg font-semibold text-primary mb-8">Here is a descriptioni of dAcademy</h2>
+      <h2 className="text-lg font-semibold mb-8">Learn, Verify, Achieve: Protocol for a Decentralized Education</h2>
       <div className="flex flex-col md:flex-row md:justify-around items-center">
         {orgs.map((org) => (
           <div key={org.slug} className="w-full md:w-1/3 mb-4 md:mb-0">
             <div className="card bg-base-100 w-96 shadow-xl hover:shadow-secondary">
-              <a href={`/org/${org.slug}`}>
+              <Link to={`/org/${org.slug}`}>
                 <figure className="px-10 pt-10">
                   <img
                     src={org.logo}
@@ -46,7 +47,7 @@ export const Route = createLazyFileRoute('/')({
                     add in attestation reactions or hearts */}
                   </div>
                 </div>
-              </a>
+              </Link>
             </div>
           </div>
         ))}
