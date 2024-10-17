@@ -27,10 +27,11 @@ export const Route = createLazyFileRoute('/')({
     <div>
       <h1 className="text-2xl font-bold text-secondary mt-8">Welcome to dAcademy!</h1>
       <h2 className="text-lg font-semibold mb-8">Learn, Verify, Achieve: Protocol for a Decentralized Education</h2>
-      <div className="flex flex-col md:flex-row md:justify-around items-center">
+      <h3 className="text-medium font-medium mb-8 mt-8 text-primary underline">Current Organizations & Bookshelves</h3>
+      <div className="flex flex-col mx-8 md:flex-row md:justify-around items-center">
         {orgs.map((org) => (
           <div key={org.slug} className="w-full md:w-1/3 mb-4 md:mb-0">
-            <div className="card bg-base-100 w-96 shadow-xl hover:shadow-secondary">
+            <div className="card bg-base-100 w-80 shadow-xl hover:shadow-secondary">
               <Link to={`/org/${org.slug}`}>
                 <figure className="px-10 pt-10">
                   <img
