@@ -3,4 +3,6 @@
 @tailwind utilities;
 
 
-
+#login w3m-button * {
+  display: inline;
+}

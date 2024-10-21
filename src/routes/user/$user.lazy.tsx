@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
   createLazyFileRoute,
-  useNavigate,
-  useLocation,
   Link,
 } from '@tanstack/react-router'
 import Carousel from 'react-multi-carousel'
@@ -30,8 +28,6 @@ const responsive = {
 
 export const Route = createLazyFileRoute('/user/$user')({
   component: () => {
-    const navigate = useNavigate()
-    const location = useLocation()
     const { user } = Route.useParams()
     const [ens, setENS] = useState(
       user.includes('.') ? user : `0x${user.substring(0, 6)} ... `
