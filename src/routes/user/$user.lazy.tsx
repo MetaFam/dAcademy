@@ -3,6 +3,7 @@ import {
   createLazyFileRoute,
   useNavigate,
   useLocation,
+  Link,
 } from '@tanstack/react-router'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
@@ -37,14 +38,7 @@ export const Route = createLazyFileRoute('/user/$user')({
     )
     const [error, setError] = useState<string>()
 
-    useEffect(() => {
-      if (location.hash) {
-        const element = document.querySelector(location.hash)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }
-      }
-    }, [location])
+
     useEffect(() => {
       const client = createPublicClient({
         chain: mainnet,
@@ -76,12 +70,11 @@ export const Route = createLazyFileRoute('/user/$user')({
         <div className="drawer drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col items-center justify-start">
-            <div id="nfts-earned" className="w-11/12 bg-secondary/25">
+            <div id="nfts-earned" className="w-11/12 bg-secondary/25 scroll-m-24">
               <h1 className="text-lg font-semibold mt-4 mb-4">NFTs Earned</h1>
               <Carousel
                 {...{ responsive }}
-                className="top-0 gap-4 md:gap-6 lg:gap-8 w-full mr-0"
-              >
+                className="top-0 gap-4 md:gap-6 lg:gap-8 w-full mr-0">
                 <Earned />
                 <Earned />
                 <Earned />
@@ -113,19 +106,19 @@ export const Route = createLazyFileRoute('/user/$user')({
                 {ens}
               </h1>
               <li>
-                <a onClick={() => navigate({ hash: 'nfts-earned' })}>
+                <Link to={'#nfts-earned' as '/'}>
                   NFTs Earned
-                </a>
+                </Link>
               </li>
               <li>
-                <a onClick={() => navigate({ hash: 'submission-statuses' })}>
+                <Link to={'#submission-statuses' as '/'}>
                   Submission Statuses
-                </a>
+                </Link>
               </li>
               <li>
-                <a onClick={() => navigate({ hash: 'workshops-attended' })}>
+                <Link to={'#workshops-attended' as '/'}>
                   Workshops Attended
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

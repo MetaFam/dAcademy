@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
-import { createLazyFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute, Link, useLocation, useNavigate } from '@tanstack/react-router'
 import { createPublicClient, http } from 'viem'
 import { mainnet } from 'viem/chains'
-import Earned from '../../components/UserProfile/Earned'
 import OrgStatuses from '../../components/dashboard/OrgStatuses'
 import Given from '../../components/dashboard/Given'
+import Completions from '../../components/dashboard/Completions'
+import Shelf from '../../components/dashboard/Shelf'
 
 const responsive = {
   desktop: {
@@ -25,6 +26,8 @@ const responsive = {
 
 export const Route = createLazyFileRoute('/dashboard/$user')({
   component: () => {
+    const navigate = useNavigate()
+    const location = useLocation()
     const { user } = Route.useParams()
     const [ens, setENS] = useState(
       user.includes('.') ? user : `0x${user.substring(0, 6)} ... `,
@@ -62,23 +65,34 @@ export const Route = createLazyFileRoute('/dashboard/$user')({
         <div className="drawer lg:drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col items-center justify-start">
-            <div className="w-11/12 bg-secondary/25">
-              <h1 className="text-lg font-semibold mt-4 mb-4">Current Books</h1>
+            <div id="bookshelf" className="w-11/12 bg-secondary/25 scroll-m-24">
+              <h1 className="text-lg font-semibold mt-4 mb-4">Current Bookshelf</h1>
               <Carousel
                 {...{ responsive }}
-                className="top-0 gap-4 md:gap-6 lg:gap-8 w-full mr-0"
-              >
-                <Earned />
-                <Earned />
-                <Earned />
-                <Earned />
-                <Earned />
+                className="top-0 gap-4 md:gap-6 lg:gap-8 w-full mr-0">
+                <Shelf />
+                <Shelf />
+                <Shelf />
+                <Shelf />
+                <Shelf />
               </Carousel>
             </div>
-            <div className="mt-4 mb-4 w-11/12">
+            <div id="statuses" className="mt-4 mb-4 w-11/12 scroll-m-24">
               <OrgStatuses />
             </div>
-            <div className="mt-4 mb-4 w-11/12">
+            <div id="completions" className="w-11/12 bg-secondary/25 scroll-m-24">
+              <h1 className="text-lg font-semibold mt-4 mb-4">Completion NFTs</h1>
+              <Carousel
+                {...{ responsive }}
+                className="top-0 gap-4 md:gap-6 lg:gap-8 w-full mr-0">
+                <Completions />
+                <Completions />
+                <Completions />
+                <Completions />
+                <Completions />
+              </Carousel>
+            </div>
+            <div id="workshops-given" className="mt-4 mb-4 w-11/12 scroll-m-24">
               <Given />
             </div>
             <label
@@ -97,19 +111,19 @@ export const Route = createLazyFileRoute('/dashboard/$user')({
             <ul className="menu bg-base-200 text-base-content max-h-fit w-80 p-4">
               <h1 className="mt-4 mb-4 text-lg font-secondary">{ens}</h1>
               <li>
-                <a>Current Books</a>
+                <Link to={'#bookshelf' as '/'}>Current Bookshelf</Link>
               </li>
               <li>
-                <a>Submission Statuses</a>
+              <Link to={'#statuses' as '/'}>Submission Statuses</Link>
               </li>
               <li>
-                <a>Workshops Given</a>
+                <Link to={'#completions' as '/'}>Completion NFTs</Link>
+              </li>
+              <li>
+                <Link to={'#workshops-given' as '/'}>Workshops Given</Link>
               </li>
               <li>
                 <a>Upload Books</a>
-              </li>
-              <li>
-                <a>Completion NFTs</a>
               </li>
             </ul>
           </div>
