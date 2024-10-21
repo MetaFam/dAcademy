@@ -1,4 +1,4 @@
-const Statuses = () => {
+const OrgStatuses = () => {
   return (
     <div className="card bg-secondary/25 h-auto w-full mr-4 mx-auto rounded-sm">
       <div className="card-body items-center text-center">
@@ -11,4 +11,4 @@ const Statuses = () => {
   )
 }
 
-export default Statuses
+export default OrgStatuses

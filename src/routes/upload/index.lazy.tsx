@@ -54,7 +54,7 @@ export const Route = createLazyFileRoute('/upload/')({
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+          <ul className="menu bg-base-200 text-base-content w-80 p-4">
             <h1 className="mt-4 mb-4 text-lg font-secondary">
               ENS/Account Info
             </h1>

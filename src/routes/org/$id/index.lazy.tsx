@@ -7,6 +7,7 @@ import CarouselItem, { toSlug } from '../../../components/CarouselItem'
 import 'react-multi-carousel/lib/styles.css'
 import '../../../App.css'
 
+
 export const Route = createLazyFileRoute('/org/$id/')({
   component: App,
 })

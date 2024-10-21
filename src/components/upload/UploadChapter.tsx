@@ -29,4 +29,4 @@ const ChapterUpload = () => {
 //   );
 // };
 
-export default ChapterUpload;
+export default ChapterUpload
