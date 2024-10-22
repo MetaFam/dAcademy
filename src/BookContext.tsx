@@ -192,10 +192,10 @@ export const useLoadedBook = () => {
 }
 
 export const BookProvider = (
-  { slug, children }:
-  { slug: string, children: ReactNode }
+  { slug, children, chapter=0 }:
+  { slug: string, children: ReactNode, chapter?: number }
 ) => {
-  const [on, setOn] = useState(0)
+  const [on, setOn] = useState(chapter)
 
   const { title } = (
     playbooks

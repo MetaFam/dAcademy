@@ -4,9 +4,9 @@ import {
   Link,
 } from '@tanstack/react-router'
 import 'react-multi-carousel/lib/styles.css'
-import Earned from '../../components/UserProfile/Earned'
-import Statuses from '../../components/UserProfile/Statuses'
-import Attended from '../../components/UserProfile/Attended'
+import Earned from '#components/UserProfile/Earned'
+import Statuses from '#components/UserProfile/Statuses'
+import Attended from '#components/UserProfile/Attended'
 import { createPublicClient, http } from "viem"
 import { mainnet } from "viem/chains"
 

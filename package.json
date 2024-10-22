@@ -10,6 +10,17 @@
     "preview": "vite preview",
     "gh:publish": "gh-pages --nojekyll --dist dist/"
   },
+
+  "imports": {
+    "#*": [
+      "./src/*",
+      "./src/*.ts",
+      "./src/*.tsx",
+      "./src/*/index.ts",
+      "./src/*/index.tsx"
+    ]
+  },
+
   "dependencies": {
     "@mdxeditor/editor": "^3.14.0",
     "@reown/appkit": "^1.0.4",

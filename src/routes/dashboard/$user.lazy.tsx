@@ -4,11 +4,11 @@ import 'react-multi-carousel/lib/styles.css'
 import { createLazyFileRoute, Link } from '@tanstack/react-router'
 import { createPublicClient, http } from 'viem'
 import { mainnet } from 'viem/chains'
-import OrgStatuses from '../../components/dashboard/OrgStatuses'
-import Given from '../../components/dashboard/Given'
-import Completions from '../../components/dashboard/Completions'
-import Shelf from '../../components/dashboard/Shelf'
-import { responsive } from '../../carousel.config'
+import OrgStatuses from '#components/dashboard/OrgStatuses'
+import Given from '#components/dashboard/Given'
+import Completions from '#components/dashboard/Completions'
+import Shelf from '#components/dashboard/Shelf'
+import { responsive } from '#carousel.config'
 
 export const Route = createLazyFileRoute('/dashboard/$user')({
   component: () => {

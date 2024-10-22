@@ -1,11 +1,11 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
 import Carousel from 'react-multi-carousel'
 import { Link } from '@tanstack/react-router'
-import playbooks from '../../../playbooks.json'
-import SectionHeader from '../../../components/SectionHeader'
-import CarouselItem, { toSlug } from '../../../components/CarouselItem'
+import playbooks from '#playbooks.json'
+import SectionHeader from '#components/SectionHeader'
+import CarouselItem, { toSlug } from '#components/CarouselItem'
 import 'react-multi-carousel/lib/styles.css'
-import '../../../App.css'
+import '#App.css'
 
 
 export const Route = createLazyFileRoute('/org/$id/')({

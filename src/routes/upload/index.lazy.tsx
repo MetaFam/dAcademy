@@ -1,9 +1,5 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import ChapterUpload from '../../components/upload/UploadChapter'
-
-// import { getAccount } from '@wagmi/core'
-// import { getEnsAvatar } from '@wagmi/core'
-// import { getEnsName } from '@wagmi/core'
+import ChapterUpload from '#components/upload/UploadChapter'
 
 const responsive = {
   desktop: {

@@ -1,5 +1,6 @@
 import { clsx } from 'clsx'
 import { useLoadedBook } from '../BookContext'
+import { Link } from '@tanstack/react-router'
 
 export default function Chapters() {
   const book = useLoadedBook()
@@ -59,7 +60,7 @@ export default function Chapters() {
               status == null && 'tooltip-primary',
             )}
           >
-            <div className="flex">
+            <Link to={`../${index}`} className="flex">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 50 50"
@@ -78,7 +79,7 @@ export default function Chapters() {
               <h2 className="text-lg font-medium text-left">
                 {chapter.title}
               </h2>
-            </div>
+            </Link>
           </li>
         )
       })}
