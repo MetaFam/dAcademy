@@ -1,4 +1,4 @@
-import { createLazyFileRoute, Link } from '@tanstack/react-router'
+import { createLazyFileRoute} from '@tanstack/react-router'
 import Carousel from 'react-multi-carousel'
 import CarouselItem, { toSlug } from '#components/CarouselItem'
 import 'react-multi-carousel/lib/styles.css'
