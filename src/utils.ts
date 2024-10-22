@@ -1,8 +1,8 @@
 import * as Delegation from '@web3-storage/w3up-client/delegation'
 import * as W3UpClient from '@web3-storage/w3up-client'
 
-export const toHTTP = (url: string) => {
-  return url.replace(/^ipfs:\/\//, 'https://w3s.link/ipfs/')
+export const toHTTP = (url?: string) => {
+  return url?.replace(/^ipfs:\/\//, 'https://w3s.link/ipfs/')
 }
 
 export const upload = async (files: Array<File>) => {

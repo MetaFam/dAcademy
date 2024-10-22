@@ -1,36 +1,20 @@
 import { useEffect, useState } from 'react'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
-import { createLazyFileRoute, Link, useLocation, useNavigate } from '@tanstack/react-router'
+import { createLazyFileRoute, Link } from '@tanstack/react-router'
 import { createPublicClient, http } from 'viem'
 import { mainnet } from 'viem/chains'
 import OrgStatuses from '../../components/dashboard/OrgStatuses'
 import Given from '../../components/dashboard/Given'
 import Completions from '../../components/dashboard/Completions'
 import Shelf from '../../components/dashboard/Shelf'
-
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
-}
+import { responsive } from '../../carousel.config'
 
 export const Route = createLazyFileRoute('/dashboard/$user')({
   component: () => {
-    const navigate = useNavigate()
-    const location = useLocation()
     const { user } = Route.useParams()
     const [ens, setENS] = useState(
-      user.includes('.') ? user : `0x${user.substring(0, 6)} ... `,
+      user.includes('.') ? user : `${user.substring(0, 6)} ... `,
     )
     const [error, setError] = useState<string>()
 
@@ -50,7 +34,9 @@ export const Route = createLazyFileRoute('/dashboard/$user')({
         })
       } else {
         client.getEnsAddress({ name: user }).then((address) => {
-          if (!address) setError(`${user} is not a valid ENS name.`)
+          if(!address) {
+            setError(`${user} is not a valid ENS name.`)
+          }
         })
       }
     })

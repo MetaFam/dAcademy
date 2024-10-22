@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import {
   createLazyFileRoute,
   Link,
 } from '@tanstack/react-router'
-import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import Earned from '../../components/UserProfile/Earned'
 import Statuses from '../../components/UserProfile/Statuses'
@@ -11,24 +10,11 @@ import Attended from '../../components/UserProfile/Attended'
 import { createPublicClient, http } from "viem"
 import { mainnet } from "viem/chains"
 
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
-}
 
 export const Route = createLazyFileRoute('/user/$user')({
   component: () => {
     const { user } = Route.useParams()
+    const [address, setAddress] = useState<string>()
     const [ens, setENS] = useState(
       user.includes('.') ? user : `0x${user.substring(0, 6)} ... `
     )
@@ -42,7 +28,7 @@ export const Route = createLazyFileRoute('/user/$user')({
       })
 
       if(!user.includes('.')) {
-
+        setAddress(user)
         client
         .getEnsName({ address: user as `0x${string}` })
         .then((name) => { if (name) {
@@ -54,7 +40,11 @@ export const Route = createLazyFileRoute('/user/$user')({
         client
         .getEnsAddress({name: user})
         .then((address) => {
-          if(!address) setError(`${user} is not a valid ENS name.`)
+          if(!address) {
+            setError(`${user} is not a valid ENS name.`)
+          }else{
+            setAddress(address)
+          }
         })
       }
     })
@@ -62,23 +52,18 @@ export const Route = createLazyFileRoute('/user/$user')({
     if(error) return <h1>{error}</h1>
     return (
       <div>
-        <h1 className="text-2xl font-semibold mt-12 mb-8">Profile for userX</h1>
         <div className="drawer drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col items-center justify-start">
             <div id="nfts-earned" className="w-11/12 bg-secondary/25 scroll-m-24">
               <h1 className="text-lg font-semibold mt-4 mb-4">NFTs Earned</h1>
-              <Carousel
-                {...{ responsive }}
-                className="top-0 gap-4 md:gap-6 lg:gap-8 w-full mr-0">
-                <Earned />
-                <Earned />
-                <Earned />
-                <Earned />
-                <Earned />
-              </Carousel>
+              <Suspense fallback={
+                <h2 className="loading loading-spinner"></h2>
+              }>
+                <Earned account={address}/>
+              </Suspense>
             </div>
-            <div id="submission-statuses" className="mt-4 mb-4 w-11/12">
+            <div id="submissions" className="mt-4 mb-4 w-11/12">
               <Statuses />
             </div>
             <div id="workshops-attended" className="mt-4 mb-4 w-11/12">
@@ -107,8 +92,8 @@ export const Route = createLazyFileRoute('/user/$user')({
                 </Link>
               </li>
               <li>
-                <Link to={'#submission-statuses' as '/'}>
-                  Submission Statuses
+                <Link to={'#submissions' as '/'}>
+                  Submissions
                 </Link>
               </li>
               <li>
