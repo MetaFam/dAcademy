@@ -9,9 +9,9 @@ import {
 import { watchChainId } from '@wagmi/core'
 import { MDXEditorMethods } from '@mdxeditor/editor'
 import clsx from 'clsx'
-import { Book, useLoadedBook } from '../BookContext'
-import { upload } from '../utils'
-import abi from '../abis/QuestChain.json'
+import { Book, useLoadedBook } from '#BookContext'
+import { upload } from '#utils'
+import abi from '#abis/QuestChain.json'
 
 const CHAIN = 10
 

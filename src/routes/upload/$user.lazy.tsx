@@ -2,6 +2,7 @@ import { createLazyFileRoute, Link } from '@tanstack/react-router'
 import ChapterUpload from '#components/upload/UploadChapter'
 import Top from '#components/Top'
 import { useUsername } from '#hooks/useUsername'
+import CoverUpload from '#components/upload/UploadCover'
 
 
 export const Route = createLazyFileRoute('/upload/$user')({
@@ -24,11 +25,7 @@ export const Route = createLazyFileRoute('/upload/$user')({
               className="mt-4 mb-4 w-11/12 bg-secondary/25 scroll-m-24"
             >
               <h1 className="mt-2">Upload Cover to IPFS</h1>
-              <input
-                type="file"
-                className="file-input w-full max-w-xs mt-8 mb-8"
-              />
-              <button className="btn ml-2 rounded-md">Upload</button>
+              <CoverUpload/>
             </div>
             <div
               id="book-title"
@@ -48,7 +45,7 @@ export const Route = createLazyFileRoute('/upload/$user')({
             >
               <h1 className="mt-2">Chapter 1</h1>
               <ChapterUpload />
-              <h1 className="mt-2">Add a chapter</h1>
+              {/* <h1 className="mt-12">Add a chapter</h1> */}
             </div>
             <label
               htmlFor="my-drawer-2"

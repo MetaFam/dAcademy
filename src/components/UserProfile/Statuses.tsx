@@ -1,4 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query"
+import clsx from "clsx"
 import { request, gql } from "graphql-request"
 
 
@@ -56,7 +57,7 @@ const Statuses = ({account}: {account?: string}) => {
   })
   return (
         <table className="table">
-          <thead>
+          <thead className="max-md:hidden">
             <tr>
               <th>Date</th>
               <th>Book</th>
@@ -67,10 +68,17 @@ const Statuses = ({account}: {account?: string}) => {
           <tbody>
             {submissions?.map((sub) => (
               <tr>
-                <td>{new Date(sub.timestamp * 1000).toLocaleDateString()}</td>
-                <td>{sub.questChain.name}</td>
-                <td>{sub.quest.name}</td>
-                <td>{sub.questStatus.status}</td>
+                <td className="max-md:list-item max-md:p-0 max-md:before:content-['Date:'] max-md:before:mr-1 max-md:before:font-bold">{new Date(sub.timestamp * 1000).toLocaleDateString()}</td>
+                <td className="max-md:list-item max-md:p-0 max-md:before:content-['Book:'] max-md:before:mr-1 before:font-bold italic max-md:before:not-italic">{sub.questChain.name}</td>
+                <td className="max-md:list-item max-md:p-0 max-md:before:content-['Chapter:'] max-md:before:mr-1 max-md:before:font-bold max-md:-indent-2 max-md:pl-2">{sub.quest.name}</td>
+                <td className={clsx((() => {
+                    switch(sub.questStatus.status) {
+                    case 'pass': return 'text-success'
+                    case 'fail': return 'text-error'
+                    case 'review': return 'text-info'
+                    default: return 'text-yellow-200'
+                  }
+                 })(), "max-md:list-item max-md:p-0 max-md:mb-4 max-md:before:content-['Status:'] max-md:before:mr-1 max-md:before:font-bold")}>{sub.questStatus.status}</td>
               </tr>
             ))}
           </tbody>
