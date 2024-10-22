@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
+import { responsive } from '#carousel.config'
 import { createLazyFileRoute, Link } from '@tanstack/react-router'
 import { createPublicClient, http } from 'viem'
 import { mainnet } from 'viem/chains'
@@ -8,7 +9,8 @@ import OrgStatuses from '#components/dashboard/OrgStatuses'
 import Given from '#components/dashboard/Given'
 import Completions from '#components/dashboard/Completions'
 import Shelf from '#components/dashboard/Shelf'
-import { responsive } from '#carousel.config'
+import Top from '#components/Top'
+
 
 export const Route = createLazyFileRoute('/dashboard/$user')({
   component: () => {
@@ -48,9 +50,9 @@ export const Route = createLazyFileRoute('/dashboard/$user')({
         <h1 className="text-2xl font-semibold text-secondary mt-12 mb-8">
           Dashboard for organizationXYZ
         </h1>
-        <div className="drawer lg:drawer-open">
+        <div className="drawer lg:drawer-open sticky">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col items-center justify-start">
+          <div id="top" className="drawer-content flex flex-col items-center justify-start scroll-m-24">
             <div id="bookshelf" className="w-11/12 bg-secondary/25 scroll-m-24">
               <h1 className="text-lg font-semibold mt-4 mb-4">Current Bookshelf</h1>
               <Carousel
@@ -100,7 +102,7 @@ export const Route = createLazyFileRoute('/dashboard/$user')({
                 <Link to={'#bookshelf' as '/'}>Current Bookshelf</Link>
               </li>
               <li>
-              <Link to={'#statuses' as '/'}>Submission Statuses</Link>
+              <Link to={'#statuses' as '/'}>Submissions</Link>
               </li>
               <li>
                 <Link to={'#completions' as '/'}>Completion NFTs</Link>
@@ -109,12 +111,13 @@ export const Route = createLazyFileRoute('/dashboard/$user')({
                 <Link to={'#workshops-given' as '/'}>Workshops Given</Link>
               </li>
               <li>
-                <a>Upload Books</a>
+                <Link to="/upload">Upload Books</Link>
               </li>
             </ul>
           </div>
         </div>
+        <Top/>
       </div>
     )
-  },
+  }
 })

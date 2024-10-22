@@ -1,12 +1,10 @@
 import { Suspense, useEffect, useState } from 'react'
-import {
-  createLazyFileRoute,
-  Link,
-} from '@tanstack/react-router'
+import { createLazyFileRoute, Link} from '@tanstack/react-router'
 import 'react-multi-carousel/lib/styles.css'
 import Earned from '#components/UserProfile/Earned'
 import Statuses from '#components/UserProfile/Statuses'
 import Attended from '#components/UserProfile/Attended'
+import Top from '#components/Top'
 import { createPublicClient, http } from "viem"
 import { mainnet } from "viem/chains"
 
@@ -16,7 +14,7 @@ export const Route = createLazyFileRoute('/user/$user')({
     const { user } = Route.useParams()
     const [address, setAddress] = useState<string>()
     const [ens, setENS] = useState(
-      user.includes('.') ? user : `0x${user.substring(0, 6)} ... `
+      user.includes('.') ? user : `${user.substring(0, 6)} ... `
     )
     const [error, setError] = useState<string>()
 
@@ -54,7 +52,7 @@ export const Route = createLazyFileRoute('/user/$user')({
       <div>
         <div className="drawer drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col items-center justify-start">
+          <div id="top" className="drawer-content flex flex-col items-center justify-start scroll-m-24">
             <div id="nfts-earned" className="w-11/12 bg-secondary/25 scroll-m-24">
               <h1 className="text-lg font-semibold mt-4 mb-4">NFTs Earned</h1>
               <Suspense fallback={
@@ -112,6 +110,7 @@ export const Route = createLazyFileRoute('/user/$user')({
             </ul>
           </div>
         </div>
+        <Top/>
       </div>
     )
   },

@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { createLazyFileRoute } from '@tanstack/react-router'
 import Chapters from '#components/Chapters'
 import Content from '#components/Content'
@@ -6,7 +7,7 @@ import { BookHeader } from '#components/BookHeader'
 import { BookProvider } from '#BookContext'
 import '@mdxeditor/editor/style.css'
 import '#markdown-editor.css'
-import { Suspense } from 'react'
+
 
 export const Route = createLazyFileRoute('/book/$slug/$chapter/')({
   component: Book,

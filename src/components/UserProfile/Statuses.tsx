@@ -67,7 +67,7 @@ const Statuses = ({account}: {account?: string}) => {
           <tbody>
             {submissions?.map((sub) => (
               <tr>
-                <td>{new Date(sub.timestamp * 1000).toLocaleString()}</td>
+                <td>{new Date(sub.timestamp * 1000).toLocaleDateString()}</td>
                 <td>{sub.questChain.name}</td>
                 <td>{sub.quest.name}</td>
                 <td>{sub.questStatus.status}</td>

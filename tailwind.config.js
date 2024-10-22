@@ -25,7 +25,7 @@ export default {
           "warning": "#ffb600",
           "error": "#ff6294",
         },
-        
+
         dark: {
 
           "primary": "#d400ff",
@@ -39,7 +39,19 @@ export default {
           "warning": "#b14b00",
           "error": "#ff5f78",
         },
-      },
+
+          lightOlive: {
+            "primary": "#a500ff",
+            "secondary": "#008416",
+            "accent": "#00958f",
+            "neutral": "#2a1f1a",
+            "base-100": "#fff9fe",
+            "info": "#009eff",
+            "success": "#5c8a00",
+            "warning": "#b27300",
+            "error": "#ff7382",
+          },
+        },
     ],
     darkTheme: "dark",
     base: true,

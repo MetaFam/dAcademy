@@ -1,11 +1,12 @@
-import { createLazyFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute, Link } from '@tanstack/react-router'
 import Carousel from 'react-multi-carousel'
-import { Link } from '@tanstack/react-router'
-import playbooks from '#playbooks.json'
-import SectionHeader from '#components/SectionHeader'
 import CarouselItem, { toSlug } from '#components/CarouselItem'
 import 'react-multi-carousel/lib/styles.css'
+import { responsive } from '#carousel.config.ts'
+import playbooks from '#playbooks.json'
+import SectionHeader from '#components/SectionHeader'
 import '#App.css'
+import Top from '#components/Top'
 
 
 export const Route = createLazyFileRoute('/org/$id/')({
@@ -28,25 +29,6 @@ interface CarouselSectionProps {
   title: string
   description: string
   items: Array<Book>
-}
-
-const responsive = {
-  superLargeDesktop: {
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5,
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 4,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
 }
 
 const CarouselSection = ({
@@ -86,40 +68,7 @@ export function App() {
           />
         ))}
       </div>
-      <div className="fixed bottom-0 right-0 p-4">
-        <Link to={'#top' as '/'} className="btn btn-ghost text-xl">
-          <div className="flex flex-col justify-center items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 10l7-7 7 7"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 10l7-7 7 7"
-              />
-            </svg>
-          </div>
-        </Link>
-      </div>
+      <Top/>
     </>
   )
 }
