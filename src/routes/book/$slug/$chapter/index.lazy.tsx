@@ -17,7 +17,7 @@ export function Book() {
     const { slug, chapter } = Route.useParams()
 
     return (
-      <BookProvider {...{ slug, chapter }}>
+      <BookProvider chapter={Number(chapter)} {...{ slug}}>
         <article
           id="top"
           className="container mx-auto py-20 px-5 overflow-auto relative"

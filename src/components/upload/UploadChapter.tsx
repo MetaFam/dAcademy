@@ -1,5 +1,4 @@
-import React from'react';
-import { MDXEditorMethods } from '@mdxeditor/editor'
+
 
 const ChapterUpload = () => {
   return <div>Test</div>;

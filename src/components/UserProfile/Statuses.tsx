@@ -19,13 +19,27 @@ query ChainDetails($address: String) {
   }
 }
 `
+type Submission =  {
+  description: string
+  timestamp: number
+  questChain: {
+    name: string
+  }
+  questStatus: {
+    status: string
+  }
+  quest: {
+    name: string
+  }
+}
 
-const Statuses = ({account}) => {
+type GraphReturn = {
+  proofSubmissions: Array<Submission>
+}
+const Statuses = ({account}: {account?: string}) => {
   const {
     data: { proofSubmissions }  = {},
-    error,
-    isLoading,
-  } = useSuspenseQuery({
+  } = useSuspenseQuery<GraphReturn>({
     queryKey: [`submissions-${account}`],
     queryFn: async () => request(
       import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,

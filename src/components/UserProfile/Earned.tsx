@@ -17,13 +17,20 @@ const completedBooksQueryDocument = gql`
     }
   }
 `
+type Book = {
+    token: { imageUrl: string }
+    name: string
+  }
 
+type GraphReturn = {
+  user: {
+    completedQuestChains: Array<Book>
+  }
+}
 const Earned = ({account}: {account?: string}) => {
   const {
-    data: { user: {completedQuestChains: completed} = [] } = {},
-    error,
-    isLoading,
-  } = useSuspenseQuery({
+    data: { user: {completedQuestChains: completed} },
+  } = useSuspenseQuery<GraphReturn>({
     queryKey: [`completed-${account}`],
     queryFn: async () => request(
       import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
@@ -31,13 +38,13 @@ const Earned = ({account}: {account?: string}) => {
       { address: account?.toLowerCase() },
     ),
   })
-console.log({completed})
+
   return (
     <Carousel
       {...{ responsive }}
       className="top-0 gap-4 md:gap-6 lg:gap-8 w-full mr-0"
     >
-      {completed?.map((book) => (
+      {completed?.map((book: Book) => (
         <div key={book.name} className="card bg-secondary/25 h-auto max-w-md mr-4 mx-auto rounded-sm">
           <div className="card-body items-center text-center">
             <div className="tooltip cursor-default" data-tip={book.name}>
