@@ -6,7 +6,7 @@ import { responsive } from '#carousel.config.ts'
 import playbooks from '#playbooks.json'
 import SectionHeader from '#components/SectionHeader'
 import '#App.css'
-import Top from '#components/Top'
+import Top from '#components/Top.tsx'
 
 
 export const Route = createLazyFileRoute('/org/$id/')({
