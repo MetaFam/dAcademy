@@ -37,11 +37,11 @@ console.log({completed})
       {...{ responsive }}
       className="top-0 gap-4 md:gap-6 lg:gap-8 w-full mr-0"
     >
-      {completed.map((book) => (
+      {completed?.map((book) => (
         <div key={book.name} className="card bg-secondary/25 h-auto max-w-md mr-4 mx-auto rounded-sm">
           <div className="card-body items-center text-center">
             <h2 className="card-title">{book.name}</h2>
-            <p>From org/shelf</p>
+            {/* <p>From org/shelf</p> */}
           </div>
           <figure className="px-2 pt-2 pb-4">
             <img

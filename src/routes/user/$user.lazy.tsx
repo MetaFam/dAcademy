@@ -63,10 +63,18 @@ export const Route = createLazyFileRoute('/user/$user')({
                 <Earned account={address}/>
               </Suspense>
             </div>
-            <div id="submissions" className="mt-4 mb-4 w-11/12">
-              <Statuses />
+            <div id="submissions" className="mt-4 mb-4 w-11/12 scroll-m-24">
+             <div className="card bg-secondary/25 h-auto w-full mr-4 mx-auto rounded-sm">
+                <div className="card-body items-center text-center">
+                  <h2 className="card-title">Submission Statuses</h2>
+              <Suspense fallback={
+                  <h2 className="loading loading-spinner"></h2>
+                }><Statuses account={address}/>
+              </Suspense>
+              </div>
+                </div>
             </div>
-            <div id="workshops-attended" className="mt-4 mb-4 w-11/12">
+            <div id="workshops-attended" className="mt-4 mb-4 w-11/12 scroll-m-24">
               <Attended />
             </div>
             <label

@@ -193,7 +193,7 @@ export const Submission = () => {
               address: contract as `0x${string}`,
               abi,
               functionName: 'submitProofs',
-              args: [[book.on - 1], [cid]],
+              args: [[book.on - 1], [`ipfs://${cid}/submission.json`]],
             }, {
               onError: (error) => {
                 console.error({ error })
