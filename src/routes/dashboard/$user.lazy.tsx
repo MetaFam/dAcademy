@@ -1,47 +1,19 @@
-import { useEffect, useState } from 'react'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import { responsive } from '#carousel.config'
 import { createLazyFileRoute, Link } from '@tanstack/react-router'
-import { createPublicClient, http } from 'viem'
-import { mainnet } from 'viem/chains'
 import OrgStatuses from '#components/dashboard/OrgStatuses'
 import Given from '#components/dashboard/Given'
 import Completions from '#components/dashboard/Completions'
 import Shelf from '#components/dashboard/Shelf'
 import Top from '#components/Top'
+import { useUsername } from '#hooks/useUsername'
 
 
 export const Route = createLazyFileRoute('/dashboard/$user')({
   component: () => {
     const { user } = Route.useParams()
-    const [ens, setENS] = useState(
-      user.includes('.') ? user : `${user.substring(0, 6)} ... `,
-    )
-    const [error, setError] = useState<string>()
-
-    useEffect(() => {
-      const client = createPublicClient({
-        chain: mainnet,
-        transport: http(),
-      })
-
-      if (!user.includes('.')) {
-        client.getEnsName({ address: user as `0x${string}` }).then((name) => {
-          if (name) {
-            setENS(name)
-          } else {
-            setError(`${user} is not a valid Ethereum address.`)
-          }
-        })
-      } else {
-        client.getEnsAddress({ name: user }).then((address) => {
-          if(!address) {
-            setError(`${user} is not a valid ENS name.`)
-          }
-        })
-      }
-    })
+    const { address, ens, error } = useUsername(user)
 
     if (error) return <h1>{error}</h1>
 

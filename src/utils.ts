@@ -5,6 +5,15 @@ export const toHTTP = (url?: string) => {
   return url?.replace(/^ipfs:\/\//, 'https://w3s.link/ipfs/')
 }
 
+export const maybeENS = (test?: string) => {
+  if(!test) return false
+  if(/^\S+(\.\S+)+$/g.test(test)) return true
+  if(!test.startsWith('0x')) {
+    console.warn(`Specious ENS Name: ${test}`)
+  }
+  return false
+}
+
 export const upload = async (files: Array<File>) => {
   const client = await W3UpClient.create()
 

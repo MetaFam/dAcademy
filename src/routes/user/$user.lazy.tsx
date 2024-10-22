@@ -5,47 +5,13 @@ import Earned from '#components/UserProfile/Earned'
 import Statuses from '#components/UserProfile/Statuses'
 import Attended from '#components/UserProfile/Attended'
 import Top from '#components/Top'
-import { createPublicClient, http } from "viem"
-import { mainnet } from "viem/chains"
+import { useUsername } from '#hooks/useUsername.ts'
 
 
 export const Route = createLazyFileRoute('/user/$user')({
   component: () => {
     const { user } = Route.useParams()
-    const [address, setAddress] = useState<string>()
-    const [ens, setENS] = useState(
-      user.includes('.') ? user : `${user.substring(0, 6)} ... `
-    )
-    const [error, setError] = useState<string>()
-
-
-    useEffect(() => {
-      const client = createPublicClient({
-        chain: mainnet,
-        transport: http(),
-      })
-
-      if(!user.includes('.')) {
-        setAddress(user)
-        client
-        .getEnsName({ address: user as `0x${string}` })
-        .then((name) => { if (name) {
-          setENS(name)
-        }else{
-          setError(`${user} is not a valid Ethereum address.`)
-        }})
-      }else{
-        client
-        .getEnsAddress({name: user})
-        .then((address) => {
-          if(!address) {
-            setError(`${user} is not a valid ENS name.`)
-          }else{
-            setAddress(address)
-          }
-        })
-      }
-    })
+    const { address, ens, error } = useUsername(user)
 
     if(error) return <h1>{error}</h1>
     return (

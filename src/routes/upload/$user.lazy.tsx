@@ -1,41 +1,13 @@
-import { useState, useEffect } from 'react'
 import { createLazyFileRoute, Link } from '@tanstack/react-router'
 import ChapterUpload from '#components/upload/UploadChapter'
 import Top from '#components/Top'
-import { mainnet } from 'viem/chains'
-import { createPublicClient, http } from 'viem'
+import { useUsername } from '#hooks/useUsername'
 
 
 export const Route = createLazyFileRoute('/upload/$user')({
   component: () => {
     const { user } = Route.useParams()
-    const [ens, setENS] = useState(
-      user.includes('.') ? user : `${user.substring(0, 6)} ... `,
-    )
-    const [error, setError] = useState<string>()
-
-    useEffect(() => {
-      const client = createPublicClient({
-        chain: mainnet,
-        transport: http(),
-      })
-
-      if (!user.includes('.')) {
-        client.getEnsName({ address: user as `0x${string}` }).then((name) => {
-          if (name) {
-            setENS(name)
-          } else {
-            setError(`${user} is not a valid Ethereum address.`)
-          }
-        })
-      } else {
-        client.getEnsAddress({ name: user }).then((address) => {
-          if (!address) {
-            setError(`${user} is not a valid ENS name.`)
-          }
-        })
-      }
-    })
+    const { address, ens, error } = useUsername(user)
 
     if (error) return <h1>{error}</h1>
 

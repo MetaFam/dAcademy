@@ -6,7 +6,7 @@ import { toHTTP } from "../../utils"
 import 'react-multi-carousel/lib/styles.css'
 
 const completedBooksQueryDocument = gql`
-  query ChainDetails($address: String!) {
+  query ChainDetails($address: String) {
     user(id: $address) {
       completedQuestChains {
         token {
