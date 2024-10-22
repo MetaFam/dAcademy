@@ -1,11 +1,11 @@
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense } from 'react'
 import { createLazyFileRoute, Link} from '@tanstack/react-router'
 import 'react-multi-carousel/lib/styles.css'
 import Earned from '#components/UserProfile/Earned'
 import Statuses from '#components/UserProfile/Statuses'
 import Attended from '#components/UserProfile/Attended'
 import Top from '#components/Top'
-import { useUsername } from '#hooks/useUsername.ts'
+import { useUsername } from '#hooks/useUsername'
 
 
 export const Route = createLazyFileRoute('/user/$user')({

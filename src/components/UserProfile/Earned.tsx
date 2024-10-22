@@ -48,7 +48,7 @@ const Earned = ({account}: {account?: string}) => {
         <div key={book.name} className="card bg-secondary/25 h-auto max-w-md mr-4 mx-auto rounded-sm">
           <div className="card-body items-center text-center">
             <div className="tooltip cursor-default" data-tip={book.name}>
-            <h2 className="card-title text-clip text-ellipsis overflow-hidden line-clamp-1">{book.name}</h2>
+            <h2 className="card-title text-ellipsis overflow-hidden line-clamp-1">{book.name}</h2>
             </div>
             {/* <p>From org/shelf</p> */}
           </div>

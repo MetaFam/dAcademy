@@ -7,7 +7,7 @@ import { useUsername } from '#hooks/useUsername'
 export const Route = createLazyFileRoute('/upload/$user')({
   component: () => {
     const { user } = Route.useParams()
-    const { address, ens, error } = useUsername(user)
+    const { ens, error } = useUsername(user)
 
     if (error) return <h1>{error}</h1>
 
