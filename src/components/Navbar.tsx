@@ -2,7 +2,7 @@ import playbooks from '../playbooks.json'
 import { Link } from '@tanstack/react-router'
 import { toSlug } from './CarouselItem'
 import { useEffect } from 'react'
-
+import Logo from '../../public/logo.svg'
 
 export const Navbar = () => {
   useEffect(() => {
@@ -70,7 +70,9 @@ export const Navbar = () => {
       </div>
       <ul className="grow flex flex-col md:flex-row justify-center">
         <li>
-          <Link to="/" className="btn btn-ghost text-xl">dAcademy</Link>
+          <Link to="/" className="btn btn-ghost text-xl text-primary fill-primary stroke-primary">
+            <Logo/>
+          </Link>
         </li>
         <li className="hidden lg:flex">
           <ul className="menu menu-horizontal px-1">

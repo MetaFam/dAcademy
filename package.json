@@ -10,7 +10,6 @@
     "preview": "vite preview",
     "gh:publish": "gh-pages --nojekyll --dist dist/"
   },
-
   "imports": {
     "#*": [
       "./src/*",
@@ -20,7 +19,6 @@
       "./src/*/index.tsx"
     ]
   },
-
   "dependencies": {
     "@mdxeditor/editor": "^3.14.0",
     "@reown/appkit": "^1.0.4",
@@ -60,6 +58,7 @@
     "tailwindcss": "^3.4.13",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vite-plugin-react-rich-svg": "^1.1.2"
   }
 }

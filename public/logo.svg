@@ -3,11 +3,6 @@
   inkscape:version="1.4 (e7c3feb100, 2024-10-09)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg"
   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview id="namedview47" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25"
-    inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1"
-    inkscape:zoom="0.38713581" inkscape:cx="2699.3112" inkscape:cy="1898.5586" inkscape:window-width="3440"
-    inkscape:window-height="1368" inkscape:window-x="0" inkscape:window-y="275" inkscape:window-maximized="1"
-    inkscape:current-layer="g46" />
   <defs id="defs16">
     <filter id="d" x="-0.01015503" y="-0.05116037" width="1.0203101" height="1.1023207"
       color-interpolation-filters="sRGB">
@@ -102,22 +97,29 @@
       <feComposite in="result4" in2="result2" operator="atop" result="result92" id="feComposite16" />
       <feBlend in2="result92" mode="multiply" id="feBlend16" />
     </filter>
-    <style>
+    <style><![CDATA[
+      @import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
       text {
-        fill: #000;
-        filter: url(#d);
+        fill: currentColor;
+        /* filter: url(#d); */
         font-size: 1133px;
-        opacity: 0.9
-        stroke: #fbff4f;
+        opacity: 0.9;
+        stroke: currentColor;
         stroke-linecap: round;
         stroke-linejoin: round;
-        stroke-opacity: 0.9833;
-        stroke-width: 76.417px;
+        stroke-opacity: 0.5;
+        stroke-width: 30px;
         text-align: center;
-        line-height:0.96;
-        paint-order:stroke fill markers;
+        line-height: 0.96;
+        paint-order: stroke fill markers;
         text-anchor: middle;
         font-family: Saira;
+        filter: drop-shadow(0 0 20px #E2FF00);
+      }
+      @media (prefers-color-scheme: dark) {
+        text {
+          stroke-width: 50px;
+        }
       }
       .book > path {
         animation: alternate-reverse var(--dur, 20s) rainbow infinite ease-in-out;
@@ -129,6 +131,10 @@
       .book:nth-of-type(4) { --delay: 6s; --dur: 12s }
       .book:nth-of-type(5) { --delay: 8s; --dur: 21s }
       .book:nth-of-type(6) { --delay: 10s; --dur: 14s }
+
+      #table > path {
+        /* filter: url(#a); */
+      }
 
       @keyframes rainbow {
         10% { fill: red }
@@ -142,7 +148,7 @@
         90% { fill: orangered }
         100% { fill: red }
       }
-    </style>
+    ]]></style>
   </defs>
   <title>dAcademy</title>
   <g transform="translate(-441.45 -1675.6)" id="g47">
@@ -152,16 +158,16 @@
           d="M 958.33604,3898.0984 H 5376.4923 c 37.519,0 69.9182,30.6659 69.9182,69.8516 v 109.0106 H 888.39112 V 3967.95 c 0,-39.1857 30.69524,-69.8516 69.91559,-69.8516"
           fill="#f3f0d5" fill-rule="evenodd" id="path16"
           style="fill:#000000;fill-opacity:0.15889047;stroke-width:0.13333" />
-        <g fill="#d4b075" id="g19">
+        <g fill="#d4b075" id="table">
           <path transform="matrix(0.13333,0,0,-0.13333,0,6327.1)"
             d="m 7187.7,19523 h 33137 c 281.4,0 524.4,-230 524.4,-523.9 v -1635.4 c 0,-293.9 -243,-523.8 -524.4,-523.8 h -33137 c -294.16,0 -524.38,229.9 -524.38,523.8 v 1635.4 c 0,293.9 230.22,523.9 524.38,523.9"
-            fill-rule="evenodd" filter="url(#b)" id="path17" />
+            fill-rule="evenodd" id="path17" />
           <path transform="matrix(0.13333,0,0,-0.13333,0,6327.1)"
             d="m 10232,13122 c 0,-306.7 242.9,-549.5 549.9,-549.5 h 1445.2 c 306.9,0 562.7,242.8 562.7,549.5 v 3718.1 H 10232 V 13122"
-            filter="url(#a)" id="path18" />
+            id="path18" />
           <path transform="matrix(0.13333,0,0,-0.13333,0,6327.1)"
             d="m 34723,16840 v -3718.1 c 0,-306.7 243,-549.5 550,-549.5 h 1445.2 c 306.9,0 562.7,242.8 562.7,549.5 V 16840 H 34723"
-            filter="url(#c)" id="path19" />
+            id="path19" />
         </g>
         <path d="m 1364.2326,4231.6857 h 341.0314 v -149.9162 h -341.0314 v 149.9162" fill-opacity="0.10465" id="path20"
           style="stroke-width:0.13333" />
