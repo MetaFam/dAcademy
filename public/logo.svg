@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg version="1.1" viewBox="0 0 5450.4 2975.7" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<svg id="logo" xmlns:html="http://www.w3.org/1999/xhtml" version="1.1" viewBox="0 0 9950 3675" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
   <defs id="defs16">
     <filter id="d" x="-0.01015503" y="-0.05116037" width="1.0203101" height="1.1023207"
       color-interpolation-filters="sRGB">
@@ -48,10 +48,11 @@
       <feComposite in="result4" in2="result2" operator="atop" result="result92" id="feComposite16" />
       <feBlend in2="result92" mode="multiply" id="feBlend16" />
     </filter>
-    <link rel="stylesheet" href="logo.css"/>
+    <style>@import url('logo.css')</style>
+    <html:link type="text/css" rel="stylesheet" href="logo.css"/>
   </defs>
   <title>dAcademy</title>
-  <g transform="translate(-441.45 -1675.6)" id="g47">
+  <g transform="translate(1741.45 -1675.6)" id="g47">
     <g transform="translate(-.85184)" id="g46">
       <g id="shelf">
         <path

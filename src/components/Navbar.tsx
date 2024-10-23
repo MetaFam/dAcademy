@@ -2,7 +2,7 @@ import playbooks from '../playbooks.json'
 import { Link } from '@tanstack/react-router'
 import { toSlug } from './CarouselItem'
 import { useEffect } from 'react'
-import Logo from '#assets/logo.svg?raw'
+import Logo from '#../public/logo.svg?raw'
 
 export const Navbar = () => {
   useEffect(() => {
@@ -73,7 +73,7 @@ export const Navbar = () => {
           <Link
             to="/"
             dangerouslySetInnerHTML={{ __html: Logo }}
-            className="btn btn-ghost text-xl text-primary fill-primary stroke-primary"
+            className="btn btn-ghost text-secondary"
           />
         </li>
         <li className="hidden lg:flex">

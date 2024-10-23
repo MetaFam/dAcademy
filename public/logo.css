@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&amp;display=swap');
-text {
+#logo text {
   fill: currentColor;
   /* filter: url(#d); */
-  font-size: 1133px;
-  opacity: 0.9;
-  stroke: currentColor;
+  font-size: 2000px;
+  /* opacity: 0.9; */
+  stroke: #000;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-opacity: 0.5;
-  stroke-width: 30px;
+  /* stroke-opacity: 0.5; */
+  stroke-width: 150px;
   text-align: center;
   line-height: 0.96;
   paint-order: stroke fill markers;
@@ -17,8 +17,8 @@ text {
   filter: drop-shadow(0 0 20px #E2FF00);
 }
 @media (prefers-color-scheme: dark) {
-  text {
-    stroke-width: 50px;
+  #logo text {
+    stroke-width: 200px;
   }
 }
 .book > path {
