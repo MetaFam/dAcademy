@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&amp;display=swap');
+text {
+  fill: currentColor;
+  /* filter: url(#d); */
+  font-size: 1133px;
+  opacity: 0.9;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-opacity: 0.5;
+  stroke-width: 30px;
+  text-align: center;
+  line-height: 0.96;
+  paint-order: stroke fill markers;
+  text-anchor: middle;
+  font-family: Saira;
+  filter: drop-shadow(0 0 20px #E2FF00);
+}
+@media (prefers-color-scheme: dark) {
+  text {
+    stroke-width: 50px;
+  }
+}
+.book > path {
+  animation: alternate-reverse var(--dur, 20s) rainbow infinite ease-in-out;
+  animation-delay: var(--delay);
+}
+.book:nth-of-type(1) { fill: #268404; --delay: 0s }
+.book:nth-of-type(2) { --delay: 2s; --dur: 15s }
+.book:nth-of-type(3) { --delay: 4s; --dur: 18s }
+.book:nth-of-type(4) { --delay: 6s; --dur: 12s }
+.book:nth-of-type(5) { --delay: 8s; --dur: 21s }
+.book:nth-of-type(6) { --delay: 10s; --dur: 14s }
+
+#table > path {
+  /* filter: url(#a); */
+}
+
+@keyframes rainbow {
+  10% { fill: red }
+  20% { fill: orange }
+  30% { fill: yellow }
+  40% { fill: green }
+  50% { fill: blue }
+  60% { fill: indigo }
+  70% { fill: violet }
+  80% { fill: blue }
+  90% { fill: orangered }
+  100% { fill: red }
+}

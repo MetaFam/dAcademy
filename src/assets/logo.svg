@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg version="1.1" viewBox="0 0 5450.4 2975.7" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<svg version="1.1" viewBox="0 0 5450.4 2975.7" id="svg47" sodipodi:docname="logo.svg"
+  inkscape:version="1.4 (e7c3feb100, 2024-10-09)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+  xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg"
+  xmlns:svg="http://www.w3.org/2000/svg">
   <defs id="defs16">
     <filter id="d" x="-0.01015503" y="-0.05116037" width="1.0203101" height="1.1023207"
       color-interpolation-filters="sRGB">
@@ -25,6 +28,52 @@
         id="feComposite4" />
       <feBlend in2="result4" mode="multiply" id="feBlend4" />
     </filter>
+    <filter id="c" x="-0.0014355526" y="-0.00086043678" width="1.0028711" height="1.0017209"
+      color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" result="result91" stdDeviation="0.01" id="feGaussianBlur4" />
+      <feComposite in="SourceGraphic" in2="result91" operator="in" result="fbSourceGraphic" id="feComposite5" />
+      <feGaussianBlur in="fbSourceGraphic" result="result1" stdDeviation="0.01" id="feGaussianBlur5" />
+      <feTurbulence baseFrequency="0.04" numOctaves="4" result="result0" seed="20" type="fractalNoise"
+        id="feTurbulence5" />
+      <feDisplacementMap in="result1" in2="result0" result="result2" scale="30" xChannelSelector="R"
+        yChannelSelector="G" id="feDisplacementMap5" />
+      <feColorMatrix result="result3" type="saturate" values="1" id="feColorMatrix5" />
+      <feGaussianBlur in="fbSourceGraphic" result="result4" stdDeviation="0.01" id="feGaussianBlur6" />
+      <feComposite in="result4" in2="result3" operator="atop" result="fbSourceGraphic" id="feComposite6" />
+      <feGaussianBlur in="fbSourceGraphic" result="result0" stdDeviation="1.5" id="feGaussianBlur7" />
+      <feTurbulence baseFrequency="0.02" numOctaves="8" result="result1" seed="20" type="fractalNoise"
+        id="feTurbulence7" />
+      <feComposite in="result0" in2="result1" operator="out" result="result2" id="feComposite7" />
+      <feSpecularLighting lighting-color="#dfbc10" in="result2" result="result4" specularConstant="2"
+        specularExponent="30" surfaceScale="2.5" id="feSpecularLighting7">
+        <feDistantLight azimuth="225" elevation="62" id="feDistantLight7" />
+      </feSpecularLighting>
+      <feComposite in="result4" in2="result2" operator="atop" result="result92" id="feComposite8" />
+      <feBlend in2="result92" mode="multiply" id="feBlend8" />
+    </filter>
+    <filter id="b" x="-0.00010741308" y="-0.0013685662" width="1.0002148" height="1.0027371"
+      color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" result="result91" stdDeviation="0.01" id="feGaussianBlur8" />
+      <feComposite in="SourceGraphic" in2="result91" operator="in" result="fbSourceGraphic" id="feComposite9" />
+      <feGaussianBlur in="fbSourceGraphic" result="result1" stdDeviation="0.01" id="feGaussianBlur9" />
+      <feTurbulence baseFrequency="0.04" numOctaves="4" result="result0" seed="20" type="fractalNoise"
+        id="feTurbulence9" />
+      <feDisplacementMap in="result1" in2="result0" result="result2" scale="30" xChannelSelector="R"
+        yChannelSelector="G" id="feDisplacementMap9" />
+      <feColorMatrix result="result3" type="saturate" values="1" id="feColorMatrix9" />
+      <feGaussianBlur in="fbSourceGraphic" result="result4" stdDeviation="0.01" id="feGaussianBlur10" />
+      <feComposite in="result4" in2="result3" operator="atop" result="fbSourceGraphic" id="feComposite10" />
+      <feGaussianBlur in="fbSourceGraphic" result="result0" stdDeviation="1.5" id="feGaussianBlur11" />
+      <feTurbulence baseFrequency="0.02" numOctaves="8" result="result1" seed="20" type="fractalNoise"
+        id="feTurbulence11" />
+      <feComposite in="result0" in2="result1" operator="out" result="result2" id="feComposite11" />
+      <feSpecularLighting lighting-color="#dfbc10" in="result2" result="result4" specularConstant="2"
+        specularExponent="30" surfaceScale="2.5" id="feSpecularLighting11">
+        <feDistantLight azimuth="225" elevation="62" id="feDistantLight11" />
+      </feSpecularLighting>
+      <feComposite in="result4" in2="result2" operator="atop" result="result92" id="feComposite12" />
+      <feBlend in2="result92" mode="multiply" id="feBlend12" />
+    </filter>
     <filter id="a" x="-0.0014356087" y="-0.00086043678" width="1.0028712" height="1.0017209"
       color-interpolation-filters="sRGB">
       <feGaussianBlur in="SourceAlpha" result="result91" stdDeviation="0.01" id="feGaussianBlur12" />
@@ -48,12 +97,63 @@
       <feComposite in="result4" in2="result2" operator="atop" result="result92" id="feComposite16" />
       <feBlend in2="result92" mode="multiply" id="feBlend16" />
     </filter>
-    <link rel="stylesheet" href="logo.css"/>
+    <style><![CDATA[
+      @import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+      text {
+        fill: currentColor;
+        /* filter: url(#d); */
+        font-size: 1133px;
+        opacity: 0.9;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-opacity: 0.5;
+        stroke-width: 30px;
+        text-align: center;
+        line-height: 0.96;
+        paint-order: stroke fill markers;
+        text-anchor: middle;
+        font-family: Saira;
+        filter: drop-shadow(0 0 20px #E2FF00);
+      }
+      @media (prefers-color-scheme: dark) {
+        text {
+          stroke-width: 50px;
+        }
+      }
+      .book > path {
+        animation: alternate-reverse var(--dur, 20s) rainbow infinite ease-in-out;
+        animation-delay: var(--delay);
+      }
+      .book:nth-of-type(1) { fill: #268404; --delay: 0s }
+      .book:nth-of-type(2) { --delay: 2s; --dur: 15s }
+      .book:nth-of-type(3) { --delay: 4s; --dur: 18s }
+      .book:nth-of-type(4) { --delay: 6s; --dur: 12s }
+      .book:nth-of-type(5) { --delay: 8s; --dur: 21s }
+      .book:nth-of-type(6) { --delay: 10s; --dur: 14s }
+
+      #table > path {
+        /* filter: url(#a); */
+      }
+
+      @keyframes rainbow {
+        10% { fill: red }
+        20% { fill: orange }
+        30% { fill: yellow }
+        40% { fill: green }
+        50% { fill: blue }
+        60% { fill: indigo }
+        70% { fill: violet }
+        80% { fill: blue }
+        90% { fill: orangered }
+        100% { fill: red }
+      }
+    ]]></style>
   </defs>
   <title>dAcademy</title>
   <g transform="translate(-441.45 -1675.6)" id="g47">
-    <g transform="translate(-.85184)" id="g46">
-      <g id="shelf">
+    <g transform="translate(-.85184)" id="g46" inkscape:label="background">
+      <g id="shelf" inkscape:label="shelf">
         <path
           d="M 958.33604,3898.0984 H 5376.4923 c 37.519,0 69.9182,30.6659 69.9182,69.8516 v 109.0106 H 888.39112 V 3967.95 c 0,-39.1857 30.69524,-69.8516 69.91559,-69.8516"
           fill="#f3f0d5" fill-rule="evenodd" id="path16"
@@ -74,7 +174,7 @@
         <path d="m 4629.6176,4081.8228 v 149.9163 h 341.0448 v -149.9163 h -341.0448" fill-opacity="0.15788" id="path21"
           style="stroke-width:0.13333" />
       </g>
-      <g id="one" class="book">
+      <g id="one" inkscape:label="one" class="book">
         <path transform="matrix(.13333 0 0 -.13333 0 6327.1)"
           d="m11050 19523h3593.8v14566c0 268.3-204.6 472.8-473.2 472.8h-2647.4c-255.8 0-473.2-204.5-473.2-472.8v-14566"
           id="path22" />
@@ -87,7 +187,7 @@
             style="mix-blend-mode:color-dodge" id="path25" />
         </g>
       </g>
-      <g id="two" class="book">
+      <g id="two" inkscape:label="two" class="book">
         <path transform="matrix(.13333 0 0 -.13333 0 6327.1)"
           d="m14938 19523h3593.8v14566c0 268.3-204.7 472.8-473.2 472.8h-2647.4c-268.6 0-473.2-204.5-473.2-472.8v-14566"
           fill="#3224f8" fill-rule="evenodd" id="path26" />
@@ -100,7 +200,7 @@
             id="path29" />
         </g>
       </g>
-      <g id="three" class="book">
+      <g id="three" inkscape:label="three" class="book">
         <path transform="matrix(.13333 0 0 -.13333 0 6327.1)"
           d="m18826 19523h3593.8v14566c0 268.3-217.4 472.8-473.2 472.8h-2647.4c-268.6 0-473.2-204.5-473.2-472.8v-14566"
           fill="#f88224" fill-rule="evenodd" id="path30" />
@@ -113,7 +213,7 @@
             style="mix-blend-mode:color-burn" id="path33" />
         </g>
       </g>
-      <g id="four" class="book">
+      <g id="four" inkscape:label="four" class="book">
         <path
           d="m22701 19523h3606.6v14566c0 268.3-217.4 472.8-473.3 472.8h-2647.4c-268.5 0-485.9-204.5-485.9-472.8v-14566"
           fill="#f89b24" fill-rule="evenodd" id="path34" transform="matrix(.13333 0 0 -.13333 0 6327.1)" />
@@ -126,7 +226,7 @@
             id="path37" />
         </g>
       </g>
-      <g id="five" class="book">
+      <g id="five" inkscape:label="five" class="book">
         <path transform="matrix(.13333 0 0 -.13333 0 6327.1)"
           d="m26589 19523h3606.7v14566c0 268.3-217.4 472.8-473.2 472.8h-2647.4c-268.6 0-486.1-204.5-486.1-472.8v-14566"
           fill="#f82474" fill-rule="evenodd" id="path38" />
@@ -139,7 +239,7 @@
             style="mix-blend-mode:color-dodge" id="path41" />
         </g>
       </g>
-      <g id="six" class="book">
+      <g id="six" inkscape:label="six" class="book">
         <path transform="matrix(.13333 0 0 -.13333 0 6327.1)"
           d="m32907 19523 3555.5 613.3-2468.4 14348c-51.1 268.3-294.1 434.4-549.9 396.1l-2621.9-447.2c-255.8-51.1-422-293.9-383.7-549.4l2468.4-14361"
           fill="#24f8c4" fill-rule="evenodd" id="path42" />
