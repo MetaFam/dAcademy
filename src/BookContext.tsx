@@ -21,10 +21,8 @@ const questChainQueryDocument = gql`
         tokenId
         imageUrl
         tokenAddress
-        owners(
-          where: { ownerOf_: { address: $reader } }
-        ) {
-          ownerOf { address }
+        owners(where: { id: $reader }) {
+          id
         }
       }
       createdBy {
@@ -144,7 +142,7 @@ export type Chain = {
     imageUrl: string
     tokenId: string
     tokenAddress: string
-    owners: Array<{ ownerOf: { address: string } }>
+    owners: Array<{ id: string }>
   }
   quests: Array<Quest>
   createdBy: { id: string }
