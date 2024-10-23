@@ -25,7 +25,7 @@
   animation: alternate-reverse var(--dur, 20s) rainbow infinite ease-in-out;
   animation-delay: var(--delay);
 }
-.book:nth-of-type(1) { fill: #268404; --delay: 0s }
+.book:nth-of-type(1) { --delay: 0s }
 .book:nth-of-type(2) { --delay: 2s; --dur: 15s }
 .book:nth-of-type(3) { --delay: 4s; --dur: 18s }
 .book:nth-of-type(4) { --delay: 6s; --dur: 12s }

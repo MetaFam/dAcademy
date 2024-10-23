@@ -23,8 +23,6 @@ export const useUsername = (user?: string) => {
       .then((name) => {
         if(name) {
           setENS(name)
-        } else {
-          setError(`${user} is not a valid Ethereum address.`)
         }
       })
     } else if(user != null) {
