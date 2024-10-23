@@ -17,7 +17,7 @@ export const Route = createLazyFileRoute('/user/$user')({
 
     return (
       <div>
-        <h1 id="top" className="text-2xl font-semibold text-secondary mt-12 mb-8 scroll-m-28">
+        <h1 id="top" className="text-2xl font-semibold text-secondary mb-8 scroll-m-28">
           User Profile
         </h1>
         <div className="drawer lg:drawer-open">
@@ -45,12 +45,6 @@ export const Route = createLazyFileRoute('/user/$user')({
             <div id="workshops-attended" className="mt-4 mb-4 w-11/12 scroll-m-24">
               <Attended />
             </div>
-            <label
-              htmlFor="my-drawer-2"
-              className="btn btn-primary drawer-button lg:hidden"
-            >
-              Open drawer
-            </label>
           </div>
           <div className="drawer-side">
             <label
@@ -58,7 +52,7 @@ export const Route = createLazyFileRoute('/user/$user')({
               aria-label="close sidebar"
               className="drawer-overlay"
             />
-            <ul className="menu bg-base-200 text-base-content min-w-0">
+            <ul className="menu bg-base-200 text-base-content min-w-0 mt-28 z-20">
               <h1 className="mt-4 mb-4 text-lg font-secondary">
                 {ens}
               </h1>
@@ -79,6 +73,12 @@ export const Route = createLazyFileRoute('/user/$user')({
               </li>
             </ul>
           </div>
+          <label
+              htmlFor="my-drawer-2"
+              className="btn btn-xs btn-secondary border border-primary drawer-button lg:hidden fixed left-0 mt-28 z-10"
+            >
+              ⇒
+        </label>
         </div>
         <Top/>
       </div>

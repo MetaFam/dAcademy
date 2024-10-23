@@ -57,9 +57,9 @@ export const Route = createLazyFileRoute('/dashboard/$user')({
             </div>
             <label
               htmlFor="my-drawer-2"
-              className="btn btn-primary drawer-button lg:hidden"
+              className="btn btn-xs btn-secondary border border-primary drawer-button lg:hidden fixed left-0 mt-44 z-10"
             >
-              Open drawer
+              ⇒
             </label>
           </div>
           <div className="drawer-side max-h-fit">
@@ -68,7 +68,7 @@ export const Route = createLazyFileRoute('/dashboard/$user')({
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu bg-base-200 text-base-content max-h-fit w-80 p-4">
+            <ul className="menu bg-base-200 text-base-content max-h-fit w-80 p-4 mt-28 z-20">
               <h1 className="mt-4 mb-4 text-lg font-secondary">{ens}</h1>
               <li>
                 <Link to={'#bookshelf' as '/'}>Current Bookshelf</Link>
