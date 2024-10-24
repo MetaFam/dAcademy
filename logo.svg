@@ -78,7 +78,7 @@
       <g id="one" class="book">
         <path transform="matrix(.13333 0 0 -.13333 0 6327.1)"
           d="m11050 19523h3593.8v14566c0 268.3-204.6 472.8-473.2 472.8h-2647.4c-255.8 0-473.2-204.5-473.2-472.8v-14566"
-          id="path22" />
+          id="path22" fill="#268404"/>
         <g fill="#636363" fill-opacity=".39763" id="g25">
           <path transform="matrix(.13333 0 0 -.13333 0 6327.1)" d="m11050 30831h3593.8v817.8h-3593.8v-817.8"
             style="mix-blend-mode:color-dodge" id="path23" />
