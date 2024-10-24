@@ -25,7 +25,7 @@ export function Book() {
         >
           <BookHeader />
           <main className="md:flex justify-start overflow-hidden relative">
-            <Suspense fallback={<h1>Loading…</h1>}>
+            <Suspense fallback={<h1 className="mt-44">Loading…</h1>}>
               <Chapters />
               <Content />
               <Reward />

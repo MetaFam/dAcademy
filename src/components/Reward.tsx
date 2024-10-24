@@ -3,6 +3,7 @@ import { toHTTP } from '../utils'
 import abi from '../abis/QuestChain.json'
 import { Chapter, useLoadedBook } from '../BookContext'
 import toast from 'react-hot-toast'
+import { useState } from 'react'
 
 export const Reward = () => {
   const book = useLoadedBook()
@@ -10,6 +11,7 @@ export const Reward = () => {
   const { isLoading: confirming, isSuccess: confirmed } = (
     useWaitForTransactionReceipt({ hash })
   )
+const [loaded, setLoaded] = useState(false)
 
   if(!book) throw new Error('No book found.')
 
@@ -65,7 +67,8 @@ export const Reward = () => {
     <div id="reward" className="flex flex-col ml-4 mt-8 md:mt-1">
       <div className="card rounded-sm bg-secondary/25 h-auto max-w-md mr-4 mx-auto">
         <h1 className="text-3xl font-bold text-center my-4 mx-2">Completion NFT</h1>
-        <img src={toHTTP(book.nft.image)} alt="Soulbound NFT" className="w-full h-full object-contain pb-4 px-4" />
+        <img onLoad={() => setLoaded(true)} src={toHTTP(book.nft.image)} alt="Soulbound NFT" className="w-full h-full object-contain pb-4 px-4" />
+        {!loaded && <div className="grid place-items-center"><span className="loading-spinner loading loading-md"></span></div>}
         {mintable && (
           <button disabled={book.nft.minted || label !== defaultLabel} onClick={mint} className="btn btn-primary">
             {label}
