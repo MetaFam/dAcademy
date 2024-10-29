@@ -60,7 +60,7 @@ export default function App() {
       throw new Error('Crop canvas does not exist.')
     }
 
-    // const offscreen = new OffscreenCanvas(aspect.width, aspect.height)
+
     const offscreen = document.createElement('canvas')
     offscreen.width = aspect.width
     offscreen.height = aspect.height
@@ -74,20 +74,8 @@ export default function App() {
       crop.height = (crop.height / image.height) * 100
     }
 
-    const pixelRatio = 1 //window.devicePixelRatio
-    // ctx.scale(pixelRatio, pixelRatio)
-    ctx.imageSmoothingQuality = 'high'
 
-    const scale = {
-      screen: {
-        x: (image.naturalWidth / image.width) * pixelRatio,
-        y: (image.naturalHeight / image.height) * pixelRatio,
-      },
-      output: {
-        x: (aspect.width / image.naturalWidth) * pixelRatio,
-        y: (aspect.height / image.naturalHeight) * pixelRatio,
-      },
-    }
+    ctx.imageSmoothingQuality = 'high'
 
     const origin = {
       x: image.naturalWidth * (crop.x / 100),
@@ -109,14 +97,7 @@ export default function App() {
     const output = offscreen.toDataURL('image/jpeg')
     localStorage.setItem('cover', output)
     setBlobURL(output)
-    // const blob = await offscreen.convertToBlob({
-    //   type: 'image/jpg',
-    // })
 
-    // if(blobURL) {
-    //   URL.revokeObjectURL(blobURL)
-    // }
-    // setBlobURL(URL.createObjectURL(blob))
   }
 
   return (
@@ -135,7 +116,7 @@ export default function App() {
           crop={crop}
           onChange={(c) => setCrop(c)}
           aspect={aspect.width / aspect.height}
-          // minWidth={400}
+
           minHeight={100}
           className="max-h-[50vh]"
         >

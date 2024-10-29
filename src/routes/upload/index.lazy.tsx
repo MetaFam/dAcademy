@@ -1,4 +1,4 @@
-import { createLazyFileRoute, useNavigate, Link } from '@tanstack/react-router'
+import { createLazyFileRoute, Link } from '@tanstack/react-router'
 import { useAccount } from 'wagmi'
 import ChapterUpload from '#components/upload/ChapterUpload.tsx'
 import Top from '#components/Top'

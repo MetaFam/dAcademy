@@ -18,18 +18,18 @@ const proofQueryDocument = gql`
   }
 `
 type GraphReturn = {
-  reviewSubmissions: {
+  reviewSubmissions: Array<{
     description: string
     txHash: string
     questStatus: {status: string}
-  }
+  }>
   proofSubmission: {
     description: string
     txHash: string
   }
 }
 
-export const SubmissionInfo = ({ proof }: {id: string, proof?: string}) => {
+export const SubmissionInfo = ({ proof }: {proof?: string}) => {
   const {
     data: { reviewSubmissions, proofSubmission }  = {},
     isLoading,
