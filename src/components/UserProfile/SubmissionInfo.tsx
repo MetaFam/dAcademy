@@ -29,7 +29,7 @@ type GraphReturn = {
   }
 }
 
-export const SubmissionInfo = ({id, proof}: {id: string, proof?: string}) => {
+export const SubmissionInfo = ({ proof }: {id: string, proof?: string}) => {
   const {
     data: { reviewSubmissions, proofSubmission }  = {},
     isLoading,

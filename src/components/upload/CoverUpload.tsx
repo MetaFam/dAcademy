@@ -1,11 +1,5 @@
 import ImageCropper from "#components/ImageCropper.tsx"
 
-const CoverUpload = () => {
-  return (
-    <>
-     <ImageCropper/>
-    </>
-  )
-}
+const CoverUpload = () => <ImageCropper/>
 
 export default CoverUpload
