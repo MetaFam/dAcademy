@@ -2,7 +2,7 @@ import playbooks from '../playbooks.json'
 import { Link } from '@tanstack/react-router'
 import { toSlug } from './CarouselItem'
 import { useEffect } from 'react'
-import Logo from '#../public/logo.svg?raw'
+import Logo from '#/assets/logo.svg?raw'
 
 export const Navbar = () => {
   useEffect(() => {

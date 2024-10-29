@@ -1,12 +1,15 @@
 import { useSuspenseQuery } from "@tanstack/react-query"
 import clsx from "clsx"
 import { request, gql } from "graphql-request"
+import { SubmissionInfo } from "./SubmissionInfo"
+import { useState } from "react"
+import "#content.css"
 
 
 const submissionsQueryDocument = gql`
 query ChainDetails($address: String) {
   proofSubmissions(where: {user: $address}) {
-    description
+    id
 		timestamp
 		questChain {
       name
@@ -21,7 +24,7 @@ query ChainDetails($address: String) {
 }
 `
 type Submission =  {
-  description: string
+  id: string
   timestamp: number
   questChain: {
     name: string
@@ -55,7 +58,16 @@ const Statuses = ({account}: {account?: string}) => {
     }
     return a.timestamp - b.timestamp
   })
+  const [proof, setProof] = useState<string>()
+  const setInfo = (proofId: string) => {
+    setProof(proofId)
+    ;(document.getElementById('subInfo') as HTMLDialogElement).showModal()
+  }
   return (
+    <>
+     <dialog id="subInfo" className="modal">
+      <SubmissionInfo {...{proof}}/>
+    </dialog>
         <table className="table">
           <thead className="max-md:hidden">
             <tr>
@@ -67,7 +79,7 @@ const Statuses = ({account}: {account?: string}) => {
           </thead>
           <tbody>
             {submissions?.map((sub, idx) => (
-              <tr key={idx} className="max-md:border-current hover:bg-secondary/10">
+              <tr key={idx} className="max-md:border-current hover:bg-secondary/10" onClick={() => setInfo(sub.id)}>
                 <td className="max-md:list-item max-md:p-0 max-md:before:content-['Date:'] max-md:before:mr-1 max-md:before:font-bold max-md:mt-2">{new Date(sub.timestamp * 1000).toLocaleDateString()}</td>
                 <td className="max-md:list-item max-md:p-0 max-md:before:content-['Book:'] max-md:before:mr-1 before:font-bold italic max-md:before:not-italic">{sub.questChain.name}</td>
                 <td className="max-md:list-item max-md:p-0 max-md:before:content-['Chapter:'] max-md:before:mr-1 max-md:before:font-bold max-md:-indent-2 max-md:pl-2">{sub.quest.name}</td>
@@ -83,6 +95,7 @@ const Statuses = ({account}: {account?: string}) => {
             ))}
           </tbody>
         </table>
+    </>
   )
 }
 

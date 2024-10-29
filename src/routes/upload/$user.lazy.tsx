@@ -24,7 +24,7 @@ export const Route = createLazyFileRoute('/upload/$user')({
               id="book-cover"
               className="mt-4 mb-4 w-11/12 bg-secondary/25 scroll-m-24"
             >
-              <h1 className="mt-2">Upload Cover to IPFS</h1>
+              <h1 className="mt-2">Select Cover</h1>
               <CoverUpload/>
             </div>
             <div
