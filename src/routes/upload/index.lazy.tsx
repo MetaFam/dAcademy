@@ -5,6 +5,7 @@ import Top from '#components/Top'
 import { useUsername } from '#hooks/useUsername'
 import CoverUpload from '#components/upload/CoverUpload.tsx'
 import { useRef, useState } from 'react'
+import { NFTGenerator } from '#components/NFTGenerator.tsx'
 
 
 export const Route = createLazyFileRoute('/upload/')({
@@ -80,6 +81,7 @@ export const Route = createLazyFileRoute('/upload/')({
                <ChapterUpload {...{reloadCallback}} onDelete={chapterDeleted} key={index} index={index + 1} />
             ))}
             <button onClick={() => setChapterCount(chapterCount + 1)} className="btn btn-md rounded-md btn-secondary">Add Chapter</button>
+            <NFTGenerator />
             <label
               htmlFor="my-drawer-2"
               className="btn btn-xs btn-secondary border border-primary drawer-button lg:hidden fixed left-0 mt-40 z-10"
