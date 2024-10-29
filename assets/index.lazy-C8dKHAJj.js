@@ -1,0 +1,1 @@
+import{w as e,e as a,u as n}from"./index-D5LvnpmU.js";function s(o){return e({select:t=>t.location})}const u=a("/book/$slug/")({component:()=>{const o=n(),t=s();/\d$/.test(t.pathname)||o({to:`${t.pathname}/0`})}});export{u as Route};
