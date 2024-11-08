@@ -44,7 +44,7 @@ export const Navbar = () => {
             <li>
               <Link to={`/user`}>Profile</Link>
             </li>
-            <li>
+            {/* <li>
               <a>Categories</a>
               <ul className="p-2">
                 {playbooks.map((category, index) => (
@@ -55,7 +55,7 @@ export const Navbar = () => {
                   </li>
                 ))}
               </ul>
-            </li>
+            </li> */}
             <li>
               <button
               data-tally-open="mOJvyK"
@@ -81,7 +81,7 @@ export const Navbar = () => {
             <li>
               <Link to={`/user`}>Profile</Link>
             </li>
-              <li>
+              {/* <li>
                 <details>
                   <summary>Categories</summary>
                   <ul className="p-2 z-10">
@@ -94,7 +94,7 @@ export const Navbar = () => {
                     ))}
                   </ul>
                 </details>
-              </li>
+              </li> */}
               <li>
                 <button
                 data-tally-open="mOJvyK"
