@@ -20,24 +20,24 @@ const orgs = [
     slogan: 'Org 3 is another shelf',
     slug: 'org3',
   },
-  {
-    name: 'Org 4',
-    logo: '🕮',
-    slogan: 'Org 4 is a new shelf',
-    slug: 'org4',
-  },
-  {
-    name: 'Org 5',
-    logo: '🕮',
-    slogan: 'Org 3 is another shelf',
-    slug: 'org5',
-  },
-  {
-    name: 'Org 6',
-    logo: '🕮',
-    slogan: 'Org 6 is a new shelf',
-    slug: 'org6',
-  },
+  // {
+  //   name: 'Org 4',
+  //   logo: '🕮',
+  //   slogan: 'Org 4 is a new shelf',
+  //   slug: 'org4',
+  // },
+  // {
+  //   name: 'Org 5',
+  //   logo: '🕮',
+  //   slogan: 'Org 3 is another shelf',
+  //   slug: 'org5',
+  // },
+  // {
+  //   name: 'Org 6',
+  //   logo: '🕮',
+  //   slogan: 'Org 6 is a new shelf',
+  //   slug: 'org6',
+  // },
 ]
 
 export const Route = createLazyFileRoute('/')({
