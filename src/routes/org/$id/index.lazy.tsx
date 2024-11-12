@@ -7,15 +7,32 @@ import playbooks from '#playbooks.json'
 import SectionHeader from '#components/SectionHeader'
 import '#App.css'
 import Top from '#components/Top.tsx'
+import { useQuery } from '@tanstack/react-query'
+import request, { gql } from "graphql-request"
 
+const chainImageQueryDocument = gql`
+  query ChainImages($name: String) {
+    questChains {
+      imageUrl
+      name
+    }
+  }
+`
 
 export const Route = createLazyFileRoute('/org/$id/')({
   component: App,
 })
 
+export type CoverImageResponse = {
+  questChains: Array<{
+    imageUrl: string | null
+    name: string
+  }>
+}
+
 export type Book = {
   title: string
-  image: string
+  image?: string
   alt?: string
   displayTitle?: boolean
 }
@@ -50,6 +67,26 @@ const CarouselSection = ({
 )
 
 export function App() {
+  const {
+    data: images,
+    error,
+
+  } = useQuery<Record<string, string>>({
+    queryKey: [`chain-images`],
+    queryFn: async (): Promise<Record<string, string>> => {
+      const {questChains: data} = await request<CoverImageResponse>(
+        import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
+        chainImageQueryDocument,
+        { },
+      )
+      console.log({data})
+      return Object.fromEntries(
+        data.map(({ imageUrl, name }) => [name, imageUrl])
+      ) as Record<string, string>
+    }
+  })
+  if(error) console.error({error})
+console.log({images})
   return (
     <>
       <div id="top" className="scroll-mt-32 flex items-center justify-center mt-2">
@@ -76,7 +113,9 @@ export function App() {
             id={toSlug(category.title)}
             title={category.title}
             description={category.description}
-            items={category.books}
+            items={category.books.map(({title}) => ({
+              title, image: images?.[title]
+            }))}
           />
         ))}
       </div>

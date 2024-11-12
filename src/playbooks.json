@@ -4,28 +4,22 @@
     "description": "Bigger picture, the grander game.",
     "books": [
       {
-        "title": "WTF is Game B?",
-        "image": "/assets/gameb.webp"
+        "title": "WTF Is Game B?"
       },
       {
-        "title": "WTF is Metacrisis?",
-        "image": "/assets/metacrisis.webp"
+        "title": "WTF Is Metacrisis?"
       },
       {
-        "title": "Meditations on Moloch",
-        "image": "/assets/moloch.webp"
+        "title": "Meditations on Moloch"
       },
       {
-        "title": "Political Metamodernism: Bridging Divides",
-        "image": "/assets/metamodernist.webp"
+        "title": "Political Metamodernism: Bridging Divides"
       },
       {
-        "title": "Choose Good Quests",
-        "image": "/assets/goodquests.webp"
+        "title": "Choose Good Quests"
       },
       {
-        "title": "Meme Driven Organizations",
-        "image": "/assets/memedriven.webp"
+        "title": "Meme Driven Organizations"
       }
     ]
   },
@@ -34,28 +28,22 @@
     "description": "Web3 basics: how & why.",
     "books": [
       {
-        "title": "WTF is Ethereum?",
-        "image": "/assets/ethereum.webp"
+        "title": "WTF Is Ethereum?"
       },
       {
-        "title": "WTF are DAOs?",
-        "image": "/assets/daos.webp"
+        "title": "WTF Are DAOs?"
       },
       {
-        "title": "WTF is DeFi?",
-        "image": "/assets/defi.webp"
+        "title": "WTF Is DeFi?"
       },
       {
-        "title": "WTF are NFTs?",
-        "image": "/assets/nfts.webp"
+        "title": "WTF Are NFTs?"
       },
       {
-        "title": "WTF are dApps?",
-        "image": "/assets/dapps.webp"
+        "title": "WTF Are dApps?"
       },
       {
-        "title": "Become a Web3 Developer",
-        "image": "/assets/web3builder.webp"
+        "title": "Become a Web3 Developer"
       }
     ]
   },
@@ -64,33 +52,26 @@
     "description": "DAO Tooling/Coordination Methods",
     "books": [
       {
-        "title": "Become the Best Contributor in Any DAO",
-        "image": "/assets/best-dao-contributor.webp"
+        "title": "Become the Best Contributor in Any DAO"
       },
       {
-        "title": "Starting DAOs 101",
-        "image": "/assets/daosummoner.webp"
+        "title": "Starting DAOs 101"
       },
       {
         "title": "How to Build a Network for Impact",
-        "image": "/assets/impact-networks.webp",
         "displayTitle": false
       },
       {
-        "title": "Using Coordinape to Reward Contributors",
-        "image": "/assets/coordinape.webp"
+        "title": "Using Coordinape to Reward Contributors"
       },
       {
-        "title": "Effective Meetings with Holacracy",
-        "image": "/assets/holacracy.webp"
+        "title": "Effective Meetings with Holacracy"
       },
       {
-        "title": "Entering a DAO as a Writer",
-        "image": "/assets/daowriter.webp"
+        "title": "Entering DAOs as a Writer"
       },
       {
-        "title": "Building Successful Teams",
-        "image": "/assets/successful-teams.webp"
+        "title": "Building Successful Teams"
       }
     ]
   },
@@ -99,24 +80,19 @@
     "description": "Level-up, self-improve.",
     "books": [
       {
-        "title": "How to Play the Creator Game",
-        "image": "/assets/creatorgame.webp"
+        "title": "How to Play the Creator Game"
       },
       {
-        "title": "Embrace the Ticking Clock",
-        "image": "/assets/time.webp"
+        "title": "Embrace the Ticking Clock"
       },
       {
-        "title": "Know Your Biases",
-        "image": "/assets/biases.webp"
+        "title": "Know Your Biases"
       },
       {
-        "title": "Understanding Imposter Syndrome",
-        "image": "/assets/imposter.webp"
+        "title": "Understanding Imposter Syndrome"
       },
       {
-        "title": "Journaling Like Dickie Bush",
-        "image": "/assets/journaling.webp"
+        "title": "Journaling Like Dickie Bush"
       }
     ]
   }
