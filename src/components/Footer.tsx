@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="footer footer-center bg-base-200 text-base-content rounded p-4">
+    <footer className="footer footer-center bg-base-200 text-base-content rounded p-4 mx-auto max-w-[85vw] absolute bottom-0 left-[50%] translate-x-[-50%] shadow-[0_-5px_30px_-15px_var(--tw-shadow-color)] shadow-secondary">
       <nav className="grid grid-flow-col gap-6">
         <a href="https://docs.dacade.my" className="link link-hover">Docs</a>
         <a href="https://github.com/MetaFam/dAcademy" className="link link-hover">

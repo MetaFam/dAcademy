@@ -1,4 +1,4 @@
-import { createLazyFileRoute} from '@tanstack/react-router'
+import { createLazyFileRoute, Link} from '@tanstack/react-router'
 import Carousel from 'react-multi-carousel'
 import CarouselItem, { toSlug } from '#components/CarouselItem'
 import 'react-multi-carousel/lib/styles.css'
@@ -52,10 +52,22 @@ const CarouselSection = ({
 export function App() {
   return (
     <>
-      <div id="top" className="scroll-mt-32">
-        <h2 className="text-accent font-light text-3xl mb-2 pt-6">
-          A de-store of knowledge. Onboard forward.
+      <div id="top" className="scroll-mt-32 flex items-center justify-center mt-2">
+        <h2 className="text-accent font-light text-3xl mr-4">
+            MetaGame Bookshelf :
         </h2>
+        <div className="dropdown dropdown-hover mt-2">
+          <div tabIndex={0} role="button" className="btn m-1">Categories</div>
+          <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+            {playbooks.map((category, index) => (
+              <li key={index}>
+                <Link to={`/org/metagame/#${toSlug(category.title)}`}>
+                  {category.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       <div className="container p-4 mt-30 gap-4">
         {playbooks.map((category, index) => (

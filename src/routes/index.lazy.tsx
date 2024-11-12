@@ -43,10 +43,11 @@ const orgs = [
 export const Route = createLazyFileRoute('/')({
   component: () => (
     <div>
-      <h1 className="text-2xl font-bold text-secondary mt-8">Welcome to dAcademy!</h1>
-      <h2 className="text-lg font-semibold mb-8">Learn, Verify, Achieve: Protocol for a Decentralized Education</h2>
-      <div className="dropdown dropdown-hover">
-        <div tabIndex={0} role="button" className="btn m-1 rounded-sm">Current Organizations & Bookshelves</div>
+      <h1 className="text-2xl font-bold text-secondary mt-6 mb-2">Welcome to dAcademy!</h1>
+      <h2 className="text-lg font-semibold mb-2">Learn, Verify, Achieve: Protocol for a Decentralized Education</h2>
+      <h2 className="text-lg font-semibold mb-8">A de-store of knowledge. Onboard forward.</h2>
+      {/* <div className="dropdown dropdown-hover">
+        <div tabIndex={0} role="button" className="btn m-1 rounded-sm">Current Organization Bookshelves</div>
         <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-sm z-[1] w-52 p-2 shadow">
           {orgs.map((org) => (
             <li key={org.slug}>
@@ -54,7 +55,7 @@ export const Route = createLazyFileRoute('/')({
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
       <div className="flex flex-col mx-8 md:flex-row md:flex-wrap md:justify-center items-center">
         {orgs.map((org) => (
           <div key={org.slug} className="w-full md:w-1/3 mb-8 md:mb-12">

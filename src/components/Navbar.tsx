@@ -44,18 +44,14 @@ export const Navbar = () => {
             <li>
               <Link to={`/user`}>Profile</Link>
             </li>
-            {/* <li>
-              <a>Categories</a>
+            <li>
+              <a>Bookshelves</a>
               <ul className="p-2">
-                {playbooks.map((category, index) => (
-                  <li key={index}>
-                    <Link to={`/#${toSlug(category.title)}`}>
-                      {category.title}
-                    </Link>
+                  <li>
+                    by : Organization
                   </li>
-                ))}
               </ul>
-            </li> */}
+            </li>
             <li>
               <button
               data-tally-open="mOJvyK"
@@ -81,20 +77,32 @@ export const Navbar = () => {
             <li>
               <Link to={`/user`}>Profile</Link>
             </li>
-              {/* <li>
-                <details>
-                  <summary>Categories</summary>
-                  <ul className="p-2 z-10">
-                    {playbooks.map((category, index) => (
-                      <li key={index}>
-                        <Link to={`/#${toSlug(category.title)}`}>
-                          {category.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              </li> */}
+            <li>
+              <details>
+                <summary>Bookshelves</summary>
+                <ul className="p-2">
+                  <li>
+                    <div className="dropdown dropdown-left">
+                    <div tabIndex={0} role="button" className="m-1">by : Organization</div>
+                      <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                        <li><Link to={'/org/metagame' as '/'}>MetaGame</Link></li>
+                        <li><a>Org 2</a></li>
+                        <li><a>Org 3</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="dropdown dropdown-right">
+                    <div tabIndex={0} role="button" className="m-1">by : User Curation</div>
+                      <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </details>
+            </li>
               <li>
                 <button
                 data-tally-open="mOJvyK"
