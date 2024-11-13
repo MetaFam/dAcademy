@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react"
 
 type Point = {x?: number, y?: number}
-export const NFTTemplate = ({bg, title}: {bg?: File, title?: string}) => {
+export const NFTTemplate = ({
+  bg, title, color, svgRef
+}: {
+  bg?: File
+  title?: string
+  color: string
+  svgRef: React.MutableRefObject
+}) => {
   const [background, setBackground] = useState<string | null>()
   const [zoomStart, setZoomStart] = useState<SVGPoint>()
   const [zoomCurrent, setZoomCurrent] = useState<SVGPoint>()
@@ -50,7 +57,7 @@ export const NFTTemplate = ({bg, title}: {bg?: File, title?: string}) => {
     }
   }
   return (
-<svg onMouseMove={zoom} onMouseUp={zoomEnd} onMouseDown={zoomBegin} version="1.1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" id="nft">
+<svg ref={svgRef} onMouseMove={zoom} onMouseUp={zoomEnd} onMouseDown={zoomBegin} version="1.1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" id="nft">
   <defs>
     {background && <image height={`${zoomPercent * 100}%`} width={`${zoomPercent * 100}%`} id="bg" href={background} />}
     <filter id="blur" colorInterpolationFilters="sRGB">
@@ -71,7 +78,7 @@ export const NFTTemplate = ({bg, title}: {bg?: File, title?: string}) => {
       <use filter="url(#blur)" clipPath="url(#textClip)" href="#bg" height="100%" width="100%"/>
       <use href="#textBox" fill="#fff" fillOpacity=".25" filter="url(#blur)" />
       <text
-        x="50%" y="90%" fill="#fff" fontSize="133%"
+        x="50%" y="90%" fill={color} fontSize="133%"
         stroke="#0005" strokeWidth=".5" textAnchor="middle" style={{fontVariationSettings:`'wdth' 87, 'wght' 500`}}
       >{title}</text>
     </>

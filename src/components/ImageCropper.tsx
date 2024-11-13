@@ -28,8 +28,8 @@ function centerAspectCrop(
   )
 }
 
-export default function App() {
-  const [imgSrc, setImgSrc] = useState('')
+export default function App({ image }: { image?:string }) {
+  const [imgSrc, setImgSrc] = useState(image)
   const imgRef = useRef<HTMLImageElement>(null)
   const [blobURL, setBlobURL] = useState<string | null>(localStorage.getItem('cover'))
   const [crop, setCrop] = useState<Crop>()
@@ -107,7 +107,9 @@ export default function App() {
           {blobURL && (
             <img src={blobURL} alt="Crop Preview" className="max-h-[50vh]"/>
           )}
-          <input type="file" accept="image/*" onChange={onSelectFile} className={clsx(!!blobURL && 'hidden', 'file-input file-input-bordered w-full max-w-xs')} />
+          {!image && (
+            <input type="file" accept="image/*" onChange={onSelectFile} className={clsx(!!blobURL && 'hidden', 'file-input file-input-bordered w-full max-w-xs')} />
+          )}
         </label>
       </div>
 
