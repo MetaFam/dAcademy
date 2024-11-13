@@ -21,10 +21,14 @@
   },
   "dependencies": {
     "@mdxeditor/editor": "^3.14.0",
+    "@react-three/drei": "^9.115.0",
+    "@react-three/fiber": "^8.17.10",
     "@reown/appkit": "^1.0.4",
     "@reown/appkit-adapter-wagmi": "^1.0.4",
     "@tanstack/react-query": "^5.56.2",
     "@tanstack/react-router": "^1.63.2",
+    "@types/three": "^0.170.0",
+    "@wagmi/core": "^2.14.5",
     "@web3-storage/w3up-client": "^16.2.0",
     "@web3modal/wagmi": "^5.1.10",
     "clsx": "^2.1.1",
@@ -32,14 +36,19 @@
     "glob": "^11.0.0",
     "graphql": "^16.9.0",
     "graphql-request": "^7.1.0",
+    "json5": "^2.2.3",
+    "multiformats": "^13.3.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.53.2",
     "react-hot-toast": "^2.4.1",
     "react-image-crop": "^11.0.7",
     "react-markdown": "^9.0.1",
     "react-multi-carousel": "^2.8.5",
+    "react-tabs": "^6.0.2",
+    "three": "^0.170.0",
     "viem": "^2.21.16",
-    "wagmi": "^2.12.16"
+    "wagmi": "^2.12.31"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
@@ -63,5 +72,5 @@
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
   },
-  "packageManager": "npm@10.9.0+sha512.65a9c38a8172948f617a53619762cd77e12b9950fe1f9239debcb8d62c652f2081824b986fee7c0af6c0a7df615becebe4bf56e17ec27214a87aa29d9e038b4b"
+  "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228"
 }
