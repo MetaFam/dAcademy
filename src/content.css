@@ -4,8 +4,11 @@
   font-family: "Saira", sans-serif;
 }
 
-.content {
+.mdxeditor-rich-text-editor > div > div:nth-of-type(2) {
+  left: 0;
+}
 
+.content {
   p {
     margin-bottom: .5rem;
     text-indent: .25rem;

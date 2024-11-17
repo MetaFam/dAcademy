@@ -18,8 +18,9 @@ import {
   Tab, Tabs, TabList, TabPanel,
 } from 'react-tabs'
 import { ThreeDScene } from './ThreeDScene'
-import fs from '../styles/NFTForm.module.css'
 import { Properties } from '@react-three/fiber'
+import fs from './NFTForm.module.css'
+import { NFTGenerator } from '#components/NFTGenerator.js'
 
 const AttrRow: React.FC<{
   attributes: Array<Attribute>
@@ -237,49 +238,54 @@ const MediaDisplay: React.FC<{
   }
 
   return (
-    <label className={fs.media}>
-      <div className={fs.selector}>
+    <>
+      <label className={fs.media}>
         <h3>{capitalize(prop)}</h3>
-        <input
-          onChange={set}
-          ref={input}
-        />
-        {filename && <h4>{filename}</h4>}
-      </div>
+        <aside>
+          <input
+            onChange={set}
+            ref={input}
+          />
+          {filename && <h4>{filename}</h4>}
+        </aside>
+      </label>
       {content && (
-        <div className={fs.content}>
-          {(() => {
-            const url = (
-              (content instanceof File) ? (
-                URL.createObjectURL(content)
-              ) : (
-                httpURL(content)
-              )
-            )
-            switch(type) {
-              case 'none': {
-                return null
-              }
-              case 'video': {
-                return <video><source src={url}/></video>
-              }
-              case 'audio': {
-                return <audio><source src={url}/></audio>
-              }
-              case 'model': {
-                return (
-                  <ThreeDScene className={fs.model} model={url}/>
+        <label>
+          <h3>Preview</h3>
+          <aside className={fs.content}>
+            {(() => {
+              const url = (
+                (content instanceof File) ? (
+                  URL.createObjectURL(content)
+                ) : (
+                  httpURL(content)
                 )
+              )
+              switch(type) {
+                case 'none': {
+                  return null
+                }
+                case 'video': {
+                  return <video><source src={url}/></video>
+                }
+                case 'audio': {
+                  return <audio><source src={url}/></audio>
+                }
+                case 'model': {
+                  return (
+                    <ThreeDScene className={fs.model} model={url}/>
+                  )
+                }
+                default: {
+                  return <img alt={name} src={url}/>
+                }
               }
-              default: {
-                return <img alt={name} src={url}/>
-              }
-            }
-          })()}
-          <button type="button" onClick={remove}>❌</button>
-        </div>
+            })()}
+            <button type="button" onClick={remove}>❌</button>
+          </aside>
+        </label>
       )}
-    </label>
+    </>
   )
 }
 
@@ -303,6 +309,7 @@ export const NFTForm: React.FC<{
     attributes, animation, name,
   } = watch()
   // const [wearables, setWearables] = useState({})
+  const [genOpen, setGenOpen] = useState(false)
 
   useEffect(() => {
     if (metadata) {
@@ -370,7 +377,7 @@ export const NFTForm: React.FC<{
   }
 
   return (
-    <ul>
+    <ul id={fs.props}>
       <li id={fs.name}>
         <label>
           <h3>Name</h3>
@@ -378,12 +385,20 @@ export const NFTForm: React.FC<{
         </label>
       </li>
       <li id={fs.image} style={{ ['--img-bg' as Properties<string>]: color }}>
-        <MediaDisplay
-          content={image}
-          prop="image"
-          accept="image/*"
-          {...{ name, setValue }}
-        />
+        <label>
+          <h3>Image</h3>
+          <aside>
+            <button
+              type="button"
+              onClick={() => setGenOpen(true)}
+              className="btn btn-primary"
+            >Design</button>
+            <NFTGenerator
+              onSubmit={(image) => setValue('image', image)}
+              isOpen={genOpen}
+            />
+          </aside>
+        </label>
       </li>
       <li id={fs.background}>
         <label>
@@ -397,19 +412,21 @@ export const NFTForm: React.FC<{
       <li id={fs.homepage}>
         <label>
           <h3>Homepage</h3>
-          <input {...register('homepage')}/>
+          <aside>
+            <input {...register('homepage')}/>
+            {homepage?.length > 0 && (
+              <Hyperlink href={homepage}>
+                🡽
+              </Hyperlink>
+            )}
+          </aside>
         </label>
-        {homepage?.length > 0 && (
-          <Hyperlink href={homepage}>
-            🡽
-          </Hyperlink>
-        )}
       </li>
       <li id={fs.description}>
         <label>
           <h3>Description</h3>
           <Tabs>
-            <TabList>
+            <TabList className="flex justify-evenly">
               <Tab>Markdown</Tab>
               <Tab>Preview</Tab>
             </TabList>
@@ -438,32 +455,34 @@ export const NFTForm: React.FC<{
       <li id={fs.attributes}>
         <label>
           <h3>Attributes</h3>
-          <button type="button" onClick={addRow}>
-            ➕
-          </button>
+          <aside>
+            <button type="button" onClick={addRow} className="btn btn-primary">
+              ➕
+            </button>
+            {attributes?.length > 0 && (
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Value</th>
+                    <th/>
+                  </tr>
+                </thead>
+                <tbody>
+                  {attributes.map((_: Attribute, index: number) => (
+                    <AttrRow
+                      key={index}
+                      {...{
+                        attributes, setValue, index,
+                      }}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </aside>
         </label>
-        {attributes?.length > 0 && (
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Value</th>
-                <th/>
-              </tr>
-            </thead>
-            <tbody>
-              {attributes.map((_: Attribute, index: number) => (
-                <AttrRow
-                  key={index}
-                  {...{
-                    attributes, setValue, index,
-                  }}
-                />
-              ))}
-            </tbody>
-          </table>
-        )}
       </li>
     </ul>
   )

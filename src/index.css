@@ -2,11 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
 #login w3m-button * {
   display: inline;
 }
 
 * {
-  outline: 2px red;
+  /* outline: 2px solid red; */
 }

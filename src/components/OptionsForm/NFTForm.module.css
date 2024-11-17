@@ -1,10 +1,6 @@
 .media {
   flex-direction: column;
 
-  & > * {
-    display: flex;
-  }
-
   & .selector {
     align-items: center;
   }
@@ -52,6 +48,15 @@
     display: block;
   }
 
+  & [class="react-tabs__tab-panel"] {
+    display: none;
+  }
+  
+  & [class="react-tabs__tab-panel--selected"] {
+    display: block;
+  }
+
+
   & [role="tabpanel"] {
     &:last-of-type, & textarea {
       max-width: 35rem;
@@ -71,6 +76,10 @@
     &:has(li[role="tab"][aria-selected="true"]:last-of-type)
     ~ [role="tabpanel"] {
       padding: 0.5rem;
+    }
+
+    & [aria-selected="true"] {
+      color: yellow;
     }
   }
 
@@ -97,4 +106,41 @@
 .net-submit {
   margin-bottom: 1rem;
   width: 100%;
+}
+
+#props {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  row-gap: 0.5rem;
+  column-gap: 0.75rem;
+
+  & h3 {
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  & h3:after {
+    content: ":";
+  }
+
+  & > li, & label {
+    display: contents;
+    /* grid-template-columns: subgrid;
+    grid-template-rows: subgrid; */
+  }
+
+  & label aside {
+    display: flex;
+
+    & input {
+      flex-grow: 1;
+      margin-right: 1rem;
+    }
+  }
+
+  & input {
+    width: 100%;
+  }
 }

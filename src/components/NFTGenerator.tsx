@@ -32,13 +32,16 @@ export const NFTGenerator = ({ isOpen = false }: { isOpen?: boolean }) => {
     }
   }
   return (
-    <dialog className="z-30" open={isOpen}>
+    <dialog className="z-30 fixed inset-0 top-24" open={isOpen}>
       <form onSubmit={commit}>
-        <input onChange={({target: { files }}) => setBg(files?.[0])} type="file" accept="image/*" />
-        <input placeholder="title" value={title} onChange={({target: {value}}) => setTitle(value)}/>
-        <input type="color" value={color} onChange={({target: {value}}) => setColor(value)}/>
+        <div className="flex justify-end">
+          <input onChange={({target: { files }}) => setBg(files?.[0])} type="file" accept="image/*" />
+          <input placeholder="title" value={title} onChange={({target: {value}}) => setTitle(value)}/>
+          <input type="color" value={color} onChange={({target: {value}}) => setColor(value)}/>
+        </div>
         <NFTTemplate {...{ bg, title, color, svgRef }} />
-        <button className="rounded-md btn-md btn mb-6 btn-secondary">Commit</button>
+        <button className="rounded-md btn-md btn mb-6 btn-secondary mr-4">Commit</button>
+        <button className="rounded-md btn-md btn mb-6 btn-cancel">Cancel</button>
       </form>
     </dialog>
   )

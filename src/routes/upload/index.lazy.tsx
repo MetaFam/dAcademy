@@ -6,7 +6,8 @@ import { useUsername } from '#hooks/useUsername'
 import CoverUpload from '#components/upload/CoverUpload.tsx'
 import { useRef, useState } from 'react'
 import { NFTGenerator } from '#components/NFTGenerator.tsx'
-
+import OptionsForm from '#components/OptionsForm/index.tsx'
+import '#content.css'
 
 export const Route = createLazyFileRoute('/upload/')({
   component: () => {
@@ -63,25 +64,39 @@ export const Route = createLazyFileRoute('/upload/')({
         </h1>
         <div className="drawer lg:drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col items-center justify-start md:px-8">
-            <div
-              id="book-cover"
-              className="mt-4 mb-4 w-full bg-secondary/25 scroll-m-24"
-            >
-              <h1 className="mt-2">Select Cover</h1>
-              <CoverUpload />
-            </div>
-            <ChapterUpload
-              index={0}
-              header='Book'
-              contentHeader='Introduction'
-            />
+          <div className="drawer-content flex flex-col items-center justify-start md:px-8 mb-20">
+            <form onSubmit={(evt) => {
+              evt.preventDefault()
+              alert('Submitting')
+            }}>
+              <div
+                id="book-cover"
+                className="mt-4 mb-4 w-full bg-secondary/25 scroll-m-24"
+              >
+                <h1 className="mt-2">Select Cover</h1>
+                <CoverUpload />
+              </div>
+              <ChapterUpload
+                index={0}
+                header='Book'
+                contentHeader='Introduction'
+              />
 
-            {Array.from({ length: chapterCount - 1 }, (_, index) => (
-               <ChapterUpload {...{reloadCallback}} onDelete={chapterDeleted} key={index} index={index + 1} />
-            ))}
-            <button onClick={() => setChapterCount(chapterCount + 1)} className="btn btn-md rounded-md btn-secondary">Add Chapter</button>
-            <NFTGenerator />
+              {Array.from({ length: chapterCount - 1 }, (_, index) => (
+                <ChapterUpload {...{reloadCallback}} onDelete={chapterDeleted} key={index} index={index + 1} />
+              ))}
+
+              <button type="button" onClick={() => setChapterCount(chapterCount + 1)} className="btn btn-md rounded-md btn-secondary mt-4">
+                Add Chapter
+              </button>
+
+              <OptionsForm />
+              <aside className="flex justify-center gap-6">
+                <button className="btn btn-md rounded-md btn-accent">
+                  Submit
+                </button>
+              </aside>
+            </form>
             <label
               htmlFor="my-drawer-2"
               className="btn btn-xs btn-secondary border border-primary drawer-button lg:hidden fixed left-0 mt-40 z-10"

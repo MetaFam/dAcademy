@@ -1,0 +1,84 @@
+@custom-media --mobile (width < 40em);
+
+button.full {
+  width: 100%;
+}
+
+#form {
+  & ul {
+    list-style: none;
+    padding-inline-start: 0;
+
+    & li {
+      margin-block: 0.5rem;
+    }
+  }
+
+  /* & label {
+    display: flex;
+
+    & h3 {
+      margin-block: 0.25rem;
+    }
+
+    & h3:after {
+      content: ": ";
+    }
+
+    & input {
+      flex-grow: 1;
+      height: auto;
+    }
+  } */
+
+  & form {
+    margin-block-end: 2rem;
+  }
+
+  & #maxes {
+    display: grid;
+    grid-template-columns: repeat(2, max-content) 1fr;
+    gap: 0rem;
+    place-items: center;
+
+    & label > *:first-child {
+      text-align: right;
+    }
+
+    & input {
+      width: 5rem;
+      text-align: center;
+    }
+
+    & .net-submit {
+      width: max-content;
+      margin-block: 0rem;
+    }
+
+    & .max, & label {
+      display: contents;
+    }
+
+    @media (--mobile) {
+      & .max {
+        display: grid;
+        grid-template-areas:
+          "title title"
+          "input submit";
+        grid-template-columns: max-content 1fr;
+
+        & h3 {
+          grid-area: title;
+        }
+
+        & input {
+          grid-area: input;
+        }
+
+        & button {
+          grid-area: submit;
+        }
+      }
+    }
+  }
+}

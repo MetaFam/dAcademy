@@ -54,11 +54,14 @@ const ChapterUpload = (
       </div>
       <div className="flex justify-center">
         <MarkdownEditor {...{ editorRef }}
-        markdown={localStorage.getItem(`chapter.${index}.content`) ?? ''}
-        className="dark-theme dark-editor content mt-4"
-        onChange={() => {
-          localStorage.setItem(`chapter.${index}.content`, editorRef.current?.getMarkdown() ?? '')
-        }}
+          markdown={localStorage.getItem(`chapter.${index}.content`) ?? ''}
+          className="dark-theme dark-editor content"
+          onChange={() => {
+            localStorage.setItem(
+              `chapter.${index}.content`,
+              editorRef.current?.getMarkdown() ?? '',
+            )
+          }}
         />
       </div>
     </fieldset>
