@@ -8,6 +8,8 @@ import { useRef, useState } from 'react'
 import { NFTGenerator } from '#components/NFTGenerator.tsx'
 import OptionsForm from '#components/OptionsForm/index.tsx'
 import '#content.css'
+import { createPointerEvents } from '@react-three/fiber'
+import { createPortal } from 'react-dom'
 
 export const Route = createLazyFileRoute('/upload/')({
   component: () => {
@@ -90,7 +92,8 @@ export const Route = createLazyFileRoute('/upload/')({
                 Add Chapter
               </button>
 
-              <OptionsForm />
+              <OptionsForm />,
+
               <aside className="flex justify-center gap-6">
                 <button className="btn btn-md rounded-md btn-accent">
                   Submit

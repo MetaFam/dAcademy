@@ -10,15 +10,17 @@ export const NFTTemplate = ({
   svgRef: React.MutableRefObject
 }) => {
   const [background, setBackground] = useState<string | null>()
-  const [zoomStart, setZoomStart] = useState<SVGPoint>()
-  const [zoomCurrent, setZoomCurrent] = useState<SVGPoint>()
+  const [pStart, setPStart] = useState<SVGPoint>()
+  const [pCurrent, setPCurrent] = useState<SVGPoint>()
   const [zoomPercent, setZoomPercent] = useState(1)
+  const [panning, setPan] = useState<Point>({ x: 0, y: 0 })
+  const [mode, setMode] = useState<'zoom' | 'pan' | null>(null)
 
   useEffect(() => {
     if(bg) {
       const reader = new FileReader()
       reader.onload = () => {
-        let {result} = reader
+        let { result } = reader
         if(result instanceof ArrayBuffer) {
           result = new String(result) as string
         }
@@ -27,73 +29,125 @@ export const NFTTemplate = ({
       reader.readAsDataURL(bg)
     }
   }, [bg])
+
   const screen2ViewBox = (coords: Point) => {
     const svg = document.querySelector('#nft') as SVGSVGElement
-    if(svg) {
-      const point = svg.createSVGPoint()
-      point.x = coords.x ?? 0
-      point.y = coords.y ?? 0
+    if(!svg) {
+      throw new Error('No SVG element found.')
+    }
+    const point = svg.createSVGPoint()
+    point.x = coords.x ?? 0
+    point.y = coords.y ?? 0
 
-      const CTM = svg.getScreenCTM()
-      if (CTM) {
-          return point.matrixTransform(CTM.inverse())
-      }
+    const CTM = svg.getScreenCTM()
+    if (CTM) {
+      return point.matrixTransform(CTM.inverse())
+    } else {
+      throw new Error('No screen CTM found.')
     }
   }
-  const zoomBegin = (evt: React.MouseEvent) => {
-    setZoomStart(screen2ViewBox({x: evt.clientX, y: evt.clientY}))
-  }
-  const zoomEnd = () => {
-    setZoomStart(undefined)
-  }
-  const zoom = (evt: React.MouseEvent) => {
-    if(zoomStart) {
-      const current = screen2ViewBox({x: evt.clientX, y: evt.clientY})
-      setZoomCurrent(current)
-      if(current) {
-        const delta = (zoomStart.y - current.y) / 200
-        setZoomPercent(delta < 0 ? 100 + delta : delta)
-      }
+
+  const begin = (evt: React.MouseEvent) => {
+    setPStart(screen2ViewBox({x: evt.clientX, y: evt.clientY}))
+    if(evt.shiftKey) {
+      setMode('pan')
+    } else {
+      setMode('zoom')
     }
   }
+
+  const end = (evt: React.MouseEvent) => {
+    console.debug({ end: evt })
+    setPStart(undefined)
+    setMode(null)
+  }
+
+  const zoom = (current: Point) => {
+    if(pStart && current.y != null) {
+      const delta = (pStart.y - current.y) / 200
+      /* When the button is first depressed, the zoom should be 100%.
+        * As the mouse moves up, the zoom should increase to a maximium of 200%.
+        * As the mouse moves down, the zoom should decrease to a minimum of 1%.
+        */
+      console.debug({ per: 1 + delta })
+      setZoomPercent(1 + delta)
+    }
+  }
+
+  const pan = (current: Point) => {
+    if(pStart && current.x != null && current.y != null) {
+      setPan({ x: current.x - pStart.x, y: current.y - pStart.y })
+    }
+  }
+
+  const move = (evt: React.MouseEvent) => {
+    const current = screen2ViewBox({x: evt.clientX, y: evt.clientY})
+    console.debug({ current, pStart })
+    setPCurrent(current)
+    switch(mode) {
+      case 'zoom': zoom(current); break
+      case 'pan': pan(current); break
+    }
+  }
+
   return (
-<svg ref={svgRef} onMouseMove={zoom} onMouseUp={zoomEnd} onMouseDown={zoomBegin} version="1.1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" id="nft">
-  <defs>
-    {background && <image height={`${zoomPercent * 100}%`} width={`${zoomPercent * 100}%`} id="bg" href={background} />}
-    <filter id="blur" colorInterpolationFilters="sRGB">
-      <feGaussianBlur stdDeviation="2" />
-    </filter>
-    <rect id="textBox" x="15%" y="80%" width="70%" height="13%" rx="4%" />
-    <clipPath id="textClip">
-      <use href="#textBox" />
-    </clipPath>
-  </defs>
-  {background && (
-    <g>
-      <use height="100%" width="100%" href="#bg" />
-    </g>
-  )}
-  {title && (
-    <>
-      <use filter="url(#blur)" clipPath="url(#textClip)" href="#bg" height="100%" width="100%"/>
-      <use href="#textBox" fill="#fff" fillOpacity=".25" filter="url(#blur)" />
-      <text
-        x="50%" y="90%" fill={color} fontSize="133%"
-        stroke="#0005" strokeWidth=".5" textAnchor="middle" style={{fontVariationSettings:`'wdth' 87, 'wght' 500`}}
-      >{title}</text>
-    </>
-  )}
+    <svg
+      ref={svgRef}
+      onMouseMove={move}
+      onMouseUp={end} onMouseDown={begin}
+      version="1.1"
+      viewBox="0 0 200 200"
+      xmlns="http://www.w3.org/2000/svg"
+      width="100%" height="100%"
+      id="nft"
+    >
+      <defs>
+        {background && (
+          <image
+            x={panning.x} y={panning.y}
+            height={`${zoomPercent * 100}%`} width={`${zoomPercent * 100}%`}
+            id="bg"
+            href={background}
+          />
+        )}
+        <filter id="blur" colorInterpolationFilters="sRGB">
+          <feGaussianBlur stdDeviation="2" />
+        </filter>
+        <rect id="textBox" x="15%" y="80%" width="70%" height="13%" rx="4%" />
+        <clipPath id="textClip">
+          <use href="#textBox" />
+        </clipPath>
+      </defs>
+      {background && (
+        <g>
+          <use height="100%" width="100%" href="#bg" />
+        </g>
+      )}
+      {title && (
+        <>
+          <use filter="url(#blur)" clipPath="url(#textClip)" href="#bg" height="100%" width="100%"/>
+          <use href="#textBox" fill="#fff" fillOpacity=".25" filter="url(#blur)" />
+          <text
+            x="50%" y="90%" fill={color} fontSize="133%"
+            stroke="#0005" strokeWidth=".5" textAnchor="middle" style={{fontVariationSettings:`'wdth' 87, 'wght' 500`}}
+          >{title}</text>
+        </>
+      )}
 
-  {zoomStart && zoomCurrent && (
-    <g>
-      <line x1={zoomStart.x} x2={zoomCurrent.x} y1={zoomStart.y} y2={zoomCurrent.y} stroke="green" strokeDasharray="1 1" />
-      <circle cx={zoomCurrent.x} cy={zoomCurrent.y} r="1%" fill="red" />
-    </g>
-  )}
+      {pStart && pCurrent && (
+        <g>
+          <line
+            x1={pStart.x} x2={pCurrent.x}
+            y1={pStart.y} y2={pCurrent.y}
+            stroke="green" strokeDasharray="1 1"
+          />
+          <circle cx={pCurrent.x} cy={pCurrent.y} r="1%" fill="red" />
+        </g>
+      )}
 
-  {zoomStart && (
-    <circle cx={zoomStart.x} cy={zoomStart.y} r="1%" fill="red" />
-  )}
-</svg>
+      {pStart && (
+        <circle cx={pStart.x} cy={pStart.y} r="1%" fill="red" />
+      )}
+    </svg>
   )
 }

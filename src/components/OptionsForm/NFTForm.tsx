@@ -21,6 +21,7 @@ import { ThreeDScene } from './ThreeDScene'
 import { Properties } from '@react-three/fiber'
 import fs from './NFTForm.module.css'
 import { NFTGenerator } from '#components/NFTGenerator.js'
+import { createPortal } from 'react-dom'
 
 const AttrRow: React.FC<{
   attributes: Array<Attribute>
@@ -393,10 +394,14 @@ export const NFTForm: React.FC<{
               onClick={() => setGenOpen(true)}
               className="btn btn-primary"
             >Design</button>
-            <NFTGenerator
-              onSubmit={(image) => setValue('image', image)}
-              isOpen={genOpen}
-            />
+            {createPortal(
+              <NFTGenerator
+                onSubmit={(image) => setValue('image', image)}
+                onClose={() => setGenOpen(false)}
+                isOpen={genOpen}
+              />,
+              document.getElementById('img-config-portal')!
+            )}
           </aside>
         </label>
       </li>
