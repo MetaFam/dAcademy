@@ -23,6 +23,9 @@ const components: { title: string; href: string; description: string }[] = [
     description:
       "This is a new org bookshelf.",
   },
+];
+
+const curatedComponents: { title: string; href: string; description: string }[] = [
   {
     title: "Community Curated Bookshelf",
     href: "/community/bookshelf1",
@@ -71,7 +74,7 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem";
 
-export const Navbar: React.FC = () => {
+export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -103,9 +106,6 @@ export const Navbar: React.FC = () => {
                 <ListItem href="https://docs.dacade.my/" title="Docs" icon={<BookOpen size={16} />}>
                   Learn how you can use dAcademy, what it's built with, and how it works.
                 </ListItem>
-                <ListItem href="/docs/installation" title="Installation">
-                  How to install dependencies and structure your app.
-                </ListItem>
                 <ListItem href="https://github.com/MetaFam/dAcademy" title="GitHub" icon={<Github size={16} />}>
                   dAcademy is open-source and on GitHub.  See a bug? Like the build?
                 </ListItem>
@@ -117,6 +117,22 @@ export const Navbar: React.FC = () => {
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                 {components.map((component) => (
+                  <ListItem
+                    key={component.title}
+                    title={component.title}
+                    href={component.href}
+                  >
+                    {component.description}
+                  </ListItem>
+                ))}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger className="md:block hidden">Curated</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                {curatedComponents.map((component) => (
                   <ListItem
                     key={component.title}
                     title={component.title}
@@ -152,9 +168,6 @@ export const Navbar: React.FC = () => {
                   <ListItem href="https://docs.dacade.my/" title="Docs" icon={<BookOpen size={16} />}>
                     Learn how you can use dAcademy, what it's built with, and how it works.
                   </ListItem>
-                  <ListItem href="/docs/installation" title="Installation">
-                    How to install dependencies and structure your app.
-                  </ListItem>
                   <ListItem href="https://github.com/MetaFam/dAcademy" title="GitHub" icon={<Github size={16} />}>
                     dAcademy is open-source and on GitHub.  See a bug? Like the build?
                   </ListItem>
@@ -166,6 +179,22 @@ export const Navbar: React.FC = () => {
               <NavigationMenuContent>
                 <ul className="pl-4">
                   {components.map((component) => (
+                    <ListItem
+                      key={component.title}
+                      title={component.title}
+                      href={component.href}
+                    >
+                      {component.description}
+                    </ListItem>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Curated</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="pl-4">
+                  {curatedComponents.map((component) => (
                     <ListItem
                       key={component.title}
                       title={component.title}

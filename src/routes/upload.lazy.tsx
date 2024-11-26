@@ -24,11 +24,21 @@ export const Route = createLazyFileRoute('/upload')({
 function Upload() {
   return (
     <div className="space-y-4 mx-auto w-2/3">
-      <UploadCover />
-      <UploadTitle />
-      <UploadIntro />
-      <UploadChapters />
-      <UploadPermissions />
+      <div id="upload-cover" className="scroll-mt-12">
+        <UploadCover />
+      </div>
+      <div id="book-title" className="scroll-mt-12">
+        <UploadTitle />
+      </div>
+      <div id="book-intro" className="scroll-mt-12">
+        <UploadIntro />
+      </div>
+      <div id="chapters" className="scroll-mt-12">
+        <UploadChapters />
+      </div>
+      <div id="permissions" className="scroll-mt-12">
+        <UploadPermissions />
+      </div>
     </div>
   );
 }

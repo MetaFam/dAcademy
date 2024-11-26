@@ -2,6 +2,7 @@ import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGrou
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LaptopMinimalCheck, SendHorizonal, Presentation, Home } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { SettingsD } from "@/components/Settings/Settings"; // Adjust the path as necessary
 
 const items = [
   {
@@ -43,18 +44,21 @@ export function ProfileSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
         <div className="mt-auto flex items-center justify-between gap-2 p-4">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
             <Avatar>
               <AvatarImage src="https://example.com/avatar.jpg" alt="Avatar" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-lg font-medium pl-2">John Doe</p>
+              <p className="text-lg font-medium">John Doe</p>
             </div>
           </div>
-          <Link to="/" className="flex items-center">
-            <Home className="h-4 w-4 mr-4" />
-          </Link>
+          <div className="flex items-center gap-4">
+            <SettingsD />
+            <Link to="/" className="flex items-center">
+              <Home className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </SidebarContent>
     </Sidebar>

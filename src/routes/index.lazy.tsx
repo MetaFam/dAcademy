@@ -35,7 +35,7 @@ function Index() {
   }));
 
   return (
-    <div className="p-6 flex flex-col space-y-6">
+    <div className="p-6 flex flex-col space-y-6 mx-20">
       {[
         { content: carouselContent1, title: "Carousel 1" },
         { content: carouselContent2, title: "Carousel 2" },

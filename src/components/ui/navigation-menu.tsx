@@ -23,6 +23,21 @@ const NavigationMenu = React.forwardRef<
 ))
 NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName
 
+const NavigationMenuSub = React.forwardRef<
+  React.ElementRef<typeof NavigationMenuPrimitive.Sub>,
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Sub>
+>(({ className, ...props }, ref) => (
+  <NavigationMenuPrimitive.Sub
+    ref={ref}
+    className={cn(
+      "z-0 group data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:origin-left",
+      className
+    )}
+    {...props}
+  />
+))
+NavigationMenuSub.displayName = NavigationMenuPrimitive.Sub.displayName
+
 const NavigationMenuList = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List>
@@ -118,6 +133,7 @@ NavigationMenuIndicator.displayName =
 export {
   navigationMenuTriggerStyle,
   NavigationMenu,
+  NavigationMenuSub,
   NavigationMenuList,
   NavigationMenuItem,
   NavigationMenuContent,
