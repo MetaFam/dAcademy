@@ -2,7 +2,7 @@ import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGrou
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LaptopMinimalCheck, SendHorizonal, Presentation, Home } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { SettingsD } from "@/components/Settings/Settings"; // Adjust the path as necessary
+import { SettingsD } from "@/components/Settings/Settings";
 
 const items = [
   {
