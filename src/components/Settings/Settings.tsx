@@ -22,8 +22,7 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
-import { Label } from "@radix-ui/react-label";
-import { Input } from "../ui/input";
+
 
 export function SettingsD() {
   const [open, setOpen] = React.useState(false);

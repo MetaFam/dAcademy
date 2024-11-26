@@ -219,6 +219,7 @@ export const Navbar = () => {
           </NavigationMenuList>
         </NavigationMenu>
       )}
+      <w3m-button size='sm' balance="hide"/>
     </div>
   );
 };
