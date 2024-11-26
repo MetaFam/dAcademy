@@ -13,12 +13,14 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-
+./routes/user/$user.lazy
 // Create Virtual Routes
 
 const UploadLazyImport = createFileRoute('/upload')()
 const ProfileLazyImport = createFileRoute('/profile')()
 const IndexLazyImport = createFileRoute('/')()
+const UserIndexLazyImport = createFileRoute('/user/')()
+const UserUserLazyImport = createFileRoute('/user/$user')()
 
 // Create/Update Routes
 
@@ -39,6 +41,18 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const UserIndexLazyRoute = UserIndexLazyImport.update({
+  id: '/user/',
+  path: '/user/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/user/index.lazy').then((d) => d.Route))
+
+const UserUserLazyRoute = UserUserLazyImport.update({
+  id: '/user/$user',
+  path: '/user/$user',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/user/$user.lazy').then((d) => d.Route))
 
 // Populate the FileRoutesByPath interface
 
@@ -65,6 +79,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UploadLazyImport
       parentRoute: typeof rootRoute
     }
+    '/user/$user': {
+      id: '/user/$user'
+      path: '/user/$user'
+      fullPath: '/user/$user'
+      preLoaderRoute: typeof UserUserLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/user/': {
+      id: '/user/'
+      path: '/user'
+      fullPath: '/user'
+      preLoaderRoute: typeof UserIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -74,12 +102,16 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/profile': typeof ProfileLazyRoute
   '/upload': typeof UploadLazyRoute
+  '/user/$user': typeof UserUserLazyRoute
+  '/user': typeof UserIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/profile': typeof ProfileLazyRoute
   '/upload': typeof UploadLazyRoute
+  '/user/$user': typeof UserUserLazyRoute
+  '/user': typeof UserIndexLazyRoute
 }
 
 export interface FileRoutesById {
@@ -87,14 +119,16 @@ export interface FileRoutesById {
   '/': typeof IndexLazyRoute
   '/profile': typeof ProfileLazyRoute
   '/upload': typeof UploadLazyRoute
+  '/user/$user': typeof UserUserLazyRoute
+  '/user/': typeof UserIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/profile' | '/upload'
+  fullPaths: '/' | '/profile' | '/upload' | '/user/$user' | '/user'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/profile' | '/upload'
-  id: '__root__' | '/' | '/profile' | '/upload'
+  to: '/' | '/profile' | '/upload' | '/user/$user' | '/user'
+  id: '__root__' | '/' | '/profile' | '/upload' | '/user/$user' | '/user/'
   fileRoutesById: FileRoutesById
 }
 
@@ -102,12 +136,16 @@ export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   ProfileLazyRoute: typeof ProfileLazyRoute
   UploadLazyRoute: typeof UploadLazyRoute
+  UserUserLazyRoute: typeof UserUserLazyRoute
+  UserIndexLazyRoute: typeof UserIndexLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   ProfileLazyRoute: ProfileLazyRoute,
   UploadLazyRoute: UploadLazyRoute,
+  UserUserLazyRoute: UserUserLazyRoute,
+  UserIndexLazyRoute: UserIndexLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -122,7 +160,9 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/profile",
-        "/upload"
+        "/upload",
+        "/user/$user",
+        "/user/"
       ]
     },
     "/": {
@@ -133,6 +173,12 @@ export const routeTree = rootRoute
     },
     "/upload": {
       "filePath": "upload.lazy.tsx"
+    },
+    "/user/$user": {
+      "filePath": "user/$user.lazy.tsx"
+    },
+    "/user/": {
+      "filePath": "user/index.lazy.tsx"
     }
   }
 }

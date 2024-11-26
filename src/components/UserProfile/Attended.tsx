@@ -14,35 +14,35 @@ import {
 export function WorkshopsAttended() {
   const workshops = [
     {
-    date: "Today",
+    date: "Today9",
     topic: "Charmverse",
     org: "MG",
     recording: "IPFS",
     poap: "Link"
     },
     {
-    date: "Today",
+    date: "Today8",
     topic: "Charmverse",
     org: "MG",
     recording: "IPFS",
     poap: "Link"
     },
     {
-    date: "Today",
+    date: "Today7",
     topic: "Charmverse",
     org: "MG",
     recording: "IPFS",
     poap: "Link"
     },
     {
-    date: "Today",
+    date: "Today6",
     topic: "Charmverse",
     org: "MG",
     recording: "IPFS",
     poap: "Link"
     },
     {
-    date: "Today",
+    date: "Today3",
     topic: "Charmverse",
     org: "MG",
     recording: "IPFS",
