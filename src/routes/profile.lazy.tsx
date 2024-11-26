@@ -20,9 +20,15 @@ export const Route = createLazyFileRoute('/profile')({
 function Profile() {
   return (
     <div className="space-y-4 mx-auto w-2/3">
-      <NFTEarned />
-      <UserSubmissions />
-      <WorkshopsAttended />
+      <div id="nfts-earned" className="scroll-mt-12">
+        <NFTEarned />
+      </div>
+      <div id="submissions" className="scroll-mt-12">
+        <UserSubmissions />
+      </div>
+      <div id="workshops-attended" className="scroll-mt-12">
+        <WorkshopsAttended />
+      </div>
     </div>
   );
 }

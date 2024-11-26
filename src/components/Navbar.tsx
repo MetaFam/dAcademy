@@ -1,52 +1,51 @@
-// src/Navbar.tsx
 import React, { useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
 import { cn } from '@/lib/utils'; // Make sure you have this file
-import { Menu, X } from 'lucide-react'; // Import Lucide React icons
+import { Menu, X, BookOpen, Github, User } from 'lucide-react'; // Import Lucide React icons
 
 const components: { title: string; href: string; description: string }[] = [
   {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
+    title: "MetaGane",
+    href: "/org/metagame",
     description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+      "MetaGame's OG Playbook Collection.",
   },
   {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
+    title: "Org2",
+    href: "/org/yourOrg",
     description:
-      "For sighted users to preview content available behind a link.",
+      "This is a new org bookshelf.",
   },
   {
-    title: "Progress",
-    href: "/docs/primitives/progress",
+    title: "Org3",
+    href: "/org/yourOrg",
     description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+      "This is a new org bookshelf.",
   },
   {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
+    title: "Community Curated Bookshelf",
+    href: "/community/bookshelf1",
+    description: "Community curated bookshelves.",
   },
   {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
+    title: "Moar from the community",
+    href: "/community/bookshelf2",
     description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+      "Community curated bookshelves",
   },
   {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
+    title: "Community Extended",
+    href: "/community/bookshelf3",
     description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+      "Community collections",
   },
 ];
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & { icon?: React.ReactNode }
+>(({ className, title, children, icon, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -58,7 +57,10 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
+          <div className="flex items-center">
+            {icon && <span className="mr-2">{icon}</span>}
+            <span className="text-sm font-medium leading-none">{title}</span>
+          </div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
           </p>
@@ -89,31 +91,29 @@ export const Navbar: React.FC = () => {
                       className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                       href="/"
                     >
-                      {/* <Icons.logo className="h-6 w-6" /> */}
                       <div className="mb-2 mt-4 text-lg font-medium">
-                        shadcn/ui
+                        dAcademy
                       </div>
                       <p className="text-sm leading-tight text-muted-foreground">
-                        Beautifully designed components built with Radix UI and
-                        Tailwind CSS.
+                        Decentralized Education Protocol
                       </p>
                     </a>
                   </NavigationMenuLink>
                 </li>
-                <ListItem href="/docs" title="Introduction">
-                  Re-usable components built using Radix UI and Tailwind CSS.
+                <ListItem href="https://docs.dacade.my/" title="Docs" icon={<BookOpen size={16} />}>
+                  Learn how you can use dAcademy, what it's built with, and how it works.
                 </ListItem>
                 <ListItem href="/docs/installation" title="Installation">
                   How to install dependencies and structure your app.
                 </ListItem>
-                <ListItem href="/docs/primitives/typography" title="Typography">
-                  Styles for headings, paragraphs, lists...etc
+                <ListItem href="https://github.com/MetaFam/dAcademy" title="GitHub" icon={<Github size={16} />}>
+                  dAcademy is open-source and on GitHub.  See a bug? Like the build?
                 </ListItem>
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="md:block hidden">Components</NavigationMenuTrigger>
+            <NavigationMenuTrigger className="md:block hidden">Bookshelves</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                 {components.map((component) => (
@@ -129,9 +129,12 @@ export const Navbar: React.FC = () => {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/docs">
-              <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "md:block hidden")}>
-                Documentation
+            <Link to="/profile" className={cn(navigationMenuTriggerStyle(), "md:block hidden")}>
+              <NavigationMenuLink>
+                <div className="flex items-center">
+                  <User className="mr-2 h-4 w-4" />
+                  Profile
+                </div>
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
@@ -146,20 +149,20 @@ export const Navbar: React.FC = () => {
               <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="pl-4">
-                  <ListItem href="/docs" title="Introduction">
-                    Re-usable components built using Radix UI and Tailwind CSS.
+                  <ListItem href="https://docs.dacade.my/" title="Docs" icon={<BookOpen size={16} />}>
+                    Learn how you can use dAcademy, what it's built with, and how it works.
                   </ListItem>
                   <ListItem href="/docs/installation" title="Installation">
                     How to install dependencies and structure your app.
                   </ListItem>
-                  <ListItem href="/docs/primitives/typography" title="Typography">
-                    Styles for headings, paragraphs, lists...etc
+                  <ListItem href="https://github.com/MetaFam/dAcademy" title="GitHub" icon={<Github size={16} />}>
+                    dAcademy is open-source and on GitHub.  See a bug? Like the build?
                   </ListItem>
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+              <NavigationMenuTrigger>Bookshelves</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="pl-4">
                   {components.map((component) => (
@@ -175,9 +178,12 @@ export const Navbar: React.FC = () => {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/docs">
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Documentation
+              <Link to="/profile" className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink>
+                  <div className="flex items-center">
+                    <User className="mr-2 h-4 w-4" />
+                    Profile
+                  </div>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
