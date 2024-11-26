@@ -88,3 +88,7 @@
 html {
   scroll-behavior: smooth;
 }
+
+w3m-modal {
+  z-index: 1002;
+}

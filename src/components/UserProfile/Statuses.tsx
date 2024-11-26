@@ -95,9 +95,9 @@ const Statuses = ({account}: {account?: string}) => {
                 <TableCell>{sub.quest.name}</TableCell>
                 <TableCell className={clsx((() => {
                     switch(sub.questStatus.status) {
-                    case 'pass': return 'text-success'
-                    case 'fail': return 'text-error'
-                    case 'review': return 'text-info'
+                    case 'pass': return 'text-green-400'
+                    case 'fail': return 'text-red-600'
+                    case 'review': return 'text-blue-500'
                     default: return 'text-yellow-200'
                     }
                 })())}>{sub.questStatus.status}</TableCell>

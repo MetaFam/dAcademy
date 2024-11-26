@@ -1,0 +1,14 @@
+.mdxeditor-root-contenteditable {
+  border: 2px solid var(--basePageBg);
+  border-radius: 2%;
+  resize: block;
+  background-color: #FFF1;
+
+  & > div {
+    min-height: 25vh;
+  }
+}
+
+.mdxeditor-toolbar > *:first-child {
+  background-color: var(--baseBg);
+}

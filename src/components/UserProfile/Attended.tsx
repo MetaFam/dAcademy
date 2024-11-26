@@ -34,20 +34,6 @@ export function WorkshopsAttended() {
     recording: "IPFS",
     poap: "Link"
     },
-    {
-    date: "Today6",
-    topic: "Charmverse",
-    org: "MG",
-    recording: "IPFS",
-    poap: "Link"
-    },
-    {
-    date: "Today3",
-    topic: "Charmverse",
-    org: "MG",
-    recording: "IPFS",
-    poap: "Link"
-    },
   ];
 
   return (

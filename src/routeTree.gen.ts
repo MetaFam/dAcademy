@@ -13,14 +13,18 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-./routes/user/$user.lazy
+
 // Create Virtual Routes
 
 const UploadLazyImport = createFileRoute('/upload')()
-const ProfileLazyImport = createFileRoute('/profile')()
 const IndexLazyImport = createFileRoute('/')()
 const UserIndexLazyImport = createFileRoute('/user/')()
 const UserUserLazyImport = createFileRoute('/user/$user')()
+const OrgIdIndexLazyImport = createFileRoute('/org/$id/')()
+const BookSlugIndexLazyImport = createFileRoute('/book/$slug/')()
+const BookSlugChapterIndexLazyImport = createFileRoute(
+  '/book/$slug/$chapter/',
+)()
 
 // Create/Update Routes
 
@@ -29,12 +33,6 @@ const UploadLazyRoute = UploadLazyImport.update({
   path: '/upload',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/upload.lazy').then((d) => d.Route))
-
-const ProfileLazyRoute = ProfileLazyImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/profile.lazy').then((d) => d.Route))
 
 const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
@@ -54,6 +52,28 @@ const UserUserLazyRoute = UserUserLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/user/$user.lazy').then((d) => d.Route))
 
+const OrgIdIndexLazyRoute = OrgIdIndexLazyImport.update({
+  id: '/org/$id/',
+  path: '/org/$id/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/org/$id/index.lazy').then((d) => d.Route))
+
+const BookSlugIndexLazyRoute = BookSlugIndexLazyImport.update({
+  id: '/book/$slug/',
+  path: '/book/$slug/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/book/$slug/index.lazy').then((d) => d.Route),
+)
+
+const BookSlugChapterIndexLazyRoute = BookSlugChapterIndexLazyImport.update({
+  id: '/book/$slug/$chapter/',
+  path: '/book/$slug/$chapter/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/book/$slug/$chapter/index.lazy').then((d) => d.Route),
+)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -63,13 +83,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/profile': {
-      id: '/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileLazyImport
       parentRoute: typeof rootRoute
     }
     '/upload': {
@@ -93,6 +106,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UserIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/book/$slug/': {
+      id: '/book/$slug/'
+      path: '/book/$slug'
+      fullPath: '/book/$slug'
+      preLoaderRoute: typeof BookSlugIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/org/$id/': {
+      id: '/org/$id/'
+      path: '/org/$id'
+      fullPath: '/org/$id'
+      preLoaderRoute: typeof OrgIdIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/book/$slug/$chapter/': {
+      id: '/book/$slug/$chapter/'
+      path: '/book/$slug/$chapter'
+      fullPath: '/book/$slug/$chapter'
+      preLoaderRoute: typeof BookSlugChapterIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -100,52 +134,84 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
-  '/profile': typeof ProfileLazyRoute
   '/upload': typeof UploadLazyRoute
   '/user/$user': typeof UserUserLazyRoute
   '/user': typeof UserIndexLazyRoute
+  '/book/$slug': typeof BookSlugIndexLazyRoute
+  '/org/$id': typeof OrgIdIndexLazyRoute
+  '/book/$slug/$chapter': typeof BookSlugChapterIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
-  '/profile': typeof ProfileLazyRoute
   '/upload': typeof UploadLazyRoute
   '/user/$user': typeof UserUserLazyRoute
   '/user': typeof UserIndexLazyRoute
+  '/book/$slug': typeof BookSlugIndexLazyRoute
+  '/org/$id': typeof OrgIdIndexLazyRoute
+  '/book/$slug/$chapter': typeof BookSlugChapterIndexLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
-  '/profile': typeof ProfileLazyRoute
   '/upload': typeof UploadLazyRoute
   '/user/$user': typeof UserUserLazyRoute
   '/user/': typeof UserIndexLazyRoute
+  '/book/$slug/': typeof BookSlugIndexLazyRoute
+  '/org/$id/': typeof OrgIdIndexLazyRoute
+  '/book/$slug/$chapter/': typeof BookSlugChapterIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/profile' | '/upload' | '/user/$user' | '/user'
+  fullPaths:
+    | '/'
+    | '/upload'
+    | '/user/$user'
+    | '/user'
+    | '/book/$slug'
+    | '/org/$id'
+    | '/book/$slug/$chapter'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/profile' | '/upload' | '/user/$user' | '/user'
-  id: '__root__' | '/' | '/profile' | '/upload' | '/user/$user' | '/user/'
+  to:
+    | '/'
+    | '/upload'
+    | '/user/$user'
+    | '/user'
+    | '/book/$slug'
+    | '/org/$id'
+    | '/book/$slug/$chapter'
+  id:
+    | '__root__'
+    | '/'
+    | '/upload'
+    | '/user/$user'
+    | '/user/'
+    | '/book/$slug/'
+    | '/org/$id/'
+    | '/book/$slug/$chapter/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
-  ProfileLazyRoute: typeof ProfileLazyRoute
   UploadLazyRoute: typeof UploadLazyRoute
   UserUserLazyRoute: typeof UserUserLazyRoute
   UserIndexLazyRoute: typeof UserIndexLazyRoute
+  BookSlugIndexLazyRoute: typeof BookSlugIndexLazyRoute
+  OrgIdIndexLazyRoute: typeof OrgIdIndexLazyRoute
+  BookSlugChapterIndexLazyRoute: typeof BookSlugChapterIndexLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
-  ProfileLazyRoute: ProfileLazyRoute,
   UploadLazyRoute: UploadLazyRoute,
   UserUserLazyRoute: UserUserLazyRoute,
   UserIndexLazyRoute: UserIndexLazyRoute,
+  BookSlugIndexLazyRoute: BookSlugIndexLazyRoute,
+  OrgIdIndexLazyRoute: OrgIdIndexLazyRoute,
+  BookSlugChapterIndexLazyRoute: BookSlugChapterIndexLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -159,17 +225,16 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/profile",
         "/upload",
         "/user/$user",
-        "/user/"
+        "/user/",
+        "/book/$slug/",
+        "/org/$id/",
+        "/book/$slug/$chapter/"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
-    },
-    "/profile": {
-      "filePath": "profile.lazy.tsx"
     },
     "/upload": {
       "filePath": "upload.lazy.tsx"
@@ -179,6 +244,15 @@ export const routeTree = rootRoute
     },
     "/user/": {
       "filePath": "user/index.lazy.tsx"
+    },
+    "/book/$slug/": {
+      "filePath": "book/$slug/index.lazy.tsx"
+    },
+    "/org/$id/": {
+      "filePath": "org/$id/index.lazy.tsx"
+    },
+    "/book/$slug/$chapter/": {
+      "filePath": "book/$slug/$chapter/index.lazy.tsx"
     }
   }
 }

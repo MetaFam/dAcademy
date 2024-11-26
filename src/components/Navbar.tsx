@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from '@tanstack/react-router';
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
-import { cn } from '@/lib/utils'; // Make sure you have this file
-import { Menu, X, BookOpen, Github, User } from 'lucide-react'; // Import Lucide React icons
+import React, { useState } from 'react'
+import { Link } from '@tanstack/react-router'
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
+import { cn } from '@/lib/utils'
+import { Menu, X, BookOpen, Github, User } from 'lucide-react'
+import Logo from '@/assets/logo.svg?raw'
 
 const components: { title: string; href: string; description: string }[] = [
   {
-    title: "MetaGane",
+    title: "MetaGame",
     href: "/org/metagame",
     description:
       "MetaGame's OG Playbook Collection.",
@@ -48,11 +49,11 @@ const curatedComponents: { title: string; href: string; description: string }[] 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a"> & { icon?: React.ReactNode }
->(({ className, title, children, icon, ...props }, ref) => {
+>(({ className, href, title, children, icon, ...props }, ref) => {
   return (
     <li>
-      <NavigationMenuLink asChild>
-        <a
+      <NavigationMenuLink>
+        <Link to={href}
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
@@ -67,7 +68,7 @@ const ListItem = React.forwardRef<
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
           </p>
-        </a>
+        </Link>
       </NavigationMenuLink>
     </li>
   );
@@ -89,18 +90,17 @@ export const Navbar = () => {
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                 <li className="row-span-3">
-                  <NavigationMenuLink asChild>
-                    <a
+                  <NavigationMenuLink>
+                    <Link
                       className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                      href="/"
+                      to="/"
                     >
-                      <div className="mb-2 mt-4 text-lg font-medium">
-                        dAcademy
+                      <div dangerouslySetInnerHTML={{ __html: Logo }} className="mb-2 mt-4 text-lg font-medium">
                       </div>
                       <p className="text-sm leading-tight text-muted-foreground">
                         Decentralized Education Protocol
                       </p>
-                    </a>
+                    </Link>
                   </NavigationMenuLink>
                 </li>
                 <ListItem href="https://docs.dacade.my/" title="Docs" icon={<BookOpen size={16} />}>
@@ -116,13 +116,12 @@ export const Navbar = () => {
             <NavigationMenuTrigger className="md:block hidden">Bookshelves</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                {components.map((component) => (
+                {components.map(({title, href, description}) => (
                   <ListItem
-                    key={component.title}
-                    title={component.title}
-                    href={component.href}
+                    key={title}
+                    {...{title, href}}
                   >
-                    {component.description}
+                    {description}
                   </ListItem>
                 ))}
               </ul>
