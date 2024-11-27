@@ -27,7 +27,6 @@ export const Route = createLazyFileRoute('/upload/')({
     const reloadCallbacks = useRef<Array<() => void>>([])
     if (error) return <h1>{error}</h1>
     const chapterDeleted = (index: number) => {
-      console.group('looping')
       for(let idx = index; idx < chapterCount - 1; idx++) {
         console.log({idx, chapterCount})
         localStorage.setItem(
@@ -69,6 +68,7 @@ export const Route = createLazyFileRoute('/upload/')({
           <div className="drawer-content flex flex-col items-center justify-start md:px-8 mb-20">
             <form onSubmit={(evt) => {
               evt.preventDefault()
+              console.dir({ Submitting: evt.target })
               alert('Submitting')
             }}>
               <div

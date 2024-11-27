@@ -20,7 +20,6 @@ export const NFTGenerator = (
 
   const commit = async (evt: FormEvent) => {
     try {
-      console.debug({ title, color })
       evt.preventDefault()
       const svg = svgRef.current?.outerHTML
       if(!svg) throw new Error('Could not generate SVG.')
@@ -61,7 +60,7 @@ export const NFTGenerator = (
 
   return (
     <dialog ref={dialogRef} className="z-30 fixed inset-0">
-      <form onSubmit={commit}>
+      <form id="img-config">
         <div className="flex justify-end">
           <input onChange={({target: { files }}) => setBg(files?.[0])} type="file" accept="image/*" />
           <input placeholder="title" value={title} onChange={({target: {value}}) => setTitle(value)}/>
@@ -77,6 +76,8 @@ export const NFTGenerator = (
             >Cancel</button>
           )}
           <button
+            type="button"
+            onClick={commit}
             className="rounded-md btn-md btn mb-6 btn-secondary mr-4"
           >Commit</button>
         </div>

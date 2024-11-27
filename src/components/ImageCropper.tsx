@@ -28,7 +28,10 @@ function centerAspectCrop(
   )
 }
 
-export default function App({ image }: { image?:string }) {
+export default function ImageCropper(
+  { image, id = 'cropped-img' }:
+  { image?: string, id?: string }
+) {
   const [imgSrc, setImgSrc] = useState(image)
   const imgRef = useRef<HTMLImageElement>(null)
   const [blobURL, setBlobURL] = useState<string | null>(localStorage.getItem('cover'))
@@ -59,7 +62,6 @@ export default function App({ image }: { image?:string }) {
     if (!image || !crop) {
       throw new Error('Crop canvas does not exist.')
     }
-
 
     const offscreen = document.createElement('canvas')
     offscreen.width = aspect.width
@@ -97,7 +99,6 @@ export default function App({ image }: { image?:string }) {
     const output = offscreen.toDataURL('image/jpeg')
     localStorage.setItem('cover', output)
     setBlobURL(output)
-
   }
 
   return (
@@ -105,17 +106,25 @@ export default function App({ image }: { image?:string }) {
       <div className="Crop-Controls">
         <label className="flex justify-center mt-4 tooltip" data-tip={!!blobURL ? 'Click to change image.' : null}>
           {blobURL && (
-            <img src={blobURL} alt="Crop Preview" className="max-h-[50vh]"/>
+            <>
+              <input type="hidden" id={`${id}-cropped`} value={blobURL}/>
+              <img src={blobURL} alt="Crop Preview" className="max-h-[50vh]"/>
+            </>
           )}
           {!image && (
-            <input type="file" accept="image/*" onChange={onSelectFile} className={clsx(!!blobURL && 'hidden', 'file-input file-input-bordered w-full max-w-xs')} />
+            <input
+              {...{ id }}
+              type="file" accept="image/*"
+              onChange={onSelectFile}
+              className={clsx(!!blobURL && 'hidden', 'file-input file-input-bordered w-full max-w-xs')}
+            />
           )}
         </label>
       </div>
 
       {!!imgSrc && !blobURL && (
         <ReactCrop
-          crop={crop}
+          {...{ crop }}
           onChange={(c) => setCrop(c)}
           aspect={aspect.width / aspect.height}
 
@@ -124,7 +133,7 @@ export default function App({ image }: { image?:string }) {
         >
           <img
             ref={imgRef}
-            alt="Crop me"
+            alt="Crop Me"
             src={imgSrc}
             onLoad={onImageLoad}
           />

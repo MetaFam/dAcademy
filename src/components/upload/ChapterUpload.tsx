@@ -40,6 +40,7 @@ const ChapterUpload = (
             localStorage.setItem(`chapter.${index}.title`, value)
             setTitle(value)
           }}
+          required
           value={title ?? ''}
           id="title"
           placeholder="Title"

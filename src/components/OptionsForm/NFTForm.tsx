@@ -306,7 +306,7 @@ export const NFTForm: React.FC<{
   metadata,
 }) => {
   const {
-    homepage, description, color, image,
+    homepage, description, color,
     attributes, animation, name,
   } = watch()
   // const [wearables, setWearables] = useState({})
