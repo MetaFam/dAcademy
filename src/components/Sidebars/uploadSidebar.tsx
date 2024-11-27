@@ -64,6 +64,7 @@ export function UploadSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
         <div className="mt-auto flex items-center justify-between gap-2 p-4">
+        {!!displayName ? (
           <div className="flex items-center gap-2">
             <Avatar>
               <AvatarImage src={ensAvatar || "https://example.com/avatar.jpg"} alt="Avatar" />
@@ -73,6 +74,11 @@ export function UploadSidebar() {
               <p className="text-sm font-medium">{displayName}</p>
             </div>
           </div>
+        ) : (
+            <div className="mx-auto">
+              <w3m-button size="sm"/>
+            </div>
+          )}
           <div className="flex items-center gap-1">
             <SettingsD />
             <Link to="/" className="flex items-center">

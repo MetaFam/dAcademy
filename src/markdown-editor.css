@@ -12,3 +12,7 @@
 .mdxeditor-toolbar > *:first-child {
   background-color: var(--baseBg);
 }
+
+.mdxeditor-root-contenteditable > div {
+  display: block;
+}

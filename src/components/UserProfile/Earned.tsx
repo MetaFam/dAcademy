@@ -35,7 +35,7 @@ type GraphReturn = {
 }
 const Earned = ({account}: {account?: string}) => {
   const {
-    data: { user: {completedQuestChains: completed} },
+    data: {user}
   } = useSuspenseQuery<GraphReturn>({
     queryKey: [`completed-${account}`],
     queryFn: async () => request(
@@ -51,31 +51,33 @@ const Earned = ({account}: {account?: string}) => {
         <CardTitle className="text-center text-xl">NFTs Earned</CardTitle>
       </CardHeader>
       <CardContent>
-        <Carousel opts={{ align: "start" }} className="w-5/6 mx-auto">
-          <CarouselContent>
-            {completed?.map((book: Book) => (
-                <CarouselItem key={book.name} className="md:basis-1/2 lg:basis-1/4">
-                  <div className="p-1">
-                    <Card>
-                      <CardTitle className="text-center text-base mt-2">{book.name}</CardTitle>
-                      <CardContent className="flex aspect-auto items-center justify-center p-6">
-                        <figure className="px-2 pt-2 pb-4">
-                          <img
-                            src={toHTTP(book.token.imageUrl)}
+        {!!user && (
+          <Carousel opts={{ align: "start" }} className="w-5/6 mx-auto">
+            <CarouselContent>
+              {user.completedQuestChains?.map((book: Book) => (
+                  <CarouselItem key={book.name} className="md:basis-1/2 lg:basis-1/4">
+                    <div className="p-1">
+                      <Card>
+                        <CardTitle className="text-center text-base mt-2">{book.name}</CardTitle>
+                        <CardContent className="flex aspect-auto items-center justify-center p-6">
+                          <figure className="px-2 pt-2 pb-4">
+                            <img
+                              src={toHTTP(book.token.imageUrl)}
 
-                            alt="Completion NFT"
-                            className="rounded-sm"
-                          />
-                        </figure>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </CarouselItem>
-              ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+                              alt="Completion NFT"
+                              className="rounded-sm"
+                            />
+                          </figure>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        )}
       </CardContent>
     </Card>
   );

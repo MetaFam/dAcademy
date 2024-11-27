@@ -145,12 +145,10 @@ export const Navbar = () => {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Link to="/user" className={cn(navigationMenuTriggerStyle(), "md:block hidden")}>
-              <NavigationMenuLink>
                 <div className="flex items-center">
                   <User className="mr-2 h-4 w-4" />
                   Profile
                 </div>
-              </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
@@ -207,12 +205,10 @@ export const Navbar = () => {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link to="/user" className={navigationMenuTriggerStyle()}>
-                <NavigationMenuLink>
                   <div className="flex items-center">
                     <User className="mr-2 h-4 w-4" />
                     Profile
                   </div>
-                </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
           </NavigationMenuList>

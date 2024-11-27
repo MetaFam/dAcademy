@@ -31,7 +31,7 @@ export const Route = createLazyFileRoute('/user/')({
             <hr className="my-24 w-full" />
             <form className="mb-40 flex flex-col items-center" onSubmit={lookup}>
               <div className="flex w-full max-w-sm items-center space-x-2">
-                <Input type="user" placeholder="ENS name or address to view" />
+                <Input required name="user" placeholder="ENS name or address to view" />
                 <Button>Lookup</Button>
               </div>
             </form>

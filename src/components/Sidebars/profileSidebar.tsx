@@ -54,15 +54,21 @@ export function ProfileSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
         <div className="mt-auto flex items-center justify-between gap-2 p-4">
-          <div className="flex items-center gap-1">
-            <Avatar>
-              <AvatarImage src={ensAvatar || "https://example.com/avatar.jpg"} alt="Avatar" />
-              <AvatarFallback>{ensName ? ensName.slice(0, 2).toUpperCase() : truncateAddress(address || '').slice(0, 2).toUpperCase()}</AvatarFallback>
-            </Avatar>
-            <div>
-              <p className="text-sm font-medium">{displayName}</p>
+          {!!displayName ? (
+            <div className="flex items-center gap-1">
+              <Avatar>
+                <AvatarImage src={ensAvatar || "https://example.com/avatar.jpg"} alt="Avatar" />
+                <AvatarFallback>{ensName ? ensName.slice(0, 2).toUpperCase() : truncateAddress(address || '').slice(0, 2).toUpperCase()}</AvatarFallback>
+              </Avatar>
+              <div>
+                <p className="text-sm font-medium">{displayName}</p>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="mx-auto">
+              <w3m-button size="sm"/>
+            </div>
+          )}
           <div className="flex items-center gap-1">
             <SettingsD />
             <Link to="/" className="flex items-center">
