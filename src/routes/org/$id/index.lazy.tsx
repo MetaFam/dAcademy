@@ -107,7 +107,7 @@ console.log({images})
             }}
             className="w-full max-sm:max-w-sm max-md:max-w-md max-lg:max-w-lg max-xl:max-w-xl dark:text-white"
           >
-            <h2 className="text-lg">{category.title}</h2>
+            <h2 className="text-lg text-purple-400">{category.title}</h2>
             <h3 className="pb-4">{category.description}</h3>
             <CarouselContent>
               {category.books.map((book, bookIndex) => (

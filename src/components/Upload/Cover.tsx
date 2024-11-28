@@ -1,8 +1,7 @@
 // src/components/Upload/Cover
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import CoverUpload from '@/components/Upload/CoverUpload'
 
 export function UploadCover() {
   return (
@@ -11,10 +10,10 @@ export function UploadCover() {
         <CardTitle className="text-center text-xl">Upload Cover</CardTitle>
       </CardHeader>
       <CardContent className="text-center">
-        <form className="flex items-center justify-center space-x-4">
-          <Input id="picture" type="file" />
+        <CoverUpload/>
+        {/* <form className="flex items-center justify-center space-x-4">
           <Button type="submit">Submit</Button>
-        </form>
+        </form> */}
       </CardContent>
     </Card>
   );

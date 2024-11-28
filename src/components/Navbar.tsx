@@ -28,21 +28,21 @@ const components: { title: string; href: string; description: string }[] = [
 
 const curatedComponents: { title: string; href: string; description: string }[] = [
   {
-    title: "Community Curated Bookshelf",
-    href: "/community/bookshelf1",
-    description: "Community curated bookshelves.",
+    title: "Community Collections",
+    href: "/curation",
+    description: "Community curated bookshelves",
   },
   {
-    title: "Moar from the community",
-    href: "/community/bookshelf2",
+    title: "ReFi Shelf",
+    href: "/curation",
     description:
-      "Community curated bookshelves",
+      "Curated ReFi collection",
   },
   {
-    title: "Community Extended",
-    href: "/community/bookshelf3",
+    title: "Feature Coming Soon!",
+    href: "/curation",
     description:
-      "Community collections",
+      "Create a curation!",
   },
 ];
 
@@ -79,14 +79,14 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="p-2 flex justify-center gap-2 dark:bg-slate-800 dark:text-white">
+    <div className="p-2 flex justify-center gap-2 dark:bg-slate-800 dark:text-white pt-2">
       <NavigationMenu>
         <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X /> : <Menu />}
         </button>
         <NavigationMenuList className="md:flex justify-center space-x-4 items-center">
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="md:block hidden">Getting started</NavigationMenuTrigger>
+            <NavigationMenuTrigger className="md:block hidden">About dAcademy</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                 <li className="row-span-3">
@@ -159,7 +159,7 @@ export const Navbar = () => {
         <NavigationMenu className="md:hidden absolute top-16 left-0 right-0 bg-slate-800 dark:bg-slate-800 dark:text-white p-4">
           <NavigationMenuList className="flex flex-col space-y-4">
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+              <NavigationMenuTrigger>About dAcademy</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="pl-4">
                   <ListItem href="https://docs.dacade.my/" title="Docs" icon={<BookOpen size={16} />}>
