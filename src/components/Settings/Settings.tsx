@@ -1,7 +1,8 @@
+// src/components/SettingsD.tsx
 import * as React from "react";
-
-import { cn } from "@/lib/utils";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import { useAtom } from 'jotai';
+import { isGridVisibleAtom } from '@/atoms/persistedAtom'
+import { useMediaQuery } from "@/hooks/use-media-query"
 import {
   Dialog,
   DialogContent,
@@ -21,12 +22,17 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
-import { Settings } from "lucide-react";
-
+import { Settings, ToggleRight, ToggleLeft } from "lucide-react"
 
 export function SettingsD() {
-  const [open, setOpen] = React.useState(false);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const [open, setOpen] = React.useState(false)
+  const isDesktop = useMediaQuery("(min-width: 768px)")
+  const [isGridVisible, setIsGridVisible] = useAtom(isGridVisibleAtom)
+
+  const toggleGridVisibility = () => {
+    setIsGridVisible(prev => !prev);
+
+  };
 
   const trigger = (
     <Button variant="outline" size="icon" className="h-4 w-4 mr-2" onClick={() => setOpen(true)}>
@@ -34,48 +40,74 @@ export function SettingsD() {
     </Button>
   );
 
-  if (isDesktop) {
-    return (
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>{trigger}</DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Settings</DialogTitle>
-            <DialogDescription>
-              Change your settings here.
-            </DialogDescription>
-          </DialogHeader>
-          <ProfileForm />
-        </DialogContent>
-      </Dialog>
-    );
-  }
-
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader className="text-left">
-          <DrawerTitle>Settings</DrawerTitle>
-          <DrawerDescription>
-            Change your settings here.
-          </DrawerDescription>
-        </DrawerHeader>
-        <ProfileForm className="px-4" />
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
-  );
-}
-
-function ProfileForm({ className }: React.ComponentProps<"form">) {
-  return (
-    <form className={cn("grid items-start gap-4", className)}>
-      Theme Choices
-    </form>
+    <>
+      {isDesktop ? (
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>{trigger}</DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Settings</DialogTitle>
+              <DialogDescription>
+                Change your settings here.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid items-start gap-4">
+              <div className="flex items-center justify-between">
+                <label htmlFor="grid-toggle" className="text-sm font-medium">
+                  Animated Grid Background
+                </label>
+                <button
+                  id="grid-toggle"
+                  onClick={toggleGridVisibility}
+                  className="flex items-center p-1 rounded-full bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  {isGridVisible ? (
+                    <ToggleRight className="h-4 w-4 text-gray-800" />
+                  ) : (
+                    <ToggleLeft className="h-4 w-4 text-gray-800" />
+                  )}
+                </button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      ) : (
+        <Drawer open={open} onOpenChange={setOpen}>
+          <DrawerTrigger asChild>{trigger}</DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader className="text-left">
+              <DrawerTitle>Settings</DrawerTitle>
+              <DrawerDescription>
+                Change your settings here.
+              </DrawerDescription>
+            </DrawerHeader>
+            <div className="grid items-start gap-4 px-4">
+              <div className="flex items-center justify-between">
+                <label htmlFor="grid-toggle" className="text-sm font-medium">
+                  Animated Grid Background
+                </label>
+                <button
+                  id="grid-toggle"
+                  onClick={toggleGridVisibility}
+                  className="flex items-center p-1 rounded-full bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  {isGridVisible ? (
+                    <ToggleRight className="h-4 w-4 text-gray-800" />
+                  ) : (
+                    <ToggleLeft className="h-4 w-4 text-gray-800" />
+                  )}
+                </button>
+              </div>
+            </div>
+            <DrawerFooter className="pt-2">
+              <DrawerClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      )}
+    </>
   );
 }

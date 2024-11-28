@@ -13,6 +13,7 @@ import {
 } from '@tanstack/react-router'
 import { Toaster } from 'sonner'
 import { routeTree } from './routeTree.gen'
+import { Provider } from 'jotai'
 
 const params = new URLSearchParams(window.location.search)
 export const debug = !!params.get('debug')
@@ -72,7 +73,9 @@ if (!root.innerHTML){
     <StrictMode>
       <Toaster position="bottom-center"/>
       <AppKitProvider>
-        <RouterProvider {...{ router }}/>
+        <Provider>
+          <RouterProvider {...{ router }}/>
+        </Provider>
       </AppKitProvider>
     </StrictMode>,
   )

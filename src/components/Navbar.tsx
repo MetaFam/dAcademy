@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { Link } from '@tanstack/react-router'
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
-import { cn } from '@/lib/utils'
-import { Menu, X, BookOpen, Github, User } from 'lucide-react'
-import Logo from '@/assets/logo.svg?raw'
+import React, { useState } from 'react';
+import { Link } from '@tanstack/react-router';
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
+import { cn } from '@/lib/utils';
+import { Menu, X, BookOpen, Github, User } from 'lucide-react';
+import Logo from '@/assets/logo.svg?raw';
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -79,7 +79,7 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="p-2 flex justify-center gap-2 dark:bg-slate-800 dark:text-white pt-2">
+    <div className="z-50 p-2 flex justify-center gap-2 dark:bg-slate-800 dark:text-white pt-2 relative">
       <NavigationMenu>
         <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X /> : <Menu />}
@@ -116,10 +116,10 @@ export const Navbar = () => {
             <NavigationMenuTrigger className="md:block hidden">Bookshelves</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                {components.map(({title, href, description}) => (
+                {components.map(({ title, href, description }) => (
                   <ListItem
                     key={title}
-                    {...{title, href}}
+                    {...{ title, href }}
                   >
                     {description}
                   </ListItem>
@@ -145,10 +145,10 @@ export const Navbar = () => {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Link to="/user" className={cn(navigationMenuTriggerStyle(), "md:block hidden")}>
-                <div className="flex items-center">
-                  <User className="mr-2 h-4 w-4" />
-                  Profile
-                </div>
+              <div className="flex items-center">
+                <User className="mr-2 h-4 w-4" />
+                Profile
+              </div>
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
@@ -156,7 +156,7 @@ export const Navbar = () => {
 
       {/* Mobile Navigation Menu */}
       {isOpen && (
-        <NavigationMenu className="md:hidden absolute top-16 left-0 right-0 bg-slate-800 dark:bg-slate-800 dark:text-white p-4">
+        <NavigationMenu className="md:hidden absolute top-16 left-0 right-0 bg-slate-800 dark:bg-slate-800 dark:text-white p-4 z-50">
           <NavigationMenuList className="flex flex-col space-y-4">
             <NavigationMenuItem>
               <NavigationMenuTrigger>About dAcademy</NavigationMenuTrigger>
@@ -205,16 +205,16 @@ export const Navbar = () => {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link to="/user" className={navigationMenuTriggerStyle()}>
-                  <div className="flex items-center">
-                    <User className="mr-2 h-4 w-4" />
-                    Profile
-                  </div>
+                <div className="flex items-center">
+                  <User className="mr-2 h-4 w-4" />
+                  Profile
+                </div>
               </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       )}
-      <w3m-button size='sm' balance="hide"/>
+      <w3m-button size='sm' balance="hide" />
     </div>
   );
 };
