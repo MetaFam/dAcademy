@@ -16,7 +16,7 @@ export default function Content() {
       {book.on === 0 ? (
         <button
           onClick={() => book.setOn(book.on + 1)}
-          className="shadow-md rounded-md bg-base-300 p-4 hover:bg-yellow-300/60 text-white text-center"
+          className="shadow-md rounded-md bg-secondary p-4 hover:bg-blue-300/60 text-white text-center"
         >
           Continue
         </button>

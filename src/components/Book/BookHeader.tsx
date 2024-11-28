@@ -26,7 +26,7 @@ export const BookHeader = () => {
 
   return (
     <header>
-      <h2 className="text-sm text-secondary mt-5 text-left pl-1">
+      <h2 className="text-sm text-blue-500 mt-5 text-left pl-1">
         Creator: {creator}
       </h2>
       <h1 className="text-4xl md:text-6xl font-bold text-left mt-2">

@@ -23,6 +23,7 @@ export function Soulbound() {
           </CardHeader>
             <CardContent className="text-gray-400 text-center">
               <p>Earn and showcase verifiable credentials using soulbound NFTs.</p>
+              <p className="text-green-500">#Learn2Earn</p>
             </CardContent>
         </Card>
       </HoverCardTrigger>

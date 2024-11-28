@@ -15,7 +15,7 @@ export function Web3() {
           <Code size={24} className="text-blue-400" />
         </Avatar>
         <div className="text-center">
-          <CardTitle className="text-xl font-bold">Web3 Technology</CardTitle>
+          <CardTitle className="text-xl font-bold">Web3</CardTitle>
           <CardDescription className="text-gray-300">Built on Optimism for decentralized learning.</CardDescription>
         </div>
         <HoverCard>
