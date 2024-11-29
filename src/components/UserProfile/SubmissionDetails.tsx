@@ -153,7 +153,7 @@ export function SubmissionDetails({ submission, onClose }: { submission: Submiss
         </Dialog>
       ) : (
         <Drawer open={true} onOpenChange={onClose}>
-          <DrawerContent>
+          <DrawerContent className="px-4">
             <DrawerHeader className="text-left">
               <DrawerTitle>Submission Details</DrawerTitle>
               <DrawerDescription>
@@ -161,7 +161,7 @@ export function SubmissionDetails({ submission, onClose }: { submission: Submiss
               </DrawerDescription>
             </DrawerHeader>
             {Content}
-            <DrawerFooter className="pt-2">
+            <DrawerFooter className="pt-4">
               <DrawerClose asChild>
                 <button
                   className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
