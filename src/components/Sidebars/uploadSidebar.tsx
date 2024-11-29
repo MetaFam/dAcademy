@@ -7,7 +7,7 @@ import { useWalletInfo } from "@/hooks/useWalletInfo";
 
 const items = [
   {
-    title: "Upload Cover",
+    title: "Cover",
     url: "#upload-cover",
     icon: ImageUp,
   },

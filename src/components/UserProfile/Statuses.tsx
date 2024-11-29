@@ -1,6 +1,6 @@
-// src/components/UserProfile/UserSubmissions
+// src/components/UserProfile/Statuses
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Table,
   TableBody,
@@ -8,68 +8,75 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/table"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import clsx from "clsx"
 import { request, gql } from "graphql-request"
-import { useState } from "react";
+import { useState } from "react"
+import { SubmissionDetails } from "@/components/UserProfile/SubmissionDetails"
 
 const submissionsQueryDocument = gql`
-query ChainDetails($address: String) {
-  proofSubmissions(where: {user: $address}) {
-    id
-		timestamp
-		questChain {
-      name
-    }
-		questStatus {
-      status
-    }
-    quest {
-      name
+  query ChainDetails($address: String) {
+    proofSubmissions(where: { user: $address }) {
+      id
+      timestamp
+      questChain {
+        name
+      }
+      questStatus {
+        status
+      }
+      quest {
+        name
+      }
     }
   }
-}
 `
-type Submission =  {
-  id: string
-  timestamp: number
+
+type Submission = {
+  id: string;
+  timestamp: number;
   questChain: {
-    name: string
+    name: string;
   }
   questStatus: {
-    status: string
+    status: string;
   }
   quest: {
-    name: string
+    name: string;
   }
 }
 
 type GraphReturn = {
-  proofSubmissions: Array<Submission>
+  proofSubmissions: Array<Submission>;
 }
-const Statuses = ({account}: {account?: string}) => {
+
+const Statuses = ({ account }: { account?: string }) => {
   const {
-    data: { proofSubmissions }  = {},
+    data: { proofSubmissions } = {},
   } = useSuspenseQuery<GraphReturn>({
     queryKey: [`submissions-${account}`],
-    queryFn: async () => request(
-      import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
-      submissionsQueryDocument,
-      { address: account?.toLowerCase() },
-    ),
+    queryFn: async () =>
+      request(
+        import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
+        submissionsQueryDocument,
+        { address: account?.toLowerCase() },
+      ),
   })
+
   const submissions = proofSubmissions?.sort((a, b) => {
-    if(a.questStatus.status !== b.questStatus.status) {
-    const statuses = ['review', 'fail', 'pass']
-    return statuses.indexOf(a.questStatus.status) - statuses.indexOf(b.questStatus.status)
+    if (a.questStatus.status !== b.questStatus.status) {
+      const statuses = ['review', 'fail', 'pass'];
+      return statuses.indexOf(a.questStatus.status) - statuses.indexOf(b.questStatus.status);
     }
-    return a.timestamp - b.timestamp
+    return a.timestamp - b.timestamp;
   })
-  const [proof, setProof] = useState<string>()
+
+  const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null);
+
   const setInfo = (proofId: string) => {
-    setProof(proofId)
-    ;(document.getElementById('subInfo') as HTMLDialogElement).showModal()
+    const submission = submissions?.find((sub) => sub.id === proofId);
+    setSelectedSubmission(submission || null);
   }
 
   return (
@@ -84,29 +91,41 @@ const Statuses = ({account}: {account?: string}) => {
               <TableHead className="w-[100px]">Date</TableHead>
               <TableHead>Book</TableHead>
               <TableHead>Chapter</TableHead>
-              <TableHead >Status</TableHead>
+              <TableHead>Status</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {submissions?.map((sub, idx) => (
-              <TableRow key={idx}>
-                <TableCell className="font-medium">{new Date(sub.timestamp * 1000).toLocaleDateString()}</TableCell>
+              <TableRow
+                key={idx}
+                onClick={() => setInfo(sub.id)}
+                className="cursor-pointer hover:bg-secondary/30"
+              >
+                <TableCell className="font-medium">
+                  {new Date(sub.timestamp * 1000).toLocaleDateString()}
+                </TableCell>
                 <TableCell>{sub.questChain.name}</TableCell>
                 <TableCell>{sub.quest.name}</TableCell>
-                <TableCell className={clsx((() => {
-                    switch(sub.questStatus.status) {
-                    case 'pass': return 'text-green-400'
-                    case 'fail': return 'text-red-600'
-                    case 'review': return 'text-blue-500'
-                    default: return 'text-yellow-200'
-                    }
-                })())}>{sub.questStatus.status}</TableCell>
+                <TableCell
+                  className={clsx({
+                    'text-green-400': sub.questStatus.status === 'pass',
+                    'text-red-600': sub.questStatus.status === 'fail',
+                    'text-blue-500': sub.questStatus.status === 'review',
+                    'text-yellow-200': sub.questStatus.status !== 'pass' && sub.questStatus.status !== 'fail' && sub.questStatus.status !== 'review',
+                  })}
+                >
+                  {sub.questStatus.status}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </CardContent>
+      {selectedSubmission && (
+        <SubmissionDetails submission={selectedSubmission} onClose={() => setSelectedSubmission(null)} />
+      )}
     </Card>
-  );
+  )
 }
+
 export default Statuses

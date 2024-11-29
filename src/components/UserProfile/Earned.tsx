@@ -55,12 +55,12 @@ const Earned = ({account}: {account?: string}) => {
           <Carousel opts={{ align: "start" }} className="w-5/6 mx-auto">
             <CarouselContent>
               {user.completedQuestChains?.map((book: Book) => (
-                  <CarouselItem key={book.name} className="md:basis-1/2 lg:basis-1/4">
+                  <CarouselItem key={book.name} className="md:basis-1/2 lg:basis-1/3">
                     <div className="p-1">
                       <Card>
-                        <CardTitle className="text-center text-base mt-2">{book.name}</CardTitle>
-                        <CardContent className="flex aspect-auto items-center justify-center p-6">
-                          <figure className="px-2 pt-2 pb-4">
+                        <CardTitle className="text-center text-base mt-2 mx-2">{book.name}</CardTitle>
+                        <CardContent className="flex aspect-auto items-center justify-center p-2">
+                          <figure className="">
                             <img
                               src={toHTTP(book.token.imageUrl)}
 
