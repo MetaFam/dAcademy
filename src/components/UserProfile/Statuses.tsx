@@ -87,7 +87,7 @@ const Statuses = ({ account }: { account?: string }) => {
       <CardContent>
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-transparent hover:bg-transparent cursor-default">
               <TableHead className="w-[100px]">Date</TableHead>
               <TableHead>Book</TableHead>
               <TableHead>Chapter</TableHead>
