@@ -1,6 +1,6 @@
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ImageUp, BookType, BookKey, BookText, BookOpenCheck, Home } from "lucide-react";
+import { ImageUp, BookType, BookKey, BookText, BookOpenCheck, Home, PartyPopper } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { SettingsD } from "@/components/Settings/Settings";
 import { useWalletInfo } from "@/hooks/useWalletInfo";
@@ -25,6 +25,11 @@ const items = [
     title: "Chapters",
     url: "#chapters",
     icon: BookText,
+  },
+  {
+    title: "Completion NFT",
+    url: "#completion",
+    icon: PartyPopper,
   },
   {
     title: "Owner Permissions",

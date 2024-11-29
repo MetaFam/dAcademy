@@ -10,6 +10,7 @@ import ChapterUpload from '@/components/Upload/ChapterUpload'
 import { UploadPermissions } from '@/components/Upload/Permissions'
 import { UploadTitle } from '@/components/Upload/Title'
 import { Button } from '@/components/ui/button'
+import { CompletionNFT } from '@/components/Upload/Completion'
 
 export const Route = createLazyFileRoute('/upload/')({
   component: () => {
@@ -62,7 +63,7 @@ export const Route = createLazyFileRoute('/upload/')({
       <SidebarProvider>
         <UploadSidebar />
         <SidebarTrigger />
-        <main className="flex-1 mt-12 w-screen">
+        <main className="flex-1 mt-12 w-screen mb-8">
           <div className="space-y-4 mx-auto w-2/3">
             <div id="upload-cover" className="scroll-mt-12">
               <UploadCover />
@@ -98,6 +99,9 @@ export const Route = createLazyFileRoute('/upload/')({
                   Add Chapter
                 </Button>
               </div>
+            </div>
+            <div id="completion" className="scroll-mt-12">
+              <CompletionNFT />
             </div>
             <div id="permissions" className="scroll-mt-12">
               <UploadPermissions />
