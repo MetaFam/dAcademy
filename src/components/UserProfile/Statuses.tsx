@@ -51,6 +51,14 @@ type GraphReturn = {
   proofSubmissions: Array<Submission>;
 }
 
+const truncateTextAfterWords = (text: string, wordLimit: number = 3): string => {
+  const words = text.split(' ');
+  if (words.length > wordLimit) {
+    return words.slice(0, wordLimit).join(' ') + '...';
+  }
+  return text;
+}
+
 const Statuses = ({ account }: { account?: string }) => {
   const {
     data: { proofSubmissions } = {},
@@ -104,8 +112,12 @@ const Statuses = ({ account }: { account?: string }) => {
                 <TableCell className="font-medium">
                   {new Date(sub.timestamp * 1000).toLocaleDateString()}
                 </TableCell>
-                <TableCell>{sub.questChain.name}</TableCell>
-                <TableCell>{sub.quest.name}</TableCell>
+                <TableCell className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[150px]">
+                  {truncateTextAfterWords(sub.questChain.name)}
+                </TableCell>
+                <TableCell className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[150px]">
+                  {sub.quest.name}
+                </TableCell>
                 <TableCell
                   className={clsx({
                     'text-green-400': sub.questStatus.status === 'pass',

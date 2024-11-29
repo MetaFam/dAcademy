@@ -55,3 +55,8 @@ export const upload = async (files: Array<File>) => {
 
   return (await client.uploadDirectory(files)).toString()
 }
+
+export const truncateHash = (hash: string, length: number = 6) => {
+  if (!hash) return '';
+  return `${hash.slice(0, length)}...${hash.slice(-length)}`;
+}
