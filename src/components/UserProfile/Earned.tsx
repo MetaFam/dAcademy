@@ -1,4 +1,3 @@
-// src/components/UserProfile/NftsEarned
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Carousel,
@@ -10,6 +9,7 @@ import {
 import { useSuspenseQuery } from "@tanstack/react-query"
 import request, { gql } from "graphql-request"
 import { toHTTP } from "@/lib/utils"
+import { useNavigate } from '@tanstack/react-router'
 
 const completedBooksQueryDocument = gql`
   query ChainDetails($address: String) {
@@ -19,13 +19,16 @@ const completedBooksQueryDocument = gql`
           imageUrl
         }
         name
+        slug  # Ensure this is included in your GraphQL response
       }
     }
   }
 `
+
 type Book = {
     token: { imageUrl: string }
     name: string
+    slug: string  // Add slug to the Book type
   }
 
 type GraphReturn = {
@@ -33,7 +36,9 @@ type GraphReturn = {
     completedQuestChains: Array<Book>
   }
 }
+
 const Earned = ({account}: {account?: string}) => {
+  const navigate = useNavigate()  // Use the navigate hook from TanStack Router
   const {
     data: {user}
   } = useSuspenseQuery<GraphReturn>({
@@ -55,7 +60,11 @@ const Earned = ({account}: {account?: string}) => {
           <Carousel opts={{ align: "start" }} className="w-5/6 mx-auto">
             <CarouselContent>
               {user.completedQuestChains?.map((book: Book) => (
-                  <CarouselItem key={book.name} className="md:basis-1/2 lg:basis-1/3">
+                  <CarouselItem
+                    key={book.name}
+                    className="md:basis-1/2 lg:basis-1/3 cursor-pointer"
+                    onClick={() => navigate({ to: `/book/${book.slug}/0` })}  // Navigate to the book page
+                  >
                     <div className="p-1">
                       <Card>
                         <CardTitle className="text-center text-base mt-2 mx-2">{book.name}</CardTitle>
@@ -63,7 +72,6 @@ const Earned = ({account}: {account?: string}) => {
                           <figure className="">
                             <img
                               src={toHTTP(book.token.imageUrl)}
-
                               alt="Completion NFT"
                               className="rounded-sm"
                             />
@@ -82,4 +90,5 @@ const Earned = ({account}: {account?: string}) => {
     </Card>
   );
 }
+
 export default Earned
