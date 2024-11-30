@@ -13,6 +13,7 @@ import {
 import SectionHeader from '@/components/SectionHeader'
 import playbooks from '@/data/playbooks.json'
 import { toHTTP } from '@/lib/utils'
+import TopOrg from '@/components/TopOrg'
 
 const chainImageQueryDocument = gql`
   query ChainImages($name: String) {
@@ -94,7 +95,7 @@ export function App() {
 
   return (
     <>
-      <div className="p-6 flex flex-col space-y-6 mx-20">
+      <div id="top" className="p-6 flex flex-col space-y-6 mx-20">
         {playbooks.map((category, index) => (
           <div key={index} className="space-y-2">
             <Carousel
@@ -104,7 +105,7 @@ export function App() {
               className="w-full max-sm:max-w-sm max-md:max-w-md max-lg:max-w-lg max-xl:max-w-xl dark:text-white"
             >
               <h2 className="text-lg text-purple-400">{category.title}</h2>
-              <h3 className="pb-4">{category.description}</h3>
+              <h3 className="pb-4 md:text-base">{category.description}</h3>
               <CarouselContent>
                 {category.books.map((book, bookIndex) => (
                   <CarouselItem
@@ -139,6 +140,7 @@ export function App() {
             </Carousel>
           </div>
         ))}
+        <TopOrg/>
       </div>
     </>
   )

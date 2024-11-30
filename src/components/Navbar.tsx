@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
 import { cn } from '@/lib/utils';
-import { Menu, X, BookOpen, Github, User } from 'lucide-react';
+import { Menu, X, BookOpen, Github, User, Home } from 'lucide-react'; // Import Home icon
 import Logo from '@/assets/logo.svg?raw';
 
 const components: { title: string; href: string; description: string }[] = [
@@ -57,11 +57,11 @@ const ListItem = React.forwardRef<
         >
           <div className="flex items-center">
             {icon && <span className="mr-2">{icon}</span>}
-            <span className="text-sm font-medium leading-none">{title}</span>
+            {title && <span className="text-sm font-medium leading-none">{title}</span>}
           </div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          {children && <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
-          </p>
+          </p>}
         </Link>
       </NavigationMenuLink>
     </li>
@@ -79,6 +79,11 @@ export const Navbar = () => {
           {isOpen ? <X /> : <Menu />}
         </button>
         <NavigationMenuList className="md:flex justify-center space-x-4 items-center">
+          <NavigationMenuItem>
+            <Link to="/" className="md:block hidden">
+              <Home size={16} className="hover:text-accent-foreground" />
+            </Link>
+          </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger className="md:block hidden">About dAcademy</NavigationMenuTrigger>
             <NavigationMenuContent>
@@ -152,6 +157,11 @@ export const Navbar = () => {
       {isOpen && (
         <NavigationMenu className="md:hidden absolute top-16 left-0 right-0 bg-slate-800 dark:bg-slate-800 dark:text-white p-4 z-50">
           <NavigationMenuList className="flex flex-col space-y-4">
+            <NavigationMenuItem>
+              <Link to="/" className="flex items-center">
+                <Home size={16} className="hover:text-accent-foreground" />
+              </Link>
+            </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuTrigger>About dAcademy</NavigationMenuTrigger>
               <NavigationMenuContent>
