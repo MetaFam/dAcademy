@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { type Book } from '../routes/org/$id/index.lazy'
+import { type Book } from '../routes/org/index.lazy'
 import { toHTTP } from '@/lib/utils.ts'
 
 export const toSlug = (title: string) => (

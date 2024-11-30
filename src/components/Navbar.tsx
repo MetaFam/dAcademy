@@ -13,16 +13,10 @@ const components: { title: string; href: string; description: string }[] = [
       "MetaGame's OG Playbook Collection.",
   },
   {
-    title: "Org2",
-    href: "/org/yourOrg",
+    title: "Add your Org's Bookshelf",
+    href: "/org/",
     description:
-      "This is a new org bookshelf.",
-  },
-  {
-    title: "Org3",
-    href: "/org/yourOrg",
-    description:
-      "This is a new org bookshelf.",
+      "Upload some playbooks!",
   },
 ];
 
