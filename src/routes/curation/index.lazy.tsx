@@ -21,7 +21,7 @@ function RouteComponent() {
       {isGridVisible && <div className="animated-grid-bg"></div>}
 
       <div className="flex flex-col h-screen z-10 p-4">
-        <h1 className="text-xl font-bold text-center mt-8">Curated Bookshelves</h1>
+        <h1 className="text-3xl font-bold text-center mt-2">Curated Bookshelves</h1>
         <Alert className="max-w-md mx-auto mt-2 flex items-center space-x-4 p-4 bg-blue-400/30">
           <AlertCircle className="h-6 w-6 text-blue-600" />
           <AlertTitle className="text-center">Coming Soon!   - Stay tuned for this new feature.</AlertTitle>

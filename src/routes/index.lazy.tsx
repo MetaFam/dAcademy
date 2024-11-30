@@ -12,6 +12,7 @@ import { GhBtn } from "@/components/Home/GhBtn"
 import { useAtom } from 'jotai'
 import { isGridVisibleAtom } from '@/atoms/persistedAtom'
 import "@/styles/animatedGrid.css"
+import { useEffect } from 'react' // Import useEffect
 
 export const Route = createLazyFileRoute('/')({
   component: Index,
@@ -20,13 +21,18 @@ export const Route = createLazyFileRoute('/')({
 function Index() {
   const [isGridVisible] = useAtom(isGridVisibleAtom)
 
+  // Scroll to the top of the page when the component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []); // Empty dependency array ensures this runs only once on mount
+
   return (
     <div>
       {isGridVisible && <div className="animated-grid-bg"></div>}
 
       <div className="p-6 flex flex-col space-y-6 mx-2 sm:mx-4 items-center relative z-10">
         <div className="text-center mt-2">
-          <h1 className="text-3xl sm:text-xl md:text-xl font-bold mb-4 text-blue-300">Welcome to dAcademy!</h1>
+          <h1 className="text-3xl font-bold mb-4 text-blue-300">Welcome to dAcademy!</h1>
           <h2 className="text-2xl sm:text-base md:text-base mb-2">Learn, Verify, Achieve: Protocol for a Decentralized Education</h2>
           <h2 className="text-2xl sm:text-base md:text-base mb-1">A decentralized knowledge network. Onboard forward.</h2>
         </div>
@@ -39,7 +45,7 @@ function Index() {
                 Start Learning
               </Button>
             </Link>
-            <Link to="/upload">
+            <Link to="/org">
               <Button variant="secondary" className="shadow-md border border-gray-500">
                 <UploadCloud size={16} className="mr-2" />
                 Upload a Playbook

@@ -1,7 +1,7 @@
-import { createLazyFileRoute} from '@tanstack/react-router'
+import { createLazyFileRoute } from '@tanstack/react-router'
 import { useAccount } from 'wagmi'
 import { useUsername } from '@/hooks/useUsername'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react' // Import useEffect
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { UploadSidebar } from '@/components/Sidebars/uploadSidebar'
 import { UploadCover } from '@/components/Upload/Cover'
@@ -27,6 +27,12 @@ export const Route = createLazyFileRoute('/upload/')({
     )
     const reloadCallbacks = useRef<Array<() => void>>([])
     if (error) return <h1>{error}</h1>
+
+    // Scroll to the top of the page when the component mounts
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []); // Empty dependency array ensures this runs only once on mount
+
     const chapterDeleted = (index: number) => {
       console.group('looping')
       for (let idx = index; idx < chapterCount - 1; idx++) {

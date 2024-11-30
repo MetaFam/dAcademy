@@ -4,7 +4,7 @@ import { Link } from '@tanstack/react-router'
 
 const TopOrg = () => {
   return (
-    <div className="fixed bottom-0 right-0 lg:pr-12 md:mt-8 md:pr-20">
+    <div className="fixed bottom-0 right-0 lg:pr-8 md:mt-8 md:pr-20">
       <Link to={'#top' as '/'} className="btn btn-ghost text-xl">
         <div className="flex flex-col justify-center items-center">
           <svg

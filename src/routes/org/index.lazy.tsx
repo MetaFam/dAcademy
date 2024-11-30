@@ -17,9 +17,15 @@ export const Route = createLazyFileRoute('/org/')({
     return (
       <div id="top" className="p-6 flex flex-col items-center space-y-6">
         <div className="max-w-3xl w-full space-y-4 text-center">
-          <h1 className="text-3xl font-bold">Start Your Organization's Bookshelf</h1>
+          <h1 className="text-3xl font-bold">
+            Start Your Organization's Bookshelf
+          </h1>
           <p className="text-lg text-gray-600">
-            Get started by uploading your first playbook to organize your workflows and procedures.
+            Get started by{' '}
+            <a href="/#org/#upload-section" className="text-blue-400 underline">
+              uploading
+            </a>{' '}
+            your first playbook to organize your workflows and procedures.
           </p>
         </div>
 
@@ -114,7 +120,7 @@ export const Route = createLazyFileRoute('/org/')({
           </Card>
         </div>
 
-        <Card className="w-full max-w-3xl bg-black/30 shadow-lg rounded-lg">
+        <Card id="upload-section" className="w-full max-w-3xl bg-black/30 shadow-lg rounded-lg">
           <CardHeader>
             <CardTitle className="text-white">Upload Your First Playbook</CardTitle>
             <CardDescription className="text-gray-400">
