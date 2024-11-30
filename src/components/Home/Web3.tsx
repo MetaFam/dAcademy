@@ -33,6 +33,13 @@ export function Web3() {
     </div>
   );
 
+  const triggerContent = (
+    <div className="flex items-center cursor-pointer mt-1">
+      <span>Built on</span>
+      <img src={OptimismLogo} alt="Optimism" width={72} height={72} className="ml-2 mb-0.5" />
+    </div>
+  );
+
   return (
     <Card className="bg-black/40 shadow-lg rounded-lg text-white w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 max-w-md">
       <CardHeader className="flex flex-col items-center space-y-2">
@@ -41,44 +48,45 @@ export function Web3() {
         </Avatar>
         <div className="text-center">
           <CardTitle className="text-xl font-bold">Web3</CardTitle>
-          <CardDescription className="text-gray-300">Built on Optimism for decentralized learning.</CardDescription>
+          <CardDescription className="text-gray-300">
+            {isDesktop ? (
+              <HoverCard>
+                <HoverCardTrigger asChild>
+                  {triggerContent}
+                </HoverCardTrigger>
+                <HoverCardContent className="w-80">
+                  {hoverCardContent}
+                </HoverCardContent>
+              </HoverCard>
+            ) : (
+              <Drawer>
+                <DrawerTrigger asChild>
+                  <div className="flex items-center">
+                    {triggerContent}
+                    <Info size={24} className="ml-2 text-blue-400" />
+                  </div>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <DrawerHeader className="text-left">
+                    <DrawerTitle>Optimism</DrawerTitle>
+                    <DrawerDescription>A layer 2 scaling solution for Ethereum.</DrawerDescription>
+                  </DrawerHeader>
+                  <div className="px-4">
+                    {hoverCardContent}
+                  </div>
+                  <DrawerFooter className="pt-2">
+                    <DrawerClose asChild>
+                      <button className="text-blue-400 hover:underline">Close</button>
+                    </DrawerClose>
+                  </DrawerFooter>
+                </DrawerContent>
+              </Drawer>
+            )}
+          </CardDescription>
         </div>
-        {isDesktop ? (
-          <HoverCard>
-            <HoverCardTrigger asChild>
-              <img src={OptimismLogo} alt="Optimism" width={72} height={72} className="mt-4 cursor-pointer" />
-            </HoverCardTrigger>
-            <HoverCardContent className="w-80">
-              {hoverCardContent}
-            </HoverCardContent>
-          </HoverCard>
-        ) : (
-          <Drawer>
-            <DrawerTrigger asChild>
-              <div className="flex items-center mt-4 cursor-pointer">
-                <img src={OptimismLogo} alt="Optimism" width={72} height={72} />
-                <Info size={24} className="ml-2 text-blue-400" />
-              </div>
-            </DrawerTrigger>
-            <DrawerContent>
-              <DrawerHeader className="text-left">
-                <DrawerTitle>Optimism</DrawerTitle>
-                <DrawerDescription>A layer 2 scaling solution for Ethereum.</DrawerDescription>
-              </DrawerHeader>
-              <div className="px-4">
-                {hoverCardContent}
-              </div>
-              <DrawerFooter className="pt-2">
-                <DrawerClose asChild>
-                  <button className="text-blue-400 hover:underline">Close</button>
-                </DrawerClose>
-              </DrawerFooter>
-            </DrawerContent>
-          </Drawer>
-        )}
       </CardHeader>
       <CardContent className="text-gray-400 text-center">
-        <p>Learn and engage with web3 technologies on the Optimism network.</p>
+        <p>Smart-contracts on the Optimism network for speed and minimal costs. Paymaster coming soon!</p>
       </CardContent>
     </Card>
   );
