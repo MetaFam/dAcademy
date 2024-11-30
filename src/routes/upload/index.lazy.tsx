@@ -1,9 +1,9 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
 import { useAccount } from 'wagmi'
 import { useUsername } from '@/hooks/useUsername'
-import { useRef, useState, useEffect } from 'react' // Import useEffect
+import { useRef, useState, useEffect } from 'react'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import { UploadSidebar } from '@/components/Sidebars/uploadSidebar'
+import { UploadSidebar, accordionItems} from '@/components/Sidebars/uploadSidebar'
 import { UploadCover } from '@/components/Upload/Cover'
 import { UploadIntro } from '@/components/Upload/Intro'
 import ChapterUpload from '@/components/Upload/ChapterUpload'
@@ -11,6 +11,12 @@ import { UploadPermissions } from '@/components/Upload/Permissions'
 import { UploadTitle } from '@/components/Upload/Title'
 import { Button } from '@/components/ui/button'
 import { CompletionNFT } from '@/components/Upload/Completion'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 
 export const Route = createLazyFileRoute('/upload/')({
   component: () => {
@@ -26,6 +32,8 @@ export const Route = createLazyFileRoute('/upload/')({
       })(),
     )
     const reloadCallbacks = useRef<Array<() => void>>([])
+    const [accordionValue, setAccordionValue] = useState<string>("item-1") // Default to "item-1" for "Upload Cover"
+
     if (error) return <h1>{error}</h1>
 
     // Scroll to the top of the page when the component mounts
@@ -65,22 +73,53 @@ export const Route = createLazyFileRoute('/upload/')({
       reloadCallbacks.current[index] = listener
     }
 
+    // Scroll to the section when the accordion value changes
+    useEffect(() => {
+      const sectionId = accordionItems.find(item => item.value === accordionValue)?.url;
+      if (sectionId) {
+        const element = document.querySelector(sectionId);
+        if (element) {
+          // Add a small delay to ensure the accordion has opened before scrolling
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
+        }
+      }
+    }, [accordionValue, accordionItems]);
+
     return (
       <SidebarProvider>
-        <UploadSidebar />
+        <UploadSidebar onAccordionChange={setAccordionValue} />
         <SidebarTrigger />
         <main className="flex-1 mt-12 w-screen mb-8">
           <div className="space-y-4 mx-auto w-2/3">
-            <div id="upload-cover" className="scroll-mt-12">
-              <UploadCover />
-            </div>
-            <div id="book-title" className="scroll-mt-12">
-              <UploadTitle />
-            </div>
-            <div id="book-intro" className="scroll-mt-12">
-              <UploadIntro />
-            </div>
-            <div id="chapters" className="scroll-mt-12">
+            <Accordion type="single" collapsible className="w-full" value={accordionValue} onValueChange={setAccordionValue}>
+              <AccordionItem value="item-1">
+                <AccordionTrigger>Upload Cover</AccordionTrigger>
+                <AccordionContent>
+                  <div id="upload-cover" className="pt-8 scroll-mt-12">
+                    <UploadCover />
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger>Upload Title</AccordionTrigger>
+                <AccordionContent>
+                  <div id="book-title" className="pt-8 scroll-mt-12">
+                    <UploadTitle />
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3">
+                <AccordionTrigger>Upload Intro</AccordionTrigger>
+                <AccordionContent>
+                  <div id="book-intro" className="pt-8 scroll-mt-12">
+                    <UploadIntro />
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+            <div id="chapters" className="pt-8 scroll-mt-12">
               <ChapterUpload
                 index={0}
                 header="Book"
@@ -106,10 +145,10 @@ export const Route = createLazyFileRoute('/upload/')({
                 </Button>
               </div>
             </div>
-            <div id="completion" className="scroll-mt-12">
+            <div id="completion" className="pt-8 scroll-mt-12">
               <CompletionNFT />
             </div>
-            <div id="permissions" className="scroll-mt-12">
+            <div id="permissions" className="pt-8 scroll-mt-12">
               <UploadPermissions />
             </div>
           </div>

@@ -33,7 +33,7 @@ const curatedComponents: { title: string; href: string; description: string }[] 
       "Curated ReFi collection",
   },
   {
-    title: "Feature Coming Soon!",
+    title: "Feature Coming Soon...",
     href: "/curation",
     description:
       "Create a curation!",
