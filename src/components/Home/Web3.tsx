@@ -1,13 +1,38 @@
-// src/components/Home/Web3
+// src/components/Home/Web3.tsx
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import OptimismLogo from "@/assets/Optimism.svg"
-import OPLogo from "@/assets/OP.svg"
-import { Code } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
+import { Code, Info } from "lucide-react";
+import OptimismLogo from "@/assets/Optimism.svg";
+import OPLogo from "@/assets/OP.svg";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 export function Web3() {
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  const hoverCardContent = (
+    <div className="flex justify-between space-x-4">
+      <Avatar className="w-12 h-12">
+        <AvatarImage src={OPLogo} className="w-full h-full object-cover" />
+        <AvatarFallback className="w-full h-full">OP</AvatarFallback>
+      </Avatar>
+      <div className="space-y-1">
+        <h4 className="text-sm font-semibold">Optimism</h4>
+        <p className="text-sm">
+          Optimism is a layer 2 scaling solution for Ethereum.
+        </p>
+        <p className="text-sm">
+          It enables decentralized learning by providing a more efficient and cost-effective blockchain.
+        </p>
+        <a href="https://docs.dacade.my/stack/optimism/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline mb-1">
+          Start Building on Optimism
+        </a>
+      </div>
+    </div>
+  );
+
   return (
     <Card className="bg-black/40 shadow-lg rounded-lg text-white w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 max-w-md">
       <CardHeader className="flex flex-col items-center space-y-2">
@@ -18,34 +43,39 @@ export function Web3() {
           <CardTitle className="text-xl font-bold">Web3</CardTitle>
           <CardDescription className="text-gray-300">Built on Optimism for decentralized learning.</CardDescription>
         </div>
-        <HoverCard>
-          <HoverCardTrigger asChild>
-            <img src={OptimismLogo} alt="Optimism" width={72} height={72} className="mt-4 cursor-pointer" />
-          </HoverCardTrigger>
-          <HoverCardContent className="w-80">
-            <div className="flex justify-between space-x-4">
-              <Avatar className="w-12 h-12">
-                <AvatarImage
-                  src={OPLogo}
-                  className="w-full h-full object-fit"
-                />
-                <AvatarFallback className="w-full h-full">OP</AvatarFallback>
-              </Avatar>
-              <div className="space-y-1">
-                <h4 className="text-sm font-semibold">Optimism</h4>
-                <p className="text-sm">
-                  Optimism is a layer 2 scaling solution for Ethereum.
-                </p>
-                <p className="text-sm">
-                  It enables decentralized learning by providing a more efficient and cost-effective blockchain.
-                </p>
-                <a href="https://docs.dacade.my/stack/optimism/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline mb-1">
-                  Start Building on Optimism
-                </a>
+        {isDesktop ? (
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <img src={OptimismLogo} alt="Optimism" width={72} height={72} className="mt-4 cursor-pointer" />
+            </HoverCardTrigger>
+            <HoverCardContent className="w-80">
+              {hoverCardContent}
+            </HoverCardContent>
+          </HoverCard>
+        ) : (
+          <Drawer>
+            <DrawerTrigger asChild>
+              <div className="flex items-center mt-4 cursor-pointer">
+                <img src={OptimismLogo} alt="Optimism" width={72} height={72} />
+                <Info size={24} className="ml-2 text-blue-400" />
               </div>
-            </div>
-          </HoverCardContent>
-        </HoverCard>
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader className="text-left">
+                <DrawerTitle>Optimism</DrawerTitle>
+                <DrawerDescription>A layer 2 scaling solution for Ethereum.</DrawerDescription>
+              </DrawerHeader>
+              <div className="px-4">
+                {hoverCardContent}
+              </div>
+              <DrawerFooter className="pt-2">
+                <DrawerClose asChild>
+                  <button className="text-blue-400 hover:underline">Close</button>
+                </DrawerClose>
+              </DrawerFooter>
+            </DrawerContent>
+          </Drawer>
+        )}
       </CardHeader>
       <CardContent className="text-gray-400 text-center">
         <p>Learn and engage with web3 technologies on the Optimism network.</p>
