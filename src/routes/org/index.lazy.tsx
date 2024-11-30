@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { createLazyFileRoute, Link } from '@tanstack/react-router'
-import { UploadCloud } from 'lucide-react'
+import { UploadCloud, Book, List, CircleHelp, Network } from 'lucide-react'
 import {
   Card,
   CardContent,
@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Avatar } from '@/components/ui/avatar'
-import { Network } from 'lucide-react'
 import { Soulbound } from '@/components/Home/Soulbound'
 import Top from '@/components/Top'
 
@@ -26,7 +25,10 @@ export const Route = createLazyFileRoute('/org/')({
 
         <Card className="w-full max-w-3xl bg-black/30 shadow-lg rounded-lg">
           <CardHeader>
-            <CardTitle className="text-white text-lg">What is a Playbook?</CardTitle>
+            <CardTitle className="text-white text-lg flex items-center">
+              <Book size={24} className="mr-2 text-blue-400" />
+              What is a Playbook?
+            </CardTitle>
             <CardDescription className="text-gray-400">
               A playbook is a step-by-step guide that you can share with others to help them learn and understand specific processes, tasks, or qualifications.
             </CardDescription>
@@ -46,7 +48,10 @@ export const Route = createLazyFileRoute('/org/')({
 
         <Card className="w-full max-w-3xl bg-black/30 shadow-lg rounded-lg">
           <CardHeader>
-            <CardTitle className="text-white text-lg">Playbook Structure</CardTitle>
+            <CardTitle className="text-white text-lg flex items-center">
+              <List size={24} className="mr-2 text-green-400" />
+              Playbook Structure
+            </CardTitle>
             <CardDescription className="text-gray-400">
               Playbooks are structured into chapters:
             </CardDescription>
@@ -68,7 +73,10 @@ export const Route = createLazyFileRoute('/org/')({
 
         <Card className="w-full max-w-3xl bg-black/30 shadow-lg rounded-lg">
           <CardHeader>
-            <CardTitle className="text-white text-lg">Why Use Playbooks?</CardTitle>
+            <CardTitle className="text-white text-lg flex items-center">
+              <CircleHelp size={24} className="mr-2 text-yellow-400" />
+              Why Use Playbooks?
+            </CardTitle>
           </CardHeader>
           <CardContent className="text-gray-400">
             <ul className="list-disc list-inside text-gray-400 text-left">
@@ -122,7 +130,7 @@ export const Route = createLazyFileRoute('/org/')({
             </Link>
           </CardContent>
         </Card>
-          <Top />
+        <Top />
       </div>
     )
   }
