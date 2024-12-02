@@ -1,5 +1,5 @@
 // src/atoms/gridAtom.ts
 
-import { atom } from 'jotai';
+import { atom } from 'jotai'
 
-export const isGridVisibleAtom = atom(true);
+export const isGridVisibleAtom = atom(true)

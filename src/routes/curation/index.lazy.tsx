@@ -6,7 +6,7 @@ import { Library, BookOpen, HandCoins, Trees, Bus, AlertCircle } from 'lucide-re
 import { Alert, AlertTitle } from "@/components/ui/alert"
 import { CreateCurationDialog } from "@/components/Curated/CreateCurationDialog"
 import { useAtom } from 'jotai'
-import { isGridVisibleAtom } from '@/atoms/persistedAtom'
+import { isGridVisibleAtom } from '@/atoms/isGridVisibleAtom'
 import "@/styles/animatedGrid.css"
 
 export const Route = createLazyFileRoute('/curation/')({

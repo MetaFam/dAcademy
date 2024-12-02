@@ -7,6 +7,10 @@ import ReactCrop, {
 } from 'react-image-crop'
 
 import 'react-image-crop/dist/ReactCrop.css'
+import { upload } from '@/lib/utils'
+import { uploadTriggerAtom, coverCIDAtom } from '@/atoms'
+import { useAtom } from 'jotai'
+import { Button } from '@/components/ui/button'
 
 function centerAspectCrop(
   mediaWidth: number,
@@ -34,6 +38,9 @@ export default function App({ image }: { image?:string }) {
   const [blobURL, setBlobURL] = useState<string | null>(localStorage.getItem('cover'))
   const [crop, setCrop] = useState<Crop>()
   const aspect = { width: 320, height: 480 }
+  const [uploadTrigger] = useAtom(uploadTriggerAtom)
+  const [, setCoverCID] = useAtom(coverCIDAtom)
+
 
   function onSelectFile(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files.length > 0) {
@@ -97,8 +104,17 @@ export default function App({ image }: { image?:string }) {
     const output = offscreen.toDataURL('image/jpeg')
     localStorage.setItem('cover', output)
     setBlobURL(output)
-
   }
+  console.log({uploadTrigger, blobURL})
+
+  if(uploadTrigger /*=== 'cover'*/) {
+    if(!blobURL) throw new Error('missing blob')
+    fetch(blobURL)
+    .then((res) => {console.log({res}); return res.blob()})
+    .then((blob) => {console.log({blob}); return upload([new File([blob], 'cover.jpg')])})
+    .then((cid) => {console.log({cid}); return setCoverCID(cid)})
+  }
+
 
   return (
     <div className="">
@@ -133,7 +149,7 @@ export default function App({ image }: { image?:string }) {
       {!!crop && !blobURL && (
         <>
           <div>
-            <button className="btn btn-secondary rounded-md btn-sm my-4" onClick={onDownloadCropClick}>Crop</button>
+            <Button className="rounded-md my-4" onClick={onDownloadCropClick}>Crop</Button>
           </div>
         </>
       )}

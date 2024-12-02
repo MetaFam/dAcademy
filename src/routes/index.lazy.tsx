@@ -10,7 +10,7 @@ import { OpenSource } from "@/components/Home/OpenSource"
 import { DocsBtn } from "@/components/Home/DocsBtn"
 import { GhBtn } from "@/components/Home/GhBtn"
 import { useAtom } from 'jotai'
-import { isGridVisibleAtom } from '@/atoms/persistedAtom'
+import { isGridVisibleAtom } from '@/atoms/isGridVisibleAtom'
 import "@/styles/animatedGrid.css"
 import { useEffect } from 'react' // Import useEffect
 

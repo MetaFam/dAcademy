@@ -17,6 +17,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { useAtom, useAtomValue } from 'jotai'
+import { uploadTriggerAtom, coverCIDAtom, bookTitleAtom, bookIntroAtom } from '@/atoms'
 
 export const Route = createLazyFileRoute('/upload/')({
   component: () => {
@@ -32,14 +34,32 @@ export const Route = createLazyFileRoute('/upload/')({
       })(),
     )
     const reloadCallbacks = useRef<Array<() => void>>([])
-    const [accordionValue, setAccordionValue] = useState<string>("item-1") // Default to "item-1" for "Upload Cover"
+    const [accordionValue, setAccordionValue] = useState("item-1")
+    const [uploadTrigger, setUploadTrigger] = useAtom(uploadTriggerAtom)
+    const coverCID = useAtomValue(coverCIDAtom)
+    const bookTitle = useAtomValue(bookTitleAtom)
+    const bookIntro = useAtomValue(bookIntroAtom)
 
     if (error) return <h1>{error}</h1>
+    console.log({coverCID, uploadTrigger})
 
-    // Scroll to the top of the page when the component mounts
+    if (coverCID) {
+      if(!bookTitle) {
+      //   setUploadTrigger({ cover: false, title: true, intro: false })
+      // } else if(!bookIntro) {
+      //   setUploadTrigger({ cover: false, title: false, intro: true })
+      //   console.log({coverCID, bookTitle})
+      // } else {
+      //   setUploadTrigger({ cover: false, title: false, intro: false })
+
+        console.log({coverCID, bookTitle, bookIntro})
+      }
+    }
+
+
     useEffect(() => {
       window.scrollTo(0, 0);
-    }, []); // Empty dependency array ensures this runs only once on mount
+    }, []);
 
     const chapterDeleted = (index: number) => {
       console.group('looping')
@@ -73,13 +93,13 @@ export const Route = createLazyFileRoute('/upload/')({
       reloadCallbacks.current[index] = listener
     }
 
-    // Scroll to the section when the accordion value changes
+
     useEffect(() => {
       const sectionId = accordionItems.find(item => item.value === accordionValue)?.url;
       if (sectionId) {
         const element = document.querySelector(sectionId);
         if (element) {
-          // Add a small delay to ensure the accordion has opened before scrolling
+
           setTimeout(() => {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 300);
@@ -119,6 +139,9 @@ export const Route = createLazyFileRoute('/upload/')({
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
+            <Button onClick={() => {console.log('settingToCover')
+              setUploadTrigger(true)
+            }} className="block mx-auto">Submit</Button>
             <div id="chapters" className="pt-8 scroll-mt-12">
               <ChapterUpload
                 index={0}

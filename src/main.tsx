@@ -13,7 +13,7 @@ import {
 } from '@tanstack/react-router'
 import { Toaster } from 'sonner'
 import { routeTree } from './routeTree.gen'
-import { Provider } from 'jotai'
+import { Provider as JotaiProvider } from 'jotai'
 
 const params = new URLSearchParams(window.location.search)
 export const debug = !!params.get('debug')
@@ -72,11 +72,11 @@ if (!root.innerHTML){
   createRoot(root).render(
     <StrictMode>
       <Toaster position="bottom-center"/>
-      <AppKitProvider>
-        <Provider>
+      <JotaiProvider>
+        <AppKitProvider>
           <RouterProvider {...{ router }}/>
-        </Provider>
-      </AppKitProvider>
+        </AppKitProvider>
+      </JotaiProvider>
     </StrictMode>,
   )
 }

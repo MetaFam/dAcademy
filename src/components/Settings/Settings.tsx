@@ -1,7 +1,7 @@
 // src/components/SettingsD.tsx
 import * as React from "react";
 import { useAtom } from 'jotai';
-import { isGridVisibleAtom } from '@/atoms/persistedAtom'
+import { isGridVisibleAtom } from '@/atoms/isGridVisibleAtom'
 import { useMediaQuery } from "@/hooks/use-media-query"
 import {
   Dialog,

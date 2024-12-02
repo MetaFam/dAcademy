@@ -1,4 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="fill-[red] hover:bg-yellow-300/75 hover:text-black fill-success" width="11" height="5"
-  viewBox="0 0 30 10" preserveAspectRatio="none" style="display: block;">
-  <polygon fill="red" points="0,0 30,0 15,10"></polygon>
-</svg>
