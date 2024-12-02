@@ -13,6 +13,14 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+				success: 'hsl(var(--success))',
+				error: 'hsl(var(--error))',
+				info: 'hsl(var(--info))',
+				fill: {
+					success: 'hsl(var(--success))',
+					error: 'hsl(var(--error))',
+					info: 'hsl(var(--info))',
+				},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

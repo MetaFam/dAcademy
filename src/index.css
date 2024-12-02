@@ -10,6 +10,9 @@
 
 @layer base {
   :root {
+    --success: 120, 69%, 49%;
+    --error: 359, 69%, 49%;
+    --info: 217, 72%, 52%;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -46,6 +49,9 @@
   }
 
   .dark {
+    --success: 120, 69%, 49%;
+    --error: 359, 69%, 49%;
+    --info: 217, 72%, 52%;
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
@@ -80,6 +86,7 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
+
 
 @layer base {
   * {
