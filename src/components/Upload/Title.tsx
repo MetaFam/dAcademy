@@ -5,15 +5,14 @@ import { uploadTriggerAtom, bookTitleAtom } from "@/atoms"
 import { useAtom } from "jotai"
 import { useState } from "react"
 
-
 export function UploadTitle() {
   const [uploadTrigger] = useAtom(uploadTriggerAtom)
   const [, setBookTitle] = useAtom(bookTitleAtom)
   const [title, setTitle] = useState<string>()
 
   if(uploadTrigger /*=== 'title'*/) {
-    if(!title) throw new Error('Missing title')
-    setBookTitle(title)
+    // if(!title) throw new Error('Missing title')
+    // setBookTitle(title)
   }
 
   return (

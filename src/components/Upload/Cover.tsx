@@ -1,7 +1,7 @@
 // src/components/Upload/Cover
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import CoverUpload from '@/components/Upload/CoverUpload'
+import { CoverUpload } from '@/components/Upload/CoverUpload'
 
 export function UploadCover() {
   return (

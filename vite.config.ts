@@ -8,7 +8,11 @@ import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 export default defineConfig({
   plugins: [
     TanStackRouterVite(),
-    viteReact(),
+    viteReact({
+      babel: {
+        presets: ['jotai/babel/preset'],
+      },
+    }),
     // ...,
   ],
   resolve: {

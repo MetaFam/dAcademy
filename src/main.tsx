@@ -14,6 +14,8 @@ import {
 import { Toaster } from 'sonner'
 import { routeTree } from './routeTree.gen'
 import { Provider as JotaiProvider } from 'jotai'
+import { DevTools as JotaiDevTools } from 'jotai-devtools'
+import 'jotai-devtools/styles.css'
 
 const params = new URLSearchParams(window.location.search)
 export const debug = !!params.get('debug')
@@ -76,6 +78,7 @@ if (!root.innerHTML){
         <AppKitProvider>
           <RouterProvider {...{ router }}/>
         </AppKitProvider>
+        <JotaiDevTools/>
       </JotaiProvider>
     </StrictMode>,
   )
