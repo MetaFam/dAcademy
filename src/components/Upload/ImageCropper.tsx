@@ -8,9 +8,9 @@ import ReactCrop, {
 
 import 'react-image-crop/dist/ReactCrop.css'
 import { upload } from '@/lib/utils'
-import { uploadTriggerAtom, coverCIDAtom } from '@/atoms'
-import { useAtom, useAtomValue } from 'jotai'
+import { useAtom } from 'jotai'
 import { Button } from '@/components/ui/button'
+import { coverAtom } from '@/atoms/frontMatterAtom'
 
 const centerAspectCrop = (
   mediaWidth: number,
@@ -35,17 +35,14 @@ const centerAspectCrop = (
 export const ImageCropper = ({ image }: { image?:string }) => {
   const [imgSrc, setImgSrc] = useState(image)
   const imgRef = useRef<HTMLImageElement>(null)
-  const [blobURL, setBlobURL] = useState<string | null>(localStorage.getItem('cover'))
   const [crop, setCrop] = useState<Crop>()
   const aspect = { width: 320, height: 480 }
-  const uploadTrigger = useAtomValue(uploadTriggerAtom)
-  const [, setCoverCID] = useAtom(coverCIDAtom)
+  const [cover, setCover] = useAtom(coverAtom)
 
-  console.debug({ trigg: uploadTrigger })
 
   function onSelectFile(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files.length > 0) {
-      setBlobURL(null)
+      setCover(null)
       setCrop(undefined)
       const reader = new FileReader()
       reader.addEventListener('load', () =>
@@ -104,34 +101,23 @@ export const ImageCropper = ({ image }: { image?:string }) => {
 
     const output = offscreen.toDataURL('image/jpeg')
     localStorage.setItem('cover', output)
-    setBlobURL(output)
+    setCover(output)
   }
-  console.log({uploadTrigger, blobURL})
-
-  if(uploadTrigger /*=== 'cover'*/) {
-    if(!blobURL) throw new Error('missing blob')
-    console.debug('uploading cover')
-    fetch(blobURL)
-    .then((res) => {console.log({res}); return res.blob()})
-    .then((blob) => {console.log({blob}); return upload([new File([blob], 'cover.jpg')])})
-    .then((cid) => {console.log({cid}); return setCoverCID(cid)})
-  }
-
 
   return (
     <div className="">
       <div className="Crop-Controls">
-        <label className="flex justify-center mt-4 tooltip" data-tip={!!blobURL ? 'Click to change image.' : null}>
-          {blobURL && (
-            <img src={blobURL} alt="Crop Preview" className="max-h-[50vh]"/>
+        <label className="flex justify-center mt-4">
+          {cover && (
+            <img src={cover} alt="Crop Preview" className="max-h-[50vh]"/>
           )}
           {!image && (
-            <input type="file" accept="image/*" onChange={onSelectFile} className={clsx(!!blobURL && 'hidden', 'file-input file-input-bordered w-full max-w-xs')} />
+            <input type="file" accept="image/*" onChange={onSelectFile} className={clsx(!!cover && 'hidden', 'file-input file-input-bordered w-full max-w-xs')} />
           )}
         </label>
       </div>
 
-      {!!imgSrc && !blobURL && (
+      {!!imgSrc && !cover && (
         <ReactCrop
           crop={crop}
           onChange={(c) => setCrop(c)}
@@ -148,7 +134,7 @@ export const ImageCropper = ({ image }: { image?:string }) => {
           />
         </ReactCrop>
       )}
-      {!!crop && !blobURL && (
+      {!!crop && !cover && (
         <div>
           <Button className="rounded-md my-4" onClick={onDownloadCropClick}>Crop</Button>
         </div>

@@ -12,6 +12,7 @@ import {
   RouterProvider, createRouter, createHashHistory,
 } from '@tanstack/react-router'
 import { Toaster } from 'sonner'
+import { Toaster as HotToaster } from 'react-hot-toast'
 import { routeTree } from './routeTree.gen'
 import { Provider as JotaiProvider } from 'jotai'
 import { DevTools as JotaiDevTools } from 'jotai-devtools'
@@ -74,6 +75,7 @@ if (!root.innerHTML){
   createRoot(root).render(
     <StrictMode>
       <Toaster position="bottom-center"/>
+      <HotToaster position="bottom-center"/>
       <JotaiProvider>
         <AppKitProvider>
           <RouterProvider {...{ router }}/>

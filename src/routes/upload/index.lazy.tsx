@@ -1,6 +1,4 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import { useAccount } from 'wagmi'
-import { useUsername } from '@/hooks/useUsername'
 import { useRef, useState, useEffect } from 'react'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { UploadSidebar, accordionItems} from '@/components/Sidebars/uploadSidebar'
@@ -17,12 +15,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { useAtom, useAtomValue } from 'jotai'
-import { uploadTriggerAtom, coverCIDAtom, bookTitleAtom, bookIntroAtom } from '@/atoms'
+import { useAtomValue } from 'jotai'
+import { frontMatterAtom } from '@/atoms/frontMatterAtom'
+import { toHTTP, upload as toIPFS } from '@/lib/utils'
+import { toast } from 'react-hot-toast'
+
 
 export const Upload = () => {
-  const { address } = useAccount()
-  const { error } = useUsername(address)
+  const [submitting, setSubmitting] = useState(false)
   const [chapterCount, setChapterCount] = useState(
     (() => {
       let count = 0
@@ -34,27 +34,49 @@ export const Upload = () => {
   )
   const reloadCallbacks = useRef<Array<() => void>>([])
   const [accordionValue, setAccordionValue] = useState("item-1")
-  const [uploadTrigger, setUploadTrigger] = useAtom(uploadTriggerAtom)
-  const coverCID = useAtomValue(coverCIDAtom)
-  const bookTitle = useAtomValue(bookTitleAtom)
-  const bookIntro = useAtomValue(bookIntroAtom)
+  const frontMatter = useAtomValue(frontMatterAtom)
+  const upload = async () => {
+    setSubmitting(true)
+    try {
+      if(!frontMatter.title) throw new Error('Missing title')
+      if(!frontMatter.introduction) throw new Error('Missing introduction')
+      if(!frontMatter.cover) throw new Error('missing cover')
+      const coverToastId = toast.loading('Uploading cover to IPFS.')
+      const cid = await fetch(frontMatter.cover)
+      .then((res) =>  res.blob())
+      .then((blob) => toIPFS([new File([blob], 'cover.jpg')]))
+      toast.dismiss(coverToastId)
 
-  if (error) return <h1>{error}</h1>
-  console.log({coverCID, uploadTrigger})
-
-  if (coverCID) {
-    if(!bookTitle) {
-    //   setUploadTrigger({ cover: false, title: true, intro: false })
-    // } else if(!bookIntro) {
-    //   setUploadTrigger({ cover: false, title: false, intro: true })
-    //   console.log({coverCID, bookTitle})
-    // } else {
-    //   setUploadTrigger({ cover: false, title: false, intro: false })
-
-      console.log({coverCID, bookTitle, bookIntro})
+      const coverURL = `ipfs://${cid}/cover.jpg`
+      const shortCoverURL = `ipfs://${cid.substring(0, 3)}…${cid.slice(-3)}/cover.jpg`
+      toast.success(
+        <p>Saved to <a target="_blank" href={toHTTP(coverURL)}>{shortCoverURL}</a>.</p>,
+        { duration: 10_000 },
+      )
+      const metaToastId = toast.loading('Uploading metadata to IPFS.')
+      const metadata = {
+        title: frontMatter.title,
+        introduction: frontMatter.introduction,
+        cover: coverURL
+      }
+      const filename = `metadata.${new Date().toISOString()}.json`
+      const metadataCID = await toIPFS(
+        [new File([JSON.stringify(metadata, null, 2)], filename)],
+      )
+      toast.dismiss(metaToastId)
+      const metadataURL = `ipfs://${metadataCID}/${filename}`
+      const shortMetadataURL = `ipfs://${metadataCID.substring(0, 3)}…${metadataCID.slice(-3)}/${filename}`
+      toast.success(
+        <p>Saved to <a target="_blank" href={toHTTP(metadataURL)}>{shortMetadataURL}</a>.</p>,
+        { duration: 10_000 },
+      )
+      console.log({metadataCID, metadataURL})
+    } catch(error) {
+      toast.error((error as Error).message)
+    } finally {
+      setSubmitting(false)
     }
   }
-
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -137,11 +159,11 @@ export const Upload = () => {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-    
-          <Button onClick={() => {console.log('settingToCover')
-            setUploadTrigger((num) => (num + 1))
-          }} className="block mx-auto" type="button">Submit</Button>
-    
+
+          <Button disabled={submitting} onClick={upload} className="block mx-auto" type="button">
+            {submitting ? 'Submitting' : 'Submit'}
+          </Button>
+
           <div id="chapters" className="pt-8 scroll-mt-12">
             <ChapterUpload
               index={0}
