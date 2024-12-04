@@ -16,7 +16,7 @@ export function UploadTitle() {
       </CardHeader>
       <CardContent className="text-center">
         <div className="flex w-full max-w-sm items-center space-x-2 mx-auto">
-          <Input value={title ?? ''} onChange={(({ target: { value } }) => setTitle(value))} placeholder="Book Title" />
+          <Input required value={title ?? ''} onChange={(({ target: { value } }) => setTitle(value))} placeholder="Book Title" />
         </div>
       </CardContent>
     </Card>

@@ -57,6 +57,7 @@ export const Upload = () => {
       <SidebarTrigger />
       <main className="flex-1 mt-12 w-screen mb-8">
         <div className="space-y-4 mx-auto w-2/3">
+        <form onSubmit={() => setProcessing(true)}>
           <Accordion type="single" collapsible className="w-full" value={accordionValue} onValueChange={setAccordionValue}>
             <AccordionItem value="item-1">
               <AccordionTrigger>Upload Cover</AccordionTrigger>
@@ -110,9 +111,12 @@ export const Upload = () => {
           <div id="permissions" className="pt-8 scroll-mt-12">
             <UploadPermissions />
           </div>
-          <Button onClick={() => setProcessing(true)} className="secondary">
-            Create Playbook
-          </Button>
+          <div className="flex justify-center mt-4">
+            <Button className="secondary">
+              Create Playbook
+            </Button>
+          </div>
+          </form>
         </div>
         {processing && <UploadPlaybook/>}
       </main>

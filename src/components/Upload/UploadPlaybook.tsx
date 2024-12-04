@@ -39,11 +39,16 @@ export function UploadPlaybook() {
   } = useWriteContract()
 
   useEffect(() => {
-    (async () => {
+    const abortController = new AbortController()
+    ;(async () => {
       try {
+        const abortSignal = abortController.signal
+        if(!nft.image) throw new Error('NFT Missing Image')
         if(!frontMatter.title) throw new Error('Missing title')
         if(!frontMatter.introduction) throw new Error('Missing introduction')
         if(!frontMatter.cover) throw new Error('missing cover')
+
+        abortSignal.throwIfAborted()
         addLine('Uploading cover to IPFS.')
         const cid = await fetch(frontMatter.cover)
         .then((res) =>  res.blob())
@@ -54,7 +59,9 @@ export function UploadPlaybook() {
         addLine(
           <p>Saved to <a target="_blank" href={toHTTP(coverURL)}>{shortCoverURL}</a>.</p>
         )
-        addLine('Uploading metadata to IPFS.')
+
+        abortSignal.throwIfAborted()
+        addLine('Uploading frontmatter to IPFS.')
         const metadata = {
           title: frontMatter.title,
           introduction: frontMatter.introduction,
@@ -71,12 +78,14 @@ export function UploadPlaybook() {
         )
 
         const chapterURLs = await Promise.all(
-          chapters.map(async (chapter) => {
+          chapters.map(async (chapter, idx) => {
+            addLine(`Uploading chapter #${idx + 1} to IPFS.`)
             const metadata = {
               title: chapter.title,
               description: chapter.content,
             }
             const filename = `chapter.${new Date().toISOString()}.json`
+            abortSignal.throwIfAborted()
             const metadataCID = await toIPFS(
               [new File([JSON.stringify(metadata, null, 2)], filename)],
             )
@@ -89,7 +98,9 @@ export function UploadPlaybook() {
           })
         )
 
-        if(!nft.image) throw new Error('NFT Missing Image')
+        addLine('Uploading NFT Image to IPFS.')
+        abortSignal.throwIfAborted()
+
         const nftImageCID = await fetch(nft.image)
         .then((res) =>  res.blob())
         .then((blob) => toIPFS([new File([blob], 'image.svg')]))
@@ -100,6 +111,8 @@ export function UploadPlaybook() {
           <p>Saved to <a target="_blank" href={toHTTP(nftImageURL)}>{shortNFTImageURL}</a>.</p>
         )
 
+        addLine('Uploading NFT metadata to IPFS.')
+        abortSignal.throwIfAborted()
         const nftMetadata = {
           title: nft.name,
           description: nft.description,
@@ -122,6 +135,8 @@ export function UploadPlaybook() {
           ))
         )
 
+        const randomBuffer = new Uint8Array(32)
+        crypto.getRandomValues(randomBuffer)
         const args = [
           {
             owners: addressGroups.owner ?? [],
@@ -133,10 +148,12 @@ export function UploadPlaybook() {
             details: frontmatterURL,
             tokenURI: nftMetadataURL,
           },
-          `0x${'0'.repeat(64)}`,
+          `0x${Array.from(randomBuffer).map((byte) => (
+            byte.toString(16).padStart(2, '0')
+          )).join('')}`,
         ]
 
-        console.log({args})
+        abortSignal.throwIfAborted()
         writeContract({
           address: '0x0d006D9e862B362180eb602e5973Fd1fdb6f78dd',
           abi,
@@ -163,11 +180,12 @@ export function UploadPlaybook() {
         })
 
       } catch(error) {
-        addLine((error as Error).message)
+        addLine(<p className="text-red-500">{(error as Error).message}</p>)
       } finally {
         // setSubmitting(false)
       }
     })()
+    return () => abortController.abort('Mounted twice, aborting double.')
   }, [])
 
   if (isDesktop) {

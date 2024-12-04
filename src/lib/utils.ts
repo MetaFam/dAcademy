@@ -66,15 +66,19 @@ export const toSlug = (title: string) => (
 )
 
 export const toDataURL = (
-  file: File, setter: (u: string | null) => void,
+  file: File | undefined, setter: (u: string | null) => void,
 ) => {
-  const reader = new FileReader()
-  reader.onload = () => {
-    let { result } = reader
-    if(result instanceof ArrayBuffer) {
-      result = new String(result) as string
+  if(!file) {
+    setter(null)
+  } else {
+    const reader = new FileReader()
+    reader.onload = () => {
+      let { result } = reader
+      if(result instanceof ArrayBuffer) {
+        result = new String(result) as string
+      }
+      setter(result)
     }
-    setter(result)
+    reader.readAsDataURL(file)
   }
-  reader.readAsDataURL(file)
 }

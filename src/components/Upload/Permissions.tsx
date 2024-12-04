@@ -57,7 +57,7 @@ export function UploadPermissions() {
         <CardTitle className="text-center text-xl">Permissions</CardTitle>
       </CardHeader>
       <CardContent className="text-center">
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4">
           <input required value={name} onChange={({target: {value} }) => setName(value)} className="grow" placeholder="ETH Address or ENS Name"/>
           <select value={role} onChange={({target: {value} }) => setRole(value)}>
             <option value="owner">Owner</option>
@@ -67,9 +67,9 @@ export function UploadPermissions() {
           </select>
           <Button onClick={add}>Add</Button>
         </div>
-        <Table>
+        <Table className="mt-4">
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-transparent hover:bg-transparent cursor-default">
               <TableHead className="w-[100px]">ENS Name</TableHead>
               <TableHead>ETH Address</TableHead>
               <TableHead>Role</TableHead>

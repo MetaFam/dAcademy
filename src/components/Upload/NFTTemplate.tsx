@@ -1,13 +1,13 @@
 import { backgroundAtom } from "@/atoms/nftTemplateAtom"
 import { toDataURL } from "@/lib/utils"
 import { useAtom } from "jotai"
-import React, { useEffect} from "react"
+import React, { useEffect, useState} from "react"
 
-// type Point = {x?: number, y?: number}
+type Point = {x?: number, y?: number}
 export const NFTTemplate = ({
   bg, title, color, svgRef
 }: {
-  bg?: File
+  bg?: string | null
   title?: string | null
   color?: string | null
   svgRef: React.MutableRefObject<SVGSVGElement | undefined>
@@ -15,17 +15,18 @@ export const NFTTemplate = ({
   const [background, setBackground] = useAtom(backgroundAtom)
   // const [pStart, setPStart] = useState<SVGPoint>()
   // const [pCurrent, setPCurrent] = useState<SVGPoint>()
-  // const [zoomPercent, setZoomPercent] = useState(1)
-  // const [panning, setPan] = useState<Point>({ x: 0, y: 0 })
+  const [zoomPercent, setZoomPercent] = useState(1)
+  const [panning, setPan] = useState<Point>({ x: 0, y: 0 })
   // const [mode, setMode] = useState<'zoom' | 'pan' | null>(null)
 
-  useEffect(() => {
-    if(!bg) {
-      setBackground(null)
-    } else {
-      toDataURL(bg, setBackground)
-    }
-  }, [bg])
+  // useEffect(() => {
+  //   console.log({bg})
+  //   if(!bg) {
+  //     setBackground(null)
+  //   } else {
+  //     toDataURL(bg, setBackground)
+  //   }
+  // }, [bg])
 
   // const screen2ViewBox = (coords: Point) => {
   //   const svg = document.querySelector('#nft') as SVGSVGElement
@@ -98,10 +99,10 @@ export const NFTTemplate = ({
       <defs>
         {background && (
           <image
-            // x={panning.x} y={panning.y}
-            // height={`${zoomPercent * 100}%`} width={`${zoomPercent * 100}%`}
+            x={panning.x} y={panning.y}
+            height={`${zoomPercent * 100}%`} width={`${zoomPercent * 100}%`}
             id="bg"
-            href={background}
+            href={bg ?? undefined}
           />
         )}
         <filter id="blur" colorInterpolationFilters="sRGB">
