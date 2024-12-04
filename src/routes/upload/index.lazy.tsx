@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { UploadSidebar, accordionItems} from '@/components/Sidebars/uploadSidebar'
 import { UploadCover } from '@/components/Upload/Cover'
@@ -15,26 +15,21 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { useAtomValue } from 'jotai'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { frontMatterAtom } from '@/atoms/frontMatterAtom'
 import { toHTTP, upload as toIPFS } from '@/lib/utils'
 import { toast } from 'react-hot-toast'
+import { chaptersAtomsAtom, removeChapterAtom } from '@/atoms/chapterAtom'
 
 
 export const Upload = () => {
   const [submitting, setSubmitting] = useState(false)
-  const [chapterCount, setChapterCount] = useState(
-    (() => {
-      let count = 0
-      while (localStorage.getItem(`chapter.${count}.title`) != null) {
-        count++
-      }
-      return Math.max(2, count)
-    })(),
-  )
-  const reloadCallbacks = useRef<Array<() => void>>([])
   const [accordionValue, setAccordionValue] = useState("item-1")
+  const [chaptersAtoms, addChapter] = useAtom(chaptersAtomsAtom)
   const frontMatter = useAtomValue(frontMatterAtom)
+  const removeChapter = useSetAtom(removeChapterAtom)
+
+
   const upload = async () => {
     setSubmitting(true)
     try {
@@ -83,35 +78,8 @@ export const Upload = () => {
   }, []);
 
   const chapterDeleted = (index: number) => {
-    console.group('looping')
-    for (let idx = index; idx < chapterCount - 1; idx++) {
-      console.log({ idx, chapterCount })
-      localStorage.setItem(
-        `chapter.${idx}.title`,
-        localStorage.getItem(`chapter.${idx + 1}.title`) ?? '',
-      )
-      localStorage.setItem(
-        `chapter.${idx}.content`,
-        localStorage.getItem(`chapter.${idx + 1}.content`) ?? '',
-      )
-      reloadCallbacks.current[idx].call(reloadCallbacks.current[idx])
-    }
-    console.groupEnd()
-    if (chapterCount > 2) {
-      localStorage.removeItem(`chapter.${chapterCount - 1}.title`)
-      localStorage.removeItem(`chapter.${chapterCount - 1}.content`)
-      setChapterCount(chapterCount - 1)
-    } else {
-      localStorage.setItem(`chapter.${chapterCount - 1}.title`, '')
-      localStorage.setItem(`chapter.${chapterCount - 1}.content`, '')
-    }
+    removeChapter(index - 1)
 
-    reloadCallbacks.current[chapterCount - 1].call(
-      reloadCallbacks.current[chapterCount - 1],
-    )
-  }
-  const reloadCallback = (index: number, listener: () => void) => {
-    reloadCallbacks.current[index] = listener
   }
 
   useEffect(() => {
@@ -165,25 +133,19 @@ export const Upload = () => {
           </Button>
 
           <div id="chapters" className="pt-8 scroll-mt-12">
-            <ChapterUpload
-              index={0}
-              header="Book"
-              contentHeader="Introduction"
-            />
 
-            {Array.from({ length: chapterCount - 1 }, (_, index) => (
+            {chaptersAtoms.map((chapterAtom, idx) => (
               <ChapterUpload
-                {...{ reloadCallback }}
+                atom={chapterAtom}
                 onDelete={chapterDeleted}
-                key={index}
-                index={index + 1}
+                key={idx}
+                index={idx + 1}
               />
             ))}
 
             <div className="flex justify-center mt-4">
               <Button
-                type="button"
-                onClick={() => setChapterCount(chapterCount + 1)}
+                onClick={() => addChapter({})}
                 className="items-center rounded-md"
               >
                 Add Chapter

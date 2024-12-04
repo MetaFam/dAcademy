@@ -16,11 +16,11 @@ import abi from '@/abis/QuestChain.json'
 
 const CHAIN = 10
 
-declare global {
-  interface Window {
-    ethereum: any
-  }
-}
+// declare global {
+//   interface Window {
+//     ethereum: any
+//   }
+// }
 
 export const Alert = ({ children }: { children: ReactNode }) => (
   <div role="alert" className="alert alert-warning flex items-center mt-10">
@@ -61,7 +61,7 @@ export const Submission = () => {
         <h3 className="flex text-center items-center justify-center">
           Please
           <a onClick={() => {
-            window.ethereum.request({
+            (window.ethereum?.request as (o: {}) => void)({
               method: 'wallet_switchEthereumChain',
               params: [{ chainId: `0x${CHAIN.toString(16)}`}],
             })

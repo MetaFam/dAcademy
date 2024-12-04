@@ -76,12 +76,12 @@ if (!root.innerHTML){
     <StrictMode>
       <Toaster position="bottom-center"/>
       <HotToaster position="bottom-center"/>
-      <JotaiProvider>
         <AppKitProvider>
-          <RouterProvider {...{ router }}/>
+          <JotaiProvider>
+            <RouterProvider {...{ router }}/>
+          <JotaiDevTools/>
+          </JotaiProvider>
         </AppKitProvider>
-        <JotaiDevTools/>
-      </JotaiProvider>
     </StrictMode>,
   )
 }

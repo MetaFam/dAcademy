@@ -60,3 +60,7 @@ export const truncateHash = (hash: string, length: number = 6) => {
   if (!hash) return '';
   return `${hash.slice(0, length)}...${hash.slice(-length)}`;
 }
+
+export const toSlug = (title: string) => (
+  title.toLowerCase().replace(/\s+/g, '-').replace(/[\?,:]/g, '')
+)

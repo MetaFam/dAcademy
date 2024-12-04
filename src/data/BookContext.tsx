@@ -3,7 +3,7 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { gql, request } from 'graphql-request'
 import { useAccount } from 'wagmi'
 import playbooks from './playbooks.json'
-import { toSlug } from '@/components/CarouselItem'
+import { toSlug } from '@/lib/utils'
 
 const questChainQueryDocument = gql`
   query ChainDetails($name: String!, $reader: String) {

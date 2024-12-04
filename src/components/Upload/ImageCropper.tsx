@@ -7,7 +7,6 @@ import ReactCrop, {
 } from 'react-image-crop'
 
 import 'react-image-crop/dist/ReactCrop.css'
-import { upload } from '@/lib/utils'
 import { useAtom } from 'jotai'
 import { Button } from '@/components/ui/button'
 import { coverAtom } from '@/atoms/frontMatterAtom'

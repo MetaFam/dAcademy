@@ -2,7 +2,6 @@ import { createLazyFileRoute, Link } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import request, { gql } from 'graphql-request'
 import { Card, CardContent } from '@/components/ui/card'
-import CarouselItems, { toSlug } from '@/components/CarouselItem'
 import {
   Carousel,
   CarouselContent,
@@ -10,9 +9,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-import SectionHeader from '@/components/SectionHeader'
 import playbooks from '@/data/playbooks.json'
-import { toHTTP } from '@/lib/utils'
+import { toHTTP, toSlug } from '@/lib/utils'
 import TopOrg from '@/components/TopOrg'
 
 const chainImageQueryDocument = gql`
@@ -48,30 +46,6 @@ export type Category = {
   books: Array<Book>
 }
 
-interface CarouselSectionProps {
-  id: string
-  title: string
-  description: string
-  items: Array<Book>
-}
-
-const CarouselSection = ({
-  id,
-  title,
-  description,
-  items,
-}: CarouselSectionProps) => (
-  <div {...{ id }} className="container py-4 mt-30 gap-4 scroll-mt-20">
-    <SectionHeader {...{ title, description }} />
-    <Carousel className="gap-4 md:gap-6 lg:gap-8 w-full">
-      {items.map((item, index) => (
-        <div id={`${id}-${toSlug(item.title)}`} key={index}>
-          <CarouselItems {...item} />
-        </div>
-      ))}
-    </Carousel>
-  </div>
-)
 
 const titleLess = ['How to Build a Network for Impact']
 
@@ -91,7 +65,7 @@ export function App() {
     },
   })
   if (error) console.error({ error })
-  console.log({ images })
+
 
   return (
     <>

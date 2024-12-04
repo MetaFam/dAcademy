@@ -1,29 +1,32 @@
 // src/components/Upload/Chapters
 import { MDXEditorMethods } from '@mdxeditor/editor'
 import MarkdownEditor from '@/components/MarkdownEditor'
-import React, { useState } from 'react'
+import React from 'react'
 import '@mdxeditor/editor/style.css'
 import '@/markdown-editor.css'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Atom, useAtom } from 'jotai'
+import { Chapter } from '@/atoms/chapterAtom'
 
-type Callback = () => void
+
+type ChapterSetter = (
+  ((f: ((c: Chapter) => Chapter)) => void)
+)
+
 const ChapterUpload = (
-  {index, header, contentHeader, onDelete, reloadCallback}:
+  {index, header, contentHeader, onDelete, atom}:
   {
     index: number
     header?: string
     contentHeader?: string
     onDelete?: (idx: number) => void
-    reloadCallback?: (idx: number, cb: Callback) => void
+    atom: Atom<Chapter>
   }
 ) => {
-  const editorRef = React.useRef<MDXEditorMethods>(null)
-  const [title, setTitle] = useState(localStorage.getItem(`chapter.${index}.title`))
 
-  reloadCallback?.(index, () => {
-    setTitle(localStorage.getItem(`chapter.${index}.title`))
-    editorRef.current?.setMarkdown(localStorage.getItem(`chapter.${index}.content`) ?? '')
-  })
+  const editorRef = React.useRef<MDXEditorMethods>(null)
+  const [chapter, setChapter] = useAtom<Chapter>(atom)
+
 
   return (
     <Card className="w-full">
@@ -42,15 +45,14 @@ const ChapterUpload = (
         >
           <h2>Title</h2>
           <input
-            onChange={(evt) => {
-              const {value} = evt.target
-              localStorage.setItem(`chapter.${index}.title`, value)
-              setTitle(value)
+            onChange={({ target: { value } }) => {
+              (setChapter as ChapterSetter)
+              ((prev: Chapter) => ({ ...prev, title: value }))
             }}
-            value={title ?? ''}
+            value={chapter.title ?? ''}
             id="title"
             placeholder="Title"
-            className="input input-bordered w-full max-w-xs my-2"
+            className="input input-bordered text-black w-full max-w-xs my-2"
           />
         </div>
         <div
@@ -61,13 +63,14 @@ const ChapterUpload = (
         </div>
         <div className="flex justify-center">
           <MarkdownEditor {...{ editorRef }}
-            markdown={localStorage.getItem(`chapter.${index}.content`) ?? ''}
+            markdown={chapter.content ?? ''}
             className="dark-theme dark-editor content"
             onChange={() => {
-              localStorage.setItem(
-                `chapter.${index}.content`,
-                editorRef.current?.getMarkdown() ?? '',
-              )
+              (setChapter as ChapterSetter)
+              ((prev) => ({
+                ...prev,
+                content: editorRef.current?.getMarkdown() ?? '',
+              }))
             }}
           />
         </div>
