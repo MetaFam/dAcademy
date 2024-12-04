@@ -1,0 +1,1 @@
+import{O as a,a as o,d as c}from"./index-nBQDF0U9.js";function s(e){return a({select:t=>t.location})}globalThis.jotaiAtomCache=globalThis.jotaiAtomCache||{cache:new Map,get(e,t){return this.cache.has(e)?this.cache.get(e):(this.cache.set(e,t),t)}};const h=o("/book/$slug/")({component:()=>{const e=c(),t=s();/\d$/.test(t.pathname)||e({to:`${t.pathname}/0`})}});export{h as Route};

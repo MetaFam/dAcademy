@@ -1,1 +1,0 @@
-import{r as a,o as l,bi as u,j as P,P as p}from"./index-HiPsjHpj.js";var d="Portal",f=a.forwardRef((o,e)=>{var r;const{container:s,...n}=o,[i,c]=a.useState(!1);l(()=>c(!0),[]);const t=s||i&&((r=globalThis==null?void 0:globalThis.document)==null?void 0:r.body);return t?u.createPortal(P.jsx(p.div,{...n,ref:e}),t):null});f.displayName=d;export{f as P};
