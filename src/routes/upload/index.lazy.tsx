@@ -15,17 +15,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { useAtom, useAtomValue, useSetAtom } from 'jotai'
-import { frontMatterAtom } from '@/atoms/frontMatterAtom'
+import { useAtom, useSetAtom } from 'jotai'
+// import { frontMatterAtom } from '@/atoms/frontMatterAtom'
 import { UploadPlaybook } from "@/components/Upload/UploadPlaybook"
 import { chaptersAtomsAtom, removeChapterAtom } from '@/atoms/chapterAtom'
 
 
 export const Upload = () => {
-  const [submitting, setSubmitting] = useState(false)
+  // const [submitting, setSubmitting] = useState(false)
   const [accordionValue, setAccordionValue] = useState("item-1")
   const [chaptersAtoms, addChapter] = useAtom(chaptersAtomsAtom)
-  const frontMatter = useAtomValue(frontMatterAtom)
+  // const frontMatter = useAtomValue(frontMatterAtom)
   const removeChapter = useSetAtom(removeChapterAtom)
   const [processing, setProcessing] = useState(false)
 
@@ -110,7 +110,9 @@ export const Upload = () => {
           <div id="permissions" className="pt-8 scroll-mt-12">
             <UploadPermissions />
           </div>
-          <Button onClick={() => setProcessing(true)} className="secondary">Create Playbook</Button>
+          <Button onClick={() => setProcessing(true)} className="secondary">
+            Create Playbook
+          </Button>
         </div>
         {processing && <UploadPlaybook/>}
       </main>
