@@ -17,8 +17,7 @@ import {
 } from "@/components/ui/accordion"
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { frontMatterAtom } from '@/atoms/frontMatterAtom'
-import { toHTTP, upload as toIPFS } from '@/lib/utils'
-import { toast } from 'react-hot-toast'
+import { UploadPlaybook } from "@/components/Upload/UploadPlaybook"
 import { chaptersAtomsAtom, removeChapterAtom } from '@/atoms/chapterAtom'
 
 
@@ -28,50 +27,7 @@ export const Upload = () => {
   const [chaptersAtoms, addChapter] = useAtom(chaptersAtomsAtom)
   const frontMatter = useAtomValue(frontMatterAtom)
   const removeChapter = useSetAtom(removeChapterAtom)
-
-
-  const upload = async () => {
-    setSubmitting(true)
-    try {
-      if(!frontMatter.title) throw new Error('Missing title')
-      if(!frontMatter.introduction) throw new Error('Missing introduction')
-      if(!frontMatter.cover) throw new Error('missing cover')
-      const coverToastId = toast.loading('Uploading cover to IPFS.')
-      const cid = await fetch(frontMatter.cover)
-      .then((res) =>  res.blob())
-      .then((blob) => toIPFS([new File([blob], 'cover.jpg')]))
-      toast.dismiss(coverToastId)
-
-      const coverURL = `ipfs://${cid}/cover.jpg`
-      const shortCoverURL = `ipfs://${cid.substring(0, 3)}…${cid.slice(-3)}/cover.jpg`
-      toast.success(
-        <p>Saved to <a target="_blank" href={toHTTP(coverURL)}>{shortCoverURL}</a>.</p>,
-        { duration: 10_000 },
-      )
-      const metaToastId = toast.loading('Uploading metadata to IPFS.')
-      const metadata = {
-        title: frontMatter.title,
-        introduction: frontMatter.introduction,
-        cover: coverURL
-      }
-      const filename = `metadata.${new Date().toISOString()}.json`
-      const metadataCID = await toIPFS(
-        [new File([JSON.stringify(metadata, null, 2)], filename)],
-      )
-      toast.dismiss(metaToastId)
-      const metadataURL = `ipfs://${metadataCID}/${filename}`
-      const shortMetadataURL = `ipfs://${metadataCID.substring(0, 3)}…${metadataCID.slice(-3)}/${filename}`
-      toast.success(
-        <p>Saved to <a target="_blank" href={toHTTP(metadataURL)}>{shortMetadataURL}</a>.</p>,
-        { duration: 10_000 },
-      )
-      console.log({metadataCID, metadataURL})
-    } catch(error) {
-      toast.error((error as Error).message)
-    } finally {
-      setSubmitting(false)
-    }
-  }
+  const [processing, setProcessing] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -128,10 +84,6 @@ export const Upload = () => {
             </AccordionItem>
           </Accordion>
 
-          <Button disabled={submitting} onClick={upload} className="block mx-auto" type="button">
-            {submitting ? 'Submitting' : 'Submit'}
-          </Button>
-
           <div id="chapters" className="pt-8 scroll-mt-12">
 
             {chaptersAtoms.map((chapterAtom, idx) => (
@@ -158,7 +110,9 @@ export const Upload = () => {
           <div id="permissions" className="pt-8 scroll-mt-12">
             <UploadPermissions />
           </div>
+          <Button onClick={() => setProcessing(true)} className="secondary">Create Playbook</Button>
         </div>
+        {processing && <UploadPlaybook/>}
       </main>
     </SidebarProvider>
   )

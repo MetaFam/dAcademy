@@ -6,6 +6,7 @@
 
 :root {
   font-family: "Saira", sans-serif;
+  color-scheme: light dark;
 }
 
 @layer base {

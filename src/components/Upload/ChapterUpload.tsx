@@ -52,7 +52,7 @@ const ChapterUpload = (
             value={chapter.title ?? ''}
             id="title"
             placeholder="Title"
-            className="input input-bordered text-black w-full max-w-xs my-2"
+            className="input input-bordered w-full max-w-xs my-2"
           />
         </div>
         <div

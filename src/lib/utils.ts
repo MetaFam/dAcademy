@@ -64,3 +64,17 @@ export const truncateHash = (hash: string, length: number = 6) => {
 export const toSlug = (title: string) => (
   title.toLowerCase().replace(/\s+/g, '-').replace(/[\?,:]/g, '')
 )
+
+export const toDataURL = (
+  file: File, setter: (u: string | null) => void,
+) => {
+  const reader = new FileReader()
+  reader.onload = () => {
+    let { result } = reader
+    if(result instanceof ArrayBuffer) {
+      result = new String(result) as string
+    }
+    setter(result)
+  }
+  reader.readAsDataURL(file)
+}
