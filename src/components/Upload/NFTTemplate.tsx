@@ -1,7 +1,6 @@
 import { backgroundAtom } from "@/atoms/nftTemplateAtom"
-import { toDataURL } from "@/lib/utils"
 import { useAtom } from "jotai"
-import React, { useEffect, useState} from "react"
+import React, { useState} from "react"
 
 type Point = {x?: number, y?: number}
 export const NFTTemplate = ({
@@ -17,6 +16,8 @@ export const NFTTemplate = ({
   // const [pCurrent, setPCurrent] = useState<SVGPoint>()
   const [zoomPercent, setZoomPercent] = useState(1)
   const [panning, setPan] = useState<Point>({ x: 0, y: 0 })
+
+  console.log({setBackground, setZoomPercent, setPan})
   // const [mode, setMode] = useState<'zoom' | 'pan' | null>(null)
 
   // useEffect(() => {

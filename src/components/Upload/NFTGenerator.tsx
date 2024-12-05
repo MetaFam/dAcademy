@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import { NFTTemplate } from "./NFTTemplate"
 import { toDataURL} from "@/lib/utils"
 import { useAtom, useSetAtom } from "jotai"
