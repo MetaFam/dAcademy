@@ -18,4 +18,4 @@ See our [Docs](https://docs.dacade.my/) for more details on the platform and the
 
 Have some feedback or request?  Start a [discussion](https://github.com/MetaFam/dAcademy/discussions)!
 
-Keep up-to-date with the build on our [Project board](https://github.com/orgs/MetaFam/projects/5/views/6)
+Keep up-to-date with the build on our [Project board](https://github.com/orgs/MetaFam/projects/5/views/6).
