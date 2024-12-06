@@ -11,3 +11,5 @@ Using [Shadcn Components](https://ui.shadcn.com/docs/components/)
 Built using [Quest Chains contracts](https://github.com/quest-chains)
 
 On [Optimism](https://docs.optimism.io/)
+
+See our [Docs](https://docs.dacade.my/) for more details on the platform and the build.
