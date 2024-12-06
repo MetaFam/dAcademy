@@ -6,6 +6,8 @@ Includes:
 
 Built with [Vite-React-ts](https://vite.dev/guide/)
 
+With [Tanstack-Router](https://tanstack.com/router) and [Tanstack-Query](https://tanstack.com/query/latest)
+
 Using [Shadcn Components](https://ui.shadcn.com/docs/components/)
 
 Built using [Quest Chains contracts](https://github.com/quest-chains)
