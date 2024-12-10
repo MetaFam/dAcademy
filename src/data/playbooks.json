@@ -1,99 +1,50 @@
 [
   {
-    "title": "Meta/GameB",
+    "category": "Meta/GameB",
     "description": "Bigger picture, the grander game.",
     "books": [
-      {
-        "title": "WTF Is Game B?"
-      },
-      {
-        "title": "WTF Is Metacrisis?"
-      },
-      {
-        "title": "Meditations on Moloch"
-      },
-      {
-        "title": "Political Metamodernism: Bridging Divides"
-      },
-      {
-        "title": "Choose Good Quests"
-      },
-      {
-        "title": "Meme Driven Organizations"
-      }
+      "wtf-is-game-b",
+      "wtf-is-metacrisis",
+      "meditations-on-moloch",
+      "political-metamodernism",
+      "choose-good-quests",
+      "meme-driven-organizations"
     ]
   },
   {
-    "title": "Web3 General",
+    "category": "Web3 General",
     "description": "Web3 basics: how & why.",
     "books": [
-      {
-        "title": "WTF Is Ethereum?"
-      },
-      {
-        "title": "WTF Are DAOs?"
-      },
-      {
-        "title": "WTF Is DeFi?"
-      },
-      {
-        "title": "WTF Are NFTs?"
-      },
-      {
-        "title": "WTF Are dApps?"
-      },
-      {
-        "title": "Become a Web3 Developer"
-      }
+      "wtf-is-ethereum",
+      "wtf-are-daos",
+      "wtf-is-defi",
+      "wtf-are-nfts",
+      "wtf-are-dapps",
+      "become-a-web3-developer"
     ]
   },
   {
-    "title": "DAO Playbooks",
+    "category": "DAO Playbooks",
     "description": "DAO Tooling/Coordination Methods",
     "books": [
-      {
-        "title": "Become the Best Contributor in Any DAO"
-      },
-      {
-        "title": "Starting DAOs 101"
-      },
-      {
-        "title": "How to Build a Network for Impact",
-        "displayTitle": false
-      },
-      {
-        "title": "Using Coordinape to Reward Contributors"
-      },
-      {
-        "title": "Effective Meetings with Holacracy"
-      },
-      {
-        "title": "Entering DAOs as a Writer"
-      },
-      {
-        "title": "Building Successful Teams"
-      }
+      "become-the-best-contributor-in-any-dao",
+      "starting-daos-101",
+      "how-to-build-a-network-for-impact",
+      "using-coordinape-to-reward-contributors",
+      "effective-meetings-with-holacracy",
+      "entering-daos-as-a-writer",
+      "building-successful-teams"
     ]
   },
   {
-    "title": "Self-Actualization",
+    "category": "Self-Actualization",
     "description": "Level-up, self-improve.",
     "books": [
-      {
-        "title": "How to Play the Creator Game"
-      },
-      {
-        "title": "Embrace the Ticking Clock"
-      },
-      {
-        "title": "Know Your Biases"
-      },
-      {
-        "title": "Understanding Imposter Syndrome"
-      },
-      {
-        "title": "Journaling Like Dickie Bush"
-      }
+      "how-to-play-the-creator-game",
+      "embrace-the-ticking-clock",
+      "know-your-biases",
+      "understanding-imposter-syndrome",
+      "journal-like-dickie-bush"
     ]
   }
 ]

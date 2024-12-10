@@ -9,15 +9,16 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-import playbooks from '@/data/playbooks.json'
-import { toHTTP, toSlug } from '@/lib/utils'
+import { toHTTP } from '@/lib/utils'
 import TopOrg from '@/components/TopOrg'
+import playbooks from '@/data/playbooks.json'
 
 const chainImageQueryDocument = gql`
   query ChainImages($name: String) {
     questChains {
       imageUrl
       name
+      slug
     }
   }
 `
@@ -30,6 +31,7 @@ export type CoverImageResponse = {
   questChains: Array<{
     imageUrl: string | null
     name: string
+    slug: string
   }>
 }
 
@@ -46,62 +48,67 @@ export type Category = {
   books: Array<Book>
 }
 
-
-const titleLess = ['How to Build a Network for Impact']
+const titleLess = ['how-to-build-a-network-for-impact']
 
 export function App() {
-  const { data: images, error } = useQuery<Record<string, string>>({
+  const { data: info, error } = useQuery<Record<string, Book>>({
     queryKey: [`chain-images`],
-    queryFn: async (): Promise<Record<string, string>> => {
-      const { questChains: data } = await request<CoverImageResponse>(
-        import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
-        chainImageQueryDocument,
-        {},
+    queryFn: async (): Promise<Record<string, Book>> => {
+      const { questChains: data } = await (
+        request<CoverImageResponse>(
+          import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
+          chainImageQueryDocument,
+          {},
+        )
       )
-      console.log({ data })
       return Object.fromEntries(
-        data.map(({ imageUrl, name }) => [name, toHTTP(imageUrl ?? undefined)]),
-      ) as Record<string, string>
+        data.map(({ imageUrl, name, slug }) => (
+          [slug, {
+            title: name,
+            image: toHTTP(imageUrl ?? undefined)
+          }]
+        ))
+      ) as Record<string, Book>
     },
   })
   if (error) console.error({ error })
 
+  console.debug({ info})
 
   return (
     <>
       <div id="top" className="p-6 flex flex-col space-y-6 mx-20">
-        {playbooks.map((category, index) => (
+        {playbooks.map((shelf, index) => (
           <div key={index} className="space-y-2">
             <Carousel
-              opts={{
-                align: 'start',
-              }}
+              opts={{ align: 'start' }}
               className="w-full max-sm:max-w-sm max-md:max-w-md max-lg:max-w-lg max-xl:max-w-xl dark:text-white"
             >
-              <h2 className="text-lg text-purple-400">{category.title}</h2>
-              <h3 className="pb-4 md:text-base">{category.description}</h3>
+              <h2 className="text-lg text-purple-400">{shelf.category}</h2>
+              <h3 className="pb-4 md:text-base">{shelf.description}</h3>
               <CarouselContent>
-                {category.books.map((book, bookIndex) => (
+                {shelf.books.map((slug, bookIndex) => (
                   <CarouselItem
                     key={bookIndex}
-                    id={toSlug(book.title)}
+                    id={slug}
                     className="md:basis-1/2 lg:basis-1/4"
                   >
                     <Link
-                      to={`/book/${toSlug(book.title)}`}
+                      to={`/book/${slug}`}
                       className="p-0 relative"
                     >
-                      {!titleLess.includes(book.title) && (
+                      {!titleLess.includes(slug) && (
                         <h3 className="text-xl font-semibold text-center absolute top-1/2 left-1/2 -translate-x-1/2 md:-translate-y-1/2 bg-black/30 p-2 max-sm:top-0">
-                          {book.title}
+                          {info?.[slug]?.title}
                         </h3>
                       )}
                       <Card className="dark:bg-zinc-800">
                         <CardContent className="flex items-center justify-center p-0 dark:text-white">
                           <img
                             className="object-cover rounded-r-lg border border-white"
-                            src={images?.[book.title]}
-                            alt={book.title}
+                            src={info?.[slug]?.image}
+                            title={slug}
+                            alt={info?.[slug]?.title}
                           />
                         </CardContent>
                       </Card>

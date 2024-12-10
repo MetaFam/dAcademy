@@ -2,18 +2,12 @@ import { createContext, ReactNode, useContext, useState } from 'react'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { gql, request } from 'graphql-request'
 import { useAccount } from 'wagmi'
-import playbooks from './playbooks.json'
-import { toSlug } from '@/lib/utils'
 
 const questChainQueryDocument = gql`
-  query ChainDetails($name: String!, $reader: String) {
-    questChains(
-      where: {
-        name_starts_with_nocase: $name,
-        name_ends_with_nocase: $name
-      }
-    ) {
+  query ChainDetails($slug: String!, $reader: String) {
+    questChains(where: { slug: $slug }) {
       id
+      name
       address
       description
       imageUrl
@@ -102,7 +96,6 @@ export type UnauthedBook = {
 export type UnloadedBook = {
   status: 'init'
   slug: string
-  title: string
 }
 export type BookError = {
   status: 'error'
@@ -135,6 +128,7 @@ export type Quest = {
 }
 export type Chain = {
   id: string
+  name: string
   address: string
   description: string
   imageUrl: string
@@ -183,7 +177,7 @@ export const useLoadedBook = () => {
   if(!book) throw new Error('No book.')
   if(book.status === 'error') throw book.error
   if(book.status === 'init') {
-    throw new Error(`Loading Book: "${book.title}".`)
+    throw new Error(`Loading Book: "${book.slug}".`)
   }
 
   return book
@@ -194,14 +188,6 @@ export const BookProvider = (
   { slug: string, children: ReactNode, chapter?: number }
 ) => {
   const [on, setOn] = useState(chapter)
-
-  const { title } = (
-    playbooks
-    .map(({ books }) => books)
-    .flat()
-    .find(({ title }) => toSlug(title) === slug)
-  ) ?? {}
-  if(!title) throw new Error(`Book "${slug}" not found.`)
 
   const account = useAccount()
   const reader = account?.address?.toLowerCase() ?? null
@@ -214,7 +200,7 @@ export const BookProvider = (
     queryFn: async () => request(
       import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
       questChainQueryDocument,
-      { name: title, reader },
+      { slug, reader },
     ),
   })
 
@@ -244,7 +230,7 @@ export const BookProvider = (
   if(!!error) {
     book = { status: 'error' as const, error }
   } else if(questLoading) {
-    book = { status: 'init' as const, slug, title }
+    book = { status: 'init' as const, slug }
   } else {
     const chapters = (() => (
       new ChaptersArray(...[
@@ -273,7 +259,7 @@ export const BookProvider = (
 
     const props = {
       slug,
-      title,
+      title: chain.name,
       introduction: chain.description,
       chapters,
       creator: chain.createdBy.id,
