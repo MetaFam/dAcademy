@@ -13,7 +13,7 @@ type ChapterSetter = (
   ((f: ((c: Chapter) => Chapter)) => void)
 )
 
-const ChapterUpload = (
+export const ChapterUpload = (
   {index, header, contentHeader, onDelete, atom}:
   {
     index: number
@@ -23,10 +23,8 @@ const ChapterUpload = (
     atom: Atom<Chapter>
   }
 ) => {
-
   const editorRef = React.useRef<MDXEditorMethods>(null)
   const [chapter, setChapter] = useAtom<Chapter>(atom)
-
 
   return (
     <Card className="w-full">

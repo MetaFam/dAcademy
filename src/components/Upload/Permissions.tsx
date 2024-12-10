@@ -58,14 +58,14 @@ export function UploadPermissions() {
       </CardHeader>
       <CardContent className="text-center">
         <div className="flex flex-wrap gap-4">
-          <input required value={name} onChange={({target: {value} }) => setName(value)} className="grow" placeholder="ETH Address or ENS Name"/>
+          <input value={name} onChange={({target: {value} }) => setName(value)} className="grow" placeholder="ETH Address or ENS Name"/>
           <select value={role} onChange={({target: {value} }) => setRole(value)}>
             <option value="owner">Owner</option>
             <option value="admin">Admin</option>
             <option value="editor">Editor</option>
             <option value="reviewer">Reviewer</option>
           </select>
-          <Button onClick={add}>Add</Button>
+          <Button type="button" onClick={add}>Add</Button>
         </div>
         <Table className="mt-4">
           <TableHeader>
@@ -83,7 +83,7 @@ export function UploadPermissions() {
                 <TableCell>{`${user.address?.substring(0,5)}…${user.address?.slice(-3)}`}</TableCell>
                 <TableCell>{user.role}</TableCell>
                 <TableCell>
-                  <Button onClick={() => remove(idx)}>Remove</Button>
+                  <Button type="button" onClick={() => remove(idx)}>Remove</Button>
                 </TableCell>
               </TableRow>
             ))}
