@@ -4,7 +4,7 @@ import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { UploadSidebar, accordionItems} from '@/components/Sidebars/uploadSidebar'
 import { UploadCover } from '@/components/Upload/Cover'
 import { UploadIntro } from '@/components/Upload/Intro'
-import ChapterUpload from '@/components/Upload/ChapterUpload'
+import { ChapterUpload } from '@/components/Upload/ChapterUpload'
 import { UploadPermissions } from '@/components/Upload/Permissions'
 import { UploadTitle } from '@/components/Upload/Title'
 import { Button } from '@/components/ui/button'
@@ -19,7 +19,6 @@ import { useAtom, useSetAtom } from 'jotai'
 // import { frontMatterAtom } from '@/atoms/frontMatterAtom'
 import { UploadPlaybook } from "@/components/Upload/UploadPlaybook"
 import { chaptersAtomsAtom, removeChapterAtom } from '@/atoms/chapterAtom'
-
 
 export const Upload = () => {
   // const [submitting, setSubmitting] = useState(false)
@@ -39,17 +38,18 @@ export const Upload = () => {
   }
 
   useEffect(() => {
-    const sectionId = accordionItems.find(item => item.value === accordionValue)?.url;
-    if (sectionId) {
-      const element = document.querySelector(sectionId);
+    const sectionId = accordionItems.find(
+      (item) => item.value === accordionValue
+    )?.url;
+    if(sectionId) {
+      const element = document.querySelector(sectionId)
       if (element) {
-
         setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 300);
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 300)
       }
     }
-  }, [accordionValue, accordionItems]);
+  }, [accordionValue, accordionItems])
 
   return (
     <SidebarProvider>

@@ -19,10 +19,9 @@ import { frontMatterAtom } from "@/atoms/frontMatterAtom"
 import { chaptersAtom } from "@/atoms/chapterAtom"
 import { nftAtom } from "@/atoms/nftAtom"
 import { usersAtom } from "@/atoms/usersAtom"
-import { upload as toIPFS, toHTTP } from '@/lib/utils'
+import { upload as toIPFS, toHTTP, toSlug } from '@/lib/utils'
 import { useWriteContract } from "wagmi"
 import abi from '@/abis/QuestChainFactory.json'
-
 
 export function UploadPlaybook() {
   const [open, setOpen] = useState(true)
@@ -33,10 +32,7 @@ export function UploadPlaybook() {
   const nft = useAtomValue(nftAtom)
   const users = useAtomValue(usersAtom)
   const addLine = (line: ReactNode) => setLines((prev) => [...prev, line])
-
-  const {
-    writeContract,
-  } = useWriteContract()
+  const { writeContract } = useWriteContract()
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -63,9 +59,11 @@ export function UploadPlaybook() {
         abortSignal.throwIfAborted()
         addLine('Uploading frontmatter to IPFS.')
         const metadata = {
-          title: frontMatter.title,
-          introduction: frontMatter.introduction,
-          cover: coverURL
+          name: frontMatter.title,
+          description: frontMatter.introduction,
+          cover: coverURL,
+          slug: toSlug(frontMatter.title),
+          categories: [],
         }
         const filename = `frontmatter.${new Date().toISOString()}.json`
         const metadataCID = await toIPFS(
@@ -81,7 +79,7 @@ export function UploadPlaybook() {
           chapters.map(async (chapter, idx) => {
             addLine(`Uploading chapter #${idx + 1} to IPFS.`)
             const metadata = {
-              title: chapter.title,
+              name: chapter.title,
               description: chapter.content,
             }
             const filename = `chapter.${new Date().toISOString()}.json`
@@ -114,7 +112,7 @@ export function UploadPlaybook() {
         addLine('Uploading NFT metadata to IPFS.')
         abortSignal.throwIfAborted()
         const nftMetadata = {
-          title: nft.name,
+          name: nft.name,
           description: nft.description,
           image: nftImageURL,
         }
