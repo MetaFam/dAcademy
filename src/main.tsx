@@ -3,7 +3,7 @@ import { createRoot } from'react-dom/client'
 import './index.css'
 import { createAppKit } from '@reown/appkit/react'
 import { WagmiProvider } from 'wagmi'
-import { mainnet, optimism } from '@reown/appkit/networks'
+import { mainnet, optimism, optimismSepolia } from '@reown/appkit/networks'
 import {
   QueryClient, QueryClientProvider,
 } from '@tanstack/react-query'
@@ -53,7 +53,7 @@ const wagmiAdapter = new WagmiAdapter({
 
 createAppKit({
   adapters: [wagmiAdapter],
-  networks: [mainnet, optimism],
+  networks: [optimism, optimismSepolia],
   metadata,
   projectId,
   showWallets: true,

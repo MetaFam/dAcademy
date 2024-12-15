@@ -1,9 +1,9 @@
-// src/components/Home/Soulbound.tsx
-
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar } from "@/components/ui/avatar";
-import { Shield, Info } from "lucide-react";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import { Shield, Info } from 'lucide-react'
+import {
+  Card, CardContent, CardDescription, CardHeader, CardTitle,
+} from '@/components/ui/card'
+import { Avatar } from '@/components/ui/avatar'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import {
   Drawer,
   DrawerClose,
@@ -13,19 +13,20 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer";
+} from '@/components/ui/drawer'
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card";
+} from '@/components/ui/hover-card'
+import { useIsMobile } from '@/hooks/useIsMobile'
 
 interface SoulboundProps {
   id?: string; // Make id optional
 }
 
 export function Soulbound({ id }: SoulboundProps) {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = !useIsMobile()
 
   const cardContent = (
     <div className="flex justify-between space-x-4">

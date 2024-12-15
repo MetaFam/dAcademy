@@ -1,0 +1,16 @@
+# Custom Dictionary Words
+appkit
+cmdk
+dacademy
+embla
+etherscans
+mdxeditor
+nojekyll
+reown
+sonner
+UCAN
+vaul
+viem
+wagmi
+wdth
+wght

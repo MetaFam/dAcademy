@@ -7,7 +7,7 @@ import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, Dr
 import { Code, Info } from "lucide-react";
 import OptimismLogo from "@/assets/Optimism.svg";
 import OPLogo from "@/assets/OP.svg";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export function Web3() {
   const isDesktop = useMediaQuery("(min-width: 768px)");

@@ -1,13 +1,15 @@
-// src/components/Upload/Permissions
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "../ui/button";
-import { useState } from "react";
-import { useAtom } from "jotai";
-import { User, usersAtom } from "@/atoms/usersAtom";
-import { createPublicClient, http } from "viem";
-import { mainnet } from "viem/chains";
-import { maybeENS } from "@/lib/utils";
+import { FormEvent, SelectHTMLAttributes, useState } from 'react'
+import { useAtom } from 'jotai'
+import { createPublicClient, http } from 'viem'
+import { mainnet } from 'viem/chains'
+import { toast } from 'react-hot-toast'
+import clsx from 'clsx'
+import {
+  Card, CardContent, CardHeader, CardTitle,
+} from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { User, usersAtom } from '@/atoms/usersAtom'
+import { maybeENS } from '@/lib/utils'
 import {
   Table,
   TableBody,
@@ -15,16 +17,43 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { toast } from "react-hot-toast"
+} from '@/components/ui/table'
+import TextInput from './TextInput'
 
+const RoleSelect = (
+  { className, ...props }:
+  { className?: string } & SelectHTMLAttributes<HTMLSelectElement>
+) => (
+  <select
+    className={clsx(
+      'px-4 py-2 rounded-md',
+      className
+    )}
+    {...props}
+  >
+    <option value="owner">Owner</option>
+    <option value="admin">Admin</option>
+    <option value="editor">Editor</option>
+    <option value="reviewer">Reviewer</option>
+  </select>
+)
 
 export function UploadPermissions() {
   const [name, setName] = useState<string>()
   const [role, setRole] = useState<string>('reviewer')
   const [users, setUsers] = useAtom(usersAtom)
 
-  const add = async () => {
+  const setUserRoleByIndex = (index: number, role: string) => {
+    setUsers((prev) => {
+      const next = [...prev]
+      next[index].role = role
+      return next
+    })
+  }
+
+  const add = async (evt: FormEvent) => {
+    evt.preventDefault()
+
     try {
       if(!name) return
       const client = createPublicClient({
@@ -52,43 +81,66 @@ export function UploadPermissions() {
     setUsers((prev) => prev.toSpliced(index, 1))
   }
   return (
-    <Card className="w-full">
+    <Card className="">
       <CardHeader>
-        <CardTitle className="text-center text-xl">Permissions</CardTitle>
+        <CardTitle className="text-center text-xl">
+          Permissions
+        </CardTitle>
       </CardHeader>
-      <CardContent className="text-center">
-        <div className="flex flex-wrap gap-4">
-          <input value={name} onChange={({target: {value} }) => setName(value)} className="grow" placeholder="ETH Address or ENS Name"/>
-          <select value={role} onChange={({target: {value} }) => setRole(value)}>
-            <option value="owner">Owner</option>
-            <option value="admin">Admin</option>
-            <option value="editor">Editor</option>
-            <option value="reviewer">Reviewer</option>
-          </select>
-          <Button type="button" onClick={add}>Add</Button>
-        </div>
-        <Table className="mt-4">
-          <TableHeader>
-            <TableRow className="bg-transparent hover:bg-transparent cursor-default">
-              <TableHead className="w-[100px]">ENS Name</TableHead>
-              <TableHead>ETH Address</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead className="text-right"></TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {users.map((user, idx) => (
-              <TableRow key={idx}>
-                <TableCell className="font-medium">{user.name}</TableCell>
-                <TableCell>{`${user.address?.substring(0,5)}…${user.address?.slice(-3)}`}</TableCell>
-                <TableCell>{user.role}</TableCell>
-                <TableCell>
-                  <Button type="button" onClick={() => remove(idx)}>Remove</Button>
-                </TableCell>
+      <CardContent className="">
+        <form
+          onSubmit={add}
+          className="flex flex-wrap gap-4 items-center justify-center"
+        >
+          <TextInput
+            value={name}
+            onChange={({ target: { value } }) => setName(value)}
+            className="min-w-[45ch] text-center"
+            placeholder="ETH Address or ENS Name"
+          />
+          <RoleSelect
+            value={role}
+            onChange={({ target: { value } }) => setRole(value)}
+          />
+          <Button>Add</Button>
+        </form>
+        {users.length > 0 && (
+          <Table className="mt-4 w-auto mx-auto">
+            <TableHeader>
+              <TableRow className="bg-transparent hover:bg-transparent cursor-default">
+                <TableHead className="w-[100px]">ENS Name</TableHead>
+                <TableHead>ETH Address</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead className="text-right"></TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {users.map((user, idx) => (
+                <TableRow key={idx}>
+                  <TableCell className="font-medium">
+                    {user.name}
+                  </TableCell>
+                  <TableCell>
+                    {`${user.address?.substring(0,7)}…${user.address?.slice(-6)}`}
+                  </TableCell>
+                  <TableCell>
+                    <RoleSelect
+                      value={user.role}
+                      onChange={({ target: { value } }) => {
+                        setUserRoleByIndex(idx, value)
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <Button type="button" onClick={() => remove(idx)}>
+                      Remove
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
       </CardContent>
     </Card>
   );

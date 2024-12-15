@@ -2,7 +2,7 @@
 import * as React from "react";
 import { useAtom } from 'jotai';
 import { isGridVisibleAtom } from '@/atoms/isGridVisibleAtom'
-import { useMediaQuery } from "@/hooks/use-media-query"
+import { useMediaQuery } from "@/hooks/useMediaQuery"
 import {
   Dialog,
   DialogContent,

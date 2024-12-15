@@ -2,29 +2,20 @@ import { createLazyFileRoute } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { UploadSidebar, accordionItems} from '@/components/Sidebars/uploadSidebar'
-import { UploadCover } from '@/components/Upload/Cover'
-import { UploadIntro } from '@/components/Upload/Intro'
-import { ChapterUpload } from '@/components/Upload/ChapterUpload'
+import { Cover } from '@/components/Upload/Cover'
+import { Intro } from '@/components/Upload/Intro'
+import { Chapter } from '@/components/Upload/Chapter'
 import { UploadPermissions } from '@/components/Upload/Permissions'
-import { UploadTitle } from '@/components/Upload/Title'
+import { Title } from '@/components/Upload/Title'
 import { Button } from '@/components/ui/button'
 import { CompletionNFT } from '@/components/Upload/Completion'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
 import { useAtom, useSetAtom } from 'jotai'
-// import { frontMatterAtom } from '@/atoms/frontMatterAtom'
 import { UploadPlaybook } from "@/components/Upload/UploadPlaybook"
 import { chaptersAtomsAtom, removeChapterAtom } from '@/atoms/chapterAtom'
 
 export const Upload = () => {
-  // const [submitting, setSubmitting] = useState(false)
   const [accordionValue, setAccordionValue] = useState("item-1")
   const [chaptersAtoms, addChapter] = useAtom(chaptersAtomsAtom)
-  // const frontMatter = useAtomValue(frontMatterAtom)
   const removeChapter = useSetAtom(removeChapterAtom)
   const [processing, setProcessing] = useState(false)
 
@@ -34,7 +25,6 @@ export const Upload = () => {
 
   const chapterDeleted = (index: number) => {
     removeChapter(index - 1)
-
   }
 
   useEffect(() => {
@@ -56,39 +46,31 @@ export const Upload = () => {
       <UploadSidebar onAccordionChange={setAccordionValue} />
       <SidebarTrigger />
       <main className="flex-1 mt-12 w-screen mb-8">
-        <div className="space-y-4 mx-auto w-2/3">
-        <form onSubmit={() => setProcessing(true)}>
-          <Accordion type="single" collapsible className="w-full" value={accordionValue} onValueChange={setAccordionValue}>
-            <AccordionItem value="item-1">
-              <AccordionTrigger>Upload Cover</AccordionTrigger>
-              <AccordionContent>
-                <div id="upload-cover" className="pt-8 scroll-mt-12">
-                  <UploadCover />
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger>Upload Title</AccordionTrigger>
-              <AccordionContent>
-                <div id="book-title" className="pt-8 scroll-mt-12">
-                  <UploadTitle />
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-              <AccordionTrigger>Upload Intro</AccordionTrigger>
-              <AccordionContent>
-                <div id="book-intro" className="pt-8 scroll-mt-12">
-                  <UploadIntro />
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+        <form
+          id="playbook"
+          onSubmit={(evt) => {
+            evt.preventDefault()
+            setProcessing(true)
+          }}
+        >
+          <div id="upload-cover" className="pt-8 scroll-mt-12">
+            <Cover/>
+          </div>
+          <div id="book-title" className="pt-8 scroll-mt-12">
+            <Title/>
+          </div>
+          <div id="book-intro" className="pt-8 scroll-mt-12">
+            <Intro/>
+          </div>
 
-          <div id="chapters" className="pt-8 scroll-mt-12">
+          <div
+            id="chapters"
+            className="mt-12 scroll-mt-12 border shadow rounded-lg"
+          >
+            <h2 className="text-center text-xl font-bold py-8">Chapters</h2>
 
             {chaptersAtoms.map((chapterAtom, idx) => (
-              <ChapterUpload
+              <Chapter
                 atom={chapterAtom}
                 onDelete={chapterDeleted}
                 key={idx}
@@ -99,6 +81,7 @@ export const Upload = () => {
             <div className="flex justify-center mt-4">
               <Button
                 onClick={() => addChapter({})}
+                type="button"
                 className="items-center rounded-md"
               >
                 Add Chapter
@@ -106,17 +89,16 @@ export const Upload = () => {
             </div>
           </div>
           <div id="completion" className="pt-8 scroll-mt-12">
-            <CompletionNFT />
+            <CompletionNFT/>
           </div>
-          <div id="permissions" className="pt-8 scroll-mt-12">
-            <UploadPermissions />
-          </div>
-          <div className="flex justify-center mt-4">
-            <Button className="secondary">
-              Create Playbook
-            </Button>
-          </div>
-          </form>
+        </form>
+        <div id="permissions" className="pt-8 scroll-mt-12">
+          <UploadPermissions/>
+        </div>
+        <div className="flex justify-center mt-4">
+          <Button form="playbook" className="secondary">
+            Create Playbook
+          </Button>
         </div>
         {processing && <UploadPlaybook/>}
       </main>

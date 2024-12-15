@@ -17,7 +17,6 @@ export const NFTTemplate = ({
   const [zoomPercent, setZoomPercent] = useState(1)
   const [panning, setPan] = useState<Point>({ x: 0, y: 0 })
 
-  console.log({setBackground, setZoomPercent, setPan})
   // const [mode, setMode] = useState<'zoom' | 'pan' | null>(null)
 
   // useEffect(() => {
@@ -65,7 +64,7 @@ export const NFTTemplate = ({
   //   if(pStart && current.y != null) {
   //     const delta = (pStart.y - current.y) / 200
   //     /* When the button is first depressed, the zoom should be 100%.
-  //       * As the mouse moves up, the zoom should increase to a maximium of 200%.
+  //       * As the mouse moves up, the zoom should increase to a maximum of 200%.
   //       * As the mouse moves down, the zoom should decrease to a minimum of 1%.
   //       */
   //     console.debug({ per: 1 + delta })
@@ -101,7 +100,8 @@ export const NFTTemplate = ({
         {background && (
           <image
             x={panning.x} y={panning.y}
-            height={`${zoomPercent * 100}%`} width={`${zoomPercent * 100}%`}
+            height={`${zoomPercent * 100}%`}
+            width={`${zoomPercent * 100}%`}
             id="bg"
             href={bg ?? undefined}
           />
@@ -109,7 +109,12 @@ export const NFTTemplate = ({
         <filter id="blur" colorInterpolationFilters="sRGB">
           <feGaussianBlur stdDeviation="2" />
         </filter>
-        <rect id="textBox" x="15%" y="80%" width="70%" height="13%" rx="4%" />
+        <rect
+          id="textBox"
+          x="5%" y="80%"
+          width="90%" height="13%"
+          rx="4%"
+        />
         <clipPath id="textClip">
           <use href="#textBox" />
         </clipPath>
@@ -121,11 +126,26 @@ export const NFTTemplate = ({
       )}
       {title && (
         <>
-          <use filter="url(#blur)" clipPath="url(#textClip)" href="#bg" height="100%" width="100%"/>
-          <use href="#textBox" fill="#fff" fillOpacity=".25" filter="url(#blur)" />
+          <use
+            filter="url(#blur)"
+            clipPath="url(#textClip)"
+            href="#bg"
+            height="100%"
+            width="100%"
+          />
+          <use
+            href="#textBox"
+            fill="#fff"
+            fillOpacity=".25"
+            filter="url(#blur)"
+          />
           <text
-            x="50%" y="90%" fill={color ?? 'black'} fontSize="133%"
-            stroke="#0005" strokeWidth=".5" textAnchor="middle" style={{fontVariationSettings:`'wdth' 87, 'wght' 500`}}
+            x="50%" y="90%"
+            fill={color ?? 'black'}
+            fontSize="133%"
+            stroke="#0005" strokeWidth=".5"
+            textAnchor="middle"
+            style={{ fontVariationSettings:`'wdth' 87, 'wght' 500` }}
           >{title}</text>
         </>
       )}

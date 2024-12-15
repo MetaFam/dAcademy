@@ -73,8 +73,6 @@ export function App() {
   })
   if (error) console.error({ error })
 
-  console.debug({ info})
-
   return (
     <>
       <div id="top" className="p-6 flex flex-col space-y-6 mx-20">
@@ -82,7 +80,7 @@ export function App() {
           <div key={index} className="space-y-2">
             <Carousel
               opts={{ align: 'start' }}
-              className="w-full max-sm:max-w-sm max-md:max-w-md max-lg:max-w-lg max-xl:max-w-xl dark:text-white"
+              className="w-full dark:text-white"
             >
               <h2 className="text-lg text-purple-400">{shelf.category}</h2>
               <h3 className="pb-4 md:text-base">{shelf.description}</h3>
@@ -91,11 +89,11 @@ export function App() {
                   <CarouselItem
                     key={bookIndex}
                     id={slug}
-                    className="md:basis-1/2 lg:basis-1/4"
+                    className="md:basis-1/2 lg:basis-1/4 2xl:basis-1/5"
                   >
                     <Link
                       to={`/book/${slug}`}
-                      className="p-0 relative"
+                      className="p-0 relative block"
                     >
                       {!titleLess.includes(slug) && (
                         <h3 className="text-xl font-semibold text-center absolute top-1/2 left-1/2 -translate-x-1/2 md:-translate-y-1/2 bg-black/30 p-2 max-sm:top-0">

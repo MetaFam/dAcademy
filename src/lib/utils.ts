@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import etherscans from '@/data/etherscans.json'
 
 import * as Delegation from '@web3-storage/w3up-client/delegation'
 import * as W3UpClient from '@web3-storage/w3up-client'
@@ -82,3 +83,30 @@ export const toDataURL = (
     reader.readAsDataURL(file)
   }
 }
+
+export const timestamp = () => {
+  const options = {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZoneName: 'longOffset',
+  } as const
+
+  return (
+    new Date()
+    .toLocaleString('sv-SE', options)
+    .replace(/\//g, '⁄')
+    .replace(',', '@')
+    .replace(/\s/g, '')
+    .replace('GMT', '')
+  )
+}
+
+export const toHex = (buffer: Uint8Array) => (
+  `0x${Array.from(buffer).map((byte) => (
+    byte.toString(16).padStart(2, '0')
+  )).join('')}`
+)

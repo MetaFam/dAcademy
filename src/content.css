@@ -14,7 +14,7 @@
     text-indent: .25rem;
   }
 
-  p, li, blockquote {
+  &, p, li, blockquote {
     text-align: justify;
   }
 
