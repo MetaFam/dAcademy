@@ -5,7 +5,7 @@ import etherscans from '@/data/etherscans.json'
 import * as Delegation from '@web3-storage/w3up-client/delegation'
 import * as W3UpClient from '@web3-storage/w3up-client'
 
-export function cn(...inputs: ClassValue[]) {
+export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs))
 }
 
@@ -110,3 +110,8 @@ export const toHex = (buffer: Uint8Array) => (
     byte.toString(16).padStart(2, '0')
   )).join('')}`
 )
+
+export const truncateAddress = (address: string) => {
+  if (!address) return ''
+  return `${address.slice(0, 7)}…${address.slice(-5)}`
+}

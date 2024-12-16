@@ -69,8 +69,8 @@ export function UploadPlaybook() {
     ;(async () => {
       try {
         const abortSignal = abortController.signal
-        if(!import.meta.env.VITE_FACTORY_CONTRACT_ADDRESS) {
-          throw new Error('Missing `VITE_FACTORY_CONTRACT_ADDRESS`.')
+        if(!factoryAddress) {
+          throw new Error('Missing Factory Address')
         }
         if(!nft.image) throw new Error('NFT Missing Image')
         if(!frontMatter.title) throw new Error('Missing Title')

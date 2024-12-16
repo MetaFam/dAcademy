@@ -14,6 +14,7 @@ import clsx from "clsx"
 import { request, gql } from "graphql-request"
 import { useState } from "react"
 import { SubmissionDetails } from "@/components/UserProfile/SubmissionDetails"
+import { useSubgraph } from "@/hooks"
 
 const submissionsQueryDocument = gql`
   query ChainDetails($address: String) {
@@ -60,13 +61,14 @@ const truncateTextAfterWords = (text: string, wordLimit: number = 3): string => 
 }
 
 const Statuses = ({ account }: { account?: string }) => {
+  const subgraph = useSubgraph()
   const {
     data: { proofSubmissions } = {},
   } = useSuspenseQuery<GraphReturn>({
     queryKey: [`submissions-${account}`],
     queryFn: async () =>
       request(
-        import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
+        subgraph,
         submissionsQueryDocument,
         { address: account?.toLowerCase() },
       ),

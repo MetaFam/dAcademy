@@ -18,7 +18,9 @@ export const NFTGenerator = () => {
   const svgRef = useRef<SVGSVGElement>()
   const setImage = useSetAtom(imageAtom)
   const [name, setName] = useAtom(nameAtom)
-  const [description, setDescription] = useAtom(descriptionAtom)
+  const [description, setDescription] = (
+    useAtom(descriptionAtom)
+  )
   const editorRef = useRef<MDXEditorMethods>(null)
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export const NFTGenerator = () => {
   }, [title, color, bg])
 
   return (
-    <form className="relative" id="img-config">
+    <section className="relative" id="img-config">
       <div className="flex justify-end flex-col gap-4">
         <Card className="w-full">
           <CardHeader>
@@ -37,7 +39,7 @@ export const NFTGenerator = () => {
               Name
             </CardTitle>
           </CardHeader>
-          <CardContent className="text-center">
+          <CardContent className="">
             <TextInput
               placeholder="Name"
               value={name ?? ''}
@@ -71,40 +73,42 @@ export const NFTGenerator = () => {
               Overlay
             </CardTitle>
           </CardHeader>
-          <CardContent className="flex justify-center gap-10">
-            <TextInput
-              placeholder="Title"
-              value={title ?? ''}
-              onChange={({ target: { value } }) => setTitle(value)}
-            />
-            <Label className="flex items-center">
-              <span className="mr-1">Text Color:</span>
+          <CardContent className="flex flex-col">
+            <div className="flex justify-center gap-10">
+              <TextInput
+                placeholder="Title"
+                value={title ?? ''}
+                onChange={({ target: { value } }) => setTitle(value)}
+              />
+              <Label className="flex items-center">
+                <span className="mr-1">Text Color:</span>
+                <input
+                  type="color"
+                  value={color ?? ''}
+                  onChange={({ target: { value } }) => setColor(value)}
+                />
+              </Label>
+            </div>
+            <Label className="block max-w-lg mx-auto relative">
+              {!bg && (
+                <div className="flex flex-col items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-24 mt-8">
+                  <FolderUp size={48}/>
+                  <h3>Upload NFT Image</h3>
+                </div>
+              )}
+              <NFTTemplate {...{ bg, title, color, svgRef }} />
               <input
-                type="color"
-                value={color ?? ''}
-                onChange={({ target: { value } }) => setColor(value)}
+                onChange={({target: { files }}) => {
+                  toDataURL(files?.[0], setBg)
+                }}
+                type="file"
+                accept="image/*"
+                className="hidden"
               />
             </Label>
           </CardContent>
         </Card>
       </div>
-      <Label className="block max-w-lg mx-auto">
-        {!bg && (
-          <div className="flex flex-col items-center absolute top-1/2 left-1/2 -translate-x-1/2 mt-8">
-            <FolderUp size={48}/>
-            <h3>Upload NFT Image</h3>
-          </div>
-        )}
-        <NFTTemplate {...{ bg, title, color, svgRef }} />
-        <input
-          onChange={({target: { files }}) => {
-            toDataURL(files?.[0], setBg)
-          }}
-          type="file"
-          accept="image/*"
-          className="hidden"
-        />
-      </Label>
-    </form>
+    </section>
   )
 }

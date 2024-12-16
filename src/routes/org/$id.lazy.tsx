@@ -12,6 +12,7 @@ import {
 import { toHTTP } from '@/lib/utils'
 import TopOrg from '@/components/TopOrg'
 import playbooks from '@/data/playbooks.json'
+import { useSubgraph } from '@/hooks'
 
 const chainImageQueryDocument = gql`
   query ChainImages($name: String) {
@@ -51,14 +52,13 @@ export type Category = {
 const titleLess = ['how-to-build-a-network-for-impact']
 
 export function App() {
+  const subgraph = useSubgraph()
   const { data: info, error } = useQuery<Record<string, Book>>({
     queryKey: [`chain-images`],
     queryFn: async (): Promise<Record<string, Book>> => {
       const { questChains: data } = await (
         request<CoverImageResponse>(
-          import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
-          chainImageQueryDocument,
-          {},
+          subgraph, chainImageQueryDocument, {},
         )
       )
       return Object.fromEntries(
@@ -82,8 +82,12 @@ export function App() {
               opts={{ align: 'start' }}
               className="w-full dark:text-white"
             >
-              <h2 className="text-lg text-purple-400">{shelf.category}</h2>
-              <h3 className="pb-4 md:text-base">{shelf.description}</h3>
+              <h2 className="text-lg text-purple-400">
+                {shelf.category}
+              </h2>
+              <h3 className="pb-4 md:text-base">
+                {shelf.description}
+              </h3>
               <CarouselContent>
                 {shelf.books.map((slug, bookIndex) => (
                   <CarouselItem

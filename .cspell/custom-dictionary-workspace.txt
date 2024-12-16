@@ -4,6 +4,7 @@ cmdk
 dacademy
 embla
 etherscans
+farcaster
 mdxeditor
 nojekyll
 reown

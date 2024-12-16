@@ -7,7 +7,9 @@ type NFT = {
   description?: string | null
 }
 
-export const nftAtom = atomWithStorage<NFT>('nft', {})
+export const nftAtom = atomWithStorage<NFT>(
+  'nft', {}, undefined, { getOnInit: true }
+)
 
 export const imageAtom = atom(
   (get) => get(nftAtom)?.image,

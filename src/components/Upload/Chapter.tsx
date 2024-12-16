@@ -1,13 +1,12 @@
-// src/components/Upload/Chapters
-import { MDXEditorMethods } from '@mdxeditor/editor'
-import MarkdownEditor from '@/components/MarkdownEditor'
 import React from 'react'
-import '@mdxeditor/editor/style.css'
-import '@/markdown-editor.css'
-import { Card, CardContent } from '@/components/ui/card'
+import { MDXEditorMethods } from '@mdxeditor/editor'
 import { Atom, useAtom } from 'jotai'
+import MarkdownEditor from '@/components/MarkdownEditor'
+import { Card, CardContent } from '@/components/ui/card'
 import { type Chapter as ChapterType } from '@/atoms/chapterAtom'
 import TextInput from './TextInput'
+import '@mdxeditor/editor/style.css'
+import '@/markdown-editor.css'
 
 type ChapterSetter = (
   ((f: ((c: ChapterType) => ChapterType)) => void)

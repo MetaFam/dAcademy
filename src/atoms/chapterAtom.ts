@@ -6,11 +6,17 @@ export type Chapter = {
   content?: string | null
 }
 
-export const chapterIdsAtom = atomWithStorage<Array<string>>('chapterIds', [], undefined, {getOnInit: true})
+export const chapterIdsAtom = (
+  atomWithStorage<Array<string>>(
+    'chapterIds', [], undefined, { getOnInit: true },
+  )
+)
 
 export const chaptersAtomsAtom = atom(
   (get) => get(chapterIdsAtom).map((id) => (
-    atomWithStorage<Chapter>(`chapter-${id}`, {}, undefined, {getOnInit: true})
+    atomWithStorage<Chapter>(
+      `chapter-${id}`, {}, undefined, { getOnInit: true },
+    )
   )),
   (_get, set, update: Chapter) => {
     const id = crypto.randomUUID()
@@ -28,7 +34,5 @@ export const removeChapterAtom = atom(
 )
 
 export const chaptersAtom = atom(
-  (get) => get(chaptersAtomsAtom).map((atom) => (
-    get(atom)
-  ))
+  (get) => get(chaptersAtomsAtom).map(get)
 )

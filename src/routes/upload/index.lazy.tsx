@@ -1,5 +1,6 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
+import { useAtom, useSetAtom } from 'jotai'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { UploadSidebar, accordionItems} from '@/components/Sidebars/uploadSidebar'
 import { Cover } from '@/components/Upload/Cover'
@@ -8,8 +9,7 @@ import { Chapter } from '@/components/Upload/Chapter'
 import { UploadPermissions } from '@/components/Upload/Permissions'
 import { Title } from '@/components/Upload/Title'
 import { Button } from '@/components/ui/button'
-import { CompletionNFT } from '@/components/Upload/Completion'
-import { useAtom, useSetAtom } from 'jotai'
+import { CompletionNFT } from '@/components/Upload/CompletionNFT'
 import { UploadPlaybook } from "@/components/Upload/UploadPlaybook"
 import { chaptersAtomsAtom, removeChapterAtom } from '@/atoms/chapterAtom'
 

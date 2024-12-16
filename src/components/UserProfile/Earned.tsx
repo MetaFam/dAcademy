@@ -10,6 +10,7 @@ import { useSuspenseQuery } from "@tanstack/react-query"
 import request, { gql } from "graphql-request"
 import { toHTTP } from "@/lib/utils"
 import { useNavigate } from '@tanstack/react-router'
+import { useSubgraph } from "@/hooks";
 
 const completedBooksQueryDocument = gql`
   query ChainDetails($address: String) {
@@ -38,13 +39,14 @@ type GraphReturn = {
 }
 
 const Earned = ({account}: {account?: string}) => {
-  const navigate = useNavigate()  // Use the navigate hook from TanStack Router
+  const navigate = useNavigate()
+  const subgraph = useSubgraph()
   const {
     data: {user}
   } = useSuspenseQuery<GraphReturn>({
     queryKey: [`completed-${account}`],
     queryFn: async () => request(
-      import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
+      subgraph,
       completedBooksQueryDocument,
       { address: account?.toLowerCase() },
     ),

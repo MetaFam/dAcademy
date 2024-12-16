@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useState } from 'react'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { gql, request } from 'graphql-request'
 import { useAccount } from 'wagmi'
+import { useSubgraph } from '@/hooks'
 
 const questChainQueryDocument = gql`
   query ChainDetails($slug: String!, $reader: String) {
@@ -188,7 +189,7 @@ export const BookProvider = (
   { slug: string, children: ReactNode, chapter?: number }
 ) => {
   const [on, setOn] = useState(chapter)
-
+  const subgraph = useSubgraph()
   const account = useAccount()
   const reader = account?.address?.toLowerCase() ?? null
   const {
@@ -198,7 +199,7 @@ export const BookProvider = (
   } = useSuspenseQuery<GraphChainResponse>({
     queryKey: [`chain-${slug}`],
     queryFn: async () => request(
-      import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
+      subgraph,
       questChainQueryDocument,
       { slug, reader },
     ),
@@ -216,7 +217,7 @@ export const BookProvider = (
           return null
         }
         return request(
-          import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
+          subgraph,
           userChainProgressQueryDocument,
           { chain: chain.id, user: reader },
         )

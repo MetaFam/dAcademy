@@ -1,37 +1,45 @@
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LaptopMinimalCheck, SendHorizonal, Presentation, Home } from "lucide-react";
-import { Link } from "@tanstack/react-router";
-import { SettingsD } from "@/components/Settings/Settings";
-import { useWalletInfo } from "@/hooks/useWalletInfo";
+import { Link } from '@tanstack/react-router'
+import {
+  LaptopMinimalCheck, SendHorizonal, Presentation, Home
+} from 'lucide-react'
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem
+} from '@/components/ui/sidebar'
+import {
+  Avatar, AvatarFallback, AvatarImage,
+} from '@/components/ui/avatar'
+import { SettingsD } from '@/components/Settings/Settings'
+import { useWalletInfo } from '@/hooks/useWalletInfo'
+import { truncateAddress } from '@/lib/utils'
 
 const items = [
   {
-    title: "NFTs Earned",
-    url: "#nfts-earned",
+    title: 'NFTs Earned',
+    url: '#nfts-earned',
     icon: LaptopMinimalCheck,
   },
   {
-    title: "Submissions",
-    url: "#submissions",
+    title: 'Submissions',
+    url: '#submissions',
     icon: SendHorizonal,
   },
   {
-    title: "Workshops Attended",
-    url: "#workshops-attended",
+    title: 'Workshops Attended',
+    url: '#workshops-attended',
     icon: Presentation,
   },
-];
-
-function truncateAddress(address: string): string {
-  if (!address) return '';
-  return `${address.slice(0, 5)}…${address.slice(-5)}`;
-}
+]
 
 export function ProfileSidebar() {
-  const { address, ensName, ensAvatar } = useWalletInfo();
-
-  const displayName = ensName || truncateAddress(address || '');
+  const { address, ensName, ensAvatar } = useWalletInfo()
+  const displayName = ensName || truncateAddress(address || '')
 
   return (
     <Sidebar>
@@ -57,8 +65,10 @@ export function ProfileSidebar() {
           {!!displayName ? (
             <div className="flex items-center gap-1">
               <Avatar>
-                <AvatarImage src={ensAvatar || "https://example.com/avatar.jpg"} alt="Avatar" />
-                <AvatarFallback>{ensName ? ensName.slice(0, 2).toUpperCase() : truncateAddress(address || '').slice(0, 2).toUpperCase()}</AvatarFallback>
+                <AvatarImage src={ensAvatar || "/inner-d.svg"} alt={displayName}/>
+                <AvatarFallback>
+                  {ensName ? ensName.slice(0, 2).toUpperCase() : truncateAddress(address || '').slice(0, 2).toUpperCase()}
+                </AvatarFallback>
               </Avatar>
               <div>
                 <p className="text-sm font-medium">{displayName}</p>
@@ -70,7 +80,7 @@ export function ProfileSidebar() {
             </div>
           )}
           <div className="flex items-center gap-1">
-            <SettingsD />
+            <SettingsD/>
             <Link to="/" className="flex items-center">
               <Home className="h-4 w-4" />
             </Link>
@@ -78,5 +88,5 @@ export function ProfileSidebar() {
         </div>
       </SidebarContent>
     </Sidebar>
-  );
+  )
 }

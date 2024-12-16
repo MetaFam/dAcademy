@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from '@tanstack/react-router';
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
-import { cn } from '@/lib/utils';
-import { Menu, X, BookOpen, Github, User, Home } from 'lucide-react'; // Import Home icon
-import Logo from '@/assets/logo.svg?raw';
+import React, { useState } from 'react'
+import { Link } from '@tanstack/react-router'
+import { Menu, X, BookOpen, Github, User, Home } from 'lucide-react' // Import Home icon
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle
+} from '@/components/ui/navigation-menu'
+import { cn } from '@/lib/utils'
+import Logo from '@/assets/logo.svg?raw'
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -18,7 +26,8 @@ const components: { title: string; href: string; description: string }[] = [
     description:
       "Upload some playbooks!",
   },
-];
+]
+
 
 const curatedComponents: { title: string; href: string; description: string }[] = [
   {
@@ -38,7 +47,7 @@ const curatedComponents: { title: string; href: string; description: string }[] 
     description:
       "Create a curation!",
   },
-];
+]
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -63,12 +72,12 @@ const ListItem = React.forwardRef<
           </p>}
         </Link>
     </li>
-  );
-});
-ListItem.displayName = "ListItem";
+  )
+})
+ListItem.displayName = "ListItem"
 
 export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div className="z-50 p-2 flex justify-center gap-2 dark:bg-slate-800 dark:text-white pt-2 relative">
@@ -218,5 +227,5 @@ export const Navbar = () => {
       )}
       <w3m-button size='sm' balance="hide" />
     </div>
-  );
-};
+  )
+}

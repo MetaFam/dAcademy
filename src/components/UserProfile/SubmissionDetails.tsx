@@ -20,6 +20,8 @@ import request, { gql } from "graphql-request"
 import Markdown from "react-markdown"
 import clsx from "clsx"
 import { truncateHash } from "@/lib/utils"
+import { useIsMobile } from "@/hooks/useIsMobile"
+import { useSubgraph } from "@/hooks"
 
 type Submission = {
   id: string;
@@ -64,8 +66,8 @@ type GraphReturn = {
 }
 
 export function SubmissionDetails({ submission, onClose }: { submission: Submission; onClose: () => void }) {
-  const isDesktop = useMediaQuery("(min-width: 768px)")
-
+  const isDesktop = !useIsMobile()
+  const subgraph = useSubgraph()
   const {
     data: { reviewSubmissions, proofSubmission } = {},
     isLoading,
@@ -73,7 +75,7 @@ export function SubmissionDetails({ submission, onClose }: { submission: Submiss
     enabled: !!submission.id,
     queryKey: [`info-${submission.id}`],
     queryFn: async () => request(
-      import.meta.env.VITE_THE_GRAPH_QUEST_CHAINS_URL,
+      subgraph,
       proofQueryDocument,
       { proof: submission.id },
     ),

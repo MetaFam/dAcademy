@@ -7,7 +7,11 @@ export type FrontMatter = {
   introduction?: string | null
 }
 
-export const frontMatterAtom = atomWithStorage<FrontMatter>('frontMatter', {})
+export const frontMatterAtom = (
+  atomWithStorage<FrontMatter>(
+    'frontMatter', {}, undefined, { getOnInit: true }
+  )
+)
 
 export const coverAtom = atom(
   (get) => get(frontMatterAtom)?.cover,
