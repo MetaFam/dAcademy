@@ -5,7 +5,7 @@ import { useAccount } from 'wagmi'
 import { useSubgraph } from '@/hooks'
 
 const questChainQueryDocument = gql`
-  query ChainDetails($slug: String!, $reader: String) {
+  query ChainDetails($slug: String!, $reader: ID) {
     questChains(where: { slug: $slug }) {
       id
       name
@@ -185,7 +185,7 @@ export const useLoadedBook = () => {
 }
 
 export const BookProvider = (
-  { slug, children, chapter=0 }:
+  { slug, children, chapter = 0 }:
   { slug: string, children: ReactNode, chapter?: number }
 ) => {
   const [on, setOn] = useState(chapter)
@@ -205,6 +205,9 @@ export const BookProvider = (
     ),
   })
 
+  if(!chain) {
+    throw new Error(`No subgraph entry found for "${slug}".`)
+  }
 
   const {
     data,

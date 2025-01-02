@@ -9,7 +9,7 @@ import {
 import { watchChainId } from '@wagmi/core'
 import { MDXEditorMethods } from '@mdxeditor/editor'
 import clsx from 'clsx'
-import { Book, useLoadedBook } from '@/data/BookContext'
+import { Book, useLoadedBook } from '@/infrastructure/BookContext'
 import { upload } from '@/lib/utils'
 import abi from '@/abis/QuestChain.json'
 

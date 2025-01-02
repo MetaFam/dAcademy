@@ -11,11 +11,11 @@ export const NFTTemplate = ({
   color?: string | null
   svgRef: React.MutableRefObject<SVGSVGElement | undefined>
 }) => {
-  const [background, setBackground] = useAtom(backgroundAtom)
+  const [background/*, setBackground*/] = useAtom(backgroundAtom)
   // const [pStart, setPStart] = useState<SVGPoint>()
   // const [pCurrent, setPCurrent] = useState<SVGPoint>()
-  const [zoomPercent, setZoomPercent] = useState(1)
-  const [panning, setPan] = useState<Point>({ x: 0, y: 0 })
+  const [zoomPercent/*, setZoomPercent*/] = useState(1)
+  const [panning/*, setPan*/] = useState<Point>({ x: 0, y: 0 })
 
   // const [mode, setMode] = useState<'zoom' | 'pan' | null>(null)
 

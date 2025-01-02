@@ -1,7 +1,5 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
-import etherscans from '@/data/etherscans.json'
-
+import { clsx, type ClassValue } from 'clsx'
+import { twMerge } from 'tailwind-merge'
 import * as Delegation from '@web3-storage/w3up-client/delegation'
 import * as W3UpClient from '@web3-storage/w3up-client'
 

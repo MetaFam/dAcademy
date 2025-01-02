@@ -1,5 +1,5 @@
 import { clsx } from 'clsx'
-import { useLoadedBook } from '@/data/BookContext'
+import { useLoadedBook } from '@/infrastructure/BookContext'
 import { Link } from '@tanstack/react-router'
 import {  Tooltip, TooltipTrigger, TooltipContent, TooltipProvider, TooltipArrow } from '@/components/ui/tooltip'
 

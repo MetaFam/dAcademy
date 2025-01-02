@@ -1,8 +1,5 @@
-// src/components/Curated/CreateCurationDialog.tsx
-import * as React from "react";
-
-// import { cn } from "@/lib/utils";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
+import React from 'react'
+import { Plus } from 'lucide-react'
 import {
   Dialog,
   DialogContent,
@@ -10,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog'
 import {
   Drawer,
   DrawerClose,
@@ -20,20 +17,20 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+} from '@/components/ui/drawer'
+import { Button } from '@/components/ui/button'
+import { useIsMobile } from '@/hooks/useIsMobile'
 
 export function CreateCurationDialog() {
-  const [open, setOpen] = React.useState(false);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const [open, setOpen] = React.useState(false)
+  const isDesktop = !useIsMobile()
 
   const trigger = (
     <Button variant="outline" size="default" className="mr-2" onClick={() => setOpen(true)}>
       <Plus className="mr-2 h-4 w-4" />
       Create a Curation
     </Button>
-  );
+  )
 
   if (isDesktop) {
     return (
@@ -48,7 +45,7 @@ export function CreateCurationDialog() {
           </DialogHeader>
         </DialogContent>
       </Dialog>
-    );
+    )
   }
 
   return (
@@ -68,5 +65,5 @@ export function CreateCurationDialog() {
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
-  );
+  )
 }

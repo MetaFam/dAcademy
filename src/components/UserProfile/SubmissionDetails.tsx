@@ -1,11 +1,13 @@
-import { useMediaQuery } from "@/hooks/useMediaQuery"
+import { useQuery } from '@tanstack/react-query'
+import request, { gql } from 'graphql-request'
+import Markdown from 'react-markdown'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
+} from '@/components/ui/dialog'
 import {
   Drawer,
   DrawerClose,
@@ -14,14 +16,10 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer"
-import { useQuery } from "@tanstack/react-query"
-import request, { gql } from "graphql-request"
-import Markdown from "react-markdown"
-import clsx from "clsx"
-import { truncateHash } from "@/lib/utils"
-import { useIsMobile } from "@/hooks/useIsMobile"
-import { useSubgraph } from "@/hooks"
+} from '@/components/ui/drawer'
+import { cn, truncateHash } from '@/lib/utils'
+import { useIsMobile } from '@/hooks/useIsMobile'
+import { useSubgraph } from '@/hooks'
 
 type Submission = {
   id: string;
@@ -65,7 +63,10 @@ type GraphReturn = {
   }
 }
 
-export function SubmissionDetails({ submission, onClose }: { submission: Submission; onClose: () => void }) {
+export function SubmissionDetails(
+  { submission, onClose }:
+  { submission: Submission; onClose: () => void }
+) {
   const isDesktop = !useIsMobile()
   const subgraph = useSubgraph()
   const {
@@ -87,17 +88,28 @@ export function SubmissionDetails({ submission, onClose }: { submission: Submiss
 
   const Content = (
     <>
-      <p><span className="text-blue-400">Date:</span> {new Date(submission.timestamp * 1000).toLocaleDateString()}</p>
-      <p><span className="text-blue-400">Book:</span> {submission.questChain.name}</p>
-      <p><span className="text-blue-400">Chapter:</span> {submission.quest.name}</p>
+      <p>
+        <span className="text-blue-400">Date:</span>{' '}
+        {new Date(submission.timestamp * 1000).toLocaleDateString()}
+      </p>
+      <p>
+        <span className="text-blue-400">Book:</span>{' '}
+        {submission.questChain.name}
+      </p>
+      <p>
+        <span className="text-blue-400">Chapter:</span>{' '}
+        {submission.quest.name}
+      </p>
       <h2 className="text-blue-400 text-left">Proof Response:</h2>
-      <div className="content"><Markdown>{proofSubmission?.description}</Markdown></div>
+      <div className="content">
+        <Markdown>{proofSubmission?.description}</Markdown>
+      </div>
       <ol>
         {reviewSubmissions?.map((sub) => (
           <li key={sub.txHash}>
             <h2 className="mb-2">
               <span className="text-blue-400">Status: </span>
-              <span className={clsx({
+              <span className={cn({
                 'text-green-400': sub.questStatus.status === 'pass',
                 'text-red-600': sub.questStatus.status === 'fail',
                 'text-blue-500': sub.questStatus.status === 'review',

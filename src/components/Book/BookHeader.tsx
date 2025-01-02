@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Book, BookError, useBook } from "@/data/BookContext"
+import { Book, BookError, useBook } from "@/infrastructure/BookContext"
 import { createPublicClient, http } from "viem"
 import { mainnet } from "viem/chains"
 
@@ -18,7 +18,7 @@ export const BookHeader = () => {
       .getEnsName({ address: book.creator as `0x${string}` })
       .then((name) => { if (name) setCreator(name) })
     }
-  })
+  }, [])
 
   if(book && (book as BookError).error) {
     throw (book as BookError).error

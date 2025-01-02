@@ -1,28 +1,30 @@
-import { ReactNode, useEffect, useState} from "react"
-import { useMediaQuery } from "@/hooks/useMediaQuery"
+import { ReactNode, useEffect, useState} from 'react'
+import { useAtomValue } from 'jotai'
+import { useWriteContract } from 'wagmi'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
+} from '@/components/ui/dialog'
 import {
   Drawer,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer"
-import { useAtomValue } from "jotai"
-import { frontMatterAtom } from "@/atoms/frontMatterAtom"
-import { chaptersAtom } from "@/atoms/chapterAtom"
-import { nftAtom } from "@/atoms/nftAtom"
-import { usersAtom } from "@/atoms/usersAtom"
-import { upload as toIPFS, toHTTP, toSlug, timestamp, toHex, etherscan } from '@/lib/utils'
-import { useWriteContract } from 'wagmi'
+} from '@/components/ui/drawer'
+import { frontMatterAtom } from '@/atoms/frontMatterAtom'
+import { chaptersAtom } from '@/atoms/chapterAtom'
+import { nftAtom } from '@/atoms/nftAtom'
+import { usersAtom } from '@/atoms/usersAtom'
+import {
+  upload as toIPFS, toHTTP, toSlug, timestamp, toHex,
+} from '@/lib/utils'
+import { useEtherscan, useFactory } from '@/hooks'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import abi from '@/abis/QuestChainFactory.json'
-import { useEtherscan, useFactory } from "@/hooks"
 
 const ipfsFilenames = (cid: string, filename: string) => ([
   `ipfs://${cid}/${filename}`,
@@ -51,7 +53,7 @@ const completion = (...names: [string, string]) => {
 
 export function UploadPlaybook() {
   const [open, setOpen] = useState(true)
-  const isDesktop = useMediaQuery('(min-width: 768px)')
+  const isDesktop = !useIsMobile()
   const [lines, setLines] = useState<Array<ReactNode>>([])
   const frontMatter = useAtomValue(frontMatterAtom)
   const chapters = useAtomValue(chaptersAtom)

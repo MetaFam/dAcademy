@@ -1,6 +1,6 @@
 import Markdown from 'react-markdown'
 import '@/content.css'
-import { useLoadedBook } from '@/data/BookContext'
+import { useLoadedBook } from '@/infrastructure/BookContext'
 import Submission from '@/components/Book/Submission'
 
 export default function Content() {

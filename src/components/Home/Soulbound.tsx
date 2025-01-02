@@ -3,7 +3,6 @@ import {
   Card, CardContent, CardDescription, CardHeader, CardTitle,
 } from '@/components/ui/card'
 import { Avatar } from '@/components/ui/avatar'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
 import {
   Drawer,
   DrawerClose,
