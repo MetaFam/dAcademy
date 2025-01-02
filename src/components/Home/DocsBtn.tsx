@@ -1,10 +1,13 @@
 // src/components/Home/Web3
 
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Book } from "lucide-react";
-import { Button } from "../ui/button";
-import Logo from '@/assets/logo.svg?raw';
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger } from "@/components/ui/hover-card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Book } from "lucide-react"
+import { Button } from "../ui/button"
+import Logo from '@/assets/logo.svg?raw'
 
 export function DocsBtn() {
   return (
@@ -35,5 +38,5 @@ export function DocsBtn() {
         </div>
       </HoverCardContent>
     </HoverCard>
-  );
+  )
 }

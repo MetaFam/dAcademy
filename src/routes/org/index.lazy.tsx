@@ -1,5 +1,10 @@
 import { createLazyFileRoute, Link } from '@tanstack/react-router'
-import { UploadCloud, Book, List, CircleHelp, Network } from 'lucide-react'
+import {
+  UploadCloud,
+  Book,
+  List,
+  CircleHelp,
+  Network } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -121,12 +126,9 @@ export const Route = createLazyFileRoute('/org/')({
 
       <Card id="upload-section" className="w-full max-w-3xl bg-black/30 shadow-lg rounded-lg">
         <CardHeader>
-          <CardTitle className="text-white">Upload Your First Playbook</CardTitle>
-          <CardDescription className="text-gray-400">
-            Click the button below to upload your first playbook.
-          </CardDescription>
+          <CardTitle className="text-white text-center">Ready to add to dAcademy?</CardTitle>
         </CardHeader>
-        <CardContent className="flex flex-col items-center space-y-2">
+        <CardContent className="flex flex-col items-center">
           <Link to="/upload">
             <Button variant="secondary" className="shadow-md border border-gray-500">
               <UploadCloud size={16} className="mr-2" />

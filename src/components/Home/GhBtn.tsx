@@ -1,10 +1,13 @@
 // src/components/Home/Web3
 
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "../ui/button";
-import Logo from '@/assets/logo.svg?raw';
-import { Github } from "lucide-react";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger } from "@/components/ui/hover-card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "../ui/button"
+import Logo from '@/assets/logo.svg?raw'
+import { Github } from "lucide-react"
 
 export function GhBtn() {
   return (
@@ -41,5 +44,5 @@ export function GhBtn() {
         </div>
       </HoverCardContent>
     </HoverCard>
-  );
+  )
 }

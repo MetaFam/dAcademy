@@ -1,16 +1,29 @@
 // src/components/Home/Web3.tsx
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle } from "@/components/ui/card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
-import { Code, Info } from "lucide-react";
-import OptimismLogo from "@/assets/Optimism.svg";
-import OPLogo from "@/assets/OP.svg";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger } from "@/components/ui/drawer"
+import { Code, Info } from "lucide-react"
+import OptimismLogo from "@/assets/Optimism.svg"
+import OPLogo from "@/assets/OP.svg"
+import { useMediaQuery } from "@/hooks/useMediaQuery"
 
 export function Web3() {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 768px)")
 
   const hoverCardContent = (
     <div className="flex justify-between space-x-4">
@@ -31,14 +44,14 @@ export function Web3() {
         </a>
       </div>
     </div>
-  );
+  )
 
   const triggerContent = (
     <div className="flex items-center cursor-pointer mt-1">
       <span>Built on</span>
       <img src={OptimismLogo} alt="Optimism" width={72} height={72} className="ml-2 mb-0.5" />
     </div>
-  );
+  )
 
   return (
     <Card className="bg-black/40 shadow-lg rounded-lg text-white w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 max-w-md">
@@ -86,8 +99,10 @@ export function Web3() {
         </div>
       </CardHeader>
       <CardContent className="text-gray-400 text-center">
-        <p>Smart-contracts on the Optimism network for speed and minimal costs. Paymaster coming soon!</p>
+        <p>
+        Smart-contracts on the Optimism network for speed and minimal costs. Paymaster coming soon!
+        </p>
       </CardContent>
     </Card>
-  );
+  )
 }

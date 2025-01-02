@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Carousel,
   CarouselContent,
@@ -10,7 +10,7 @@ import { useSuspenseQuery } from "@tanstack/react-query"
 import request, { gql } from "graphql-request"
 import { toHTTP } from "@/lib/utils"
 import { useNavigate } from '@tanstack/react-router'
-import { useSubgraph } from "@/hooks";
+import { useSubgraph } from "@/hooks"
 
 const completedBooksQueryDocument = gql`
   query ChainDetails($address: String) {
@@ -20,8 +20,7 @@ const completedBooksQueryDocument = gql`
           imageUrl
         }
         name
-        slug  # Ensure this is included in your GraphQL response
-      }
+        slug
     }
   }
 `
@@ -29,7 +28,7 @@ const completedBooksQueryDocument = gql`
 type Book = {
     token: { imageUrl: string }
     name: string
-    slug: string  // Add slug to the Book type
+    slug: string
   }
 
 type GraphReturn = {
@@ -65,7 +64,7 @@ const Earned = ({account}: {account?: string}) => {
                   <CarouselItem
                     key={book.name}
                     className="md:basis-1/2 lg:basis-1/3 cursor-pointer"
-                    onClick={() => navigate({ to: `/book/${book.slug}/0` })}  // Navigate to the book page
+                    onClick={() => navigate({ to: `/book/${book.slug}/0` })}
                   >
                     <div className="p-1">
                       <Card>

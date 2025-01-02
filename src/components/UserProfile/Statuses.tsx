@@ -57,7 +57,7 @@ const truncateTextAfterWords = (text: string, wordLimit: number = 3): string => 
   if (words.length > wordLimit) {
     return words.slice(0, wordLimit).join(' ') + '...';
   }
-  return text;
+  return text
 }
 
 const Statuses = ({ account }: { account?: string }) => {

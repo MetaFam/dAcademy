@@ -2,7 +2,9 @@ import { StrictMode, ReactNode } from'react'
 import { createRoot } from'react-dom/client'
 import { createAppKit } from '@reown/appkit/react'
 import { WagmiProvider } from 'wagmi'
-import { AppKitNetwork, optimism, optimismSepolia } from '@reown/appkit/networks'
+import {
+  AppKitNetwork, optimism, optimismSepolia
+} from '@reown/appkit/networks'
 import {
   QueryClient, QueryClientProvider,
 } from '@tanstack/react-query'
@@ -25,7 +27,7 @@ const router = createRouter({
   routeTree, history: hashHistory,
 })
 
-// Register the router instance for type safety
+
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router

@@ -21,7 +21,7 @@ import {
 import { useIsMobile } from '@/hooks/useIsMobile'
 
 interface SoulboundProps {
-  id?: string; // Make id optional
+  id?: string
 }
 
 export function Soulbound({ id }: SoulboundProps) {
@@ -39,18 +39,18 @@ export function Soulbound({ id }: SoulboundProps) {
         <p className="text-base font-semibold mb-2">
           Some possible use-cases:
         </p>
-        <ul>
-          <li className="text-sm mb-1">- Token-gating access to member-only content</li>
-          <li className="text-sm mb-1">- Prerequisites for gigs or bounties</li>
-          <li className="text-sm mb-1">- Onboarding flows for new members</li>
-          <li className="text-sm mb-1">- Skill badge collection of an online course</li>
+        <ul className="list-disc">
+          <li className="text-sm mb-1">Token-gating access to member-only content</li>
+          <li className="text-sm mb-1">Prerequisites for gigs or bounties</li>
+          <li className="text-sm mb-1">Onboarding flows for new members</li>
+          <li className="text-sm mb-1">Skill badge collection of an online course</li>
         </ul>
         <a href="https://docs.dacade.my/stack/soulbound/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline mb-1">
           Explore use-cases in our docs.
         </a>
       </div>
     </div>
-  );
+  )
 
   return (
     <>
@@ -64,7 +64,8 @@ export function Soulbound({ id }: SoulboundProps) {
                 </Avatar>
                 <div className="text-center">
                   <CardTitle className="text-xl font-bold">Soulbound NFTs</CardTitle>
-                  <CardDescription className="text-gray-300">Verify your skills on-chain.</CardDescription>
+                  <CardDescription className="text-gray-300">Verify your skills on-chain.
+                  </CardDescription>
                 </div>
               </CardHeader>
               <CardContent className="text-gray-400 text-center">
@@ -114,5 +115,5 @@ export function Soulbound({ id }: SoulboundProps) {
         </Drawer>
       )}
     </>
-  );
+  )
 }

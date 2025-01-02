@@ -95,8 +95,8 @@ export function UploadPermissions() {
           <TextInput
             value={name}
             onChange={({ target: { value } }) => setName(value)}
-            className="min-w-[45ch] text-center"
-            placeholder="ETH Address or ENS Name"
+            className="w-fit"
+            placeholder="ETH Address/ENS Name"
           />
           <RoleSelect
             value={role}

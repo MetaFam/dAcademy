@@ -1,7 +1,9 @@
 import { clsx } from 'clsx'
 import { useLoadedBook } from '@/infrastructure/BookContext'
 import { Link } from '@tanstack/react-router'
-import {  Tooltip, TooltipTrigger, TooltipContent, TooltipProvider, TooltipArrow } from '@/components/ui/tooltip'
+import {
+  Tooltip, TooltipTrigger, TooltipContent, TooltipProvider, TooltipArrow
+} from '@/components/ui/tooltip'
 
 export default function Chapters() {
   const book = useLoadedBook()

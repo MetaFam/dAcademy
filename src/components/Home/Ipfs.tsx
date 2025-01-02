@@ -1,36 +1,52 @@
 // src/components/Home/Ipfs.tsx
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar } from "@/components/ui/avatar";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
-import { Database, Network, Info } from "lucide-react";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle } from "@/components/ui/card"
+import { Avatar } from "@/components/ui/avatar"
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger } from "@/components/ui/hover-card"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger } from "@/components/ui/drawer"
+import { Database, Network, Info } from "lucide-react"
+import { useMediaQuery } from "@/hooks/useMediaQuery"
 
 export function Ipfs() {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 768px)")
 
   const cardContent = (
     <div className="flex justify-between space-x-4">
-      <Avatar className="bg-white/10 rounded-full p-2">
+      <Avatar className="bg-white/10 rounded-full p-2 mb-3">
         <Network size={24} className="text-green-400" />
       </Avatar>
       <div className="space-y-1">
         <p className="text-sm mb-2">
           InterPlanetary File System
         </p>
-        <ul>
-          <li className="text-sm mb-1">- Decentralized web hosting for websites</li>
-          <li className="text-sm mb-1">- Secure and efficient data storage</li>
-          <li className="text-sm mb-1">- Resilient and fast content distribution</li>
-          <li className="text-sm mb-1">- Integration with blockchain for immutable data</li>
+        <ul className="list-disc mt-2 ml-1">
+          <li className="text-sm mb-1">Decentralized web hosting for websites</li>
+          <li className="text-sm mb-1">Secure and efficient data storage</li>
+          <li className="text-sm mb-1">Resilient and fast content distribution</li>
+          <li className="text-sm mb-1">Integration with blockchain for immutable data</li>
         </ul>
         <a href="https://docs.dacade.my/stack/ipfs/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline mb-1">
           See how we use IPFS in our docs.
         </a>
       </div>
     </div>
-  );
+  )
 
   return (
     <>
@@ -92,5 +108,5 @@ export function Ipfs() {
         </Drawer>
       )}
     </>
-  );
+  )
 }

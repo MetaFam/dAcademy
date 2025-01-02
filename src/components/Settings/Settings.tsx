@@ -109,5 +109,5 @@ export function SettingsD() {
         </Drawer>
       )}
     </>
-  );
+  )
 }

@@ -45,7 +45,7 @@ export const Upload = () => {
     <SidebarProvider>
       <UploadSidebar onAccordionChange={setAccordionValue} />
       <SidebarTrigger />
-      <main className="flex-1 mt-12 w-screen mb-8">
+      <main className="flex-1 mt-12 w-screen mb-8 lg:px-8">
         <form
           id="playbook"
           onSubmit={(evt) => {
@@ -82,7 +82,7 @@ export const Upload = () => {
               <Button
                 onClick={() => addChapter({})}
                 type="button"
-                className="items-center rounded-md"
+                className="items-center rounded-md mb-4"
               >
                 Add Chapter
               </Button>

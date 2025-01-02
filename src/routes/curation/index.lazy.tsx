@@ -22,9 +22,9 @@ function RouteComponent() {
 
       <div className="flex flex-col h-screen z-10 p-4">
         <h1 className="text-3xl font-bold text-center mt-2">Curated Bookshelves</h1>
-        <Alert className="max-w-md mx-auto mt-2 flex items-center space-x-4 p-4 bg-blue-400/30">
+        <Alert className="w-fit mx-auto mt-2 flex items-center p-4 bg-blue-400/30">
           <AlertCircle className="h-6 w-6 text-blue-600" />
-          <AlertTitle className="text-center">Coming Soon!   - Stay tuned for this new feature.</AlertTitle>
+          <AlertTitle className="text-center ml-2">Feature coming soon! - Stay tuned</AlertTitle>
         </Alert>
         <div className="grid sm:grid-cols-3 grid-cols-1 h-full gap-4 p-8">
           <div className="col-span-1 h-full">
@@ -75,8 +75,8 @@ function RouteComponent() {
               </CardContent>
             </Card>
           </div>
-          <div className="col-span-1 md:gap-y-2">
-            <Card className="mb-4 bg-black/30 shadow-lg rounded-lg">
+          <div className="col-span-1 sm:gap-y-2">
+            <Card className="bg-black/30 shadow-lg rounded-lg">
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Bus className="mr-2 text-red-500" />
@@ -89,7 +89,7 @@ function RouteComponent() {
                 <p className="mt-2">Create your community's onboarding flow with Soulbound NFTs.</p>
               </CardContent>
             </Card>
-            <Card className="h-1/2 bg-black/30 shadow-lg rounded-lg">
+            <Card className="h-1/2 mt-4 bg-black/30 shadow-lg rounded-lg">
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <BookOpen className="mr-2 text-purple-500" />

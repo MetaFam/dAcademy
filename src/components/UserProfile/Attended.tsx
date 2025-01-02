@@ -1,6 +1,6 @@
 // src/components/UserProfile/Attended
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Table,
   TableBody,
@@ -9,9 +9,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Info } from "lucide-react";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
+} from "@/components/ui/table"
+import { Info } from "lucide-react"
+import { useMediaQuery } from "@/hooks/useMediaQuery"
 import {
   Drawer,
   DrawerClose,
@@ -20,12 +20,12 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer";
+} from "@/components/ui/drawer"
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card";
+} from "@/components/ui/hover-card"
 
 export function WorkshopsAttended() {
   const workshops = [
@@ -50,15 +50,15 @@ export function WorkshopsAttended() {
       recording: "IPFS",
       poap: "Link",
     },
-  ];
+  ]
 
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 768px)")
 
   const comingSoonContent = (
     <div>
       <p>This feature is coming soon with huddle01 dRTC integration.</p>
     </div>
-  );
+  )
 
   return (
     <Card className="w-full mb-8">
@@ -123,5 +123,5 @@ export function WorkshopsAttended() {
         </Table>
       </CardContent>
     </Card>
-  );
+  )
 }

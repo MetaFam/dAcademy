@@ -110,7 +110,7 @@ export const Navbar = () => {
                   </NavigationMenuLink>
                 </li>
                 <ListItem href="https://docs.dacade.my/" title="Docs" icon={<BookOpen size={16} />}>
-                  Learn how you can use dAcademy, what it's built with, and how it works.
+                  Learn how to use dAcademy and how it's built.
                 </ListItem>
                 <ListItem href="https://github.com/MetaFam/dAcademy" title="GitHub" icon={<Github size={16} />}>
                   dAcademy is open-source and on GitHub.  See a bug? Like the build?

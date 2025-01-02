@@ -1,9 +1,24 @@
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ImageUp, BookType, BookKey, BookText, BookOpenCheck, Home, PartyPopper } from "lucide-react";
-import { Link } from "@tanstack/react-router";
-import { SettingsD } from "@/components/Settings/Settings";
-import { useWalletInfo } from "@/hooks/useWalletInfo";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem } from "@/components/ui/sidebar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import {
+  ImageUp,
+  BookType,
+  BookKey,
+  BookText,
+  BookOpenCheck,
+  Home,
+  PartyPopper } from "lucide-react"
+import { Link } from "@tanstack/react-router"
+import { SettingsD } from "@/components/Settings/Settings"
+import { useWalletInfo } from "@/hooks/useWalletInfo"
 
 export const accordionItems = [
   {
@@ -45,36 +60,34 @@ export const otherItems = [
     value: "item-6",
     icon: BookKey,
   },
-];
+]
 
 function truncateAddress(address: string): string {
   if (!address) return '';
-  return `${address.slice(0, 5)}…${address.slice(-5)}`;
+  return `${address.slice(0, 5)}…${address.slice(-5)}`
 }
 
 interface UploadSidebarProps {
-  onAccordionChange: (value: string) => void;
+  onAccordionChange: (value: string) => void
 }
 
 export function UploadSidebar({ onAccordionChange }: UploadSidebarProps) {
-  const { address, ensName, ensAvatar } = useWalletInfo();
+  const { address, ensName, ensAvatar } = useWalletInfo()
 
-  const displayName = ensName || truncateAddress(address || '');
+  const displayName = ensName || truncateAddress(address || '')
 
   const handleItemClick = (url: string) => {
     const item = accordionItems.find(item => item.url === url) || otherItems.find(item => item.url === url);
     if (item) {
       onAccordionChange(item.value);
-      // Scroll to the section when a sidebar item is clicked
       const element = document.querySelector(url);
       if (element) {
-        // Add a small delay to ensure the accordion has opened before scrolling
         setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 300);
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 300)
       }
     }
-  };
+  }
 
   return (
     <Sidebar>
@@ -131,5 +144,5 @@ export function UploadSidebar({ onAccordionChange }: UploadSidebarProps) {
         </div>
       </SidebarContent>
     </Sidebar>
-  );
+  )
 }
