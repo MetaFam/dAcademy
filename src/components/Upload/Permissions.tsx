@@ -143,5 +143,5 @@ export function UploadPermissions() {
         )}
       </CardContent>
     </Card>
-  );
+  )
 }

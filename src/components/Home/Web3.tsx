@@ -6,7 +6,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import {
   Drawer,
@@ -29,7 +29,6 @@ export function Web3() {
     <div className="flex justify-between space-x-4">
       <Avatar className="w-12 h-12">
         <AvatarImage src={OPLogo} className="w-full h-full object-cover" />
-        <AvatarFallback className="w-full h-full">OP</AvatarFallback>
       </Avatar>
       <div className="space-y-1">
         <h4 className="text-sm font-semibold">Optimism</h4>

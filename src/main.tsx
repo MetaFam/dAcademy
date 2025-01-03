@@ -17,7 +17,7 @@ import { Provider as JotaiProvider } from 'jotai'
 import { DevTools as JotaiDevTools } from 'jotai-devtools'
 import { routeTree } from './routeTree.gen'
 import 'jotai-devtools/styles.css'
-import './index.css'
+import './styles/index.css'
 
 const params = new URLSearchParams(window.location.search)
 export const debug = !!params.get('debug')

@@ -1,5 +1,5 @@
 import Markdown from 'react-markdown'
-import '@/content.css'
+import '@/styles/content.css'
 import { useLoadedBook } from '@/infrastructure/BookContext'
 import Submission from '@/components/Book/Submission'
 
