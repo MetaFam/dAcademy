@@ -1,0 +1,1 @@
+import{aB as e,aC as t}from"./index-qFgN0BDJ.js";function d(s,r){if(!e(s,{strict:!1}))throw new t({address:s});if(!e(r,{strict:!1}))throw new t({address:r});return s.toLowerCase()===r.toLowerCase()}export{d as i};
