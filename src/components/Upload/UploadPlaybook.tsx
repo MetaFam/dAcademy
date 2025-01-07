@@ -152,6 +152,7 @@ export function UploadPlaybook() {
           name: nft.name,
           description: nft.description,
           image: nftImageURL,
+          image_url: nftImageURL,
           properties: {
             createdAt: timestamp(),
           },
@@ -193,6 +194,8 @@ export function UploadPlaybook() {
           },
           toHex(randomBuffer),
         ]
+
+        console.debug({ args })
 
         abortSignal.throwIfAborted()
         writeContract({
@@ -242,7 +245,9 @@ export function UploadPlaybook() {
           <DialogHeader>
             <DialogTitle>Uploading Playbook</DialogTitle>
             <DialogDescription>
-              <ol>{lines.map((line) => <li>{line}</li>)}</ol>
+              <ol>{lines.map((line, idx) => (
+                <li key={idx}>{line}</li>
+              ))}</ol>
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
@@ -256,7 +261,9 @@ export function UploadPlaybook() {
         <DrawerHeader className="text-left">
           <DrawerTitle>Uploading Playbook</DrawerTitle>
           <DrawerDescription>
-            <ol>{lines.map((line) => <li>{line}</li>)}</ol>
+            <ol>{lines.map((line, idx) => (
+              <li key={idx}>{line}</li>
+            ))}</ol>
           </DrawerDescription>
         </DrawerHeader>
       </DrawerContent>

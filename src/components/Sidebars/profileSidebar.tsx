@@ -65,7 +65,7 @@ export function ProfileSidebar() {
           {!!displayName ? (
             <div className="flex items-center gap-1">
               <Avatar>
-                <AvatarImage src={ensAvatar || "/inner-d.svg"} alt={displayName}/>
+                <AvatarImage src={ensAvatar || '/inner-d.svg'} alt={displayName}/>
                 <AvatarFallback>
                   {ensName ? ensName.slice(0, 2).toUpperCase() : truncateAddress(address || '').slice(0, 2).toUpperCase()}
                 </AvatarFallback>

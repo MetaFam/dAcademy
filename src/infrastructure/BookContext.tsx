@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { gql, request } from 'graphql-request'
-import { useAccount } from 'wagmi'
+import { useAccount, useChainId } from 'wagmi'
 import { useSubgraph } from '@/hooks'
 
 const questChainQueryDocument = gql`
@@ -71,6 +71,7 @@ export class ChaptersArray<T> extends Array {
 export type Book = {
   status: 'auth'
 
+  chainId: number
   slug: string
   title: string
   introduction: string
@@ -189,6 +190,7 @@ export const BookProvider = (
   { slug: string, children: ReactNode, chapter?: number }
 ) => {
   const [on, setOn] = useState(chapter)
+  const chainId = useChainId()
   const subgraph = useSubgraph()
   const account = useAccount()
   const reader = account?.address?.toLowerCase() ?? null
@@ -262,6 +264,7 @@ export const BookProvider = (
     chapters.current = on
 
     const props = {
+      chainId,
       slug,
       title: chain.name,
       introduction: chain.description,

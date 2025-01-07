@@ -25,7 +25,7 @@ export function Book() {
             className="container mx-auto py-20 px-8 lg:px-24 overflow-auto relative"
           >
             <BookHeader />
-            <main className="md:flex justify-start overflow-hidden relative">
+            <main className="md:flex justify-start relative">
               <Suspense fallback={<h1 className="mt-44">Loading…</h1>}>
                 <Chapters />
                 <Content />

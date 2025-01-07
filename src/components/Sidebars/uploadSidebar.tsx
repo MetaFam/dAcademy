@@ -123,7 +123,7 @@ export function UploadSidebar({ onAccordionChange }: UploadSidebarProps) {
           {!!displayName ? (
             <div className="flex items-center gap-2">
               <Avatar>
-                <AvatarImage src={ensAvatar || "https://example.com/avatar.jpg"} alt="Avatar" />
+                <AvatarImage src={ensAvatar || '/inner-d.svg'} alt="Avatar" />
                 <AvatarFallback>{ensName ? ensName.slice(0, 2).toUpperCase() : truncateAddress(address || '').slice(0, 2).toUpperCase()}</AvatarFallback>
               </Avatar>
               <div>

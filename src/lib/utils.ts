@@ -61,7 +61,7 @@ export const truncateHash = (hash: string, length: number = 6) => {
 }
 
 export const toSlug = (title: string) => (
-  title.toLowerCase().replace(/\s+/g, '-').replace(/[\?,:]/g, '')
+  title.toLowerCase().replace(/\s+/g, '-').replace(/[\?,:#]/g, '')
 )
 
 export const toDataURL = (
