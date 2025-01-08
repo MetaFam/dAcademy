@@ -25,6 +25,7 @@ import {
 import { useEtherscan, useFactory } from '@/hooks'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import abi from '@/abis/QuestChainFactory.json'
+import { categoriesAtom } from '@/atoms/categoriesAtom'
 
 const ipfsFilenames = (cid: string, filename: string) => ([
   `ipfs://${cid}/${filename}`,
@@ -59,6 +60,7 @@ export function UploadPlaybook() {
   const chapters = useAtomValue(chaptersAtom)
   const nft = useAtomValue(nftAtom)
   const users = useAtomValue(usersAtom)
+  const categories = useAtomValue(categoriesAtom)
   const addLine = (line: ReactNode) => {
     setLines((prev) => [...prev, line])
   }
@@ -99,7 +101,7 @@ export function UploadPlaybook() {
           description: frontMatter.introduction,
           cover: coverURL,
           slug: toSlug(frontMatter.title),
-          categories: [],
+          categories,
           createdAt: timestamp(),
         }
         const filename = `frontmatter.json`

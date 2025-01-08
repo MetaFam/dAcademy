@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button'
 import { CompletionNFT } from '@/components/Upload/CompletionNFT'
 import { UploadPlaybook } from "@/components/Upload/UploadPlaybook"
 import { chaptersAtomsAtom, removeChapterAtom } from '@/atoms/chapterAtom'
+import { CategoriesInput } from '@/components/Upload/CategoriesInput'
 
 export const Upload = () => {
   const [accordionValue, setAccordionValue] = useState("item-1")
@@ -90,6 +91,9 @@ export const Upload = () => {
           </div>
           <div id="completion" className="pt-8 scroll-mt-12">
             <CompletionNFT/>
+          </div>
+          <div id="cartegories" className="pt-8 scroll-mt-12">
+            <CategoriesInput/>
           </div>
         </form>
         <div id="permissions" className="pt-8 scroll-mt-12">
