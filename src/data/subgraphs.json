@@ -1,4 +1,5 @@
 {
   "10": "https://api.studio.thegraph.com/query/71457/quest-chains-optimism/version/latest",
-  "11155420": "https://api.studio.thegraph.com/query/42037/dacademy-optimism-sepolia/version/latest"
+  "11155420": "https://api.studio.thegraph.com/query/42037/dacademy-optimism-sepolia/version/latest",
+  "31337": "http://localhost:8000/subgraphs/name/dacademy-localhost"
 }

@@ -1,5 +1,6 @@
 {
   "1": "https://etherscan.io",
   "10": "https://optimistic.etherscan.io",
-  "11155420": "https://sepolia-optimism.etherscan.io/"
+  "11155420": "https://sepolia-optimism.etherscan.io/",
+  "31337": ""
 }

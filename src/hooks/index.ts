@@ -8,7 +8,7 @@ export const useEtherscan = () => {
   const scan = etherscans[
     chainId.toString() as keyof typeof etherscans
   ]
-  if(!scan) {
+  if(scan == null) {
     throw new Error(`No Etherscan for Chain: #${chainId}`)
   }
   return scan

@@ -3,7 +3,7 @@ import { createRoot } from'react-dom/client'
 import { createAppKit } from '@reown/appkit/react'
 import { WagmiProvider } from 'wagmi'
 import {
-  AppKitNetwork, optimism, optimismSepolia
+  AppKitNetwork, hardhat, optimism, optimismSepolia
 } from '@reown/appkit/networks'
 import {
   QueryClient, QueryClientProvider,
@@ -27,7 +27,6 @@ const router = createRouter({
   routeTree, history: hashHistory,
 })
 
-
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router
@@ -45,8 +44,8 @@ const metadata = {
   icons: ['https://dacade.my/octopus%20icon.svg']
 }
 
-export const networks: [AppKitNetwork, AppKitNetwork] = (
-  [optimism, optimismSepolia]
+export const networks: [AppKitNetwork, AppKitNetwork, AppKitNetwork] = (
+  [optimism, optimismSepolia, hardhat]
 )
 
 const wagmiAdapter = new WagmiAdapter({
