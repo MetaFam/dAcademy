@@ -154,7 +154,6 @@ export function UploadPlaybook() {
           name: nft.name,
           description: nft.description,
           image: nftImageURL,
-          image_url: nftImageURL,
           properties: {
             createdAt: timestamp(),
           },

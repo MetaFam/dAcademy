@@ -22,40 +22,48 @@ const submissionsQueryDocument = gql`
       id
       timestamp
       questChain {
-        name
+        details {
+          name
+        }
       }
       questStatus {
         status
       }
       quest {
-        name
+        details {
+          name
+        }
       }
     }
   }
 `
 
-type Submission = {
-  id: string;
-  timestamp: number;
+export type Submission = {
+  id: string
+  timestamp: number
   questChain: {
-    name: string;
+    details: {
+      name: string
+    }
   }
   questStatus: {
-    status: string;
+    status: string
   }
   quest: {
-    name: string;
+    details: {
+      name: string
+    }
   }
 }
 
 type GraphReturn = {
-  proofSubmissions: Array<Submission>;
+  proofSubmissions: Array<Submission>
 }
 
 const truncateTextAfterWords = (text: string, wordLimit: number = 3): string => {
-  const words = text.split(' ');
+  const words = text.split(' ')
   if (words.length > wordLimit) {
-    return words.slice(0, wordLimit).join(' ') + '...';
+    return words.slice(0, wordLimit).join(' ') + '…'
   }
   return text
 }
@@ -115,10 +123,10 @@ const Statuses = ({ account }: { account?: string }) => {
                   {new Date(sub.timestamp * 1000).toLocaleDateString()}
                 </TableCell>
                 <TableCell className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[150px]">
-                  {truncateTextAfterWords(sub.questChain.name)}
+                  {truncateTextAfterWords(sub.questChain.details.name)}
                 </TableCell>
                 <TableCell className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[150px]">
-                  {sub.quest.name}
+                  {sub.quest.details.name}
                 </TableCell>
                 <TableCell
                   className={clsx({

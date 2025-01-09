@@ -17,9 +17,11 @@ import { useSubgraph } from '@/hooks'
 const chainImageQueryDocument = gql`
   query ChainImages($name: String) {
     questChains {
-      imageUrl
-      name
-      slug
+      details {
+        image
+        name
+        slug
+      }
     }
   }
 `
@@ -30,9 +32,11 @@ export const Route = createLazyFileRoute('/org/$id')({
 
 export type CoverImageResponse = {
   questChains: Array<{
-    imageUrl: string | null
-    name: string
-    slug: string
+    details: {
+      image: string | null
+      name: string
+      slug: string
+    }
   }>
 }
 
@@ -62,10 +66,10 @@ export function App() {
         )
       )
       return Object.fromEntries(
-        data.map(({ imageUrl, name, slug }) => (
+        data.map(({ details: { image, name, slug } }) => (
           [slug, {
             title: name,
-            image: toHTTP(imageUrl ?? undefined)
+            image: toHTTP(image ?? undefined)
           }]
         ))
       ) as Record<string, Book>

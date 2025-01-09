@@ -20,29 +20,21 @@ import {
 import { cn, truncateHash } from '@/lib/utils'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { useSubgraph } from '@/hooks'
+import type { Submission } from './Statuses'
 
-type Submission = {
-  id: string;
-  timestamp: number;
-  questChain: {
-    name: string;
-  };
-  questStatus: {
-    status: string;
-  };
-  quest: {
-    name: string;
-  }
-}
 
 const proofQueryDocument = gql`
   query ProofDetails($proof: String) {
     proofSubmission(id: $proof) {
-      description
+      details {
+        description
+      }
       txHash
     }
     reviewSubmissions(where: {proof: $proof}) {
-      description
+      details {
+         description
+      }
       questStatus {
         status
       }
@@ -53,12 +45,16 @@ const proofQueryDocument = gql`
 
 type GraphReturn = {
   reviewSubmissions: Array<{
-    description: string
+    details: {
+      description: string
+    }
     txHash: string
     questStatus: {status: string}
   }>
   proofSubmission: {
-    description: string
+    details: {
+      description: string
+    }
     txHash: string
   }
 }
@@ -94,15 +90,15 @@ export function SubmissionDetails(
       </p>
       <p>
         <span className="text-blue-400">Book:</span>{' '}
-        {submission.questChain.name}
+        {submission.questChain.details.name}
       </p>
       <p>
         <span className="text-blue-400">Chapter:</span>{' '}
-        {submission.quest.name}
+        {submission.quest.details.name}
       </p>
       <h2 className="text-blue-400 text-left">Proof Response:</h2>
       <div className="content">
-        <Markdown>{proofSubmission?.description}</Markdown>
+        <Markdown>{proofSubmission?.details.description}</Markdown>
       </div>
       <ol>
         {reviewSubmissions?.map((sub) => (
@@ -118,7 +114,7 @@ export function SubmissionDetails(
                 {sub.questStatus.status}
               </span>
             </h2>
-            <Markdown>{sub.description}</Markdown>
+            <Markdown>{sub.details.description}</Markdown>
             <p>
               <span className="text-blue-400">Proof TX Hash:  </span>
               {proofSubmission?.txHash ? (

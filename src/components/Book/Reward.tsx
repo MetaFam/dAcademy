@@ -45,7 +45,7 @@ const [loaded, setLoaded] = useState(false)
       )
     })
   }
-  let mintable = book.chapters?.every(
+  const mintable = book.chapters?.every(
     (chapter: Chapter) => (
       chapter.status === 'pass' || chapter.optional
     )

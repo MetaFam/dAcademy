@@ -17,19 +17,27 @@ const completedBooksQueryDocument = gql`
     user(id: $address) {
       completedQuestChains {
         token {
-          imageUrl
+          details {
+            name
+            image
+          }
         }
-        name
         slug
     }
   }
 `
 
 type Book = {
-    token: { imageUrl: string }
+  details: {
     name: string
     slug: string
   }
+  token: {
+    details: {
+      image: string
+    }
+  }
+}
 
 type GraphReturn = {
   user: {
@@ -62,17 +70,17 @@ const Earned = ({account}: {account?: string}) => {
             <CarouselContent>
               {user.completedQuestChains?.map((book: Book) => (
                   <CarouselItem
-                    key={book.name}
+                    key={book.details.name}
                     className="md:basis-1/2 lg:basis-1/3 cursor-pointer"
-                    onClick={() => navigate({ to: `/book/${book.slug}/0` })}
+                    onClick={() => navigate({ to: `/book/${book.details.slug}/0` })}
                   >
                     <div className="p-1">
                       <Card>
-                        <CardTitle className="text-center text-base mt-2 mx-2">{book.name}</CardTitle>
+                        <CardTitle className="text-center text-base mt-2 mx-2">{book.details.name}</CardTitle>
                         <CardContent className="flex aspect-auto items-center justify-center p-2">
                           <figure className="">
                             <img
-                              src={toHTTP(book.token.imageUrl)}
+                              src={toHTTP(book.token.details.image)}
                               alt="Completion NFT"
                               className="rounded-sm"
                             />

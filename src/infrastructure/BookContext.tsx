@@ -8,14 +8,18 @@ const questChainQueryDocument = gql`
   query ChainDetails($slug: String!, $reader: ID) {
     questChains(where: { slug: $slug }) {
       id
-      name
+      details {
+        name
+        description
+        image
+      }
       address
-      description
-      imageUrl
       token {
         tokenId
-        imageUrl
         tokenAddress
+        details {
+          image
+        }
         owners(where: { id: $reader }) {
           id
         }
@@ -26,8 +30,10 @@ const questChainQueryDocument = gql`
       updatedAt
       quests(orderBy: questId) {
         questId
-        name
-        description
+        details {
+          name
+          description
+        }
         optional
         status { status }
       }
@@ -46,10 +52,12 @@ const userChainProgressQueryDocument = gql`
         paused
       }
       submissions {
-        name
-        description
-        details
-        externalUrl
+        details {
+          id
+          name
+          description
+        }
+        externalURL
       }
     }
   }
@@ -123,19 +131,25 @@ export type ChapterStatus = 'init' | 'pass' | 'fail' | 'review'
 
 export type Quest = {
   questId: number
-  name: string
-  description: string
+  details: {
+    name: string
+    description: string
+  }
   optional: boolean
   status: { status: string }
 }
 export type Chain = {
+  details: {
+    name: string
+    description: string
+    image: string
+  }
   id: string
-  name: string
   address: string
-  description: string
-  imageUrl: string
   token: {
-    imageUrl: string
+    details: {
+      image: string
+    }
     tokenId: string
     tokenAddress: string
     owners: Array<{ id: string }>
@@ -149,10 +163,12 @@ export type GraphChainResponse = {
 }
 
 export type Submission = {
-  name: string
-  description: string
-  details: string
-  externalUrl: string
+  details: {
+    name: string
+    description: string
+    id: string
+  }
+  externalURL: string
 }
 export type Status = {
   status: string
@@ -233,7 +249,7 @@ export const BookProvider = (
 
   let book = null
   const error = questError ?? statusesError
-  if(!!error) {
+  if(error) {
     book = { status: 'error' as const, error }
   } else if(questLoading) {
     book = { status: 'init' as const, slug }
@@ -243,7 +259,7 @@ export const BookProvider = (
         {
           optional: true,
           title: 'Introduction',
-          content: chain.description,
+          content: chain.details.description,
           status: 'init',
         },
         ...chain.quests.map((quest, index) => {
@@ -254,8 +270,8 @@ export const BookProvider = (
           )
           return {
             optional: quest.optional,
-            title: quest.name,
-            content: quest.description,
+            title: quest.details.name,
+            content: quest.details.description,
             status: status?.status ?? null,
           }
         }),
@@ -266,8 +282,8 @@ export const BookProvider = (
     const props = {
       chainId,
       slug,
-      title: chain.name,
-      introduction: chain.description,
+      title: chain.details.name,
+      introduction: chain.details.description,
       chapters,
       creator: chain.createdBy.id,
       owners: [], // ToDo: Extract from The Graph
@@ -276,7 +292,7 @@ export const BookProvider = (
       nft: {
         id: Number(chain.token.tokenId),
         address: chain.token.tokenAddress,
-        image: chain.token.imageUrl,
+        image: chain.token.details.image,
         minted: chain.token.owners.length > 0,
       },
       on,
