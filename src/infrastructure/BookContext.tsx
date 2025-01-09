@@ -6,7 +6,7 @@ import { useSubgraph } from '@/hooks'
 
 const questChainQueryDocument = gql`
   query ChainDetails($slug: String!, $reader: ID) {
-    questChains(where: { slug: $slug }) {
+    questChains(where: { details_: { slug: $slug } }) {
       id
       details {
         name
@@ -56,8 +56,8 @@ const userChainProgressQueryDocument = gql`
           id
           name
           description
+          externalURL
         }
-        externalURL
       }
     }
   }
@@ -164,11 +164,11 @@ export type GraphChainResponse = {
 
 export type Submission = {
   details: {
+    id: string
     name: string
     description: string
-    id: string
+    externalURL: string
   }
-  externalURL: string
 }
 export type Status = {
   status: string
