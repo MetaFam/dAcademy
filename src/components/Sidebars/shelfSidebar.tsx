@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import {
-  LaptopMinimalCheck, SendHorizonal, Presentation, Home
+  SwatchBook, BookHeart, BookCheck, Home
 } from 'lucide-react'
 import {
   Sidebar,
@@ -21,23 +21,23 @@ import { truncateAddress } from '@/lib/utils'
 
 const items = [
   {
-    title: 'NFTs Earned',
-    url: '#nfts-earned',
-    icon: LaptopMinimalCheck,
+    title: 'Create a Shelf',
+    url: '#shelf-creation',
+    icon: SwatchBook,
   },
   {
-    title: 'Submissions',
-    url: '#submissions',
-    icon: SendHorizonal,
+    title: 'Select Books',
+    url: '#shelf-books',
+    icon: BookHeart,
   },
   {
-    title: 'Workshops Attended',
-    url: '#workshops-attended',
-    icon: Presentation,
+    title: 'Achievement NFT',
+    url: '#shelf-nft',
+    icon: BookCheck,
   },
 ]
 
-export function ProfileSidebar() {
+export function ShelfSidebar() {
   const { address, ensName, ensAvatar } = useWalletInfo()
   const displayName = ensName || truncateAddress(address || '')
 
@@ -45,7 +45,7 @@ export function ProfileSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>User Profile</SidebarGroupLabel>
+          <SidebarGroupLabel>Shelf Creation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="mt-8">
               {items.map((item) => (

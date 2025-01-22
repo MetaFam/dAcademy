@@ -120,7 +120,7 @@ export function UploadSidebar({ onAccordionChange }: UploadSidebarProps) {
           </SidebarGroupContent>
         </SidebarGroup>
         <div className="mt-auto flex items-center justify-between gap-2 p-4">
-          {!!displayName ? (
+          {displayName ? (
             <div className="flex items-center gap-2">
               <Avatar>
                 <AvatarImage src={ensAvatar || '/inner-d.svg'} alt="Avatar" />
