@@ -13,9 +13,6 @@ import { Book, useLoadedBook } from '@/infrastructure/BookContext'
 import { upload } from '@/lib/utils'
 import abi from '@/abis/QuestChain.json'
 
-
-const CHAIN = 10
-
 // declare global {
 //   interface Window {
 //     ethereum: any
@@ -63,11 +60,11 @@ export const Submission = () => {
           <a onClick={() => {
             (window.ethereum?.request as (o: {}) => void)({
               method: 'wallet_switchEthereumChain',
-              params: [{ chainId: `0x${CHAIN.toString(16)}`}],
+              params: [{ chainId: `0x${book.chainId.toString(16)}`}],
             })
           }}
           className="underline text-accent hover:text-accent-content mx-1">
-            switch to the Optimism network
+            switch to the 0x{book.chainId.toString(16)} network
           </a>
           to continue.
         </h3>
@@ -88,7 +85,7 @@ export const Submission = () => {
     if(config) {
       return watchChainId(config, {
         onChange(chainId: number) {
-          if(chainId !== CHAIN && !error.chain) {
+          if(chainId !== book.chainId && !error.chain) {
             setError(errorSource.chain)
           }
         },
@@ -124,9 +121,9 @@ export const Submission = () => {
     setError({ type: 'account', error: null })
   }
 
-  if(chain !== CHAIN && !error.chain) {
+  if(chain !== book.chainId && !error.chain) {
     setError(errorSource.chain)
-  } else if(chain === CHAIN && error.chain) {
+  } else if(chain === book.chainId && error.chain) {
     setError({ type: 'chain', error: null })
   }
 
