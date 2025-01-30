@@ -1,6 +1,8 @@
 import { Link } from '@tanstack/react-router'
 import {
-  SwatchBook, BookHeart, BookCheck, Home
+  SwatchBook, BookHeart, BookCheck, Home, UserCog,
+  BookType,
+  SquareLibrary
 } from 'lucide-react'
 import {
   Sidebar,
@@ -21,19 +23,34 @@ import { truncateAddress } from '@/lib/utils'
 
 const items = [
   {
-    title: 'Create a Shelf',
-    url: '#shelf-creation',
-    icon: SwatchBook,
+    title: 'Shelf Name',
+    url: '#name',
+    icon: BookType,
+  },
+  {
+    title: 'Shelf Description',
+    url: '#description',
+    icon: SquareLibrary,
   },
   {
     title: 'Select Books',
-    url: '#shelf-books',
+    url: '#books',
     icon: BookHeart,
   },
   {
-    title: 'Achievement NFT',
-    url: '#shelf-nft',
+    title: 'Shelf Category',
+    url: '#category',
+    icon: SwatchBook,
+  },
+  {
+    title: 'Completion NFT',
+    url: '#completion',
     icon: BookCheck,
+  },
+  {
+    title: 'Shelf Permissions',
+    url: '#permissions',
+    icon: UserCog,
   },
 ]
 

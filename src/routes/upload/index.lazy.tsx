@@ -92,7 +92,7 @@ export const Upload = () => {
           <div id="completion" className="pt-8 scroll-mt-12">
             <CompletionNFT/>
           </div>
-          <div id="cartegories" className="pt-8 scroll-mt-12">
+          <div id="categories" className="pt-8 scroll-mt-12">
             <CategoriesInput/>
           </div>
         </form>
