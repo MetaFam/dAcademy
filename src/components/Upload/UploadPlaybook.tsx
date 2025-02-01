@@ -202,7 +202,7 @@ export function UploadPlaybook() {
         writeContract({
           address: factoryAddress,
           abi,
-          functionName: 'create',
+          functionName: 'createChain',
           args,
         }, {
           onError: (error) => {

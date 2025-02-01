@@ -377,6 +377,19 @@
   },
   {
     "inputs": [],
+    "name": "OWNER_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "REVIEWER_ROLE",
     "outputs": [
       {
@@ -396,10 +409,36 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "chainId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "complete",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256[]",
-        "name": "_questIdList",
+        "name": "_idList",
         "type": "uint256[]"
       },
       {
@@ -421,7 +460,7 @@
           }
         ],
         "internalType": "struct IQuestChain.QuestDetails[]",
-        "name": "_questDetails",
+        "name": "_detailsList",
         "type": "tuple[]"
       }
     ],
@@ -444,6 +483,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "creator",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "string",
@@ -460,7 +512,7 @@
     "inputs": [
       {
         "internalType": "uint256[]",
-        "name": "_questIdList",
+        "name": "_idList",
         "type": "uint256[]"
       },
       {
@@ -472,6 +524,19 @@
     "name": "editQuests",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "factory",
+    "outputs": [
+      {
+        "internalType": "contract IQuestChainFactory",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -499,7 +564,7 @@
     "outputs": [
       {
         "internalType": "string",
-        "name": "uri",
+        "name": "",
         "type": "string"
       }
     ],
@@ -605,12 +670,12 @@
   },
   {
     "inputs": [],
-    "name": "limiterContract",
+    "name": "length",
     "outputs": [
       {
-        "internalType": "address",
+        "internalType": "uint256",
         "name": "",
-        "type": "address"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -633,19 +698,6 @@
   {
     "inputs": [],
     "name": "paused",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "premium",
     "outputs": [
       {
         "internalType": "bool",
@@ -746,7 +798,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "_questId",
+        "name": "_id",
         "type": "uint256"
       }
     ],
@@ -754,7 +806,7 @@
     "outputs": [
       {
         "internalType": "enum IQuestChain.Status",
-        "name": "status",
+        "name": "",
         "type": "uint8"
       }
     ],
@@ -788,7 +840,7 @@
       },
       {
         "internalType": "uint256[]",
-        "name": "_questIdList",
+        "name": "_idList",
         "type": "uint256[]"
       },
       {
@@ -828,21 +880,8 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_limiterContract",
-        "type": "address"
-      }
-    ],
-    "name": "setLimiter",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "string",
-        "name": "_tokenURI",
+        "name": "_uri",
         "type": "string"
       }
     ],
@@ -855,7 +894,7 @@
     "inputs": [
       {
         "internalType": "uint256[]",
-        "name": "_questIdList",
+        "name": "_idList",
         "type": "uint256[]"
       },
       {
@@ -890,14 +929,20 @@
   },
   {
     "inputs": [],
-    "name": "unpause",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "name": "token",
+    "outputs": [
+      {
+        "internalType": "contract IQuestChainToken",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "upgrade",
+    "name": "unpause",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
