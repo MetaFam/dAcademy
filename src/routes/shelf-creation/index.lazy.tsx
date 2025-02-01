@@ -7,7 +7,7 @@ import { ShelfBooks } from '@/components/Shelf/ShelfBooks'
 import { ShelfPermissions } from '@/components/Shelf/ShelfPermissions'
 import { Button } from '@/components/ui/button'
 import { ShelfName } from '@/components/Shelf/ShelfName'
-import CategoriesInput from '@/components/Upload/CategoriesInput'
+import ShelfCategoriesInput from '@/components/Shelf/ShelfCategories'
 
 export const Route = createLazyFileRoute('/shelf-creation/')({
   component: () => {
@@ -26,7 +26,7 @@ export const Route = createLazyFileRoute('/shelf-creation/')({
             <ShelfBooks/>
           </div>
           <div id="category" className="mt-8 scroll-mt-12">
-           <CategoriesInput/>
+           <ShelfCategoriesInput/>
           </div>
           <div id="completion" className="mt-8 scroll-mt-12">
             <CompletionNFT />

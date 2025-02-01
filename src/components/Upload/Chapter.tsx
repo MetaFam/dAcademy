@@ -49,8 +49,9 @@ export const Chapter = (
             <h2 className="font-bold">Title</h2>
             <TextInput
               onChange={({ target: { value } }) => {
-                (setChapter as ChapterSetter)
-                ((prev: ChapterType) => ({ ...prev, title: value }))
+                (setChapter as ChapterSetter)((prev: ChapterType) => ({
+                  ...prev, title: value
+                }))
               }}
               value={chapter.title ?? ''}
               id="title"
@@ -69,8 +70,7 @@ export const Chapter = (
                 markdown={chapter.content ?? ''}
                 className="dark-theme dark-editor content"
                 onChange={() => {
-                  (setChapter as ChapterSetter)
-                  ((prev) => ({
+                  (setChapter as ChapterSetter)((prev) => ({
                     ...prev,
                     content: editorRef.current?.getMarkdown() ?? '',
                   }))

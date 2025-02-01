@@ -8,7 +8,7 @@ import {
   Card, CardContent, CardHeader, CardTitle,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { User, usersAtom } from '@/atoms/usersAtom'
+import { Curator, curatorAtom } from '@/atoms/curatorAtom'
 import { maybeENS } from '@/lib/utils'
 import {
   Table,
@@ -39,10 +39,10 @@ const RoleSelect = (
 export function ShelfPermissions() {
   const [name, setName] = useState<string>()
   const [role, setRole] = useState<string>('admin')
-  const [users, setUsers] = useAtom(usersAtom)
+  const [curators, setCurators] = useAtom(curatorAtom)
 
   const setUserRoleByIndex = (index: number, role: string) => {
-    setUsers((prev) => {
+    setCurators((prev) => {
       const next = [...prev]
       next[index].role = role
       return next
@@ -58,25 +58,25 @@ export function ShelfPermissions() {
         chain: mainnet,
         transport: http(),
       })
-      const user: User = {role}
+      const curator: Curator = {role}
       if(/^0x(\d|[a-f]){40}$/i.test(name)) {
-        user.address = name
-        user.name = (await client.getEnsName({ address: name as `0x${string}` })) ?? undefined
+        curator.address = name
+        curator.name = (await client.getEnsName({ address: name as `0x${string}` })) ?? undefined
       } else if(maybeENS(name)) {
-        user.name = name
-        user.address = (await client.getEnsAddress({ name })) ?? undefined
-        if(!user.address) throw new Error(`${name} is not a valid ENS name.`)
+        curator.name = name
+        curator.address = (await client.getEnsAddress({ name })) ?? undefined
+        if(!curator.address) throw new Error(`${name} is not a valid ENS name.`)
       } else {
         throw new Error(`Invalid name: ${name}`)
       }
-      setUsers((prev) => [...prev, user])
+      setCurators((prev) => [...prev, curator])
       setName('')
     } catch(error) {
       toast.error((error as Error).message)
     }
   }
   const remove = (index: number) => {
-    setUsers((prev) => prev.toSpliced(index, 1))
+    setCurators((prev) => prev.toSpliced(index, 1))
   }
   return (
     <Card className="">
@@ -102,7 +102,7 @@ export function ShelfPermissions() {
           />
           <Button>Add</Button>
         </form>
-        {users.length > 0 && (
+        {curators.length > 0 && (
           <Table className="mt-4 w-auto mx-auto">
             <TableHeader>
               <TableRow className="bg-transparent hover:bg-transparent cursor-default">
@@ -113,17 +113,17 @@ export function ShelfPermissions() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {users.map((user, idx) => (
+              {curators.map((curator, idx) => (
                 <TableRow key={idx}>
                   <TableCell className="font-medium">
-                    {user.name}
+                    {curator.name}
                   </TableCell>
                   <TableCell>
-                    {`${user.address?.substring(0,7)}…${user.address?.slice(-6)}`}
+                    {`${curator.address?.substring(0,7)}…${curator.address?.slice(-6)}`}
                   </TableCell>
                   <TableCell>
                     <RoleSelect
-                      value={user.role}
+                      value={curator.role}
                       onChange={({ target: { value } }) => {
                         setUserRoleByIndex(idx, value)
                       }}

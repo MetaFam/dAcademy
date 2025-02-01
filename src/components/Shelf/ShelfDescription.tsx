@@ -2,12 +2,14 @@ import React from 'react'
 import { useAtom } from 'jotai'
 import { type MDXEditorMethods } from '@mdxeditor/editor'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { introAtom } from '@/atoms/frontMatterAtom'
+import { descriptionAtom } from '@/atoms/shelfAtom'
 import MarkdownEditor from '../MarkdownEditor'
+import '@mdxeditor/editor/style.css'
+import '@/markdown-editor.css'
 
 export function ShelfDescription() {
   const editorRef = React.useRef<MDXEditorMethods>(null)
-  const [intro, setIntro] = useAtom(introAtom) //or make a description atom?
+  const [description, setDescription] = useAtom(descriptionAtom)
 
   return (
     <Card className="w-full">
@@ -16,10 +18,10 @@ export function ShelfDescription() {
       </CardHeader>
       <CardContent className="text-center flex justify-center">
         <MarkdownEditor {...{ editorRef }}
-          markdown={intro ?? ''}
+          markdown={description ?? ''}
           className="dark-theme dark-editor content"
           onChange={() => {
-            setIntro(editorRef.current?.getMarkdown() ?? '')
+            setDescription(editorRef.current?.getMarkdown() ?? '')
           }}
         />
       </CardContent>

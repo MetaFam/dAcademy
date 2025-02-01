@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { X } from 'lucide-react'
 import { useAtom } from 'jotai'
-import { categoriesAtom } from '@/atoms/categoriesAtom'
+import { shelfCatAtom } from '@/atoms/shelfCatAtom'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
-export const CategoriesInput: React.FC = () => {
-  const [tags, setTags] = useAtom(categoriesAtom)
+export const ShelfCategoriesInput: React.FC = () => {
+  const [tags, setTags] = useAtom(shelfCatAtom)
   const [inputValue, setInputValue] = useState('')
   const inputRef = useRef<HTMLInputElement | null>(null)
 
@@ -72,4 +72,4 @@ export const CategoriesInput: React.FC = () => {
   )
 }
 
-export default CategoriesInput
+export default ShelfCategoriesInput
