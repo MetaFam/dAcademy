@@ -1,14 +1,14 @@
 import { atom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 
-export type FrontMatter = {
+export type ShelfFrontMatter = {
   name?: string | null
   shelfCover?: string | null
   description?: string | null
 }
 
 export const frontMatterAtom = (
-  atomWithStorage<FrontMatter>(
+  atomWithStorage<ShelfFrontMatter>(
     'frontMatter', {}, undefined, { getOnInit: true }
   )
 )
