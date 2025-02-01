@@ -19,6 +19,7 @@ import { Route as rootRoute } from './routes/__root'
 const IndexLazyImport = createFileRoute('/')()
 const UserIndexLazyImport = createFileRoute('/user/')()
 const UploadIndexLazyImport = createFileRoute('/upload/')()
+const ShelfCreationIndexLazyImport = createFileRoute('/shelf-creation/')()
 const OrgIndexLazyImport = createFileRoute('/org/')()
 const CurationIndexLazyImport = createFileRoute('/curation/')()
 const UserUserLazyImport = createFileRoute('/user/$user')()
@@ -47,6 +48,14 @@ const UploadIndexLazyRoute = UploadIndexLazyImport.update({
   path: '/upload/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/upload/index.lazy').then((d) => d.Route))
+
+const ShelfCreationIndexLazyRoute = ShelfCreationIndexLazyImport.update({
+  id: '/shelf-creation/',
+  path: '/shelf-creation/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/shelf-creation/index.lazy').then((d) => d.Route),
+)
 
 const OrgIndexLazyRoute = OrgIndexLazyImport.update({
   id: '/org/',
@@ -129,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrgIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/shelf-creation/': {
+      id: '/shelf-creation/'
+      path: '/shelf-creation'
+      fullPath: '/shelf-creation'
+      preLoaderRoute: typeof ShelfCreationIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/upload/': {
       id: '/upload/'
       path: '/upload'
@@ -168,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/user/$user': typeof UserUserLazyRoute
   '/curation': typeof CurationIndexLazyRoute
   '/org': typeof OrgIndexLazyRoute
+  '/shelf-creation': typeof ShelfCreationIndexLazyRoute
   '/upload': typeof UploadIndexLazyRoute
   '/user': typeof UserIndexLazyRoute
   '/book/$slug': typeof BookSlugIndexLazyRoute
@@ -180,6 +197,7 @@ export interface FileRoutesByTo {
   '/user/$user': typeof UserUserLazyRoute
   '/curation': typeof CurationIndexLazyRoute
   '/org': typeof OrgIndexLazyRoute
+  '/shelf-creation': typeof ShelfCreationIndexLazyRoute
   '/upload': typeof UploadIndexLazyRoute
   '/user': typeof UserIndexLazyRoute
   '/book/$slug': typeof BookSlugIndexLazyRoute
@@ -193,6 +211,7 @@ export interface FileRoutesById {
   '/user/$user': typeof UserUserLazyRoute
   '/curation/': typeof CurationIndexLazyRoute
   '/org/': typeof OrgIndexLazyRoute
+  '/shelf-creation/': typeof ShelfCreationIndexLazyRoute
   '/upload/': typeof UploadIndexLazyRoute
   '/user/': typeof UserIndexLazyRoute
   '/book/$slug/': typeof BookSlugIndexLazyRoute
@@ -207,6 +226,7 @@ export interface FileRouteTypes {
     | '/user/$user'
     | '/curation'
     | '/org'
+    | '/shelf-creation'
     | '/upload'
     | '/user'
     | '/book/$slug'
@@ -218,6 +238,7 @@ export interface FileRouteTypes {
     | '/user/$user'
     | '/curation'
     | '/org'
+    | '/shelf-creation'
     | '/upload'
     | '/user'
     | '/book/$slug'
@@ -229,6 +250,7 @@ export interface FileRouteTypes {
     | '/user/$user'
     | '/curation/'
     | '/org/'
+    | '/shelf-creation/'
     | '/upload/'
     | '/user/'
     | '/book/$slug/'
@@ -242,6 +264,7 @@ export interface RootRouteChildren {
   UserUserLazyRoute: typeof UserUserLazyRoute
   CurationIndexLazyRoute: typeof CurationIndexLazyRoute
   OrgIndexLazyRoute: typeof OrgIndexLazyRoute
+  ShelfCreationIndexLazyRoute: typeof ShelfCreationIndexLazyRoute
   UploadIndexLazyRoute: typeof UploadIndexLazyRoute
   UserIndexLazyRoute: typeof UserIndexLazyRoute
   BookSlugIndexLazyRoute: typeof BookSlugIndexLazyRoute
@@ -254,6 +277,7 @@ const rootRouteChildren: RootRouteChildren = {
   UserUserLazyRoute: UserUserLazyRoute,
   CurationIndexLazyRoute: CurationIndexLazyRoute,
   OrgIndexLazyRoute: OrgIndexLazyRoute,
+  ShelfCreationIndexLazyRoute: ShelfCreationIndexLazyRoute,
   UploadIndexLazyRoute: UploadIndexLazyRoute,
   UserIndexLazyRoute: UserIndexLazyRoute,
   BookSlugIndexLazyRoute: BookSlugIndexLazyRoute,
@@ -275,6 +299,7 @@ export const routeTree = rootRoute
         "/user/$user",
         "/curation/",
         "/org/",
+        "/shelf-creation/",
         "/upload/",
         "/user/",
         "/book/$slug/",
@@ -295,6 +320,9 @@ export const routeTree = rootRoute
     },
     "/org/": {
       "filePath": "org/index.lazy.tsx"
+    },
+    "/shelf-creation/": {
+      "filePath": "shelf-creation/index.lazy.tsx"
     },
     "/upload/": {
       "filePath": "upload/index.lazy.tsx"

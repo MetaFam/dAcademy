@@ -1,6 +1,8 @@
 import { Link } from '@tanstack/react-router'
 import {
-  LaptopMinimalCheck, SendHorizonal, Presentation, Home
+  SwatchBook, BookHeart, BookCheck, Home, UserCog,
+  BookType,
+  SquareLibrary
 } from 'lucide-react'
 import {
   Sidebar,
@@ -21,23 +23,38 @@ import { truncateAddress } from '@/lib/utils'
 
 const items = [
   {
-    title: 'NFTs Earned',
-    url: '#nfts-earned',
-    icon: LaptopMinimalCheck,
+    title: 'Shelf Name',
+    url: '#name',
+    icon: BookType,
   },
   {
-    title: 'Submissions',
-    url: '#submissions',
-    icon: SendHorizonal,
+    title: 'Shelf Description',
+    url: '#description',
+    icon: SquareLibrary,
   },
   {
-    title: 'Workshops Attended',
-    url: '#workshops-attended',
-    icon: Presentation,
+    title: 'Select Books',
+    url: '#books',
+    icon: BookHeart,
+  },
+  {
+    title: 'Shelf Category',
+    url: '#category',
+    icon: SwatchBook,
+  },
+  {
+    title: 'Completion NFT',
+    url: '#completion',
+    icon: BookCheck,
+  },
+  {
+    title: 'Shelf Permissions',
+    url: '#permissions',
+    icon: UserCog,
   },
 ]
 
-export function ProfileSidebar() {
+export function ShelfSidebar() {
   const { address, ensName, ensAvatar } = useWalletInfo()
   const displayName = ensName || truncateAddress(address || '')
 
@@ -45,7 +62,7 @@ export function ProfileSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>User Profile</SidebarGroupLabel>
+          <SidebarGroupLabel>Shelf Creation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="mt-8">
               {items.map((item) => (

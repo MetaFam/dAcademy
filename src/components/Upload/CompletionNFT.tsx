@@ -1,4 +1,4 @@
-// src/components/Upload/Completion
+// src/components/Upload/CompletionNFT
 
 import {
   Card, CardContent, CardHeader, CardTitle,
