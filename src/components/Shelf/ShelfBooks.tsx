@@ -21,6 +21,8 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { booksAtom, type Book } from "@/atoms/booksAtom"
+import { useAtom } from "jotai"
 
 const chainSearch = gql`
   query ChainSearch($search: String!) {
@@ -67,10 +69,7 @@ type QuestInfo = {
   }
 }
 
-type SearchResult = {
-  name: string
-  id: string
-}
+type SearchResult = Book
 
 
 interface SortableItemProps {
@@ -113,7 +112,7 @@ function SortableItem({ id, name, onRemove }: SortableItemProps) {
 export function ShelfBooks() {
   const [searchString, setSearchString] = useState("")
   const [searchResults, setSearchResults] = useState<Array<SearchResult>>([])
-  const [selectedBooks, setSelectedBooks] = useState<Array<SearchResult>>([])
+  const [selectedBooks, setSelectedBooks] = useAtom(booksAtom)
   const subgraph = useSubgraph()
 
   const sensors = useSensors(
@@ -207,7 +206,7 @@ export function ShelfBooks() {
                 className="flex flex-grow hover:bg-gray-400/20 items-center p-2 rounded"
               >
                 <span className="flex-1 pl-1">{result.name}</span>
-                <Button onClick={() => add(result)}>Add</Button>
+                <Button type="button" onClick={() => add(result)}>Add</Button>
               </li>
             ))}
           </ul>
