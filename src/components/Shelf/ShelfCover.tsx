@@ -1,12 +1,12 @@
-// src/components/Upload/Cover
+// src/components/Shelf/ShelfCover
 
 import {
   Card, CardContent, CardHeader, CardTitle,
 } from '@/components/ui/card'
-import { ImageCropper } from './ImageCropper'
-import { coverAtom } from '@/atoms/frontMatterAtom'
+import { ImageCropper } from '../Upload/ImageCropper'
+import { shelfCoverAtom } from '@/atoms/shelfAtom'
 
-export function Cover() {
+export function ShelfCover() {
   return (
     <Card className="w-full">
       <CardHeader>
@@ -15,7 +15,7 @@ export function Cover() {
         </CardTitle>
       </CardHeader>
       <CardContent className="text-center">
-        <ImageCropper atom={coverAtom}/>
+        <ImageCropper atom={shelfCoverAtom}/>
       </CardContent>
     </Card>
   )

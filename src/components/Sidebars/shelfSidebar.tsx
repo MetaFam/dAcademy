@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import {
-  SwatchBook, BookHeart, BookCheck, Home, UserCog,
+  SwatchBook, BookHeart, BookCheck, BookImage, Home, UserCog,
   BookType,
   SquareLibrary
 } from 'lucide-react'
@@ -22,6 +22,11 @@ import { useWalletInfo } from '@/hooks/useWalletInfo'
 import { truncateAddress } from '@/lib/utils'
 
 const items = [
+  {
+    title: 'Shelf Cover',
+    url: '#cover',
+    icon: BookImage,
+  },
   {
     title: 'Shelf Name',
     url: '#name',

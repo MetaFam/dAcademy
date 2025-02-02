@@ -9,7 +9,7 @@ export type ShelfFrontMatter = {
 
 export const frontMatterAtom = (
   atomWithStorage<ShelfFrontMatter>(
-    'frontMatter', {}, undefined, { getOnInit: true }
+    'shelfFrontMatter', {}, undefined, { getOnInit: true }
   )
 )
 

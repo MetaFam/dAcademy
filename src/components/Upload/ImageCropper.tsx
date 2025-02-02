@@ -7,9 +7,9 @@ import ReactCrop, {
 } from 'react-image-crop'
 
 import 'react-image-crop/dist/ReactCrop.css'
-import { useAtom } from 'jotai'
+import { useAtom, WritableAtom } from 'jotai'
 import { Button } from '@/components/ui/button'
-import { coverAtom } from '@/atoms/frontMatterAtom'
+
 
 const centerAspectCrop = (
   mediaWidth: number,
@@ -31,12 +31,12 @@ const centerAspectCrop = (
   )
 )
 
-export const ImageCropper = ({ image }: { image?:string }) => {
+export const ImageCropper = ({ image, atom }: { image?:string, atom: WritableAtom<string | null | undefined, [update: string | null], void> }) => {
   const [imgSrc, setImgSrc] = useState(image)
   const imgRef = useRef<HTMLImageElement>(null)
   const [crop, setCrop] = useState<Crop>()
   const aspect = { width: 320, height: 480 }
-  const [cover, setCover] = useAtom(coverAtom)
+  const [cover, setCover] = useAtom(atom)
 
 
   function onSelectFile(e: React.ChangeEvent<HTMLInputElement>) {

@@ -1,21 +1,18 @@
-// src/components/Upload/Cover
-
 import {
   Card, CardContent, CardHeader, CardTitle,
 } from '@/components/ui/card'
-import { ImageCropper } from './ImageCropper'
-import { coverAtom } from '@/atoms/frontMatterAtom'
+import { NFTGenerator } from './ShelfNFTGenerator'
 
-export function Cover() {
+export function CompletionNFT() {
   return (
     <Card className="w-full">
       <CardHeader>
         <CardTitle className="text-center text-xl">
-          Cover
+          Completion NFT
         </CardTitle>
       </CardHeader>
       <CardContent className="text-center">
-        <ImageCropper atom={coverAtom}/>
+        <NFTGenerator/>
       </CardContent>
     </Card>
   )

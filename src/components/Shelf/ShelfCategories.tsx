@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { X } from 'lucide-react'
 import { useAtom } from 'jotai'
 import { shelfCatAtom } from '@/atoms/shelfCatAtom'
@@ -28,11 +28,6 @@ export const ShelfCategoriesInput: React.FC = () => {
     setTags((tags) => tags.toSpliced(index, 1))
   }
 
-  useEffect(() => {
-    if(inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [tags])
 
   return (
     <Card className="flex flex-col justify-center items-center">
