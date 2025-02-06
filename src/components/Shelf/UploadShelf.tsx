@@ -150,9 +150,12 @@ export function UploadShelf() {
         )
         addLine(nftMetadataLink)
 
+        console.log({users})
+
         const userGroups = (
           Object.groupBy(users, ({role}) => role ?? 'unknown')
         )
+        console.log({userGroups})
         const addressGroups = Object.fromEntries(
           Object.entries(userGroups).map(([role, users]) => (
             [role, users?.map(({address}) => address)]

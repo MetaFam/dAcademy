@@ -8,7 +8,7 @@ import {
   Card, CardContent, CardHeader, CardTitle,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Curator, curatorAtom } from '@/atoms/curatorAtom'
+import { usersAtom as curatorAtom } from '@/atoms/shelfUsersAtom'
 import { maybeENS } from '@/lib/utils'
 import {
   Table,
@@ -19,6 +19,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import TextInput from '@/components/Upload/TextInput'
+import { User } from '@/atoms/usersAtom'
 
 const RoleSelect = (
   { className, ...props }:
@@ -58,7 +59,7 @@ export function ShelfPermissions() {
         chain: mainnet,
         transport: http(),
       })
-      const curator: Curator = {role}
+      const curator: User = {role}
       if(/^0x(\d|[a-f]){40}$/i.test(name)) {
         curator.address = name
         curator.name = (await client.getEnsName({ address: name as `0x${string}` })) ?? undefined
