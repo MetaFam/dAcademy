@@ -111,7 +111,8 @@ function SortableItem({ id, name, onRemove }: SortableItemProps) {
 
 export function ShelfBooks() {
   const [searchString, setSearchString] = useState("")
-  const [searchResults, setSearchResults] = useState<Array<SearchResult>>([])
+  const [searching, setSearching] = useState(false)
+  const [searchResults, setSearchResults] = useState<Array<SearchResult> | null>([])
   const [selectedBooks, setSelectedBooks] = useAtom(booksAtom)
   const subgraph = useSubgraph()
 
@@ -128,33 +129,42 @@ export function ShelfBooks() {
 
   const search = async () => {
     console.log({searchString})
-    const [chains, quests] = await Promise.all([
-      request<ChainResult>(
-        subgraph,
-        chainSearch,
-        { search: searchString }
-      ),
-      request<QuestResult>(
-        subgraph,
-        questSearch,
-        { search: searchString }
-      ),
-    ])
+    setSearching(true)
+    try {
+      const [chains, quests] = await Promise.all([
+        request<ChainResult>(
+          subgraph,
+          chainSearch,
+          { search: searchString }
+        ),
+        request<QuestResult>(
+          subgraph,
+          questSearch,
+          { search: searchString }
+        ),
+      ])
 
-    const results = ([
-      ...chains.chainSearch.map((chain: ChainInfo) => ({
-        name: chain.name,
-        id: chain.questChain.id,
-      })),
-      ...quests.questSearch.map((quest: QuestInfo) => ({
-        name: quest.quest.questChain.details.name,
-        id: quest.quest.questChain.id,
-      }))
-    ])
-    setSearchResults(Array.from(
-      new Map(results.map(item => [item.id, item])).values()
-    ))
-    console.log({chains})
+      const results = ([
+        ...chains.chainSearch.map((chain: ChainInfo) => ({
+          name: chain.name,
+          id: chain.questChain.id,
+        })),
+        ...quests.questSearch.map((quest: QuestInfo) => ({
+          name: quest.quest.questChain.details.name,
+          id: quest.quest.questChain.id,
+        }))
+      ])
+      if(results.length === 0) {
+        setSearchResults(null)
+      } else {
+        setSearchResults(Array.from(
+          new Map(results.map(item => [item.id, item])).values()
+        ))
+      }
+      console.log({chains})
+    } finally {
+      setSearching(false)
+    }
   }
 
   const add = (result: SearchResult) => {
@@ -193,22 +203,28 @@ export function ShelfBooks() {
             onChange={({target: {value}}) => setSearchString(value)}
             placeholder="Search current playbooks"
           />
-          <Button onClick={search} type="button">Search</Button>
+          <Button disabled={searching} onClick={search} type="button">
+            {searching ? <span className="animate-spin">↻</span> : 'Search'}
+          </Button>
         </div>
 
         {/* Search Results */}
         <div className="mt-4">
           <h3 className="text-sm font-semibold mb-2">Search Results</h3>
           <ul className="flex flex-col gap-2 border outline-2 p-2 min-h-[100px]">
-            {searchResults.map((result) => (
-              <li
-                key={result.id}
-                className="flex flex-grow hover:bg-gray-400/20 items-center p-2 rounded"
-              >
-                <span className="flex-1 pl-1">{result.name}</span>
-                <Button type="button" onClick={() => add(result)}>Add</Button>
-              </li>
-            ))}
+            {searchResults === null ? (
+              'No search results found.'
+            ) : (
+              searchResults.map((result) => (
+                <li
+                  key={result.id}
+                  className="flex flex-grow hover:bg-gray-400/20 items-center p-2 rounded"
+                >
+                  <span className="flex-1 pl-1">{result.name}</span>
+                  <Button type="button" onClick={() => add(result)}>Add</Button>
+                </li>
+              ))
+            )}
           </ul>
         </div>
 
