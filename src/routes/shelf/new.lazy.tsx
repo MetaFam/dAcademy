@@ -21,7 +21,7 @@ function Upload() {
   const [processing, setProcessing] = useState(false)
   return (
     <>
-      <Helmet><title>: Create Shelf</title></Helmet>
+      <Helmet><title>क: Create Shelf</title></Helmet>
       <SidebarProvider>
         <ShelfSidebar />
         <SidebarTrigger />
