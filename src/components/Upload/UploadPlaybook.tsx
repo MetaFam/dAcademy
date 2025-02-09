@@ -196,7 +196,7 @@ export function UploadPlaybook() {
           toHex(randomBuffer),
         ]
 
-        console.debug({ args })
+        console.debug({ createChain: args })
 
         abortSignal.throwIfAborted()
         writeContract({
