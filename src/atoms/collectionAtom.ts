@@ -1,20 +1,20 @@
 import { atom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 
-export type ShelfFrontMatter = {
+export type CollectionFrontMatter = {
   name?: string | null
-  shelfCover?: string | null
+  collectionCover?: string | null
   description?: string | null
 }
 
 export const frontMatterAtom = (
-  atomWithStorage<ShelfFrontMatter>(
-    'ShelfFrontMatter', {}, undefined, { getOnInit: true }
+  atomWithStorage<CollectionFrontMatter>(
+    'collectionFrontMatter', {}, undefined, { getOnInit: true }
   )
 )
 
-export const shelfCoverAtom = atom(
-  (get) => get(frontMatterAtom)?.shelfCover,
+export const CollectionCoverAtom = atom(
+  (get) => get(frontMatterAtom)?.collectionCover,
   (_get, set, update: string | null) => (
     set(frontMatterAtom, (prev) => ({ ...prev, shelfCover: update }))
   )
