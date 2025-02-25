@@ -15,6 +15,7 @@ import {
 import { Toaster as HotToaster } from 'react-hot-toast'
 import { Provider as JotaiProvider } from 'jotai'
 import { DevTools as JotaiDevTools } from 'jotai-devtools'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { routeTree } from './routeTree.gen'
 import 'jotai-devtools/styles.css'
 import './styles/index.css'
@@ -74,17 +75,32 @@ const AppKitProvider = ({ children }: { children: ReactNode }) => (
   </WagmiProvider>
 )
 
+const helmetContext = {}
+
 const root=document.getElementById('root')!
 if(!root.innerHTML){
   createRoot(root).render(
     <StrictMode>
       <HotToaster position="bottom-center"/>
-        <AppKitProvider>
-          <JotaiProvider>
+      <AppKitProvider>
+        <JotaiProvider>
+          <HelmetProvider context={helmetContext}>
+            <Helmet>
+              <title>dAcademy</title>
+              <meta charSet="UTF-8"/>
+              <link rel="icon" type="image/svg+xml" href="/inner-d.svg"/>
+              <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+              <meta property="og:title" content="dAcademy"/>
+              <meta property="og:description" content="A de-store of knowledge. Learn, Verify, Achieve: Protocol for a Decentralized Education"/>
+              <meta property="og:image" content="/dacademy-logo.png"/>
+              <meta property="og:url" content="https://dacade.my"/>
+              <meta property="og:site_name" content="dAcademy"/>
+            </Helmet>
             <RouterProvider {...{ router }}/>
-          <JotaiDevTools/>
-          </JotaiProvider>
-        </AppKitProvider>
+            <JotaiDevTools/>
+          </HelmetProvider>
+        </JotaiProvider>
+      </AppKitProvider>
     </StrictMode>,
   )
 }

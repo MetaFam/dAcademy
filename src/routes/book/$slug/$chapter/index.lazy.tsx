@@ -14,10 +14,9 @@ export const Route = createLazyFileRoute('/book/$slug/$chapter/')({
 })
 
 export function Book() {
+  const { slug, chapter } = Route.useParams()
   try {
-    const { slug, chapter } = Route.useParams()
-
-    return (
+     return (
       <LoggingErrorBoundary>
         <BookProvider chapter={Number(chapter)} {...{ slug}}>
           <article

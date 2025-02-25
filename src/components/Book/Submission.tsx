@@ -58,7 +58,9 @@ export const Submission = () => {
         <h3 className="flex text-center items-center justify-center">
           Please
           <a onClick={() => {
-            (window.ethereum?.request as (o: {}) => void)({
+            (window.ethereum?.request as
+              (o: { method: string, params: Array<Record<string, string>> }) => void
+            )({
               method: 'wallet_switchEthereumChain',
               params: [{ chainId: `0x${book.chainId.toString(16)}`}],
             })

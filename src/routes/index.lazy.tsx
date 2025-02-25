@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { GraduationCap, UploadCloud } from 'lucide-react'
 import { useAtom } from 'jotai'
 import { createLazyFileRoute, Link } from '@tanstack/react-router'
@@ -18,11 +17,6 @@ export const Route = createLazyFileRoute('/')({
 
 function Index() {
   const [isGridVisible] = useAtom(isGridVisibleAtom)
-
-  // Scroll to the top of the page when the component mounts
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []); // Empty dependency array ensures this runs only once on mount
 
   return (
     <div>
