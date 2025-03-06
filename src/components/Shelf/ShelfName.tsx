@@ -1,4 +1,4 @@
-import { nameAtom } from "@/atoms/shelfAtom"
+import { nameAtom } from "@/atoms/shelfFrontmatterAtom"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { useAtom } from "jotai"

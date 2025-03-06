@@ -21,55 +21,36 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { frontMatterAtom } from "@/atoms/shelfAtom"
+import { collectionAtom, type Shelf } from "@/atoms/collectionAtom"
 import { useAtom } from "jotai"
 
 //this one needs work
 
-const chainSearch = gql`
-  query ChainSearch($search: String!) {
-    chainSearch(text: $search) {
+const shelfSearch = gql`
+  query ShelfSearch($search: String!) {
+    shelfSearch(text: $search) {
+      cover
       name
-      questChain{ id }
+      id
+      slug
     }
   }
 `
 
-const questSearch = gql`
-  query QuestSearch($search: String!) {
-    questSearch(text: $search) {
-      quest{
-        questChain{
-          id
-          details{ name }
-        }
-      }
-    }
-  }
-`
 
-type ChainInfo = {
+
+type ShelfInfo = {
+  cover: string
   name: string
-  questChain: {
-    id: string
-  }
+  id: string
+  slug: string
+
 }
 
-type ChainResult = {
-  chainSearch: Array<ChainInfo>
-}
-type QuestResult = {
-  questSearch: Array<QuestInfo>
+type ShelfResult = {
+  shelfSearch: Array<ShelfInfo>
 }
 
-type QuestInfo = {
-  quest: {
-    questChain: {
-      id: string
-      details: { name: string }
-    }
-  }
-}
 
 type SearchResult = Shelf
 
@@ -115,7 +96,7 @@ export function CollectionShelves() {
   const [searchString, setSearchString] = useState("")
   const [searching, setSearching] = useState(false)
   const [searchResults, setSearchResults] = useState<Array<SearchResult> | null>([])
-  const [selectedShelves, setSelectedShelves] = useAtom(frontMatterAtom)
+  const [selectedShelves, setSelectedShelves] = useAtom(collectionAtom)
   const subgraph = useSubgraph()
 
   const sensors = useSensors(
@@ -133,37 +114,30 @@ export function CollectionShelves() {
     console.log({searchString})
     setSearching(true)
     try {
-      const [chains, quests] = await Promise.all([
-        request<ChainResult>(
+      const shelves = await (
+        request<ShelfResult>(
           subgraph,
-          chainSearch,
+          shelfSearch,
           { search: searchString }
-        ),
-        request<QuestResult>(
-          subgraph,
-          questSearch,
-          { search: searchString }
-        ),
-      ])
+        )
+      )
 
-      const results = ([
-        ...chains.chainSearch.map((chain: ChainInfo) => ({
-          name: chain.name,
-          id: chain.questChain.id,
-        })),
-        ...quests.questSearch.map((quest: QuestInfo) => ({
-          name: quest.quest.questChain.details.name,
-          id: quest.quest.questChain.id,
+      const results = (
+        shelves.shelfSearch.map((shelf: ShelfInfo) => ({
+          cover: shelf.cover,
+          name: shelf.name,
+          id: shelf.id,
+          slug: shelf.slug,
         }))
-      ])
+      )
       if(results.length === 0) {
         setSearchResults(null)
       } else {
         setSearchResults(Array.from(
-          new Map(results.map(item => [item.id, item])).values()
+          new Map(results.map(item => [item.slug, item])).values()
         ))
       }
-      console.log({chains})
+      console.log({shelves})
     } finally {
       setSearching(false)
     }
@@ -171,13 +145,13 @@ export function CollectionShelves() {
 
   const add = (result: SearchResult) => {
     setSelectedShelves((shelves) => [result, ...shelves.filter((shelf) => (
-      book.id !== result.id
+      shelf.slug !== result.slug
     ))])
   }
 
   const remove = (result: SearchResult) => {
     setSelectedShelves((shelves) => shelves.filter((shelf) => (
-      book.id !== result.id
+      shelf.slug !== result.slug
     )))
   }
 
@@ -186,8 +160,8 @@ export function CollectionShelves() {
 
     if (over != null && active.id !== over?.id) {
       setSelectedShelves((shelves) => {
-        const oldIndex = shelves.findIndex((shelf) => shelf.id === active.id)
-        const newIndex = shelves.findIndex((shelf) => shelf.id === over.id)
+        const oldIndex = shelves.findIndex((shelf) => shelf.slug === active.id)
+        const newIndex = shelves.findIndex((shelf) => shelf.slug === over.id)
         return arrayMove(shelves, oldIndex, newIndex)
       })
     }
@@ -196,13 +170,17 @@ export function CollectionShelves() {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle className="text-center text-xl">Select Books</CardTitle>
+        <CardTitle className="text-center text-xl">Select Shelves</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex w-full items-center justify-center space-x-2">
           <Input
             value={searchString}
-            onChange={({target: {value}}) => setSearchString(value)}
+            onChange={(evt) => {
+              console.log('wtf')
+              evt.preventDefault()
+              setSearchString(evt.target.value)
+            }}
             placeholder="Search current playbooks"
           />
           <Button disabled={searching} onClick={search} type="button">
@@ -219,7 +197,7 @@ export function CollectionShelves() {
             ) : (
               searchResults.map((result) => (
                 <li
-                  key={result.id}
+                  key={result.slug}
                   className="flex flex-grow hover:bg-gray-400/20 items-center p-2 rounded"
                 >
                   <span className="flex-1 pl-1">{result.name}</span>
@@ -239,14 +217,14 @@ export function CollectionShelves() {
             onDragEnd={handleDragEnd}
           >
             <SortableContext
-              items={selectedShelves.map(shelf => shelf.id)}
+              items={selectedShelves.map(shelf => shelf.slug)}
               strategy={verticalListSortingStrategy}
             >
               <ul className="flex flex-col gap-2 border outline-2 p-2 min-h-[100px]">
                 {selectedShelves.map((result) => (
                   <SortableItem
-                    key={result.id}
-                    id={result.id}
+                    key={result.slug}
+                    id={result.slug}
                     name={result.name}
                     onRemove={() => remove(result)}
                   />

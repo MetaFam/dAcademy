@@ -24,7 +24,6 @@ const Upload = () => {
           id="Collection"
           onSubmit={(evt) => {
             evt.preventDefault()
-            setProcessing(true)
           }}
         >
           <div id="cover" className="scroll-mt-12">
@@ -50,7 +49,7 @@ const Upload = () => {
           <CollectionPermissions />
         </div>
         <div className="flex justify-center mt-4">
-          <Button form="Collection" className="secondary">
+          <Button type="button" onClick={() => setProcessing(true)} form="Collection" className="secondary">
             Create Collection
           </Button>
         </div>

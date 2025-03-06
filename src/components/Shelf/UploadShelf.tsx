@@ -15,7 +15,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer'
-import { frontMatterAtom } from '@/atoms/shelfAtom'
+import { frontMatterAtom } from '@/atoms/shelfFrontmatterAtom'
 import { nftAtom } from '@/atoms/shelfNFTAtom'
 import { usersAtom } from '@/atoms/shelfUsersAtom'
 import {

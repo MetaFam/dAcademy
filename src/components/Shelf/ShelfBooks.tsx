@@ -200,7 +200,10 @@ export function ShelfBooks() {
         <div className="flex w-full items-center justify-center space-x-2">
           <Input
             value={searchString}
-            onChange={({target: {value}}) => setSearchString(value)}
+            onChange={(evt) => {
+              evt.preventDefault()
+              setSearchString(evt.target.value)
+            }}
             placeholder="Search current playbooks"
           />
           <Button disabled={searching} onClick={search} type="button">

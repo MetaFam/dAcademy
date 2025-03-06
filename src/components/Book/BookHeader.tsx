@@ -17,6 +17,7 @@ export const BookHeader = () => {
       client
       .getEnsName({ address: book.creator as `0x${string}` })
       .then((name) => { if (name) setCreator(name) })
+      .catch((error) => console.error('ENS lookup failed', error))
     }
   }, [])
 

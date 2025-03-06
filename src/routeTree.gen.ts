@@ -19,6 +19,7 @@ import { Route as rootRoute } from './routes/__root'
 const IndexLazyImport = createFileRoute('/')()
 const UserIndexLazyImport = createFileRoute('/user/')()
 const UploadIndexLazyImport = createFileRoute('/upload/')()
+const SearchIndexLazyImport = createFileRoute('/search/')()
 const OrgIndexLazyImport = createFileRoute('/org/')()
 const CurationIndexLazyImport = createFileRoute('/curation/')()
 const CollectionIndexLazyImport = createFileRoute('/collection/')()
@@ -49,6 +50,12 @@ const UploadIndexLazyRoute = UploadIndexLazyImport.update({
   path: '/upload/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/upload/index.lazy').then((d) => d.Route))
+
+const SearchIndexLazyRoute = SearchIndexLazyImport.update({
+  id: '/search/',
+  path: '/search/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/search/index.lazy').then((d) => d.Route))
 
 const OrgIndexLazyRoute = OrgIndexLazyImport.update({
   id: '/org/',
@@ -159,6 +166,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrgIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/search/': {
+      id: '/search/'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/upload/': {
       id: '/upload/'
       path: '/upload'
@@ -200,6 +214,7 @@ export interface FileRoutesByFullPath {
   '/collection': typeof CollectionIndexLazyRoute
   '/curation': typeof CurationIndexLazyRoute
   '/org': typeof OrgIndexLazyRoute
+  '/search': typeof SearchIndexLazyRoute
   '/upload': typeof UploadIndexLazyRoute
   '/user': typeof UserIndexLazyRoute
   '/book/$slug': typeof BookSlugIndexLazyRoute
@@ -214,6 +229,7 @@ export interface FileRoutesByTo {
   '/collection': typeof CollectionIndexLazyRoute
   '/curation': typeof CurationIndexLazyRoute
   '/org': typeof OrgIndexLazyRoute
+  '/search': typeof SearchIndexLazyRoute
   '/upload': typeof UploadIndexLazyRoute
   '/user': typeof UserIndexLazyRoute
   '/book/$slug': typeof BookSlugIndexLazyRoute
@@ -229,6 +245,7 @@ export interface FileRoutesById {
   '/collection/': typeof CollectionIndexLazyRoute
   '/curation/': typeof CurationIndexLazyRoute
   '/org/': typeof OrgIndexLazyRoute
+  '/search/': typeof SearchIndexLazyRoute
   '/upload/': typeof UploadIndexLazyRoute
   '/user/': typeof UserIndexLazyRoute
   '/book/$slug/': typeof BookSlugIndexLazyRoute
@@ -245,6 +262,7 @@ export interface FileRouteTypes {
     | '/collection'
     | '/curation'
     | '/org'
+    | '/search'
     | '/upload'
     | '/user'
     | '/book/$slug'
@@ -258,6 +276,7 @@ export interface FileRouteTypes {
     | '/collection'
     | '/curation'
     | '/org'
+    | '/search'
     | '/upload'
     | '/user'
     | '/book/$slug'
@@ -271,6 +290,7 @@ export interface FileRouteTypes {
     | '/collection/'
     | '/curation/'
     | '/org/'
+    | '/search/'
     | '/upload/'
     | '/user/'
     | '/book/$slug/'
@@ -286,6 +306,7 @@ export interface RootRouteChildren {
   CollectionIndexLazyRoute: typeof CollectionIndexLazyRoute
   CurationIndexLazyRoute: typeof CurationIndexLazyRoute
   OrgIndexLazyRoute: typeof OrgIndexLazyRoute
+  SearchIndexLazyRoute: typeof SearchIndexLazyRoute
   UploadIndexLazyRoute: typeof UploadIndexLazyRoute
   UserIndexLazyRoute: typeof UserIndexLazyRoute
   BookSlugIndexLazyRoute: typeof BookSlugIndexLazyRoute
@@ -300,6 +321,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollectionIndexLazyRoute: CollectionIndexLazyRoute,
   CurationIndexLazyRoute: CurationIndexLazyRoute,
   OrgIndexLazyRoute: OrgIndexLazyRoute,
+  SearchIndexLazyRoute: SearchIndexLazyRoute,
   UploadIndexLazyRoute: UploadIndexLazyRoute,
   UserIndexLazyRoute: UserIndexLazyRoute,
   BookSlugIndexLazyRoute: BookSlugIndexLazyRoute,
@@ -323,6 +345,7 @@ export const routeTree = rootRoute
         "/collection/",
         "/curation/",
         "/org/",
+        "/search/",
         "/upload/",
         "/user/",
         "/book/$slug/",
@@ -349,6 +372,9 @@ export const routeTree = rootRoute
     },
     "/org/": {
       "filePath": "org/index.lazy.tsx"
+    },
+    "/search/": {
+      "filePath": "search/index.lazy.tsx"
     },
     "/upload/": {
       "filePath": "upload/index.lazy.tsx"

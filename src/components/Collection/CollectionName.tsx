@@ -1,4 +1,4 @@
-import { nameAtom } from "@/atoms/collectionAtom"
+import { nameAtom } from "@/atoms/collectionFrontmatterAtom"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { useAtom } from "jotai"

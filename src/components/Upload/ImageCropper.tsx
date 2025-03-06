@@ -60,6 +60,7 @@ export const ImageCropper = ({ image, atom }: { image?:string, atom: WritableAto
 
   async function onDownloadCropClick() {
     const image = imgRef.current
+    console.log('here')
     if (!image || !crop) {
       throw new Error('Crop canvas does not exist.')
     }
@@ -70,7 +71,7 @@ export const ImageCropper = ({ image, atom }: { image?:string, atom: WritableAto
     offscreen.height = aspect.height
     const ctx = offscreen.getContext('2d')
     if(!ctx) throw new Error('No 2d context')
-
+      console.log({u: crop})
     if(crop.unit === 'px') {
       crop.x = (crop.x / image.width) * 100
       crop.y = (crop.y / image.height) * 100

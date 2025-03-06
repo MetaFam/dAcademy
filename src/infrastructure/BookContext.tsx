@@ -8,11 +8,11 @@ const questChainQueryDocument = gql`
   query ChainDetails($slug: String!, $reader: ID) {
     questChains(where: { details_: { slug: $slug } }) {
       id
+      network
       details {
         name
         description
         image
-        network
       }
       address
       token {
@@ -25,7 +25,7 @@ const questChainQueryDocument = gql`
           id
         }
       }
-      createdBy {
+      creator {
         id
       }
       updatedAt
@@ -144,9 +144,9 @@ export type Chain = {
     name: string
     description: string
     image: string
-    network: string
   }
   id: string
+  network: string
   address: string
   token: {
     details: {
@@ -157,7 +157,7 @@ export type Chain = {
     owners: Array<{ id: string }>
   }
   quests: Array<Quest>
-  createdBy: { id: string }
+  creator: { id: string }
   updatedAt: string
 }
 export type GraphChainResponse = {
@@ -281,12 +281,12 @@ export const BookProvider = (
     chapters.current = on
 
     const props = {
-      chainId: Number(chain.details.network),
+      chainId: Number(chain.network),
       slug,
       title: chain.details.name,
       introduction: chain.details.description,
       chapters,
-      creator: chain.createdBy.id,
+      creator: chain.creator.id,
       owners: [], // ToDo: Extract from The Graph
       updatedAt: new Date(Number(chain.updatedAt) * 1000),
       contract: chain.id,

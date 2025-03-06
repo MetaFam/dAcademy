@@ -30,7 +30,6 @@ function Upload() {
             id="shelf"
             onSubmit={(evt) => {
               evt.preventDefault()
-              setProcessing(true)
             }}
           >
             <div id="cover" className="scroll-mt-12">
@@ -56,7 +55,7 @@ function Upload() {
             <ShelfPermissions />
           </div>
           <div className="flex justify-center mt-4">
-            <Button form="shelf" className="secondary">
+            <Button type="button" onClick={() => setProcessing(true)} form="shelf" className="secondary">
               Create Shelf
             </Button>
           </div>

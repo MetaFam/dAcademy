@@ -49,6 +49,12 @@ function Index() {
                 Upload a Playbook
               </Button>
             </Link>
+            <form method="get" action="/#/search">
+              <input type="search" name="q" />
+              <Button variant="secondary" className="shadow-md border border-gray-500">
+                🔍
+              </Button>
+            </form>
           </div>
         </div>
 

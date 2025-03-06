@@ -4,7 +4,7 @@ import {
   Card, CardContent, CardHeader, CardTitle,
 } from '@/components/ui/card'
 import { ImageCropper } from '../Upload/ImageCropper'
-import { shelfCoverAtom } from '@/atoms/shelfAtom'
+import { shelfCoverAtom } from '@/atoms/shelfFrontmatterAtom'
 
 export function ShelfCover() {
   return (

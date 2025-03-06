@@ -1,35 +1,14 @@
-import { atom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 
-export type CollectionFrontMatter = {
-  name?: string | null
-  collectionCover?: string | null
-  description?: string | null
+export type Shelf = {
+  cover: string
+  name: string
+  id: string
+  slug: string
 }
 
-export const frontMatterAtom = (
-  atomWithStorage<CollectionFrontMatter>(
-    'collectionFrontMatter', {}, undefined, { getOnInit: true }
-  )
-)
-
-export const CollectionCoverAtom = atom(
-  (get) => get(frontMatterAtom)?.collectionCover,
-  (_get, set, update: string | null) => (
-    set(frontMatterAtom, (prev) => ({ ...prev, shelfCover: update }))
-  )
-)
-
-export const nameAtom = atom(
-  (get) => get(frontMatterAtom)?.name,
-  (_get, set, update: string | null) => (
-    set(frontMatterAtom, (prev) => ({ ...prev, name: update }))
-  )
-)
-
-export const descriptionAtom = atom(
-  (get) => get(frontMatterAtom)?.description,
-  (_get, set, update: string | null) => (
-    set(frontMatterAtom, (prev) => ({ ...prev, description: update }))
+export const collectionAtom = (
+  atomWithStorage<Array<Shelf>>(
+    'shelves', [], undefined, { getOnInit: true },
   )
 )

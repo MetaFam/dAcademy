@@ -15,7 +15,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer'
-import { frontMatterAtom } from '@/atoms/collectionAtom'
+import { frontMatterAtom } from '@/atoms/collectionFrontmatterAtom'
 import { nftAtom } from '@/atoms/shelfNFTAtom'
 import { usersAtom } from '@/atoms/shelfUsersAtom'
 import {
@@ -25,8 +25,8 @@ import { useEtherscan, useFactory } from '@/hooks'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import abi from '@/abis/QuestChainFactory.json'
 import { collectionCatAtom } from '@/atoms/collectionCatAtom'
-// import { booksAtom } from '@/atoms/shelfAtom'
-// this needs to change
+import { collectionAtom } from '@/atoms/collectionAtom'
+
 
 const ipfsFilenames = (cid: string, filename: string) => ([
   `ipfs://${cid}/${filename}`,
@@ -61,7 +61,7 @@ export function UploadCollection() {
   const nft = useAtomValue(nftAtom)
   const users = useAtomValue(usersAtom)
   const categories = useAtomValue(collectionCatAtom)
-  const books = useAtomValue(booksAtom)
+  const shelves = useAtomValue(collectionAtom)
   const addLine = (line: ReactNode) => {
     setLines((prev) => [...prev, line])
   }
@@ -83,7 +83,7 @@ export function UploadCollection() {
           throw new Error('Missing Description')
         }
         if(!frontMatter.collectionCover) throw new Error('Missing Cover')
-        if(books.length === 0) throw new Error('No books in shelf')
+        if(shelves.length === 0) throw new Error('No books in shelf')
 
         abortSignal.throwIfAborted()
         addLine('Uploading cover to IPFS…')
@@ -169,7 +169,7 @@ export function UploadCollection() {
           {
             owners: addressGroups.owner ?? [],
             admins: addressGroups.admin ?? [],
-            chains: books.map(({id}) => id),
+            shelves: shelves.map(({id}) => id),
             details: frontmatterURL,
             tokenURI: nftMetadataURL,
           },
