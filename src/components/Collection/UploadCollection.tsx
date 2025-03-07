@@ -16,7 +16,7 @@ import {
   DrawerTitle,
 } from '@/components/ui/drawer'
 import { frontMatterAtom } from '@/atoms/collectionFrontmatterAtom'
-import { nftAtom } from '@/atoms/shelfNFTAtom'
+import { nftAtom } from '@/atoms/collectionNFTAtom'
 import { curatorsAtom } from '@/atoms/curatorsAtom'
 import {
   upload as toIPFS, toHTTP, toSlug, timestamp, toHex,
@@ -178,6 +178,12 @@ export function UploadCollection() {
         console.debug({ args })
         let hash = 'unknown'
         try {
+          addLine(<p>
+            Calling contract:
+            <a href={`${etherscan}/address/${factoryAddress}`} target="_blank"
+              className="ml-1 whitespace-nowrap text-primary hover:text-secondary"
+            >{factoryAddress.slice(0, 6)}…{factoryAddress.slice(-4)}</a>
+          </p>)
           abortSignal.throwIfAborted()
           hash = await writeContractAsync({
             address: factoryAddress,
