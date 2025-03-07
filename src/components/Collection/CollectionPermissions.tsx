@@ -8,7 +8,7 @@ import {
   Card, CardContent, CardHeader, CardTitle,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { usersAtom as curatorAtom } from '@/atoms/collectionUsersAtom'
+import { curatorsAtom } from '@/atoms/curatorsAtom'
 import { maybeENS } from '@/lib/utils'
 import {
   Table,
@@ -40,7 +40,7 @@ const RoleSelect = (
 export function CollectionPermissions() {
   const [name, setName] = useState<string>()
   const [role, setRole] = useState<string>('admin')
-  const [curators, setCurators] = useAtom(curatorAtom)
+  const [curators, setCurators] = useAtom(curatorsAtom)
 
   const setUserRoleByIndex = (index: number, role: string) => {
     setCurators((prev) => {

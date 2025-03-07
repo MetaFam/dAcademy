@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/drawer'
 import { frontMatterAtom } from '@/atoms/collectionFrontmatterAtom'
 import { nftAtom } from '@/atoms/shelfNFTAtom'
-import { usersAtom } from '@/atoms/shelfUsersAtom'
+import { curatorsAtom } from '@/atoms/curatorsAtom'
 import {
   upload as toIPFS, toHTTP, toSlug, timestamp, toHex,
 } from '@/lib/utils'
@@ -59,13 +59,13 @@ export function UploadCollection() {
   const [lines, setLines] = useState<Array<ReactNode>>([])
   const frontMatter = useAtomValue(frontMatterAtom)
   const nft = useAtomValue(nftAtom)
-  const users = useAtomValue(usersAtom)
+  const users = useAtomValue(curatorsAtom)
   const categories = useAtomValue(collectionCatAtom)
   const shelves = useAtomValue(collectionAtom)
   const addLine = (line: ReactNode) => {
     setLines((prev) => [...prev, line])
   }
-  const { writeContract } = useWriteContract()
+  const { writeContractAsync } = useWriteContract()
   const etherscan = useEtherscan()
   const factoryAddress = useFactory()
 
@@ -151,7 +151,7 @@ export function UploadCollection() {
         )
         addLine(nftMetadataLink)
 
-        console.log({users})
+        console.log({users, shelves})
 
         const userGroups = (
           Object.groupBy(users, ({role}) => role ?? 'unknown')
@@ -171,43 +171,40 @@ export function UploadCollection() {
             admins: addressGroups.admin ?? [],
             shelves: shelves.map(({id}) => id),
             details: frontmatterURL,
-            tokenURI: nftMetadataURL,
           },
           toHex(randomBuffer),
         ]
 
         console.debug({ args })
-
-        abortSignal.throwIfAborted()
-        writeContract({
-          address: factoryAddress,
-          abi,
-          functionName: 'createShelf',
-          args,
-        }, {
-          onError: (error) => {
-            console.error({ error })
-            addLine(
-              (error as { shortMessage: string }).shortMessage
-              ?? error.message,
-            )
-          },
-          onSuccess: (hash) => (
-            addLine(
-              <p>
-                Submitted in transaction
-                <a
-                  href={`${etherscan}/tx/${hash}`}
-                  target="_blank"
-                  className="ml-1 whitespace-nowrap text-primary hover:text-secondary"
-                >
-                  {hash.substring(0, 8)}…{hash.slice(-6)}
-                </a>.
-              </p>,
-            )
+        let hash = 'unknown'
+        try {
+          abortSignal.throwIfAborted()
+          hash = await writeContractAsync({
+            address: factoryAddress,
+            abi,
+            functionName: 'createCollection',
+            args,
+          })
+        } catch (error) {
+          console.error({ error })
+          addLine(
+            (error as { shortMessage: string }).shortMessage
+            ?? error.message,
           )
-        })
-
+          ;({hash} = error)
+        }
+        addLine(
+          <p>
+            Submitted in transaction
+            <a
+              href={`${etherscan}/tx/${hash}`}
+              target="_blank"
+              className="ml-1 whitespace-nowrap text-primary hover:text-secondary"
+            >
+              {hash.substring(0, 8)}…{hash.slice(-6)}
+            </a>.
+          </p>,
+        )
       } catch(error) {
         addLine(<p className="text-red-500">
           {(error as Error).message}

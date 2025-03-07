@@ -11,6 +11,87 @@
     "type": "constructor"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "AddressNotZero",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "attempted",
+        "type": "address"
+      }
+    ],
+    "name": "NotAdmin",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "proposed",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "sent",
+        "type": "address"
+      }
+    ],
+    "name": "NotProposedAdmin",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "from",
+        "type": "uint256"
+      }
+    ],
+    "name": "OneDayWaitRequired",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      }
+    ],
+    "name": "UnchangedAddress",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "from",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "to",
+        "type": "uint256"
+      }
+    ],
+    "name": "UnchangedUInt",
+    "type": "error"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
@@ -34,6 +115,25 @@
       }
     ],
     "name": "AdminReplaced",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address[]",
+        "name": "admins",
+        "type": "address[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "contract ICollection",
+        "name": "collection",
+        "type": "address"
+      }
+    ],
+    "name": "CollectionCreated",
     "type": "event"
   },
   {
@@ -120,6 +220,12 @@
         "internalType": "contract IShelf",
         "name": "shelf",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
       }
     ],
     "name": "ShelfCreated",
@@ -217,6 +323,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "collectionTemplate",
+    "outputs": [
+      {
+        "internalType": "contract ICollection",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "components": [
@@ -297,6 +416,52 @@
             "type": "address[]"
           },
           {
+            "internalType": "contract IShelf[]",
+            "name": "shelves",
+            "type": "address[]"
+          },
+          {
+            "internalType": "string",
+            "name": "details",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct ICollection.CollectionInfo",
+        "name": "_info",
+        "type": "tuple"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_salt",
+        "type": "bytes32"
+      }
+    ],
+    "name": "createCollection",
+    "outputs": [
+      {
+        "internalType": "contract ICollection",
+        "name": "_collection",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address[]",
+            "name": "owners",
+            "type": "address[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "admins",
+            "type": "address[]"
+          },
+          {
             "internalType": "contract IQuestChain[]",
             "name": "chains",
             "type": "address[]"
@@ -312,7 +477,7 @@
             "type": "string"
           }
         ],
-        "internalType": "struct QuestChainCommons.ShelfInfo",
+        "internalType": "struct IShelf.ShelfInfo",
         "name": "_info",
         "type": "tuple"
       },

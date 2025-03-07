@@ -6,5 +6,5 @@ export type Curator = {
   role?: string
 }
 
-export const curatorAtom = atomWithStorage<Array<Curator>>('curators', [])
+export const curatorsAtom = atomWithStorage<Array<Curator>>('curators', [])
 

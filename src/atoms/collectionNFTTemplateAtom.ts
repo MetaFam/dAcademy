@@ -7,7 +7,7 @@ type NFTTemplate = {
   color?: string | null
 }
 
-export const nftTemplateAtom = atomWithStorage<NFTTemplate>('shelfNFTTemplate', {})
+export const nftTemplateAtom = atomWithStorage<NFTTemplate>('collectionNFTTemplate', {})
 
 export const backgroundAtom = atom(
   (get) => get(nftTemplateAtom)?.background,

@@ -1,5 +1,5 @@
-import { backgroundAtom } from "@/atoms/nftTemplateAtom"
-import { useAtom } from "jotai"
+// import { backgroundAtom } from "@/atoms/nftTemplateAtom"
+// import { useAtom } from "jotai"
 import React, { useState} from "react"
 
 type Point = {x?: number, y?: number}
@@ -11,7 +11,7 @@ export const NFTTemplate = ({
   color?: string | null
   svgRef: React.MutableRefObject<SVGSVGElement | undefined>
 }) => {
-  const [background/*, setBackground*/] = useAtom(backgroundAtom)
+  // const [background/*, setBackground*/] = useAtom(backgroundAtom)
   // const [pStart, setPStart] = useState<SVGPoint>()
   // const [pCurrent, setPCurrent] = useState<SVGPoint>()
   const [zoomPercent/*, setZoomPercent*/] = useState(1)
@@ -97,7 +97,7 @@ export const NFTTemplate = ({
       id="nft"
     >
       <defs>
-        {background && (
+        {bg && (
           <image
             x={panning.x} y={panning.y}
             height={`${zoomPercent * 100}%`}
@@ -119,7 +119,7 @@ export const NFTTemplate = ({
           <use href="#textBox" />
         </clipPath>
       </defs>
-      {background && (
+      {bg && (
         <g>
           <use height="100%" width="100%" href="#bg" />
         </g>

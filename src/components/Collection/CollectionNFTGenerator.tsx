@@ -30,6 +30,7 @@ export const NFTGenerator = () => {
     toDataURL(file, setImage)
   }, [title, color, bg])
 
+  {console.log({bg}) ?? ''}
   return (
     <section className="relative" id="img-config">
       <div className="flex justify-end flex-col gap-4">

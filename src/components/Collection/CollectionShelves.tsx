@@ -31,7 +31,7 @@ const shelfSearch = gql`
     shelfSearch(text: $search) {
       cover
       name
-      id
+      shelf { id }
       slug
     }
   }
@@ -42,7 +42,7 @@ const shelfSearch = gql`
 type ShelfInfo = {
   cover: string
   name: string
-  id: string
+  shelf: { id: string }
   slug: string
 
 }
@@ -126,7 +126,7 @@ export function CollectionShelves() {
         shelves.shelfSearch.map((shelf: ShelfInfo) => ({
           cover: shelf.cover,
           name: shelf.name,
-          id: shelf.id,
+          id: shelf.shelf.id,
           slug: shelf.slug,
         }))
       )
