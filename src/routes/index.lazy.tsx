@@ -4,6 +4,7 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { createLazyFileRoute } from '@tanstack/react-router'
 import request, { gql } from 'graphql-request'
 import '@/styles/home.css'
+import { ChangeEvent } from 'react'
 
 const collectionsQuery = gql`
   query CollectionQuery {
@@ -84,17 +85,17 @@ function Collections() {
     ),
   })
 
-  function collapseChildren(evt) {
-    let curr = evt.target
+  function collapseChildren(evt: ChangeEvent) {
+    let curr = evt.target as HTMLInputElement
     if(!curr.checked) {
-        curr.checked = false
-        const list = curr.closest('label').nextElementSibling
-
+      curr.checked = false
+      const list = curr.closest('label')?.nextElementSibling
+      if(list) {
         Array.from(list.querySelectorAll('input[type="checkbox"]')).forEach((elem) => {
-          elem.checked = false
+          (elem as HTMLInputElement).checked = false
         })
       }
-    evt.target.closest
+    }
   }
 
   return (
