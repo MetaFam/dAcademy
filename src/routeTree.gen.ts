@@ -23,6 +23,7 @@ const SearchIndexLazyImport = createFileRoute('/search/')()
 const OrgIndexLazyImport = createFileRoute('/org/')()
 const CurationIndexLazyImport = createFileRoute('/curation/')()
 const CollectionIndexLazyImport = createFileRoute('/collection/')()
+const AboutIndexLazyImport = createFileRoute('/about/')()
 const UserUserLazyImport = createFileRoute('/user/$user')()
 const ShelfNewLazyImport = createFileRoute('/shelf/new')()
 const OrgIdLazyImport = createFileRoute('/org/$id')()
@@ -78,6 +79,12 @@ const CollectionIndexLazyRoute = CollectionIndexLazyImport.update({
 } as any).lazy(() =>
   import('./routes/collection/index.lazy').then((d) => d.Route),
 )
+
+const AboutIndexLazyRoute = AboutIndexLazyImport.update({
+  id: '/about/',
+  path: '/about/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/about/index.lazy').then((d) => d.Route))
 
 const UserUserLazyRoute = UserUserLazyImport.update({
   id: '/user/$user',
@@ -143,6 +150,13 @@ declare module '@tanstack/react-router' {
       path: '/user/$user'
       fullPath: '/user/$user'
       preLoaderRoute: typeof UserUserLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/about/': {
+      id: '/about/'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutIndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/collection/': {
@@ -211,6 +225,7 @@ export interface FileRoutesByFullPath {
   '/org/$id': typeof OrgIdLazyRoute
   '/shelf/new': typeof ShelfNewLazyRoute
   '/user/$user': typeof UserUserLazyRoute
+  '/about': typeof AboutIndexLazyRoute
   '/collection': typeof CollectionIndexLazyRoute
   '/curation': typeof CurationIndexLazyRoute
   '/org': typeof OrgIndexLazyRoute
@@ -226,6 +241,7 @@ export interface FileRoutesByTo {
   '/org/$id': typeof OrgIdLazyRoute
   '/shelf/new': typeof ShelfNewLazyRoute
   '/user/$user': typeof UserUserLazyRoute
+  '/about': typeof AboutIndexLazyRoute
   '/collection': typeof CollectionIndexLazyRoute
   '/curation': typeof CurationIndexLazyRoute
   '/org': typeof OrgIndexLazyRoute
@@ -242,6 +258,7 @@ export interface FileRoutesById {
   '/org/$id': typeof OrgIdLazyRoute
   '/shelf/new': typeof ShelfNewLazyRoute
   '/user/$user': typeof UserUserLazyRoute
+  '/about/': typeof AboutIndexLazyRoute
   '/collection/': typeof CollectionIndexLazyRoute
   '/curation/': typeof CurationIndexLazyRoute
   '/org/': typeof OrgIndexLazyRoute
@@ -259,6 +276,7 @@ export interface FileRouteTypes {
     | '/org/$id'
     | '/shelf/new'
     | '/user/$user'
+    | '/about'
     | '/collection'
     | '/curation'
     | '/org'
@@ -273,6 +291,7 @@ export interface FileRouteTypes {
     | '/org/$id'
     | '/shelf/new'
     | '/user/$user'
+    | '/about'
     | '/collection'
     | '/curation'
     | '/org'
@@ -287,6 +306,7 @@ export interface FileRouteTypes {
     | '/org/$id'
     | '/shelf/new'
     | '/user/$user'
+    | '/about/'
     | '/collection/'
     | '/curation/'
     | '/org/'
@@ -303,6 +323,7 @@ export interface RootRouteChildren {
   OrgIdLazyRoute: typeof OrgIdLazyRoute
   ShelfNewLazyRoute: typeof ShelfNewLazyRoute
   UserUserLazyRoute: typeof UserUserLazyRoute
+  AboutIndexLazyRoute: typeof AboutIndexLazyRoute
   CollectionIndexLazyRoute: typeof CollectionIndexLazyRoute
   CurationIndexLazyRoute: typeof CurationIndexLazyRoute
   OrgIndexLazyRoute: typeof OrgIndexLazyRoute
@@ -318,6 +339,7 @@ const rootRouteChildren: RootRouteChildren = {
   OrgIdLazyRoute: OrgIdLazyRoute,
   ShelfNewLazyRoute: ShelfNewLazyRoute,
   UserUserLazyRoute: UserUserLazyRoute,
+  AboutIndexLazyRoute: AboutIndexLazyRoute,
   CollectionIndexLazyRoute: CollectionIndexLazyRoute,
   CurationIndexLazyRoute: CurationIndexLazyRoute,
   OrgIndexLazyRoute: OrgIndexLazyRoute,
@@ -342,6 +364,7 @@ export const routeTree = rootRoute
         "/org/$id",
         "/shelf/new",
         "/user/$user",
+        "/about/",
         "/collection/",
         "/curation/",
         "/org/",
@@ -363,6 +386,9 @@ export const routeTree = rootRoute
     },
     "/user/$user": {
       "filePath": "user/$user.lazy.tsx"
+    },
+    "/about/": {
+      "filePath": "about/index.lazy.tsx"
     },
     "/collection/": {
       "filePath": "collection/index.lazy.tsx"

@@ -1,0 +1,55 @@
+:root {
+  interpolate-size: allow-keywords;
+  transition-behavior: allow-discrete;
+}
+
+.label-checked {
+  @apply opacity-0;
+  transition: opacity 0.25s, translate 0.25s, scale 0.25s;
+  translate: -100% 0%;
+  scale: 0.5;
+}
+
+label:has(input:checked) ~ label figure {
+  @apply opacity-100;
+  translate: 0 0%;
+  scale: 1;
+}
+
+
+input:checked ~ figure .description {
+  height: auto !important;
+  opacity: 1;
+}
+
+.description {
+  height: 0;
+  opacity: 0;
+  overflow-y: hidden;
+  font-size: 13pt;
+  font-weight: normal;
+  padding: 0.5rem;
+  text-wrap: pretty;
+  transition: height 0.5s, opacity 0.25s;
+}
+
+figure::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  transition: background-color 0.25s;
+}
+
+figure:hover::before, input:checked ~ figure::before {
+  background-color: #0009;
+}
+
+figure h2 {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+li:hover h2, input:checked ~ figure h2 {
+  opacity: 1;
+}

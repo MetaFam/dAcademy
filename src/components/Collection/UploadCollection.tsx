@@ -176,35 +176,33 @@ export function UploadCollection() {
         ]
 
         console.debug({ args })
-        let hash = 'unknown'
         try {
           abortSignal.throwIfAborted()
-          hash = await writeContractAsync({
+          const hash = await writeContractAsync({
             address: factoryAddress,
             abi,
             functionName: 'createCollection',
             args,
           })
+          addLine(
+            <p>
+              Submitted in transaction
+              <a
+                href={`${etherscan}/tx/${hash}`}
+                target="_blank"
+                className="ml-1 whitespace-nowrap text-primary hover:text-secondary"
+              >
+                {hash.substring(0, 8)}…{hash.slice(-6)}
+              </a>.
+            </p>,
+          )
         } catch (error) {
           console.error({ error })
           addLine(
             (error as { shortMessage: string }).shortMessage
-            ?? error.message,
+            ?? (error as Error).message,
           )
-          ;({hash} = error)
         }
-        addLine(
-          <p>
-            Submitted in transaction
-            <a
-              href={`${etherscan}/tx/${hash}`}
-              target="_blank"
-              className="ml-1 whitespace-nowrap text-primary hover:text-secondary"
-            >
-              {hash.substring(0, 8)}…{hash.slice(-6)}
-            </a>.
-          </p>,
-        )
       } catch(error) {
         addLine(<p className="text-red-500">
           {(error as Error).message}
