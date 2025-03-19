@@ -8,7 +8,7 @@ type NFT = {
 }
 
 export const nftAtom = atomWithStorage<NFT>(
-  'shelfNFT', {}, undefined, { getOnInit: true }
+  'collectionNFT', {}, undefined, { getOnInit: true }
 )
 
 export const imageAtom = atom(
