@@ -84,24 +84,53 @@ function Collections() {
     ),
   })
 
+  function collapseChildren(evt) {
+    let curr = evt.target
+    if(!curr.checked) {
+        curr.checked = false
+        const list = curr.closest('label').nextElementSibling
+
+        Array.from(list.querySelectorAll('input[type="checkbox"]')).forEach((elem) => {
+          elem.checked = false
+        })
+      }
+    evt.target.closest
+  }
+
   return (
-    <ol>
-      {collections.map(({ details, contents }, idx) => (
-        (details && (
-          <li key={idx} className="flex gap-4">
-            <label>
-              <input type="checkbox" />
-              <HoverCover {...details} />
-            </label>
-            {contents.map(({ details, contents }) => (
+    <main>
+      <ol id="collections">
+        {collections.map(({ details, contents }, idx) => (
+          (details && (
+            <li key={idx} className="flex gap-4">
               <label>
-                <input type="checkbox" />
-                <HoverCover className="label-checked" {...details} />
+                <input type="checkbox" onChange={collapseChildren}/>
+                <HoverCover {...details} />
               </label>
-            ))}
-          </li>
-        ))
-      ))}
-    </ol>
+              <ol className="shelves">
+                {contents.map(({ details, contents }, idx) => (
+                  <li key={idx}>
+                    <label>
+                      <input type="checkbox" onChange={collapseChildren}/>
+                      <HoverCover className="label-checked" {...details} />
+                    </label>
+                    <ol className="books">
+                      {contents.map(({ details }, idx) => (
+                        <li key={idx}>
+                          <label>
+                            <input type="checkbox" />
+                            <HoverCover className="label-checked" name={details.name} cover={details.image} description={details.description}/>
+                          </label>
+                        </li>
+                      ))}
+                    </ol>
+                  </li>
+                ))}
+              </ol>
+            </li>
+          ))
+        ))}
+      </ol>
+    </main>
   )
 }

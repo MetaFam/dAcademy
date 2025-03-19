@@ -3,6 +3,23 @@
   transition-behavior: allow-discrete;
 }
 
+html, body, #root {
+  height: calc(100vh - 8rem);
+}
+
+main {
+  height: 100%;
+  display: grid;
+  align-items: center;
+}
+
+#collections {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-inline: 3rem;
+}
+
 .label-checked {
   @apply opacity-0;
   transition: opacity 0.25s, translate 0.25s, scale 0.25s;
@@ -10,7 +27,7 @@
   scale: 0.5;
 }
 
-label:has(input:checked) ~ label figure {
+label:has(input:checked) ~ ol > li > label > figure {
   @apply opacity-100;
   translate: 0 0%;
   scale: 1;
@@ -50,6 +67,16 @@ figure h2 {
   transition: opacity 0.5s;
 }
 
-li:hover h2, input:checked ~ figure h2 {
+:where(#collections, .shelves, .books):hover > li > label > figure h2, input:checked ~ figure h2 {
   opacity: 1;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+:where(.shelves, .books) {
+  &, & > li {
+    display: contents;
+  }
 }
