@@ -13,9 +13,9 @@ import { useNavigate } from '@tanstack/react-router'
 import { useSubgraph } from "@/hooks"
 
 const completedBooksQueryDocument = gql`
-  query ChainDetails($address: String) {
+  query BookDetails($address: String) {
     user(id: $address) {
-      completedQuestChains {
+      completedBooks {
         token {
           details {
             name
@@ -41,7 +41,7 @@ type Book = {
 
 type GraphReturn = {
   user: {
-    completedQuestChains: Array<Book>
+    completedBooks: Array<Book>
   }
 }
 
@@ -68,7 +68,7 @@ const Earned = ({account}: {account?: string}) => {
         {!!user && (
           <Carousel opts={{ align: "start" }} className="w-5/6 mx-auto">
             <CarouselContent>
-              {user.completedQuestChains?.map((book: Book) => (
+              {user.completedBooks?.map((book: Book) => (
                   <CarouselItem
                     key={book.details.name}
                     className="md:basis-1/2 lg:basis-1/3 cursor-pointer"

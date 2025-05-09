@@ -122,6 +122,44 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "book",
+        "type": "address"
+      }
+    ],
+    "name": "BookCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "book",
+        "type": "address"
+      }
+    ],
+    "name": "BookUpgraded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "address[]",
         "name": "admins",
         "type": "address[]"
@@ -166,44 +204,6 @@
       }
     ],
     "name": "PaymentTokenReplaced",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "index",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "questChain",
-        "type": "address"
-      }
-    ],
-    "name": "QuestChainCreated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "sender",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "questChain",
-        "type": "address"
-      }
-    ],
-    "name": "QuestChainUpgraded",
     "type": "event"
   },
   {
@@ -285,7 +285,7 @@
   },
   {
     "inputs": [],
-    "name": "chainCount",
+    "name": "bookCount",
     "outputs": [
       {
         "internalType": "uint256",
@@ -298,10 +298,10 @@
   },
   {
     "inputs": [],
-    "name": "chainTemplate",
+    "name": "bookTemplate",
     "outputs": [
       {
-        "internalType": "contract IQuestChain",
+        "internalType": "contract IBook",
         "name": "",
         "type": "address"
       }
@@ -311,10 +311,10 @@
   },
   {
     "inputs": [],
-    "name": "chainToken",
+    "name": "bookToken",
     "outputs": [
       {
-        "internalType": "contract IQuestChainToken",
+        "internalType": "contract IBookToken",
         "name": "",
         "type": "address"
       }
@@ -361,7 +361,7 @@
           },
           {
             "internalType": "string[]",
-            "name": "quests",
+            "name": "chapters",
             "type": "string[]"
           },
           {
@@ -380,7 +380,7 @@
             "type": "string"
           }
         ],
-        "internalType": "struct QuestChainCommons.QuestChainInfo",
+        "internalType": "struct BookCommons.BookInfo",
         "name": "_info",
         "type": "tuple"
       },
@@ -390,10 +390,10 @@
         "type": "bytes32"
       }
     ],
-    "name": "createChain",
+    "name": "createBook",
     "outputs": [
       {
-        "internalType": "contract IQuestChain",
+        "internalType": "contract IBook",
         "name": "",
         "type": "address"
       }
@@ -462,8 +462,8 @@
             "type": "address[]"
           },
           {
-            "internalType": "contract IQuestChain[]",
-            "name": "chains",
+            "internalType": "contract IBook[]",
+            "name": "books",
             "type": "address[]"
           },
           {
@@ -513,10 +513,10 @@
         "type": "uint256"
       }
     ],
-    "name": "getQuestChain",
+    "name": "getBook",
     "outputs": [
       {
-        "internalType": "contract IQuestChain",
+        "internalType": "contract IBook",
         "name": "",
         "type": "address"
       }

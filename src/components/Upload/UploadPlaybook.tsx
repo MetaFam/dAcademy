@@ -24,7 +24,7 @@ import {
 } from '@/lib/utils'
 import { useEtherscan, useFactory } from '@/hooks'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import abi from '@/abis/QuestChainFactory.json'
+import abi from '@/abis/BookFactory.json'
 import { categoriesAtom } from '@/atoms/categoriesAtom'
 
 const ipfsFilenames = (cid: string, filename: string) => ([
@@ -188,7 +188,7 @@ export function UploadPlaybook() {
             admins: addressGroups.admin ?? [],
             editors: addressGroups.editor ?? [],
             reviewers: addressGroups.reviewer ?? [],
-            quests: chapterURLs,
+            chapters: chapterURLs,
             paused: false,
             details: frontmatterURL,
             tokenURI: nftMetadataURL,
@@ -196,13 +196,23 @@ export function UploadPlaybook() {
           toHex(randomBuffer),
         ]
 
-        console.debug({ createChain: args })
-
         abortSignal.throwIfAborted()
+        addLine(
+          <p>
+            Submitting to
+            <a
+              href={`${etherscan}/address/${factoryAddress}`}
+              target="_blank"
+              className="ml-1 whitespace-nowrap text-primary hover:text-secondary"
+            >
+              {factoryAddress.substring(0, 8)}…{factoryAddress.slice(-6)}
+            </a>.
+          </p>,
+        )
         writeContract({
           address: factoryAddress,
           abi,
-          functionName: 'createChain',
+          functionName: 'createBook',
           args,
         }, {
           onError: (error) => {

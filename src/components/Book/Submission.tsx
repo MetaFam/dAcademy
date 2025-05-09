@@ -11,7 +11,7 @@ import { MDXEditorMethods } from '@mdxeditor/editor'
 import clsx from 'clsx'
 import { Book, useLoadedBook } from '@/infrastructure/BookContext'
 import { upload } from '@/lib/utils'
-import abi from '@/abis/QuestChain.json'
+import abi from '@/abis/Book.json'
 
 // declare global {
 //   interface Window {
@@ -104,7 +104,7 @@ export const Submission = () => {
           <a href={`https://optimistic.etherscan.io/tx/${hash}`} className="mx-1 whitespace-nowrap text-primary hover:text-secondary" target="_blank">
             {hash.substring(0, 8)}…{hash.slice(-6)}
           </a>
-          to the Quest Chain contract at
+          to the Book contract at
           <a href={`https://optimistic.etherscan.io/address/${contract}`} className="ml-1 whitespace-nowrap text-primary hover:text-secondary" target="_blank">
             {contract?.substring(0, 6)}…{contract?.slice(-4)}
           </a>.

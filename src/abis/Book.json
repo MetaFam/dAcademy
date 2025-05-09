@@ -15,8 +15,171 @@
       },
       {
         "indexed": false,
+        "internalType": "string",
+        "name": "details",
+        "type": "string"
+      }
+    ],
+    "name": "BookEdited",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "details",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string[]",
+        "name": "chapters",
+        "type": "string[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "paused",
+        "type": "bool"
+      }
+    ],
+    "name": "BookInit",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "tokenURI",
+        "type": "string"
+      }
+    ],
+    "name": "BookTokenURIUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "reviewer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address[]",
+        "name": "userList",
+        "type": "address[]"
+      },
+      {
+        "indexed": false,
         "internalType": "uint256[]",
-        "name": "questIdList",
+        "name": "chapterIdList",
+        "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool[]",
+        "name": "successList",
+        "type": "bool[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "string[]",
+        "name": "detailsList",
+        "type": "string[]"
+      }
+    ],
+    "name": "ChapterProofsReviewed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "chapterIdList",
+        "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "string[]",
+        "name": "proofList",
+        "type": "string[]"
+      }
+    ],
+    "name": "ChapterProofsSubmitted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "creator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string[]",
+        "name": "detailsList",
+        "type": "string[]"
+      }
+    ],
+    "name": "ChaptersCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "editor",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "chapterIdList",
+        "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "string[]",
+        "name": "detailsList",
+        "type": "string[]"
+      }
+    ],
+    "name": "ChaptersEdited",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "editor",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "chapterIdList",
         "type": "uint256[]"
       },
       {
@@ -38,12 +201,12 @@
           }
         ],
         "indexed": false,
-        "internalType": "struct IQuestChain.QuestDetails[]",
-        "name": "questDetails",
+        "internalType": "struct IBook.ChapterDetails[]",
+        "name": "chapterDetails",
         "type": "tuple[]"
       }
     ],
-    "name": "ConfiguredQuests",
+    "name": "ConfiguredChapters",
     "type": "event"
   },
   {
@@ -70,169 +233,6 @@
       }
     ],
     "name": "Paused",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "editor",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "details",
-        "type": "string"
-      }
-    ],
-    "name": "QuestChainEdited",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "details",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "string[]",
-        "name": "quests",
-        "type": "string[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "bool",
-        "name": "paused",
-        "type": "bool"
-      }
-    ],
-    "name": "QuestChainInit",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "tokenURI",
-        "type": "string"
-      }
-    ],
-    "name": "QuestChainTokenURIUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "reviewer",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address[]",
-        "name": "questerList",
-        "type": "address[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256[]",
-        "name": "questIdList",
-        "type": "uint256[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "bool[]",
-        "name": "successList",
-        "type": "bool[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "string[]",
-        "name": "detailsList",
-        "type": "string[]"
-      }
-    ],
-    "name": "QuestProofsReviewed",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "quester",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256[]",
-        "name": "questIdList",
-        "type": "uint256[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "string[]",
-        "name": "proofList",
-        "type": "string[]"
-      }
-    ],
-    "name": "QuestProofsSubmitted",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "creator",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "string[]",
-        "name": "detailsList",
-        "type": "string[]"
-      }
-    ],
-    "name": "QuestsCreated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "editor",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256[]",
-        "name": "questIdList",
-        "type": "uint256[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "string[]",
-        "name": "detailsList",
-        "type": "string[]"
-      }
-    ],
-    "name": "QuestsEdited",
     "type": "event"
   },
   {
@@ -403,6 +403,45 @@
   },
   {
     "inputs": [],
+    "name": "bookFactory",
+    "outputs": [
+      {
+        "internalType": "contract IBookFactory",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "bookId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "bookToken",
+    "outputs": [
+      {
+        "internalType": "contract IBookToken",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "burnToken",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -410,12 +449,65 @@
   },
   {
     "inputs": [],
-    "name": "chainId",
+    "name": "chapterCount",
     "outputs": [
       {
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "chapterDetails",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "paused",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "optional",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "skipReview",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "chapterStatus",
+    "outputs": [
+      {
+        "internalType": "enum IBook.Status",
+        "name": "",
+        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -459,12 +551,12 @@
             "type": "bool"
           }
         ],
-        "internalType": "struct IQuestChain.QuestDetails[]",
+        "internalType": "struct IBook.ChapterDetails[]",
         "name": "_detailsList",
         "type": "tuple[]"
       }
     ],
-    "name": "configureQuests",
+    "name": "configureChapters",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -477,22 +569,9 @@
         "type": "string[]"
       }
     ],
-    "name": "createQuests",
+    "name": "createChapters",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "creator",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -521,7 +600,7 @@
         "type": "string[]"
       }
     ],
-    "name": "editQuests",
+    "name": "editChapters",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -531,7 +610,7 @@
     "name": "factory",
     "outputs": [
       {
-        "internalType": "contract IQuestChainFactory",
+        "internalType": "contract IBookFactory",
         "name": "",
         "type": "address"
       }
@@ -639,7 +718,7 @@
           },
           {
             "internalType": "string[]",
-            "name": "quests",
+            "name": "chapters",
             "type": "string[]"
           },
           {
@@ -658,7 +737,7 @@
             "type": "string"
           }
         ],
-        "internalType": "struct QuestChainCommons.QuestChainInfo",
+        "internalType": "struct BookCommons.BookInfo",
         "name": "_info",
         "type": "tuple"
       }
@@ -666,19 +745,6 @@
     "name": "init",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "length",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -709,111 +775,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "questChainFactory",
-    "outputs": [
-      {
-        "internalType": "contract IQuestChainFactory",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "questChainId",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "questChainToken",
-    "outputs": [
-      {
-        "internalType": "contract IQuestChainToken",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "questCount",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "questDetails",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "paused",
-        "type": "bool"
-      },
-      {
-        "internalType": "bool",
-        "name": "optional",
-        "type": "bool"
-      },
-      {
-        "internalType": "bool",
-        "name": "skipReview",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_quester",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_id",
-        "type": "uint256"
-      }
-    ],
-    "name": "questStatus",
-    "outputs": [
-      {
-        "internalType": "enum IQuestChain.Status",
-        "name": "",
-        "type": "uint8"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "bytes32",
@@ -835,7 +796,7 @@
     "inputs": [
       {
         "internalType": "address[]",
-        "name": "_questerList",
+        "name": "_userList",
         "type": "address[]"
       },
       {
@@ -932,9 +893,22 @@
     "name": "token",
     "outputs": [
       {
-        "internalType": "contract IQuestChainToken",
+        "internalType": "contract IBookToken",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "tokenId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",

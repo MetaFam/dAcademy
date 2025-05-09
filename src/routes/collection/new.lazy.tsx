@@ -12,7 +12,6 @@ import { CollectionCover } from '@/components/Collection/CollectionCover'
 import { UploadCollection } from '@/components/Collection/UploadCollection'
 import { useState } from 'react'
 
-
 const Upload = () => {
   const [processing, setProcessing] = useState(false)
   return (
@@ -33,13 +32,13 @@ const Upload = () => {
             <CollectionName />
           </div>
           <div id="description" className="mt-8 scroll-mt-12">
-            <CollectionDescription/>
+            <CollectionDescription />
           </div>
           <div id="books" className="mt-8 scroll-mt-12">
-            <CollectionShelves/>
+            <CollectionShelves />
           </div>
           <div id="category" className="mt-8 scroll-mt-12">
-          <CollectionCategoriesInput/>
+            <CollectionCategoriesInput />
           </div>
           <div id="completion" className="mt-8 scroll-mt-12">
             <CompletionNFT />
@@ -49,16 +48,21 @@ const Upload = () => {
           <CollectionPermissions />
         </div>
         <div className="flex justify-center mt-4">
-          <Button type="button" onClick={() => setProcessing(true)} form="Collection" className="secondary">
+          <Button
+            type="button"
+            onClick={() => setProcessing(true)}
+            form="Collection"
+            className="secondary"
+          >
             Create Collection
           </Button>
         </div>
-        {processing && <UploadCollection/>}
+        {processing && <UploadCollection />}
       </main>
     </SidebarProvider>
   )
 }
 
-export const Route = createLazyFileRoute('/collection/')({
-  component: Upload
+export const Route = createLazyFileRoute('/collection/new')({
+  component: Upload,
 })

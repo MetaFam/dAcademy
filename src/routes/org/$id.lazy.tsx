@@ -14,9 +14,9 @@ import TopOrg from '@/components/TopOrg'
 import playbooks from '@/data/playbooks.json'
 import { useSubgraph } from '@/hooks'
 
-const chainImageQueryDocument = gql`
-  query ChainImages($name: String) {
-    questChains {
+const bookImageQueryDocument = gql`
+  query BookImages($name: String) {
+    Books {
       details {
         image
         name
@@ -31,7 +31,7 @@ export const Route = createLazyFileRoute('/org/$id')({
 })
 
 export type CoverImageResponse = {
-  questChains: Array<{
+  books: Array<{
     details: {
       image: string | null
       name: string
@@ -58,11 +58,11 @@ const titleLess = ['how-to-build-a-network-for-impact']
 export function App() {
   const subgraph = useSubgraph()
   const { data: info, error } = useQuery<Record<string, Book>>({
-    queryKey: [`chain-images`],
+    queryKey: [`book-images`],
     queryFn: async (): Promise<Record<string, Book>> => {
-      const { questChains: data } = await (
+      const { books: data } = await (
         request<CoverImageResponse>(
-          subgraph, chainImageQueryDocument, {},
+          subgraph, bookImageQueryDocument, {},
         )
       )
       return Object.fromEntries(

@@ -17,19 +17,19 @@ import { SubmissionDetails } from "@/components/UserProfile/SubmissionDetails"
 import { useSubgraph } from "@/hooks"
 
 const submissionsQueryDocument = gql`
-  query ChainDetails($address: String) {
+  query BookDetails($address: String) {
     proofSubmissions(where: { user: $address }) {
       id
       timestamp
-      questChain {
+      book {
         details {
           name
         }
       }
-      questStatus {
+      chapterStatus {
         status
       }
-      quest {
+      chapter {
         details {
           name
         }
@@ -41,15 +41,15 @@ const submissionsQueryDocument = gql`
 export type Submission = {
   id: string
   timestamp: number
-  questChain: {
+  book: {
     details: {
       name: string
     }
   }
-  questStatus: {
+  chapterStatus: {
     status: string
   }
-  quest: {
+  chapter: {
     details: {
       name: string
     }
@@ -83,9 +83,9 @@ const Statuses = ({ account }: { account?: string }) => {
   })
 
   const submissions = proofSubmissions?.sort((a, b) => {
-    if (a.questStatus.status !== b.questStatus.status) {
+    if (a.chapterStatus.status !== b.chapterStatus.status) {
       const statuses = ['review', 'fail', 'pass'];
-      return statuses.indexOf(a.questStatus.status) - statuses.indexOf(b.questStatus.status);
+      return statuses.indexOf(a.chapterStatus.status) - statuses.indexOf(b.chapterStatus.status);
     }
     return a.timestamp - b.timestamp;
   })
@@ -123,20 +123,20 @@ const Statuses = ({ account }: { account?: string }) => {
                   {new Date(sub.timestamp * 1000).toLocaleDateString()}
                 </TableCell>
                 <TableCell className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[150px]">
-                  {truncateTextAfterWords(sub.questChain.details.name)}
+                  {truncateTextAfterWords(sub.book.details.name)}
                 </TableCell>
                 <TableCell className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[150px]">
-                  {sub.quest.details.name}
+                  {sub.chapter.details.name}
                 </TableCell>
                 <TableCell
                   className={clsx({
-                    'text-green-400': sub.questStatus.status === 'pass',
-                    'text-red-600': sub.questStatus.status === 'fail',
-                    'text-blue-500': sub.questStatus.status === 'review',
-                    'text-yellow-200': sub.questStatus.status !== 'pass' && sub.questStatus.status !== 'fail' && sub.questStatus.status !== 'review',
+                    'text-green-400': sub.chapterStatus.status === 'pass',
+                    'text-red-600': sub.chapterStatus.status === 'fail',
+                    'text-blue-500': sub.chapterStatus.status === 'review',
+                    'text-yellow-200': sub.chapterStatus.status !== 'pass' && sub.chapterStatus.status !== 'fail' && sub.chapterStatus.status !== 'review',
                   })}
                 >
-                  {sub.questStatus.status}
+                  {sub.chapterStatus.status}
                 </TableCell>
               </TableRow>
             ))}

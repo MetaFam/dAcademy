@@ -35,7 +35,7 @@ const proofQueryDocument = gql`
       details {
          description
       }
-      questStatus {
+      chapterStatus {
         status
       }
       txHash
@@ -49,7 +49,7 @@ type GraphReturn = {
       description: string
     }
     txHash: string
-    questStatus: {status: string}
+    chapterStatus: {status: string}
   }>
   proofSubmission: {
     details: {
@@ -90,11 +90,11 @@ export function SubmissionDetails(
       </p>
       <p>
         <span className="text-blue-400">Book:</span>{' '}
-        {submission.questChain.details.name}
+        {submission.book.details.name}
       </p>
       <p>
         <span className="text-blue-400">Chapter:</span>{' '}
-        {submission.quest.details.name}
+        {submission.chapter.details.name}
       </p>
       <h2 className="text-blue-400 text-left">Proof Response:</h2>
       <div className="content">
@@ -106,12 +106,12 @@ export function SubmissionDetails(
             <h2 className="mb-2">
               <span className="text-blue-400">Status: </span>
               <span className={cn({
-                'text-green-400': sub.questStatus.status === 'pass',
-                'text-red-600': sub.questStatus.status === 'fail',
-                'text-blue-500': sub.questStatus.status === 'review',
-                'text-yellow-200': sub.questStatus.status !== 'pass' && sub.questStatus.status !== 'fail' && sub.questStatus.status !== 'review',
+                'text-green-400': sub.chapterStatus.status === 'pass',
+                'text-red-600': sub.chapterStatus.status === 'fail',
+                'text-blue-500': sub.chapterStatus.status === 'review',
+                'text-yellow-200': sub.chapterStatus.status !== 'pass' && sub.chapterStatus.status !== 'fail' && sub.chapterStatus.status !== 'review',
               })}>
-                {sub.questStatus.status}
+                {sub.chapterStatus.status}
               </span>
             </h2>
             <Markdown>{sub.details.description}</Markdown>
