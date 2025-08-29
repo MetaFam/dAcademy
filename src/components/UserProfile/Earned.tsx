@@ -5,7 +5,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
+} from "@/components/ui/carousel"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import request, { gql } from "graphql-request"
 import { toHTTP } from "@/lib/utils"
@@ -13,16 +13,19 @@ import { useNavigate } from '@tanstack/react-router'
 import { useSubgraph } from "@/hooks"
 
 const completedBooksQueryDocument = gql`
-  query ChainDetails($address: String) {
+  query BookDetails($address: String) {
     user(id: $address) {
-      completedQuestChains {
+      completedBooks {
         token {
           details {
             name
             image
           }
         }
-        slug
+        details {
+          slug
+        }
+      }
     }
   }
 `

@@ -1,6 +1,6 @@
 import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi'
 import { toHTTP } from '@/lib/utils'
-import abi from '@/abis/QuestChain.json'
+import abi from '@/abis/Book.json'
 import { Chapter, useLoadedBook } from '@/infrastructure/BookContext'
 import toast from 'react-hot-toast'
 import { useState } from 'react'

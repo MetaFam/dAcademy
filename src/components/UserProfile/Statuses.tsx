@@ -17,19 +17,19 @@ import { SubmissionDetails } from "@/components/UserProfile/SubmissionDetails"
 import { useSubgraph } from "@/hooks"
 
 const submissionsQueryDocument = gql`
-  query ChainDetails($address: String) {
+  query ProofDetails($address: String) {
     proofSubmissions(where: { user: $address }) {
       id
       timestamp
-      questChain {
+      book {
         details {
           name
         }
       }
-      questStatus {
+      chapterStatus {
         status
       }
-      quest {
+      chapter {
         details {
           name
         }

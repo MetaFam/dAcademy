@@ -11,7 +11,7 @@ import { MDXEditorMethods } from '@mdxeditor/editor'
 import clsx from 'clsx'
 import { Book, useLoadedBook } from '@/infrastructure/BookContext'
 import { upload } from '@/lib/utils'
-import abi from '@/abis/QuestChain.json'
+import abi from '@/abis/Book.json'
 
 // declare global {
 //   interface Window {
