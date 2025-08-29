@@ -201,6 +201,18 @@ export function UploadPlaybook() {
         addLine('Writing to BookFactory contract.')
 
         abortSignal.throwIfAborted()
+        addLine(
+          <p>
+            Submitting to
+            <a
+              href={`${etherscan}/address/${factoryAddress}`}
+              target="_blank"
+              className="ml-1 whitespace-nowrap text-primary hover:text-secondary"
+            >
+              {factoryAddress.substring(0, 8)}…{factoryAddress.slice(-6)}
+            </a>.
+          </p>,
+        )
         writeContract({
           address: factoryAddress,
           abi,

@@ -4,9 +4,9 @@ import { gql, request } from 'graphql-request'
 import { useAccount } from 'wagmi'
 import { useSubgraph } from '@/hooks'
 
-const questChainQueryDocument = gql`
-  query ChainDetails($slug: String!, $reader: ID) {
-    questChains(where: { details_: { slug: $slug } }) {
+const bookQueryDocument = gql`
+  query BookDetails($slug: String!, $reader: ID) {
+    books(where: { details_: { slug: $slug } }) {
       id
       network
       details {
@@ -29,8 +29,8 @@ const questChainQueryDocument = gql`
         id
       }
       updatedAt
-      quests(orderBy: questId) {
-        questId
+      chapters(orderBy: chapterId) {
+        chapterId
         details {
           name
           description
@@ -42,14 +42,14 @@ const questChainQueryDocument = gql`
   }
 `
 
-const userChainProgressQueryDocument = gql`
-  query ChainUserDetails($chain: String!, $user: String!) {
-    questStatuses(where: {
-      questChain: $chain, user: $user
-    }, orderBy: quest__questId) {
+const userBookProgressQueryDocument = gql`
+  query BookUserDetails($book: String!, $user: String!) {
+    chapterStatuses(where: {
+      book: $book, user: $user
+    }, orderBy: chapter__chapterId) {
       status
-      quest {
-        questId
+      chapter {
+        chapterId
         paused
       }
       submissions {
@@ -130,8 +130,8 @@ export type UnauthedChapter = {
 } & Omit<Chapter, 'status'>
 export type ChapterStatus = 'init' | 'pass' | 'fail' | 'review'
 
-export type Quest = {
-  questId: number
+export type ReturnedChapter = {
+  chapterId: number
   details: {
     name: string
     description: string
@@ -139,7 +139,7 @@ export type Quest = {
   optional: boolean
   status: { status: string }
 }
-export type Chain = {
+export type ReturnedBook = {
   details: {
     name: string
     description: string
@@ -156,12 +156,12 @@ export type Chain = {
     tokenAddress: string
     owners: Array<{ id: string }>
   }
-  quests: Array<Quest>
+  chapters: Array<ReturnedChapter>
   creator: { id: string }
   updatedAt: string
 }
 export type GraphChainResponse = {
-  questChains: Array<Chain>
+  books: Array<ReturnedBook>
 }
 
 export type Submission = {
@@ -174,14 +174,14 @@ export type Submission = {
 }
 export type Status = {
   status: string
-  quest: {
-   questId: string
+  chapter: {
+   chapterId: string
    optional: boolean
   }
   submissions: Array<Submission>
 }
 export type Statuses = {
-  questStatuses: Array<Status>
+  chapterStatuses: Array<Status>
 }
 
 export const BookContext = (
@@ -212,19 +212,19 @@ export const BookProvider = (
   const account = useAccount()
   const reader = account?.address?.toLowerCase() ?? null
   const {
-    data: { questChains: [chain] = [] } = {},
-    error: questError,
-    isLoading: questLoading,
+    data: { books: [returnedBook] = [] } = {},
+    error: chapterError,
+    isLoading: chapterLoading,
   } = useSuspenseQuery<GraphChainResponse>({
-    queryKey: [`chain-${slug}`],
+    queryKey: [`book-${slug}`],
     queryFn: async () => request(
       subgraph,
-      questChainQueryDocument,
+      bookQueryDocument,
       { slug, reader },
     ),
   })
 
-  if(!chain) {
+  if(!returnedBook) {
     throw new Error(`No subgraph entry found for "${slug}".`)
   }
 
@@ -233,26 +233,26 @@ export const BookProvider = (
     error: statusesError,
   } = (
     useSuspenseQuery<Statuses | null>({
-      queryKey: [`statuses-${chain?.id}-${reader}`],
+      queryKey: [`statuses-${returnedBook?.id}-${reader}`],
       queryFn: async () => {
-        if(!reader || !chain?.id) {
+        if(!reader || !returnedBook?.id) {
           return null
         }
         return request(
           subgraph,
-          userChainProgressQueryDocument,
-          { chain: chain.id, user: reader },
+          userBookProgressQueryDocument,
+          { book: returnedBook.id, user: reader },
         )
       },
     })
   )
-  const { questStatuses: statuses } = data ?? {}
+  const { chapterStatuses: statuses } = data ?? {}
 
   let book = null
-  const error = questError ?? statusesError
+  const error = chapterError ?? statusesError
   if(error) {
     book = { status: 'error' as const, error }
-  } else if(questLoading) {
+  } else if(chapterLoading) {
     book = { status: 'init' as const, slug }
   } else {
     const chapters = (() => (
@@ -260,19 +260,19 @@ export const BookProvider = (
         {
           optional: true,
           title: 'Introduction',
-          content: chain.details.description,
+          content: returnedBook.details.description,
           status: 'init',
         },
-        ...chain.quests.map((quest, index) => {
+        ...returnedBook.chapters.map((chapter, index) => {
           const status = statuses?.find(
-            ({ quest: { questId } }) => (
-              Number(questId) === index
+            ({ chapter: { chapterId } }) => (
+              Number(chapterId) === index
             )
           )
           return {
-            optional: quest.optional,
-            title: quest.details.name,
-            content: quest.details.description,
+            optional: chapter.optional,
+            title: chapter.details.name,
+            content: chapter.details.description,
             status: status?.status ?? null,
           }
         }),
@@ -281,20 +281,20 @@ export const BookProvider = (
     chapters.current = on
 
     const props = {
-      chainId: Number(chain.network),
+      chainId: Number(returnedBook.network),
       slug,
-      title: chain.details.name,
-      introduction: chain.details.description,
+      title: returnedBook.details.name,
+      introduction: returnedBook.details.description,
       chapters,
-      creator: chain.creator.id,
+      creator: returnedBook.creator.id,
       owners: [], // ToDo: Extract from The Graph
-      updatedAt: new Date(Number(chain.updatedAt) * 1000),
-      contract: chain.id,
+      updatedAt: new Date(Number(returnedBook.updatedAt) * 1000),
+      contract: returnedBook.id,
       nft: {
-        id: Number(chain.token.tokenId),
-        address: chain.token.tokenAddress,
-        image: chain.token.details.image,
-        minted: chain.token.owners.length > 0,
+        id: Number(returnedBook.token.tokenId),
+        address: returnedBook.token.tokenAddress,
+        image: returnedBook.token.details.image,
+        minted: returnedBook.token.owners.length > 0,
       },
       on,
       setOn,

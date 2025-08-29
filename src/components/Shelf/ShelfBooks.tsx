@@ -24,20 +24,20 @@ import { CSS } from '@dnd-kit/utilities'
 import { booksAtom, type Book } from "@/atoms/booksAtom"
 import { useAtom } from "jotai"
 
-const chainSearch = gql`
-  query ChainSearch($search: String!) {
-    chainSearch(text: $search) {
+const bookSearch = gql`
+  query BookSearch($search: String!) {
+    bookSearch(text: $search) {
       name
-      questChain{ id }
+      book{ id }
     }
   }
 `
 
-const questSearch = gql`
-  query QuestSearch($search: String!) {
-    questSearch(text: $search) {
-      quest{
-        questChain{
+const chapterSearch = gql`
+  query ChapterSearch($search: String!) {
+    ChapterSearch(text: $search) {
+      chapter{
+        book{
           id
           details{ name }
         }
@@ -46,23 +46,23 @@ const questSearch = gql`
   }
 `
 
-type ChainInfo = {
+type BookInfo = {
   name: string
-  questChain: {
+  book: {
     id: string
   }
 }
 
-type ChainResult = {
-  chainSearch: Array<ChainInfo>
+type BookResult = {
+  bookSearch: Array<BookInfo>
 }
-type QuestResult = {
-  questSearch: Array<QuestInfo>
+type ChapterResult = {
+  chapterSearch: Array<ChapterInfo>
 }
 
-type QuestInfo = {
-  quest: {
-    questChain: {
+type ChapterInfo = {
+  chapter: {
+    book: {
       id: string
       details: { name: string }
     }
@@ -102,8 +102,8 @@ function SortableItem({ id, name, onRemove }: SortableItemProps) {
     >
       <span className="flex-1 pl-1">{name}</span>
       <Button onClick={(e) => {
-        e.stopPropagation();
-        onRemove();
+        e.stopPropagation()
+        onRemove()
       }}>Remove</Button>
     </li>
   )
@@ -128,30 +128,29 @@ export function ShelfBooks() {
   )
 
   const search = async () => {
-    console.log({searchString})
     setSearching(true)
     try {
-      const [chains, quests] = await Promise.all([
-        request<ChainResult>(
+      const [books, chapters] = await Promise.all([
+        request<BookResult>(
           subgraph,
-          chainSearch,
+          bookSearch,
           { search: searchString }
         ),
-        request<QuestResult>(
+        request<ChapterResult>(
           subgraph,
-          questSearch,
+          chapterSearch,
           { search: searchString }
         ),
       ])
 
       const results = ([
-        ...chains.chainSearch.map((chain: ChainInfo) => ({
-          name: chain.name,
-          id: chain.questChain.id,
+        ...books.bookSearch.map((book: BookInfo) => ({
+          name: book.name,
+          id: book.book.id,
         })),
-        ...quests.questSearch.map((quest: QuestInfo) => ({
-          name: quest.quest.questChain.details.name,
-          id: quest.quest.questChain.id,
+        ...chapters.chapterSearch.map((chapter: ChapterInfo) => ({
+          name: chapter.chapter.book.details.name,
+          id: chapter.chapter.book.id,
         }))
       ])
       if(results.length === 0) {
@@ -161,7 +160,6 @@ export function ShelfBooks() {
           new Map(results.map(item => [item.id, item])).values()
         ))
       }
-      console.log({chains})
     } finally {
       setSearching(false)
     }

@@ -23,7 +23,7 @@ import {
 } from '@/lib/utils'
 import { useEtherscan, useFactory } from '@/hooks'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import abi from '@/abis/QuestChainFactory.json'
+import abi from '@/abis/BookFactory.json'
 import { shelfCatAtom } from '@/atoms/shelfCatAtom'
 import { booksAtom } from '@/atoms/booksAtom'
 
@@ -168,7 +168,7 @@ export function UploadShelf() {
           {
             owners: addressGroups.owner ?? [],
             admins: addressGroups.admin ?? [],
-            chains: books.map(({id}) => id),
+            books: books.map(({id}) => id),
             details: frontmatterURL,
             tokenURI: nftMetadataURL,
           },

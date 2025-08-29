@@ -23,7 +23,7 @@ import {
 } from '@/lib/utils'
 import { useEtherscan, useFactory } from '@/hooks'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import abi from '@/abis/QuestChainFactory.json'
+import abi from '@/abis/BookFactory.json'
 import { collectionCatAtom } from '@/atoms/collectionCatAtom'
 import { collectionAtom } from '@/atoms/collectionAtom'
 

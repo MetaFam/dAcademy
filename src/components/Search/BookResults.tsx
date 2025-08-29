@@ -4,9 +4,9 @@ import { useSuspenseQuery } from "@tanstack/react-query"
 import request, { gql } from "graphql-request"
 import Markdown from "react-markdown"
 
-const questChainQueryDocument = gql`
-  query ChainDetails($query: String!) {
-    chainSearch(text: $query) {
+const bookQueryDocument = gql`
+  query BookDetails($query: String!) {
+    bookSearch(text: $query) {
       name
       description
       image
@@ -15,7 +15,7 @@ const questChainQueryDocument = gql`
   }
 `
 
-  type GraphReturn = {chainSearch: Array<{
+  type GraphReturn = {bookSearch: Array<{
     name: string
     description: string
     image: string
@@ -26,22 +26,22 @@ export function BookResults({query}: {query:string}) {
 
   const subgraph = useSubgraph()
   const {
-    data: {chainSearch}
+    data: {bookSearch}
   } = useSuspenseQuery<GraphReturn>({
     queryKey: [`search-book-${query}`],
     queryFn: async () => request(
       subgraph,
-      questChainQueryDocument,
+      bookQueryDocument,
       { query },
     ),
   })
 
   return (
     <ul>
-      {chainSearch.length === 0 ? (
+      {bookSearch.length === 0 ? (
         'No results found.'
       ) : (
-        chainSearch.map((book) => (
+        bookSearch.map((book) => (
           <li>
             <details>
               <summary>

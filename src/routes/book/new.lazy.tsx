@@ -2,7 +2,10 @@ import { createLazyFileRoute } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
 import { useAtom, useSetAtom } from 'jotai'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import { UploadSidebar, accordionItems} from '@/components/Sidebars/uploadSidebar'
+import {
+  UploadSidebar,
+  accordionItems,
+} from '@/components/Sidebars/uploadSidebar'
 import { Cover } from '@/components/Upload/Cover'
 import { Intro } from '@/components/Upload/Intro'
 import { Chapter } from '@/components/Upload/Chapter'
@@ -10,13 +13,13 @@ import { UploadPermissions } from '@/components/Upload/Permissions'
 import { Title } from '@/components/Upload/Title'
 import { Button } from '@/components/ui/button'
 import { CompletionNFT } from '@/components/Upload/CompletionNFT'
-import { UploadPlaybook } from "@/components/Upload/UploadPlaybook"
+import { UploadPlaybook } from '@/components/Upload/UploadPlaybook'
 import { chaptersAtomsAtom, removeChapterAtom } from '@/atoms/chapterAtom'
 import { CategoriesInput } from '@/components/Upload/CategoriesInput'
 import { Helmet } from 'react-helmet-async'
 
 export const Upload = () => {
-  const [accordionValue, setAccordionValue] = useState("item-1")
+  const [accordionValue, setAccordionValue] = useState('item-1')
   const [chaptersAtoms, addChapter] = useAtom(chaptersAtomsAtom)
   const removeChapter = useSetAtom(removeChapterAtom)
   const [processing, setProcessing] = useState(false)
@@ -27,9 +30,9 @@ export const Upload = () => {
 
   useEffect(() => {
     const sectionId = accordionItems.find(
-      (item) => item.value === accordionValue
-    )?.url;
-    if(sectionId) {
+      (item) => item.value === accordionValue,
+    )?.url
+    if (sectionId) {
       const element = document.querySelector(sectionId)
       if (element) {
         setTimeout(() => {
@@ -41,7 +44,9 @@ export const Upload = () => {
 
   return (
     <>
-      <Helmet><title>क: Upload Playbook</title></Helmet>
+      <Helmet>
+        <title>क: Upload Playbook</title>
+      </Helmet>
       <SidebarProvider>
         <UploadSidebar onAccordionChange={setAccordionValue} />
         <SidebarTrigger />
@@ -54,13 +59,13 @@ export const Upload = () => {
             }}
           >
             <div id="upload-cover" className="pt-8 scroll-mt-12">
-              <Cover/>
+              <Cover />
             </div>
             <div id="book-title" className="pt-8 scroll-mt-12">
-              <Title/>
+              <Title />
             </div>
             <div id="book-intro" className="pt-8 scroll-mt-12">
-              <Intro/>
+              <Intro />
             </div>
 
             <div
@@ -89,27 +94,27 @@ export const Upload = () => {
               </div>
             </div>
             <div id="completion" className="pt-8 scroll-mt-12">
-              <CompletionNFT/>
+              <CompletionNFT />
             </div>
             <div id="categories" className="pt-8 scroll-mt-12">
-              <CategoriesInput/>
+              <CategoriesInput />
             </div>
           </form>
           <div id="permissions" className="pt-8 scroll-mt-12">
-            <UploadPermissions/>
+            <UploadPermissions />
           </div>
           <div className="flex justify-center mt-4">
             <Button form="playbook" className="secondary">
               Create Playbook
             </Button>
           </div>
-          {processing && <UploadPlaybook/>}
+          {processing && <UploadPlaybook />}
         </main>
       </SidebarProvider>
     </>
   )
 }
 
-export const Route = createLazyFileRoute('/upload/')({
+export const Route = createLazyFileRoute('/book/new')({
   component: Upload,
 })

@@ -129,7 +129,7 @@ export const Route = createLazyFileRoute('/org/')({
           <CardTitle className="text-white text-center">Ready to add to dAcademy?</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col items-center">
-          <Link to="/upload">
+          <Link to="/book/new">
             <Button variant="secondary" className="shadow-md border border-gray-500">
               <UploadCloud size={16} className="mr-2" />
               Upload a Playbook
