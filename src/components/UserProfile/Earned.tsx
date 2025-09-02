@@ -22,7 +22,10 @@ const completedBooksQueryDocument = gql`
             image
           }
         }
-        slug
+        details {
+          slug
+        }
+      }
     }
   }
 `
