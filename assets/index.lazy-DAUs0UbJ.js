@@ -1,0 +1,1 @@
+import{O as o,c as a,u as c}from"./index-C_TOYGMG.js";function s(e){return o({select:t=>t.location})}globalThis.jotaiAtomCache=globalThis.jotaiAtomCache||{cache:new Map,get(e,t){return this.cache.has(e)?this.cache.get(e):(this.cache.set(e,t),t)}};const h=a("/book/$slug/")({component:()=>{const e=c(),t=s();/\/\d+$/.test(t.pathname)||e({to:`${t.pathname}/0`})}});export{h as Route};
