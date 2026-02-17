@@ -1,0 +1,1 @@
+import{cI as r,cN as l,cO as u,cG as P,cP as p}from"./index-CkghpzNC.js";var d="Portal",f=r.forwardRef((e,o)=>{var a;const{container:s,...c}=e,[n,i]=r.useState(!1);l(()=>i(!0),[]);const t=s||n&&((a=globalThis==null?void 0:globalThis.document)==null?void 0:a.body);return t?u.createPortal(P.jsx(p.div,{...c,ref:o}),t):null});f.displayName=d;export{f as P};
