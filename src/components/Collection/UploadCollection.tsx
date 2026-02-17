@@ -146,7 +146,7 @@ export function UploadCollection() {
           )],
         )
 
-        const { url: nftMetadataURL, link: nftMetadataLink } = (
+        const { url: _nftMetadataURL, link: nftMetadataLink } = (
           completion(nftMetadataCID, nftFilename)
         )
         addLine(nftMetadataLink)
